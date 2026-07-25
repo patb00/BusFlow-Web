@@ -84,6 +84,16 @@ visitor data.
 
 ## Deploying
 
+Every push to  builds and publishes to **GitHub Pages** via
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml) —
+https://patb00.github.io/BusFlow-Web/
+
+The site lives in a subdirectory there, so the workflow sets  (asset
+URLs, the router basename and the 404 redirect all derive from it) and  to the
+matching origin. For a deploy at a domain root, drop  and set  in
+[public/404.html](public/404.html).
+
+
 Static build — any host will do. `public/404.html` + `public/.htaccess` cover SPA fallback on
 Apache/Hostinger-style hosts. The only runtime network calls are the map tiles and the two
 webfonts.

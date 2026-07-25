@@ -3,12 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <title>BusFlow</title>
+    <meta name="robots" content="noindex" />
     <script>
-      // Static-host SPA redirect: keep the path so BrowserRouter can pick it up.
-      var path = window.location.pathname;
-      var search = window.location.search;
-      var hash = window.location.hash;
-      window.location.replace('/?p=' + encodeURIComponent(path + search + hash));
+      // Static hosts (GitHub Pages, Hostinger…) serve this file for any unknown path, because
+      // only index.html exists on disk. Hand the path to index.html in ?p= so BrowserRouter can
+      // restore it there.
+      //
+      // SEGMENTS is how many leading path segments belong to the site itself: 1 on GitHub
+      // Pages (/BusFlow-Web/…), 0 when the site is deployed at a domain root.
+      var SEGMENTS = 1;
+      var l = window.location;
+      var base = l.pathname.split('/').slice(0, 1 + SEGMENTS).join('/');
+      l.replace(base + '/?p=' + encodeURIComponent(l.pathname + l.search + l.hash));
     </script>
   </head>
   <body></body>
