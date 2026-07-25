@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BusFlow</title>
+    <script>
+      // Static-host SPA redirect: keep the path so BrowserRouter can pick it up.
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+      window.location.replace('/?p=' + encodeURIComponent(path + search + hash));
+    </script>
+  </head>
+  <body></body>
+</html>

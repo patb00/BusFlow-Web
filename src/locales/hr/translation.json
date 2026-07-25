@@ -1,0 +1,525 @@
+{
+  "nav": {
+    "home": "Naslovna",
+    "clients": "Klijenti",
+    "demo": "Demo",
+    "contact": "Kontakt",
+    "menu": "Izbornik",
+    "close": "Zatvori"
+  },
+  "hero": {
+    "eyebrow": "BusFlow · softver za autobusne prijevoznike",
+    "title": "Ruta, cijena i rezervacija na jednoj karti.",
+    "sub": "Putnik složi putovanje s međustajalištima i izletima, vidi kilometražu i fiksnu cijenu, i rezervira online. Vi sve vodite iz jedne administracije."
+  },
+  "planner": {
+    "title": "Složite putovanje",
+    "badge": "Demo izračun",
+    "from": "Polazak",
+    "to": "Odredište",
+    "via": "Međustajalište",
+    "fromPlaceholder": "npr. Zagreb",
+    "toPlaceholder": "npr. Wien",
+    "addStop": "Dodaj međustajalište",
+    "removeStop": "Ukloni međustajalište",
+    "date": "Datum polaska",
+    "nights": "Noćenja",
+    "pax": "Putnika",
+    "excursions": "Izleti s odredišta",
+    "excursionsNote": "vožnje tijekom boravka",
+    "excursion": "Izlet",
+    "excursionPlaceholder": "npr. Schönbrunn",
+    "addExcursion": "Dodaj izlet",
+    "removeExcursion": "Ukloni izlet",
+    "roundTrip": "Povratak na polazište",
+    "submit": "Izračunaj cijenu",
+    "calculating": "Računam…",
+    "note": "Demo izračun na temelju kilometraže, dnevnica vozača, cestarina i goriva. Nije obvezujuća ponuda.",
+    "time": "Vrijeme polaska"
+  },
+  "quote": {
+    "driving": "vožnje",
+    "driverOne": "vozač",
+    "driverMany": "vozača",
+    "dayOne": "dan",
+    "dayMany": "dana",
+    "withExcursions": "Uključeno {{n}} izleta s odredišta ({{km}} km).",
+    "fixedPrice": "Fiksna cijena putovanja",
+    "perPerson": "po osobi",
+    "pax": "putnika",
+    "seats": "sjedala",
+    "book": "Rezerviraj",
+    "km": "Kilometraža",
+    "driversCost": "Vozači ({{n}} × {{d}} dana)",
+    "tolls": "Cestarine i gorivo",
+    "base": "Osnovica",
+    "otherBuses": "Ostale kategorije",
+    "route": "Ruta",
+    "bus": "Autobus",
+    "oneDriver": "Ruta je unutar dnevnog limita vožnje, pa je dovoljan jedan vozač.",
+    "twoDrivers": "Zbog EU pravila o vremenu vožnje i odmora (561/2006) ruta se planira s dva vozača."
+  },
+  "buses": {
+    "minibus": {
+      "name": "Minibus"
+    },
+    "midi": {
+      "name": "Midi autobus"
+    },
+    "standard": {
+      "name": "Turistički autobus"
+    },
+    "double": {
+      "name": "Autobus na kat"
+    }
+  },
+  "facts": {
+    "eyebrow": "BusFlow u brojkama",
+    "title": "Sustav koji već vozi",
+    "sub": "BusFlow nije prototip — radi u prometu, na stvarnim rutama i stvarnim rezervacijama.",
+    "operators_one": "prijevoznik vozi na BusFlowu",
+    "operators_few": "prijevoznika vozi na BusFlowu",
+    "operators_other": "prijevoznika vozi na BusFlowu",
+    "languages_one": "jezik u cijeloj platformi",
+    "languages_few": "jezika u cijeloj platformi",
+    "languages_other": "jezika u cijeloj platformi",
+    "modules_one": "modul administracije",
+    "modules_few": "modula administracije",
+    "modules_other": "modula administracije",
+    "availability": "dostupne rezervacije, bez radnog vremena",
+    "vehicles_one": "autobus u sustavu",
+    "vehicles_few": "autobusa u sustavu",
+    "vehicles_other": "autobusa u sustavu",
+    "bookings_one": "obrađena rezervacija",
+    "bookings_few": "obrađene rezervacije",
+    "bookings_other": "obrađenih rezervacija"
+  },
+  "route": {
+    "eyebrow": "Ruta",
+    "title": "Putovanje rijetko ide iz točke A u točku B",
+    "sub": "Grupe usput kupe putnike, ostaju nekoliko dana i iz baze idu na izlete. BusFlow to računa kao jedno putovanje, a ne kao tri odvojena upita.",
+    "stops": {
+      "title": "Međustajališta",
+      "desc": "Dodajte koliko god usputnih točaka treba — svaka ulazi u kilometražu i u vrijeme vožnje. Ruta se na karti ucrtava redoslijedom kojim ste je složili."
+    },
+    "excursions": {
+      "title": "Izleti s odredišta",
+      "desc": "Dok je grupa na odredištu, autobus i vozač su i dalje angažirani. Izleti se računaju kao povratne vožnje iz baze i ulaze u ukupnu cijenu, umjesto da se naplaćuju naknadno."
+    },
+    "rest": {
+      "title": "Vremena vožnje i odmora",
+      "desc": "Kad ruta prijeđe dnevni limit vožnje, sustav sam predlaže drugog vozača prema EU uredbi 561/2006 i uračuna njegovu dnevnicu u ponudu."
+    }
+  },
+  "how": {
+    "eyebrow": "Kako radi",
+    "title": "Od upita do potvrđene vožnje",
+    "s1": {
+      "title": "Putnik složi rutu",
+      "desc": "Polazak, međustajališta, odredište i izleti. Karta i kilometraža se osvježavaju dok upisuje."
+    },
+    "s2": {
+      "title": "Sustav izračuna cijenu",
+      "desc": "Fiksna cijena po vašem cjeniku, s prikazom svih kategorija autobusa koje odgovaraju veličini grupe."
+    },
+    "s3": {
+      "title": "Rezervacija i plaćanje",
+      "desc": "Putnik potvrđuje podatke i plaća karticom. Rezervacija odmah ulazi u vaš sustav s cijelim itinerarom."
+    },
+    "s4": {
+      "title": "Vi vodite izvedbu",
+      "desc": "Raspored, popunjenost, cjenik i naplata na jednom mjestu — bez tablica i ručnog prepisivanja."
+    }
+  },
+  "system": {
+    "eyebrow": "Sustav",
+    "title": "Administracija prijevoznika",
+    "sub": "Kliknite kroz demo: rezervacije, redovni polasci, cjenik i korisnici. Podaci su izmišljeni, sučelje je stvarno.",
+    "c1": {
+      "title": "Rezervacije",
+      "desc": "Svaki upit stiže potpun — ruta s međustajalištima, datumi, broj putnika, kontakt i status plaćanja."
+    },
+    "c2": {
+      "title": "Redovni polasci",
+      "desc": "Objavite liniju, kapacitet i cijenu karte. Sustav broji prodana mjesta i zatvara prodaju kada je autobus pun."
+    },
+    "c3": {
+      "title": "Cjenik",
+      "desc": "Cijene po kilometru i dnevnice vozača po kategoriji autobusa mijenjate sami, bez programera."
+    },
+    "c4": {
+      "title": "Plaćanja",
+      "desc": "Kartično plaćanje kod rezervacije, s pregledom uplata i statusa po svakoj rezervaciji."
+    },
+    "c5": {
+      "title": "Korisnici i uloge",
+      "desc": "Vlasnik, administrator i zaposlenik — svatko vidi i mijenja samo ono što smije."
+    },
+    "c6": {
+      "title": "Tri jezika",
+      "desc": "Hrvatski, engleski i njemački u cijeloj platformi, uključujući potvrde i e-mailove prema putnicima."
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Pregled",
+      "bookings": "Rezervacije",
+      "trips": "Polasci",
+      "pricing": "Cjenik",
+      "users": "Korisnici"
+    },
+    "dashboard": {
+      "title": "Pregled poslovanja",
+      "sub": "Rezervacije, prihod i popunjenost u stvarnom vremenu.",
+      "period": "Kolovoz 2026."
+    },
+    "kpi": {
+      "bookings": "Rezervacija ovaj mjesec",
+      "revenue": "Prihod ovaj mjesec",
+      "occupancy": "Prosječna popunjenost",
+      "response": "Prosječno do ponude"
+    },
+    "col": {
+      "id": "Broj",
+      "client": "Klijent",
+      "route": "Ruta",
+      "date": "Datum",
+      "total": "Iznos",
+      "status": "Status",
+      "pax": "Putnika",
+      "line": "Linija",
+      "departure": "Polazak",
+      "bus": "Autobus",
+      "seats": "Mjesta",
+      "ticket": "Karta",
+      "name": "Ime i prezime",
+      "email": "E-mail",
+      "role": "Uloga"
+    },
+    "status": {
+      "paid": "Plaćeno",
+      "confirmed": "Potvrđeno",
+      "quote": "Ponuda poslana",
+      "cancelled": "Otkazano",
+      "active": "Aktivan",
+      "inactive": "Neaktivan"
+    },
+    "bookings": {
+      "title": "Rezervacije",
+      "sub": "Kliknite na redak za detalje rezervacije.",
+      "count": "u kolovozu"
+    },
+    "detail": {
+      "title": "Detalji rezervacije"
+    },
+    "trips": {
+      "title": "Redovni polasci",
+      "sub": "Objavljene linije i prodaja pojedinačnih karata."
+    },
+    "pricing": {
+      "title": "Cjenik",
+      "sub": "Cijene po kilometru i dnevnice vozača po kategoriji autobusa.",
+      "saved": "Spremljeno",
+      "active": "Aktivno",
+      "perKm": "Po kilometru",
+      "perDay": "Dnevnica vozača",
+      "note": "Isti cjenik koristi javni planer na vašoj stranici — promjena vrijedi odmah za sve nove upite."
+    },
+    "users": {
+      "title": "Korisnici",
+      "sub": "Zaposlenici i njihove ovlasti u sustavu."
+    },
+    "roles": {
+      "superadmin": "Vlasnik",
+      "admin": "Administrator",
+      "member": "Zaposlenik"
+    }
+  },
+  "faq": {
+    "eyebrow": "Pitanja",
+    "title": "Ono što nas klijenti najčešće pitaju",
+    "q1": {
+      "q": "Kako se izračunava cijena?",
+      "a": "Prema vašem cjeniku: cijena po kilometru za kategoriju autobusa, dnevnica vozača, cestarine i gorivo te fiksna osnovica. Kilometraža uključuje međustajališta, povratak i izlete s odredišta, a kad ruta prijeđe dnevni limit vožnje, u izračun ulazi i drugi vozač."
+    },
+    "q2": {
+      "q": "Što ako grupa usput uzima putnike na više mjesta?",
+      "a": "Dodaje se koliko god međustajališta treba. Svako ulazi u rutu, kilometražu i vrijeme vožnje, a putnik ih vidi ucrtane na karti prije nego što potvrdi rezervaciju."
+    },
+    "q3": {
+      "q": "Je li broj putnika iz upita obvezujući?",
+      "a": "Nije. Broj putnika služi da sustav predloži odgovarajuću kategoriju autobusa. Točan broj potvrđuje se prije putovanja, a ako se grupa bitno promijeni, cijena se ponovno izračunava."
+    },
+    "q4": {
+      "q": "Treba li nam vlastita web stranica?",
+      "a": "Ne nužno. BusFlow dolazi s javnim dijelom — naslovnica, usluge, kontakt i planer putovanja — koji se prilagodi vašem brendu. Ako već imate stranicu, planer i rezervacije mogu se ugraditi u nju."
+    },
+    "q5": {
+      "q": "Kako izgleda plaćanje?",
+      "a": "Putnik plaća karticom prilikom rezervacije, a novac ide izravno na vaš račun preko platnog pružatelja. Za škole i tvrtke moguće je plaćanje po ponudi ili avansom."
+    },
+    "q6": {
+      "q": "Koliko traje uvođenje?",
+      "a": "Osnovna instalacija s vašim cjenikom i brendom postavlja se u nekoliko dana. Nakon toga zajedno prolazimo kroz sustav i preuzimamo postojeće podatke ako ih ima."
+    }
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": "Razgovarajmo o vašem voznom parku",
+    "sub": "Recite nam koliko autobusa vozite i kako danas obrađujete upite — javljamo se s prijedlogom i terminom za prezentaciju uživo.",
+    "direct": {
+      "company": "Tvrtka",
+      "answer": "Odgovaramo",
+      "answerValue": "unutar jednog radnog dana"
+    },
+    "form": {
+      "title": "Pošaljite upit",
+      "name": "Ime i prezime",
+      "company": "Tvrtka",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "fleet": "Veličina voznog parka",
+      "message": "Poruka",
+      "messagePlaceholder": "Kako danas primate upite i što vam najviše oduzima vremena?",
+      "send": "Pošaljite upit",
+      "note": "Upit stiže izravno u sandučić Flow Solutionsa. Ne šaljemo newsletter i ne dijelimo podatke dalje.",
+      "sent": "Hvala — upit je zaprimljen. Javljamo se unutar jednog radnog dana.",
+      "subject": "BusFlow — upit",
+      "error": "Slanje nije uspjelo. Pokušajte ponovno ili nam pišite preko flow-solutions.hr.",
+      "sending": "Šaljem…"
+    },
+    "fleet": {
+      "f1": "1 – 5 autobusa",
+      "f2": "6 – 15 autobusa",
+      "f3": "16 i više autobusa"
+    }
+  },
+  "footer": {
+    "blurb": "Platforma za najam autobusa: planer rute s međustajalištima i izletima, trenutačna cijena, online rezervacija i administracija prijevoznika.",
+    "byline": "Razvija Flow Solutions d.o.o.",
+    "product": "Proizvod",
+    "languages": "Jezici",
+    "copyright": "© Flow Solutions d.o.o. 2026",
+    "demoNote": "Demo stranica — podaci i cijene su primjeri.",
+    "pages": "Stranice",
+    "section": {
+      "route": "Ruta",
+      "how": "Kako radi",
+      "system": "Sustav"
+    }
+  },
+  "demo": {
+    "eyebrow": "Interaktivni demo",
+    "title": "Isprobajte BusFlow kao putnik i kao prijevoznik",
+    "sub": "Sve radi u vašem pregledniku — nema backenda ni registracije. Podaci su izmišljeni, ali tok je isti kao u pravoj aplikaciji.",
+    "tabs": {
+      "booking": "Rezervacija (putnik)",
+      "admin": "Administracija (prijevoznik)"
+    },
+    "steps": {
+      "s1": "Ruta i cijena",
+      "s2": "Podaci i plaćanje",
+      "s3": "Potvrda"
+    },
+    "checkout": {
+      "title": "Podaci i plaćanje",
+      "name": "Ime i prezime",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "company": "Tvrtka ili ustanova",
+      "card": "Broj kartice",
+      "note": "Demo plaćanje — kartica se ne naplaćuje i podaci se nigdje ne šalju.",
+      "back": "Natrag",
+      "pay": "Plati i rezerviraj"
+    },
+    "done": {
+      "title": "Rezervacija je potvrđena",
+      "sub": "U pravoj aplikaciji potvrda i račun stižu na e-mail putnika.",
+      "paid": "Plaćeno",
+      "note": "U pravoj aplikaciji ovdje stiže i voucher s podacima vozača i autobusa.",
+      "again": "Želite probati drugu rutu?",
+      "restart": "Kreni ispočetka"
+    },
+    "adminTitle": "Administracija prijevoznika",
+    "adminSub": "Prebacujte se između rezervacija, polazaka, cjenika i korisnika. Kliknite redak rezervacije za detalje."
+  },
+  "notfound": {
+    "title": "Stranica nije pronađena",
+    "sub": "Stranica koju tražite ne postoji ili je premještena.",
+    "cta": "Natrag na naslovnicu"
+  },
+  "clients": {
+    "eyebrow": "Klijenti",
+    "title": "Tko vozi na BusFlowu",
+    "sub": "Sustav nije demo iz ladice — nastao je s prijevoznikom koji ga svakodnevno koristi.",
+    "mikanovic": {
+      "name": "Omnibus Mikanović",
+      "place": "Offenbach am Main, Njemačka",
+      "short": "Javna stranica s planerom putovanja, online rezervacije i administracija — na njemačkom, engleskom i hrvatskom."
+    },
+    "next": {
+      "name": "Vaša tvrtka",
+      "place": "Mjesto je slobodno",
+      "desc": "Ako vozite grupe, a ponude i dalje radite ručno, pokazat ćemo vam sustav na vašim rutama.",
+      "cta": "Javite nam se"
+    },
+    "caseStudy": "Pogledaj case study"
+  },
+  "closing": {
+    "title": "Želite BusFlow na svojoj stranici?",
+    "sub": "Prezentacija je uživo i na vašim podacima — vaše rute, vaš cjenik, vaše kategorije autobusa.",
+    "primary": "Zatraži prezentaciju",
+    "secondary": "Prvo pogledaj demo",
+    "note": "BusFlow razvija Flow Solutions d.o.o."
+  },
+  "seo": {
+    "home": {
+      "title": "Softver za najam autobusa i online rezervacije",
+      "description": "Planer rute s međustajalištima i izletima, trenutačna fiksna cijena, online rezervacija i plaćanje — na web stranici autobusnog prijevoznika."
+    },
+    "clients": {
+      "title": "Klijenti — tko vozi na BusFlowu",
+      "description": "Autobusni prijevoznici koji rade na BusFlowu. Prvi je Omnibus Mikanović iz Offenbacha am Main: stranica s planerom i administracija."
+    },
+    "demo": {
+      "title": "Interaktivni demo",
+      "description": "Isprobajte BusFlow bez registracije: složite rutu s međustajalištima i izletima, izračunajte cijenu i prođite rezervaciju te administraciju prijevoznika."
+    },
+    "contact": {
+      "title": "Kontakt i česta pitanja",
+      "description": "Zatražite prezentaciju BusFlowa na vašim rutama i vašem cjeniku. Odgovaramo unutar jednog radnog dana."
+    },
+    "caseMikanovic": {
+      "title": "Omnibus Mikanović — case study",
+      "description": "Kako autobusni prijevoznik iz Offenbacha am Main dobiva web stranicu s planerom putovanja, online rezervacijama, prodajom karata i administracijom na BusFlowu."
+    }
+  },
+  "case": {
+    "back": "Svi klijenti",
+    "eyebrow": "Case study",
+    "mikanovic": {
+      "title": "Omnibus Mikanović",
+      "lead": "Obiteljski prijevoznik iz Offenbacha am Main dobio je web stranicu koja sama radi ponude: putnik složi rutu s međustajalištima i izletima, vidi fiksnu cijenu i rezervira online — a ured sve vodi iz jedne administracije."
+    },
+    "facts": {
+      "sector": {
+        "label": "Djelatnost",
+        "value": "Autobusni prijevoz, grupna putovanja"
+      },
+      "place": {
+        "label": "Sjedište",
+        "value": "Offenbach am Main, Njemačka"
+      },
+      "since": {
+        "label": "Prijevoznik",
+        "value": "Obiteljska tvrtka od 2010."
+      },
+      "scope": {
+        "label": "Opseg",
+        "value": "Web stranica, rezervacijski sustav i administracija"
+      },
+      "languages": {
+        "label": "Jezici",
+        "value": "Njemački, engleski, hrvatski"
+      },
+      "role": {
+        "label": "Naša uloga",
+        "value": "Izrada i programiranje weba"
+      }
+    },
+    "challenge": {
+      "eyebrow": "Zadatak",
+      "title": "Svaki upit bio je ručni posao",
+      "sub": "Prije BusFlowa put od upita do potvrđene vožnje išao je preko telefona, e-maila i kalkulatora.",
+      "c1": {
+        "title": "Upiti stižu nepotpuni",
+        "desc": "Telefon i e-mail donose pola podatka — bez točne rute, datuma ili broja putnika. Slijedi dopisivanje prije nego što se uopće može računati cijena."
+      },
+      "c2": {
+        "title": "Cijena se računa ručno",
+        "desc": "Kilometraža, dnevnice vozača, cestarine i gorivo za svaku varijantu ponaosob. Odgovor kasni satima ili danima, a grupa u međuvremenu pita drugoga."
+      },
+      "c3": {
+        "title": "Nema pregleda",
+        "desc": "Rezervacije, uplate i popunjenost polazaka žive po tablicama i porukama, pa je teško vidjeti stanje voznog parka na jednom mjestu."
+      }
+    },
+    "solution": {
+      "eyebrow": "Rješenje",
+      "title": "Što smo izradili",
+      "sub": "Javna stranica i interni sustav su jedna aplikacija — ono što putnik unese odmah je i podatak u administraciji.",
+      "s1": {
+        "title": "Planer putovanja",
+        "desc": "Polazak, međustajališta, odredište i izleti s odredišta, s rutom ucrtanom na karti i automatskim izračunom kilometraže i vremena vožnje."
+      },
+      "s2": {
+        "title": "Trenutačna cijena",
+        "desc": "Cijena se računa po cjeniku prijevoznika: kilometraža po kategoriji autobusa, dnevnice vozača, cestarine i gorivo. Duge rute automatski dobivaju drugog vozača prema EU pravilima o vremenu vožnje."
+      },
+      "s3": {
+        "title": "Online rezervacija",
+        "desc": "Putnik potvrđuje podatke i rezervaciju s cijelim itinerarom — ruta, međustajališta, izleti, datumi i broj putnika odmah ulaze u sustav."
+      },
+      "s4": {
+        "title": "Karte za redovne polaske",
+        "desc": "Objavljene linije s kapacitetom i cijenom karte, prodajom pojedinačnih mjesta i praćenjem popunjenosti."
+      },
+      "s5": {
+        "title": "Administracija",
+        "desc": "Rezervacije, polasci, cjenik, plaćanja i korisnici s ulogama — vlasnik, administrator i zaposlenik vide točno ono što smiju."
+      },
+      "s6": {
+        "title": "Tri jezika i sigurna prijava",
+        "desc": "Cijela platforma na njemačkom, engleskom i hrvatskom, uključujući e-mailove. Prijava ide preko Keycloaka, s dvofaktorskom prijavom i prijavom preko Googlea."
+      },
+      "s7": {
+        "title": "Naplata karticom preko myPOS-a",
+        "desc": "Plaćanje ide na myPOS Checkout: sustav gradi potpisani obrazac za plaćanje, a povratne poruke provjerava potpisom prije nego rezervaciju označi plaćenom. Potvrda stiže i sa servera i iz preglednika, pa se obrađuje idempotentno — dvostruka poruka ne može stvoriti dvostruku uplatu. Povrati se bilježe uz rezervaciju."
+      }
+    },
+    "gallery": {
+      "home": "Naslovna stranica s videom i planerom putovanja"
+    },
+    "stack": {
+      "eyebrow": "Tehnologija",
+      "title": "Na čemu je izgrađeno",
+      "sub": "Isti stack pokreće i BusFlow demo koji možete isprobati na ovoj stranici.",
+      "frontend": {
+        "label": "Frontend",
+        "value": "React, TypeScript, Vite, Tailwind CSS"
+      },
+      "backend": {
+        "label": "Backend",
+        "value": ".NET 10, Clean Architecture i CQRS, PostgreSQL, Redis"
+      },
+      "auth": {
+        "label": "Prijava",
+        "value": "Keycloak (OIDC + PKCE), dvofaktorska prijava, Google prijava"
+      },
+      "map": {
+        "label": "Karte i lokacije",
+        "value": "MapLibre GL, OpenFreeMap pločice, Photon pretraživanje mjesta"
+      },
+      "payments": {
+        "label": "Plaćanja",
+        "value": "myPOS Checkout (IPC 1.4) — potpisani obrazac i potpisani callbackovi; Stripe kao alternativni pružatelj"
+      },
+      "hosting": {
+        "label": "Isporuka",
+        "value": "Docker, Coolify, CI/CD preko GitHub Actionsa"
+      }
+    },
+    "closing": {
+      "title": "Vozite grupe i radite ponude ručno?",
+      "sub": "Isti sustav postavljamo na vaš brend, vaše rute i vaš cjenik.",
+      "primary": "Zatraži prezentaciju",
+      "secondary": "Isprobaj demo"
+    }
+  },
+  "schedule": {
+    "title": "Procjena vremena po stajalištima",
+    "arrival": "dolazak",
+    "departure": "polazak",
+    "note": "Procjena: vrijeme vožnje, 15 min ukrcaja na međustajalištu i obavezna pauza od 45 min nakon 4,5 h vožnje."
+  }
+}

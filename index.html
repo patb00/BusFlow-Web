@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#2c2a25" />
+
+    <!-- Fallback metadata for crawlers that do not run JavaScript. Every route replaces these
+         at runtime (src/components/Seo.jsx); the description carries data-default so the page's
+         own description can drop it instead of competing with it. -->
+    <title>BusFlow — Software für Busvermietung und Online-Buchung</title>
+    <meta
+      name="description"
+      data-default
+      content="BusFlow ist die Plattform für Omnibusunternehmen: Routenplaner mit Zwischenstopps und Ausflügen, sofortiger Festpreis, Online-Buchung und Zahlung, Ticketverkauf und Verwaltung in einem System."
+    />
+
+    <meta property="og:type" content="website" data-default />
+    <meta property="og:site_name" content="BusFlow" data-default />
+    <meta property="og:title" content="BusFlow — Software für Busvermietung und Online-Buchung" data-default />
+    <meta
+      data-default
+      property="og:description"
+      content="Routenplaner mit Zwischenstopps und Ausflügen, Sofortpreis, Online-Buchung — auf der Website des Busunternehmens."
+    />
+    <meta property="og:image" content="/og-share.jpg" data-default />
+    <meta name="twitter:card" content="summary_large_image" data-default />
+
+    <!-- Third parties the first screen needs: map tiles, webfonts, place autocomplete. -->
+    <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin />
+    <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
+    <link rel="dns-prefetch" href="https://photon.komoot.io" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Flow Solutions d.o.o.",
+        "url": "https://flow-solutions.hr",
+        "brand": { "@type": "Brand", "name": "BusFlow" }
+      }
+    </script>
+
+    <script>
+      // SPA fallback: 404.html preserves the path in ?p= so BrowserRouter can restore it.
+      (function () {
+        var p = new URLSearchParams(window.location.search).get('p');
+        if (p) window.history.replaceState(null, '', p);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

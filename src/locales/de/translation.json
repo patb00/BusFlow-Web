@@ -1,0 +1,520 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "clients": "Kunden",
+    "demo": "Demo",
+    "contact": "Kontakt",
+    "menu": "Menü",
+    "close": "Schließen"
+  },
+  "hero": {
+    "eyebrow": "BusFlow · Software für Omnibusunternehmen",
+    "title": "Route, Preis und Buchung auf einer Karte.",
+    "sub": "Ihr Kunde stellt die Fahrt mit Zwischenstopps und Ausflügen zusammen, sieht Kilometer und Festpreis und bucht online. Sie steuern alles aus einer Verwaltung."
+  },
+  "planner": {
+    "title": "Fahrt zusammenstellen",
+    "badge": "Demo-Berechnung",
+    "from": "Abfahrt",
+    "to": "Ziel",
+    "via": "Zwischenstopp",
+    "fromPlaceholder": "z. B. Offenbach am Main",
+    "toPlaceholder": "z. B. Wien",
+    "addStop": "Zwischenstopp hinzufügen",
+    "removeStop": "Zwischenstopp entfernen",
+    "date": "Abfahrtsdatum",
+    "nights": "Nächte",
+    "pax": "Personen",
+    "excursions": "Ausflüge vom Zielort",
+    "excursionsNote": "während des Aufenthalts",
+    "excursion": "Ausflug",
+    "excursionPlaceholder": "z. B. Schönbrunn",
+    "addExcursion": "Ausflug hinzufügen",
+    "removeExcursion": "Ausflug entfernen",
+    "roundTrip": "Rückfahrt zum Startort",
+    "submit": "Preis berechnen",
+    "calculating": "Berechne…",
+    "note": "Demo-Berechnung auf Basis von Kilometern, Fahrertagessätzen, Maut und Kraftstoff. Kein verbindliches Angebot.",
+    "time": "Abfahrtszeit"
+  },
+  "quote": {
+    "driving": "Fahrzeit",
+    "driverOne": "Fahrer",
+    "driverMany": "Fahrer",
+    "dayOne": "Tag",
+    "dayMany": "Tage",
+    "withExcursions": "Enthält {{n}} Ausflug/Ausflüge vom Zielort ({{km}} km).",
+    "fixedPrice": "Festpreis für die Fahrt",
+    "perPerson": "pro Person",
+    "pax": "Personen",
+    "seats": "Sitzplätze",
+    "book": "Buchen",
+    "km": "Kilometer",
+    "driversCost": "Fahrer ({{n}} × {{d}} Tage)",
+    "tolls": "Maut und Kraftstoff",
+    "base": "Grundgebühr",
+    "otherBuses": "Andere Kategorien",
+    "route": "Route",
+    "bus": "Bus",
+    "oneDriver": "Die Route bleibt innerhalb der Tageslenkzeit, ein Fahrer genügt.",
+    "twoDrivers": "Nach den EU-Lenk- und Ruhezeiten (561/2006) wird diese Route mit zwei Fahrern geplant."
+  },
+  "buses": {
+    "minibus": {
+      "name": "Minibus"
+    },
+    "midi": {
+      "name": "Midibus"
+    },
+    "standard": {
+      "name": "Reisebus"
+    },
+    "double": {
+      "name": "Doppeldecker"
+    }
+  },
+  "facts": {
+    "eyebrow": "BusFlow in Zahlen",
+    "title": "Ein System, das bereits fährt",
+    "sub": "BusFlow ist kein Prototyp — es läuft im Betrieb, auf echten Routen und mit echten Buchungen.",
+    "operators_one": "Busunternehmen fährt mit BusFlow",
+    "operators_other": "Busunternehmen fahren mit BusFlow",
+    "languages_one": "Sprache in der Plattform",
+    "languages_other": "Sprachen in der Plattform",
+    "modules_one": "Verwaltungsbereich",
+    "modules_other": "Verwaltungsbereiche",
+    "availability": "Buchungen möglich, ohne Öffnungszeiten",
+    "vehicles_one": "Bus im System",
+    "vehicles_other": "Busse im System",
+    "bookings_one": "verarbeitete Buchung",
+    "bookings_other": "verarbeitete Buchungen"
+  },
+  "route": {
+    "eyebrow": "Die Route",
+    "title": "Eine Fahrt geht selten direkt von A nach B",
+    "sub": "Gruppen steigen unterwegs zu, bleiben einige Tage und fahren vom Standort aus zu Ausflügen. BusFlow rechnet das als eine Reise statt als drei getrennte Anfragen.",
+    "stops": {
+      "title": "Zwischenstopps",
+      "desc": "Fügen Sie so viele Zustiegspunkte hinzu, wie die Fahrt braucht — jeder zählt in Kilometer und Fahrzeit, und die Karte zeichnet die Route in der Reihenfolge, in der Sie sie gebaut haben."
+    },
+    "excursions": {
+      "title": "Ausflüge vom Zielort",
+      "desc": "Während die Gruppe am Zielort ist, sind Bus und Fahrer weiter gebunden. Ausflüge werden als Hin- und Rückfahrten vom Standort berechnet und fließen in den Gesamtpreis ein, statt später nachberechnet zu werden."
+    },
+    "rest": {
+      "title": "Lenk- und Ruhezeiten",
+      "desc": "Überschreitet die Route die Tageslenkzeit, schlägt das System nach EU-Verordnung 561/2006 einen zweiten Fahrer vor und rechnet seinen Tagessatz ins Angebot ein."
+    }
+  },
+  "how": {
+    "eyebrow": "Ablauf",
+    "title": "Von der Anfrage zur bestätigten Fahrt",
+    "s1": {
+      "title": "Der Kunde baut die Route",
+      "desc": "Abfahrt, Zwischenstopps, Ziel und Ausflüge. Karte und Kilometer aktualisieren sich beim Tippen."
+    },
+    "s2": {
+      "title": "Das System berechnet den Preis",
+      "desc": "Festpreis nach Ihrem Tarif, mit allen Buskategorien, die zur Größe der Gruppe passen."
+    },
+    "s3": {
+      "title": "Buchung und Zahlung",
+      "desc": "Der Kunde bestätigt seine Daten und zahlt per Karte. Die Buchung landet mit dem gesamten Reiseverlauf in Ihrem System."
+    },
+    "s4": {
+      "title": "Sie steuern den Betrieb",
+      "desc": "Einsatzplan, Auslastung, Tarif und Zahlungen an einem Ort — ohne Tabellen und ohne Abtippen."
+    }
+  },
+  "system": {
+    "eyebrow": "Das System",
+    "title": "Die Verwaltung des Busunternehmens",
+    "sub": "Klicken Sie durch die Demo: Buchungen, feste Abfahrten, Tarif und Nutzer. Die Daten sind erfunden, die Oberfläche ist echt.",
+    "c1": {
+      "title": "Buchungen",
+      "desc": "Jede Anfrage kommt vollständig an — Route mit Stopps, Daten, Personenzahl, Kontakt und Zahlungsstatus."
+    },
+    "c2": {
+      "title": "Feste Abfahrten",
+      "desc": "Veröffentlichen Sie Linie, Kapazität und Ticketpreis. Das System zählt verkaufte Plätze und stoppt den Verkauf, wenn der Bus voll ist."
+    },
+    "c3": {
+      "title": "Tarif",
+      "desc": "Kilometerpreise und Fahrertagessätze je Buskategorie ändern Sie selbst, ohne Entwickler."
+    },
+    "c4": {
+      "title": "Zahlungen",
+      "desc": "Kartenzahlung bei der Buchung, mit Übersicht über Eingänge und Status je Buchung."
+    },
+    "c5": {
+      "title": "Nutzer und Rollen",
+      "desc": "Inhaber, Administrator und Mitarbeiter — jeder sieht und ändert nur, was er darf."
+    },
+    "c6": {
+      "title": "Drei Sprachen",
+      "desc": "Deutsch, Englisch und Kroatisch in der ganzen Plattform, inklusive Bestätigungen und E-Mails an Ihre Kunden."
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Übersicht",
+      "bookings": "Buchungen",
+      "trips": "Abfahrten",
+      "pricing": "Tarif",
+      "users": "Nutzer"
+    },
+    "dashboard": {
+      "title": "Geschäftsübersicht",
+      "sub": "Buchungen, Umsatz und Auslastung in Echtzeit.",
+      "period": "August 2026"
+    },
+    "kpi": {
+      "bookings": "Buchungen diesen Monat",
+      "revenue": "Umsatz diesen Monat",
+      "occupancy": "Durchschnittliche Auslastung",
+      "response": "Durchschnitt bis zum Angebot"
+    },
+    "col": {
+      "id": "Nr.",
+      "client": "Kunde",
+      "route": "Route",
+      "date": "Datum",
+      "total": "Betrag",
+      "status": "Status",
+      "pax": "Pers.",
+      "line": "Linie",
+      "departure": "Abfahrt",
+      "bus": "Bus",
+      "seats": "Plätze",
+      "ticket": "Ticket",
+      "name": "Name",
+      "email": "E-Mail",
+      "role": "Rolle"
+    },
+    "status": {
+      "paid": "Bezahlt",
+      "confirmed": "Bestätigt",
+      "quote": "Angebot gesendet",
+      "cancelled": "Storniert",
+      "active": "Aktiv",
+      "inactive": "Inaktiv"
+    },
+    "bookings": {
+      "title": "Buchungen",
+      "sub": "Klicken Sie auf eine Zeile für die Details.",
+      "count": "im August"
+    },
+    "detail": {
+      "title": "Buchungsdetails"
+    },
+    "trips": {
+      "title": "Feste Abfahrten",
+      "sub": "Veröffentlichte Linien und Verkauf von Einzeltickets."
+    },
+    "pricing": {
+      "title": "Tarif",
+      "sub": "Kilometerpreis und Fahrertagessatz je Buskategorie.",
+      "saved": "Gespeichert",
+      "active": "Aktiv",
+      "perKm": "Pro Kilometer",
+      "perDay": "Fahrertagessatz",
+      "note": "Der öffentliche Planer auf Ihrer Website nutzt denselben Tarif — eine Änderung gilt sofort für alle neuen Anfragen."
+    },
+    "users": {
+      "title": "Nutzer",
+      "sub": "Mitarbeiterkonten und ihre Berechtigungen."
+    },
+    "roles": {
+      "superadmin": "Inhaber",
+      "admin": "Administrator",
+      "member": "Mitarbeiter"
+    }
+  },
+  "faq": {
+    "eyebrow": "Fragen",
+    "title": "Was Kunden uns am häufigsten fragen",
+    "q1": {
+      "q": "Wie wird der Preis berechnet?",
+      "a": "Nach Ihrem Tarif: Kilometerpreis der Buskategorie, Fahrertagessatz, Maut und Kraftstoff sowie eine feste Grundgebühr. Die Kilometer umfassen Zwischenstopps, Rückfahrt und Ausflüge vom Zielort; überschreitet die Route die Tageslenkzeit, wird auch ein zweiter Fahrer eingerechnet."
+    },
+    "q2": {
+      "q": "Was, wenn die Gruppe an mehreren Orten zusteigt?",
+      "a": "Fügen Sie so viele Zwischenstopps hinzu, wie nötig. Jeder zählt in Route, Kilometer und Fahrzeit, und der Kunde sieht sie auf der Karte eingezeichnet, bevor er die Buchung bestätigt."
+    },
+    "q3": {
+      "q": "Ist die Personenzahl aus der Anfrage verbindlich?",
+      "a": "Nein. Die Personenzahl dient dazu, die passende Buskategorie vorzuschlagen. Die genaue Zahl wird vor der Fahrt bestätigt, und wenn sich die Gruppe deutlich ändert, wird der Preis neu berechnet."
+    },
+    "q4": {
+      "q": "Brauchen wir eine eigene Website?",
+      "a": "Nicht zwingend. BusFlow bringt einen öffentlichen Teil mit — Startseite, Leistungen, Kontakt und Reiseplaner — der an Ihre Marke angepasst wird. Haben Sie bereits eine Website, lassen sich Planer und Buchung darin einbinden."
+    },
+    "q5": {
+      "q": "Wie läuft die Zahlung?",
+      "a": "Der Kunde zahlt bei der Buchung per Karte, das Geld geht über den Zahlungsdienstleister direkt auf Ihr Konto. Für Schulen und Firmen sind Zahlung auf Rechnung oder Anzahlung möglich."
+    },
+    "q6": {
+      "q": "Wie lange dauert die Einführung?",
+      "a": "Eine Basisinstallation mit Ihrem Tarif und Ihrer Marke steht in wenigen Tagen. Danach gehen wir das System gemeinsam durch und übernehmen vorhandene Daten."
+    }
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": "Sprechen wir über Ihren Fuhrpark",
+    "sub": "Sagen Sie uns, wie viele Busse Sie fahren und wie Anfragen heute bei Ihnen ankommen — wir melden uns mit einem Vorschlag und einem Termin für eine Live-Präsentation.",
+    "direct": {
+      "company": "Unternehmen",
+      "answer": "Wir antworten",
+      "answerValue": "innerhalb eines Werktages"
+    },
+    "form": {
+      "title": "Anfrage senden",
+      "name": "Vor- und Nachname",
+      "company": "Firma",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "fleet": "Größe des Fuhrparks",
+      "message": "Nachricht",
+      "messagePlaceholder": "Wie kommen Anfragen heute zu Ihnen, und was kostet dabei die meiste Zeit?",
+      "send": "Anfrage senden",
+      "note": "Die Anfrage geht direkt in das Postfach von Flow Solutions. Kein Newsletter, keine Weitergabe Ihrer Daten.",
+      "sent": "Danke — Ihre Anfrage ist angekommen. Wir melden uns innerhalb eines Werktages.",
+      "subject": "BusFlow — Anfrage",
+      "error": "Senden fehlgeschlagen. Bitte erneut versuchen oder über flow-solutions.hr schreiben.",
+      "sending": "Wird gesendet…"
+    },
+    "fleet": {
+      "f1": "1 – 5 Busse",
+      "f2": "6 – 15 Busse",
+      "f3": "16 und mehr Busse"
+    }
+  },
+  "footer": {
+    "blurb": "Plattform für Busvermietung: Routenplaner mit Zwischenstopps und Ausflügen, Sofortpreis, Online-Buchung und Verwaltung für das Busunternehmen.",
+    "byline": "Entwickelt von Flow Solutions d.o.o.",
+    "product": "Produkt",
+    "languages": "Sprachen",
+    "copyright": "© Flow Solutions d.o.o. 2026",
+    "demoNote": "Demo-Seite — Daten und Preise sind Beispiele.",
+    "pages": "Seiten",
+    "section": {
+      "route": "Route",
+      "how": "Ablauf",
+      "system": "System"
+    }
+  },
+  "demo": {
+    "eyebrow": "Interaktive Demo",
+    "title": "Testen Sie BusFlow als Fahrgast und als Busunternehmen",
+    "sub": "Alles läuft in Ihrem Browser — kein Backend, keine Anmeldung. Die Daten sind erfunden, der Ablauf ist derselbe wie in der echten App.",
+    "tabs": {
+      "booking": "Buchung (Fahrgast)",
+      "admin": "Verwaltung (Unternehmen)"
+    },
+    "steps": {
+      "s1": "Route und Preis",
+      "s2": "Daten und Zahlung",
+      "s3": "Bestätigung"
+    },
+    "checkout": {
+      "title": "Daten und Zahlung",
+      "name": "Vor- und Nachname",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "company": "Firma oder Einrichtung",
+      "card": "Kartennummer",
+      "note": "Demo-Zahlung — es wird nichts abgebucht und keine Daten verlassen den Browser.",
+      "back": "Zurück",
+      "pay": "Bezahlen und buchen"
+    },
+    "done": {
+      "title": "Buchung bestätigt",
+      "sub": "In der echten App gehen Bestätigung und Rechnung per E-Mail an den Kunden.",
+      "paid": "Bezahlt",
+      "note": "In der echten App kommt hier zusätzlich ein Voucher mit Fahrer- und Busdaten an.",
+      "again": "Noch eine Route ausprobieren?",
+      "restart": "Von vorne beginnen"
+    },
+    "adminTitle": "Verwaltung für Busunternehmen",
+    "adminSub": "Wechseln Sie zwischen Buchungen, Abfahrten, Tarif und Nutzern. Klicken Sie eine Buchungszeile für die Details an."
+  },
+  "notfound": {
+    "title": "Seite nicht gefunden",
+    "sub": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "cta": "Zurück zur Startseite"
+  },
+  "clients": {
+    "eyebrow": "Kunden",
+    "title": "Wer mit BusFlow fährt",
+    "sub": "Kein Demo aus der Schublade — das System ist mit einem Unternehmen entstanden, das es täglich nutzt.",
+    "mikanovic": {
+      "name": "Omnibus Mikanović",
+      "place": "Offenbach am Main, Deutschland",
+      "short": "Öffentliche Website mit Reiseplaner, Online-Buchungen und Verwaltung — auf Deutsch, Englisch und Kroatisch."
+    },
+    "next": {
+      "name": "Ihr Unternehmen",
+      "place": "Dieser Platz ist frei",
+      "desc": "Wenn Sie Gruppen fahren und Angebote noch von Hand schreiben, zeigen wir Ihnen das System mit Ihren Routen.",
+      "cta": "Melden Sie sich"
+    },
+    "caseStudy": "Case Study ansehen"
+  },
+  "closing": {
+    "title": "Sie möchten BusFlow auf Ihrer Website?",
+    "sub": "Die Präsentation ist live und mit Ihren Daten — Ihre Routen, Ihr Tarif, Ihre Buskategorien.",
+    "primary": "Präsentation anfragen",
+    "secondary": "Erst die Demo ansehen",
+    "note": "BusFlow wird von Flow Solutions d.o.o. entwickelt."
+  },
+  "seo": {
+    "home": {
+      "title": "Software für Busvermietung und Online-Buchung",
+      "description": "Routenplaner mit Zwischenstopps und Ausflügen, Sofortpreis, Online-Buchung und Kartenzahlung — auf der Website des Busunternehmens."
+    },
+    "clients": {
+      "title": "Kunden — wer mit BusFlow fährt",
+      "description": "Busunternehmen, die mit BusFlow arbeiten. Das erste ist Omnibus Mikanović aus Offenbach am Main: Website mit Reiseplaner und Verwaltung."
+    },
+    "demo": {
+      "title": "Interaktive Demo",
+      "description": "Testen Sie BusFlow ohne Anmeldung: Route mit Zwischenstopps und Ausflügen zusammenstellen, Preis berechnen und Buchung sowie Verwaltung durchgehen."
+    },
+    "contact": {
+      "title": "Kontakt und häufige Fragen",
+      "description": "Fragen Sie eine BusFlow-Präsentation mit Ihren Routen und Ihrem Tarif an. Wir antworten innerhalb eines Werktages."
+    },
+    "caseMikanovic": {
+      "title": "Omnibus Mikanović — Case Study",
+      "description": "Wie ein Omnibusunternehmen aus Offenbach am Main eine Website mit Reiseplaner, Online-Buchungen und Verwaltung auf BusFlow bekam."
+    }
+  },
+  "case": {
+    "back": "Alle Kunden",
+    "eyebrow": "Case Study",
+    "mikanovic": {
+      "title": "Omnibus Mikanović",
+      "lead": "Ein Familienbetrieb aus Offenbach am Main hat eine Website bekommen, die Angebote selbst erstellt: Der Kunde stellt die Route mit Zwischenstopps und Ausflügen zusammen, sieht einen Festpreis und bucht online — das Büro steuert alles aus einer Verwaltung."
+    },
+    "facts": {
+      "sector": {
+        "label": "Branche",
+        "value": "Busverkehr, Gruppenreisen"
+      },
+      "place": {
+        "label": "Sitz",
+        "value": "Offenbach am Main, Deutschland"
+      },
+      "since": {
+        "label": "Unternehmen",
+        "value": "Familienbetrieb seit 2010"
+      },
+      "scope": {
+        "label": "Umfang",
+        "value": "Website, Buchungssystem und Verwaltung"
+      },
+      "languages": {
+        "label": "Sprachen",
+        "value": "Deutsch, Englisch, Kroatisch"
+      },
+      "role": {
+        "label": "Unsere Rolle",
+        "value": "Webentwicklung und Programmierung"
+      }
+    },
+    "challenge": {
+      "eyebrow": "Die Aufgabe",
+      "title": "Jede Anfrage war Handarbeit",
+      "sub": "Vor BusFlow lief der Weg von der Anfrage zur bestätigten Fahrt über Telefon, E-Mail und Taschenrechner.",
+      "c1": {
+        "title": "Anfragen kommen unvollständig",
+        "desc": "Telefon und E-Mail bringen die halbe Information — ohne genaue Route, Daten oder Personenzahl. Erst nach mehrfachem Nachfragen lässt sich überhaupt rechnen."
+      },
+      "c2": {
+        "title": "Preise werden von Hand gerechnet",
+        "desc": "Kilometer, Fahrertagessätze, Maut und Kraftstoff für jede Variante einzeln. Die Antwort dauert Stunden oder Tage — und die Gruppe fragt inzwischen woanders."
+      },
+      "c3": {
+        "title": "Keine Übersicht",
+        "desc": "Buchungen, Zahlungen und Auslastung leben in Tabellen und Nachrichten, der Zustand des Fuhrparks ist an einem Ort kaum zu sehen."
+      }
+    },
+    "solution": {
+      "eyebrow": "Die Lösung",
+      "title": "Was wir gebaut haben",
+      "sub": "Öffentliche Website und internes System sind eine Anwendung — was der Kunde eingibt, ist sofort ein Datensatz in der Verwaltung.",
+      "s1": {
+        "title": "Reiseplaner",
+        "desc": "Abfahrt, Zwischenstopps, Ziel und Ausflüge vom Zielort, mit der Route auf der Karte und automatisch berechneten Kilometern und Fahrzeiten."
+      },
+      "s2": {
+        "title": "Sofortiger Preis",
+        "desc": "Der Preis kommt aus dem Tarif des Unternehmens: Kilometerpreise je Buskategorie, Fahrertagessätze, Maut und Kraftstoff. Lange Routen bekommen nach den EU-Lenkzeiten automatisch einen zweiten Fahrer."
+      },
+      "s3": {
+        "title": "Online-Buchung",
+        "desc": "Der Kunde bestätigt seine Daten und die Buchung mit dem gesamten Reiseverlauf — Route, Zwischenstopps, Ausflüge, Daten und Personenzahl landen sofort im System."
+      },
+      "s4": {
+        "title": "Tickets für feste Abfahrten",
+        "desc": "Veröffentlichte Linien mit Kapazität und Ticketpreis, Verkauf einzelner Plätze und laufender Auslastung."
+      },
+      "s5": {
+        "title": "Verwaltung",
+        "desc": "Buchungen, Abfahrten, Tarif, Zahlungen und Nutzer mit Rollen — Inhaber, Administrator und Mitarbeiter sehen genau das, was sie dürfen."
+      },
+      "s6": {
+        "title": "Drei Sprachen und sichere Anmeldung",
+        "desc": "Die gesamte Plattform auf Deutsch, Englisch und Kroatisch, inklusive E-Mails. Die Anmeldung läuft über Keycloak, mit Zwei-Faktor-Anmeldung und Google-Login."
+      },
+      "s7": {
+        "title": "Kartenzahlung über myPOS",
+        "desc": "Die Zahlung läuft über myPOS Checkout: Das System erzeugt ein signiertes Zahlungsformular und prüft die Signatur der Rückmeldungen, bevor eine Buchung als bezahlt markiert wird. Die Bestätigung kommt sowohl Server-zu-Server als auch über den Browser und wird idempotent verarbeitet — eine doppelte Meldung kann keine doppelte Zahlung erzeugen. Rückerstattungen werden bei der Buchung vermerkt."
+      }
+    },
+    "gallery": {
+      "home": "Startseite mit Video und Reiseplaner"
+    },
+    "stack": {
+      "eyebrow": "Technologie",
+      "title": "Worauf es gebaut ist",
+      "sub": "Derselbe Stack treibt auch die BusFlow-Demo auf dieser Seite an.",
+      "frontend": {
+        "label": "Frontend",
+        "value": "React, TypeScript, Vite, Tailwind CSS"
+      },
+      "backend": {
+        "label": "Backend",
+        "value": ".NET 10, Clean Architecture und CQRS, PostgreSQL, Redis"
+      },
+      "auth": {
+        "label": "Anmeldung",
+        "value": "Keycloak (OIDC + PKCE), Zwei-Faktor-Anmeldung, Google-Login"
+      },
+      "map": {
+        "label": "Karten und Orte",
+        "value": "MapLibre GL, OpenFreeMap-Kacheln, Photon-Ortssuche"
+      },
+      "payments": {
+        "label": "Zahlungen",
+        "value": "myPOS Checkout (IPC 1.4) — signiertes Formular und signierte Callbacks; Stripe als alternativer Anbieter"
+      },
+      "hosting": {
+        "label": "Auslieferung",
+        "value": "Docker, Coolify, CI/CD über GitHub Actions"
+      }
+    },
+    "closing": {
+      "title": "Sie fahren Gruppen und rechnen Angebote von Hand?",
+      "sub": "Wir richten dasselbe System mit Ihrer Marke, Ihren Routen und Ihrem Tarif ein.",
+      "primary": "Präsentation anfragen",
+      "secondary": "Demo ausprobieren"
+    }
+  },
+  "schedule": {
+    "title": "Zeitschätzung je Haltestelle",
+    "arrival": "Ankunft",
+    "departure": "Abfahrt",
+    "note": "Schätzung: Fahrzeit, 15 Min. Einstieg je Zwischenstopp und die vorgeschriebene 45-Minuten-Pause nach 4,5 Std. Fahrt."
+  }
+}

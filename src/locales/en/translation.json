@@ -1,0 +1,520 @@
+{
+  "nav": {
+    "home": "Home",
+    "clients": "Clients",
+    "demo": "Demo",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "hero": {
+    "eyebrow": "BusFlow · software for coach operators",
+    "title": "Route, price and booking on one map.",
+    "sub": "Your customer builds the trip with intermediate stops and day trips, sees the distance and a fixed price, and books online. You run all of it from one admin area."
+  },
+  "planner": {
+    "title": "Build the trip",
+    "badge": "Demo calculation",
+    "from": "Departure",
+    "to": "Destination",
+    "via": "Stop",
+    "fromPlaceholder": "e.g. Zagreb",
+    "toPlaceholder": "e.g. Vienna",
+    "addStop": "Add a stop",
+    "removeStop": "Remove stop",
+    "date": "Departure date",
+    "nights": "Nights",
+    "pax": "Passengers",
+    "excursions": "Day trips from the destination",
+    "excursionsNote": "while the group is there",
+    "excursion": "Day trip",
+    "excursionPlaceholder": "e.g. Schönbrunn",
+    "addExcursion": "Add a day trip",
+    "removeExcursion": "Remove day trip",
+    "roundTrip": "Return to departure point",
+    "submit": "Calculate price",
+    "calculating": "Calculating…",
+    "note": "Demo calculation based on distance, driver day rates, tolls and fuel. Not a binding quote.",
+    "time": "Departure time"
+  },
+  "quote": {
+    "driving": "driving",
+    "driverOne": "driver",
+    "driverMany": "drivers",
+    "dayOne": "day",
+    "dayMany": "days",
+    "withExcursions": "Includes {{n}} day trip(s) from the destination ({{km}} km).",
+    "fixedPrice": "Fixed price for the trip",
+    "perPerson": "per person",
+    "pax": "passengers",
+    "seats": "seats",
+    "book": "Book",
+    "km": "Distance",
+    "driversCost": "Drivers ({{n}} × {{d}} days)",
+    "tolls": "Tolls and fuel",
+    "base": "Base fee",
+    "otherBuses": "Other classes",
+    "route": "Route",
+    "bus": "Coach",
+    "oneDriver": "The route stays within the daily driving limit, so one driver is enough.",
+    "twoDrivers": "Under the EU driving and rest rules (561/2006) this route is planned with two drivers."
+  },
+  "buses": {
+    "minibus": {
+      "name": "Minibus"
+    },
+    "midi": {
+      "name": "Midi coach"
+    },
+    "standard": {
+      "name": "Touring coach"
+    },
+    "double": {
+      "name": "Double-decker"
+    }
+  },
+  "facts": {
+    "eyebrow": "BusFlow in numbers",
+    "title": "A system already on the road",
+    "sub": "BusFlow is not a prototype — it runs in production, on real routes and real bookings.",
+    "operators_one": "operator runs on BusFlow",
+    "operators_other": "operators run on BusFlow",
+    "languages_one": "language across the platform",
+    "languages_other": "languages across the platform",
+    "modules_one": "admin area",
+    "modules_other": "admin areas",
+    "availability": "bookings taken, no office hours",
+    "vehicles_one": "coach in the system",
+    "vehicles_other": "coaches in the system",
+    "bookings_one": "booking processed",
+    "bookings_other": "bookings processed"
+  },
+  "route": {
+    "eyebrow": "The route",
+    "title": "A trip rarely runs from A straight to B",
+    "sub": "Groups pick people up on the way, stay for a few days and take day trips from their base. BusFlow prices that as one journey instead of three separate enquiries.",
+    "stops": {
+      "title": "Intermediate stops",
+      "desc": "Add as many pickup points as the trip needs — each one counts towards the distance and the driving time, and the map draws the route in the order you built it."
+    },
+    "excursions": {
+      "title": "Day trips from the destination",
+      "desc": "While the group is at the destination the coach and driver are still engaged. Day trips are priced as return runs from the base and land in the total instead of being invoiced afterwards."
+    },
+    "rest": {
+      "title": "Driving and rest times",
+      "desc": "When the route passes the daily driving limit the system proposes a second driver under EU regulation 561/2006 and puts their day rate into the quote."
+    }
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "From enquiry to confirmed trip",
+    "s1": {
+      "title": "The customer builds the route",
+      "desc": "Departure, stops, destination and day trips. The map and the distance update as they type."
+    },
+    "s2": {
+      "title": "The system prices it",
+      "desc": "A fixed price from your tariff, showing every coach class that fits the size of the group."
+    },
+    "s3": {
+      "title": "Booking and payment",
+      "desc": "The customer confirms their details and pays by card. The booking lands in your system with the full itinerary."
+    },
+    "s4": {
+      "title": "You run the operation",
+      "desc": "Schedule, occupancy, tariff and payments in one place — no spreadsheets, no copying data by hand."
+    }
+  },
+  "system": {
+    "eyebrow": "The system",
+    "title": "The operator's admin area",
+    "sub": "Click through the demo: bookings, scheduled departures, tariff and users. The data is invented, the interface is real.",
+    "c1": {
+      "title": "Bookings",
+      "desc": "Every enquiry arrives complete — route with stops, dates, group size, contact details and payment status."
+    },
+    "c2": {
+      "title": "Scheduled departures",
+      "desc": "Publish a line, its capacity and the ticket price. The system counts seats sold and closes sales when the coach is full."
+    },
+    "c3": {
+      "title": "Tariff",
+      "desc": "Per-kilometre rates and driver day rates per coach class are yours to change, without a developer."
+    },
+    "c4": {
+      "title": "Payments",
+      "desc": "Card payment at booking time, with an overview of what has been paid against every booking."
+    },
+    "c5": {
+      "title": "Users and roles",
+      "desc": "Owner, administrator and staff — everyone sees and changes only what they are allowed to."
+    },
+    "c6": {
+      "title": "Three languages",
+      "desc": "Croatian, English and German across the platform, including the confirmations and emails your customers receive."
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Overview",
+      "bookings": "Bookings",
+      "trips": "Departures",
+      "pricing": "Tariff",
+      "users": "Users"
+    },
+    "dashboard": {
+      "title": "Business overview",
+      "sub": "Bookings, revenue and occupancy in real time.",
+      "period": "August 2026"
+    },
+    "kpi": {
+      "bookings": "Bookings this month",
+      "revenue": "Revenue this month",
+      "occupancy": "Average occupancy",
+      "response": "Average time to quote"
+    },
+    "col": {
+      "id": "Ref",
+      "client": "Customer",
+      "route": "Route",
+      "date": "Date",
+      "total": "Amount",
+      "status": "Status",
+      "pax": "Pax",
+      "line": "Line",
+      "departure": "Departure",
+      "bus": "Coach",
+      "seats": "Seats",
+      "ticket": "Ticket",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role"
+    },
+    "status": {
+      "paid": "Paid",
+      "confirmed": "Confirmed",
+      "quote": "Quote sent",
+      "cancelled": "Cancelled",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "bookings": {
+      "title": "Bookings",
+      "sub": "Click a row to see the booking details.",
+      "count": "in August"
+    },
+    "detail": {
+      "title": "Booking details"
+    },
+    "trips": {
+      "title": "Scheduled departures",
+      "sub": "Published lines and individual ticket sales."
+    },
+    "pricing": {
+      "title": "Tariff",
+      "sub": "Rate per kilometre and driver day rate per coach class.",
+      "saved": "Saved",
+      "active": "Active",
+      "perKm": "Per kilometre",
+      "perDay": "Driver day rate",
+      "note": "The public planner on your website uses this same tariff — a change applies to every new enquiry immediately."
+    },
+    "users": {
+      "title": "Users",
+      "sub": "Staff accounts and what they are allowed to do."
+    },
+    "roles": {
+      "superadmin": "Owner",
+      "admin": "Administrator",
+      "member": "Staff"
+    }
+  },
+  "faq": {
+    "eyebrow": "Questions",
+    "title": "What customers ask us most",
+    "q1": {
+      "q": "How is the price calculated?",
+      "a": "From your tariff: the per-kilometre rate for the coach class, the driver day rate, tolls and fuel, plus a fixed base fee. The distance includes intermediate stops, the return leg and day trips from the destination, and when the route passes the daily driving limit a second driver is priced in as well."
+    },
+    "q2": {
+      "q": "What if the group picks people up in several places?",
+      "a": "Add as many intermediate stops as you need. Each one counts towards the route, the distance and the driving time, and the customer sees them drawn on the map before confirming the booking."
+    },
+    "q3": {
+      "q": "Is the passenger count in the enquiry binding?",
+      "a": "No. The number of passengers is used to suggest the right coach class. The exact count is confirmed before departure, and if the group changes significantly the price is recalculated."
+    },
+    "q4": {
+      "q": "Do we need our own website?",
+      "a": "Not necessarily. BusFlow ships with a public site — home, services, contact and the trip planner — styled to your brand. If you already have a website, the planner and booking flow can be embedded into it."
+    },
+    "q5": {
+      "q": "How does payment work?",
+      "a": "The customer pays by card when booking and the money goes straight to your account through the payment provider. Schools and companies can pay against an invoice or a deposit instead."
+    },
+    "q6": {
+      "q": "How long does onboarding take?",
+      "a": "A basic installation with your tariff and branding is set up in a few days. After that we walk through the system together and migrate any existing data."
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let us talk about your fleet",
+    "sub": "Tell us how many coaches you run and how enquiries reach you today — we will come back with a proposal and a time for a live walkthrough.",
+    "direct": {
+      "company": "Company",
+      "answer": "We reply",
+      "answerValue": "within one business day"
+    },
+    "form": {
+      "title": "Send an enquiry",
+      "name": "Full name",
+      "company": "Company",
+      "email": "Email",
+      "phone": "Phone",
+      "fleet": "Fleet size",
+      "message": "Message",
+      "messagePlaceholder": "How do enquiries reach you today, and what eats the most time?",
+      "send": "Send enquiry",
+      "note": "The enquiry goes straight to the Flow Solutions inbox. No newsletter, no sharing your details.",
+      "sent": "Thank you — your enquiry arrived. We reply within one business day.",
+      "subject": "BusFlow — enquiry",
+      "error": "Sending failed. Please try again or write to us via flow-solutions.hr.",
+      "sending": "Sending…"
+    },
+    "fleet": {
+      "f1": "1 – 5 coaches",
+      "f2": "6 – 15 coaches",
+      "f3": "16 or more coaches"
+    }
+  },
+  "footer": {
+    "blurb": "A coach hire platform: route planner with stops and day trips, instant price, online booking and the operator's admin area.",
+    "byline": "Built by Flow Solutions d.o.o.",
+    "product": "Product",
+    "languages": "Languages",
+    "copyright": "© Flow Solutions d.o.o. 2026",
+    "demoNote": "Demo site — data and prices are examples.",
+    "pages": "Pages",
+    "section": {
+      "route": "Route",
+      "how": "How it works",
+      "system": "System"
+    }
+  },
+  "demo": {
+    "eyebrow": "Interactive demo",
+    "title": "Try BusFlow as a passenger and as an operator",
+    "sub": "Everything runs in your browser — no backend, no sign-up. The data is invented, but the flow is the same as in the real app.",
+    "tabs": {
+      "booking": "Booking (passenger)",
+      "admin": "Admin (operator)"
+    },
+    "steps": {
+      "s1": "Route and price",
+      "s2": "Details and payment",
+      "s3": "Confirmation"
+    },
+    "checkout": {
+      "title": "Details and payment",
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company or institution",
+      "card": "Card number",
+      "note": "Demo payment — nothing is charged and no data leaves your browser.",
+      "back": "Back",
+      "pay": "Pay and book"
+    },
+    "done": {
+      "title": "Booking confirmed",
+      "sub": "In the real app the confirmation and invoice are emailed to the customer.",
+      "paid": "Paid",
+      "note": "In the real app a voucher with the driver and coach details arrives here as well.",
+      "again": "Want to try another route?",
+      "restart": "Start over"
+    },
+    "adminTitle": "Operator admin area",
+    "adminSub": "Switch between bookings, departures, tariff and users. Click a booking row for its details."
+  },
+  "notfound": {
+    "title": "Page not found",
+    "sub": "The page you are looking for doesn't exist or has been moved.",
+    "cta": "Back to home"
+  },
+  "clients": {
+    "eyebrow": "Clients",
+    "title": "Who runs on BusFlow",
+    "sub": "Not a demo built in a vacuum — the system was made with an operator who uses it every day.",
+    "mikanovic": {
+      "name": "Omnibus Mikanović",
+      "place": "Offenbach am Main, Germany",
+      "short": "A public website with the trip planner, online bookings and the admin area — in German, English and Croatian."
+    },
+    "next": {
+      "name": "Your company",
+      "place": "This slot is open",
+      "desc": "If you move groups and still write quotes by hand, we will show you the system on your own routes.",
+      "cta": "Get in touch"
+    },
+    "caseStudy": "Read the case study"
+  },
+  "closing": {
+    "title": "Want BusFlow on your website?",
+    "sub": "The walkthrough is live and on your data — your routes, your tariff, your coach classes.",
+    "primary": "Book a walkthrough",
+    "secondary": "See the demo first",
+    "note": "BusFlow is built by Flow Solutions d.o.o."
+  },
+  "seo": {
+    "home": {
+      "title": "Coach hire and online booking software",
+      "description": "Route planner with stops and day trips, an instant fixed price, online booking and card payment — on the coach operator’s own website."
+    },
+    "clients": {
+      "title": "Clients — who runs on BusFlow",
+      "description": "Coach operators running on BusFlow. The first is Omnibus Mikanović of Offenbach am Main: a site with the trip planner and admin area."
+    },
+    "demo": {
+      "title": "Interactive demo",
+      "description": "Try BusFlow without signing up: build a route with stops and day trips, price it, and walk through both the booking flow and the operator admin area."
+    },
+    "contact": {
+      "title": "Contact and FAQ",
+      "description": "Ask for a BusFlow walkthrough on your own routes and tariff. We reply within one business day."
+    },
+    "caseMikanovic": {
+      "title": "Omnibus Mikanović — case study",
+      "description": "How a coach operator from Offenbach am Main got a website with a trip planner, online bookings, ticket sales and an admin area, built on BusFlow."
+    }
+  },
+  "case": {
+    "back": "All clients",
+    "eyebrow": "Case study",
+    "mikanovic": {
+      "title": "Omnibus Mikanović",
+      "lead": "A family-run operator from Offenbach am Main got a website that writes its own quotes: the customer builds a route with stops and day trips, sees a fixed price and books online — while the office runs everything from one admin area."
+    },
+    "facts": {
+      "sector": {
+        "label": "Sector",
+        "value": "Coach transport, group travel"
+      },
+      "place": {
+        "label": "Based in",
+        "value": "Offenbach am Main, Germany"
+      },
+      "since": {
+        "label": "Operator",
+        "value": "Family business since 2010"
+      },
+      "scope": {
+        "label": "Scope",
+        "value": "Website, booking system and admin area"
+      },
+      "languages": {
+        "label": "Languages",
+        "value": "German, English, Croatian"
+      },
+      "role": {
+        "label": "Our role",
+        "value": "Web design and development"
+      }
+    },
+    "challenge": {
+      "eyebrow": "The task",
+      "title": "Every enquiry was manual work",
+      "sub": "Before BusFlow the path from enquiry to confirmed trip ran through the phone, email and a calculator.",
+      "c1": {
+        "title": "Enquiries arrive incomplete",
+        "desc": "Phone and email bring half the information — no exact route, dates or group size. A round of back-and-forth has to happen before anything can be priced."
+      },
+      "c2": {
+        "title": "Prices are worked out by hand",
+        "desc": "Distance, driver day rates, tolls and fuel for every variant, one at a time. The answer takes hours or days, and by then the group has asked someone else."
+      },
+      "c3": {
+        "title": "No overview",
+        "desc": "Bookings, payments and seat availability live in spreadsheets and messages, so the state of the fleet is hard to see in one place."
+      }
+    },
+    "solution": {
+      "eyebrow": "The solution",
+      "title": "What we built",
+      "sub": "The public site and the internal system are one application — what the customer types is immediately data in the admin area.",
+      "s1": {
+        "title": "Trip planner",
+        "desc": "Departure, intermediate stops, destination and day trips from the destination, with the route drawn on a map and distance and driving time calculated automatically."
+      },
+      "s2": {
+        "title": "Instant price",
+        "desc": "The price comes from the operator’s tariff: per-kilometre rates by coach class, driver day rates, tolls and fuel. Long routes automatically get a second driver under the EU driving-time rules."
+      },
+      "s3": {
+        "title": "Online booking",
+        "desc": "The customer confirms their details and the booking with the full itinerary — route, stops, day trips, dates and group size land in the system straight away."
+      },
+      "s4": {
+        "title": "Tickets for scheduled departures",
+        "desc": "Published lines with capacity and ticket price, individual seat sales and live occupancy."
+      },
+      "s5": {
+        "title": "Admin area",
+        "desc": "Bookings, departures, tariff, payments and users with roles — owner, administrator and staff see exactly what they are allowed to."
+      },
+      "s6": {
+        "title": "Three languages and secure sign-in",
+        "desc": "The whole platform in German, English and Croatian, emails included. Sign-in runs through Keycloak, with two-factor authentication and Google sign-in."
+      },
+      "s7": {
+        "title": "Card payment through myPOS",
+        "desc": "Payment runs through myPOS Checkout: the system builds a signed payment form and verifies the signature on the callbacks before marking a booking paid. Confirmation arrives both server-to-server and through the browser, so it is handled idempotently — a duplicate message cannot create a duplicate payment. Refunds are recorded against the booking."
+      }
+    },
+    "gallery": {
+      "home": "Home page with the video and the trip planner"
+    },
+    "stack": {
+      "eyebrow": "Technology",
+      "title": "What it is built on",
+      "sub": "The same stack powers the BusFlow demo you can try on this site.",
+      "frontend": {
+        "label": "Frontend",
+        "value": "React, TypeScript, Vite, Tailwind CSS"
+      },
+      "backend": {
+        "label": "Backend",
+        "value": ".NET 10, Clean Architecture and CQRS, PostgreSQL, Redis"
+      },
+      "auth": {
+        "label": "Sign-in",
+        "value": "Keycloak (OIDC + PKCE), two-factor authentication, Google sign-in"
+      },
+      "map": {
+        "label": "Maps and places",
+        "value": "MapLibre GL, OpenFreeMap tiles, Photon place search"
+      },
+      "payments": {
+        "label": "Payments",
+        "value": "myPOS Checkout (IPC 1.4) — signed form and signed callbacks; Stripe as an alternative provider"
+      },
+      "hosting": {
+        "label": "Delivery",
+        "value": "Docker, Coolify, CI/CD on GitHub Actions"
+      }
+    },
+    "closing": {
+      "title": "Moving groups and still quoting by hand?",
+      "sub": "We set the same system up on your brand, your routes and your tariff.",
+      "primary": "Book a walkthrough",
+      "secondary": "Try the demo"
+    }
+  },
+  "schedule": {
+    "title": "Estimated times per stop",
+    "arrival": "arrives",
+    "departure": "departs",
+    "note": "Estimate: driving time, 15 min boarding at each stop and the mandatory 45-minute break after 4.5 h of driving."
+  }
+}
