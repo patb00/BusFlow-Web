@@ -41,9 +41,9 @@ src/
 │   ├── Itinerary.jsx    # live route read-out + the price card
 │   ├── AdminMock.jsx    # operator admin mock-up (bookings, departures, tariff, users)
 │   └── Faq.jsx, Navbar.jsx, Footer.jsx, LangToggle.jsx, Reveal.jsx
-├── pages/               # Home (map-first landing), Clients, Demo (booking + admin),
-│                        # Contact (mailto form + FAQ), NotFound
-├── locales/{hr,en,de}/  # all copy; the three files must stay key-identical
+├── pages/               # Home (map-first landing), Clients + the Mikanović case study,
+│                        # Demo (booking + admin), Contact (form + FAQ), NotFound
+├── locales/{de,en,hr}/  # all copy; the three files must stay key-identical
 └── styles.css           # single stylesheet, design tokens at the top
 ```
 
@@ -68,8 +68,9 @@ Rates are plausible market numbers, **not** a real tariff. In the product the op
   description, canonical, Open Graph/Twitter tags and the hreflang set. React 19 hoists head
   tags, so no helmet library is needed; exactly one `Seo` per page. `index.html` keeps a static
   fallback marked `data-default`, which the first page render removes so the two never compete.
-- **Language in the URL** — `?lang=en` / `?lang=de`; Croatian is the bare URL and `x-default`.
-  The canonical follows the URL, not the language the visitor happens to be served.
+- **Language in the URL** — German is the default: the bare URL and `x-default`, with
+  `?lang=en` / `?lang=hr` for the other two. Only an explicit choice (the query or a previous
+  pick) moves off German, so the canonical always matches what a crawler is served.
 - **robots.txt + sitemap.xml** are generated into `dist/` by
   [scripts/gen-seo-files.mjs](scripts/gen-seo-files.mjs) on `postbuild`, from `VITE_SITE_URL`.
 - **Structured data** — Organization in `index.html`, SoftwareApplication on the home page,
@@ -84,16 +85,16 @@ visitor data.
 
 ## Deploying
 
-Every push to  builds and publishes to **GitHub Pages** via
-[.github/workflows/deploy.yml](.github/workflows/deploy.yml) —
+Every push to `main` builds and publishes to **GitHub Pages** through
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml):
 https://patb00.github.io/BusFlow-Web/
 
-The site lives in a subdirectory there, so the workflow sets  (asset
-URLs, the router basename and the 404 redirect all derive from it) and  to the
-matching origin. For a deploy at a domain root, drop  and set  in
-[public/404.html](public/404.html).
+The site sits in a subdirectory there, so the workflow sets `VITE_BASE=/BusFlow-Web/` — asset
+URLs, the router basename and the 404 redirect all derive from it — and `VITE_SITE_URL` to the
+matching origin, which is what canonical links and the sitemap use.
 
-
-Static build — any host will do. `public/404.html` + `public/.htaccess` cover SPA fallback on
-Apache/Hostinger-style hosts. The only runtime network calls are the map tiles and the two
-webfonts.
+For a deploy at a domain root instead: leave `VITE_BASE` unset and set `SEGMENTS = 0` in
+[public/404.html](public/404.html). The build is static, so any host works;
+`public/404.html` and `public/.htaccess` cover the SPA fallback on GitHub Pages and
+Apache-style hosts respectively. The only runtime network calls are the map tiles, the place
+autocomplete and the two webfonts.
