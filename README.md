@@ -85,16 +85,17 @@ visitor data.
 
 ## Deploying
 
-Every push to `main` builds and publishes to **GitHub Pages** through
+**Production: https://busflow.email** — Vercel, connected to this repository, so every push to
+`main` deploys. Settings live in [vercel.json](vercel.json): `VITE_SITE_URL` (canonicals, Open
+Graph URLs, sitemap), a rewrite that serves `index.html` for every non-file path, and immutable
+caching for the hashed build output. `www` redirects to the bare domain (308).
+
+A second copy is published to **GitHub Pages** by
 [.github/workflows/deploy.yml](.github/workflows/deploy.yml):
-https://patb00.github.io/BusFlow-Web/
+https://patb00.github.io/BusFlow-Web/. It sits in a subdirectory there, so the workflow sets
+`VITE_BASE=/BusFlow-Web/` — asset URLs, the router basename and the `SEGMENTS` count in
+[public/404.html](public/404.html) all derive from it. Pages cannot rewrite, so a deep link
+answers 404 before the redirect script runs; that is why Vercel is production.
 
-The site sits in a subdirectory there, so the workflow sets `VITE_BASE=/BusFlow-Web/` — asset
-URLs, the router basename and the 404 redirect all derive from it — and `VITE_SITE_URL` to the
-matching origin, which is what canonical links and the sitemap use.
-
-For a deploy at a domain root instead: leave `VITE_BASE` unset and set `SEGMENTS = 0` in
-[public/404.html](public/404.html). The build is static, so any host works;
-`public/404.html` and `public/.htaccess` cover the SPA fallback on GitHub Pages and
-Apache-style hosts respectively. The only runtime network calls are the map tiles, the place
-autocomplete and the two webfonts.
+The build is static, so any host works. The only runtime network calls are the map tiles, the
+place autocomplete and the two webfonts.
