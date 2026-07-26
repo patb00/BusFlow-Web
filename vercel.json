@@ -10,14 +10,12 @@
   },
   "rewrites": [
     {
-      "comment": "Client-side routes: serve the app for any path that is not a file. This is what GitHub Pages cannot do — there a deep link answers 404 before the redirect.",
       "source": "/((?!assets/|clients/|.*\\..*).*)",
       "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "comment": "Build output carries a content hash in the filename, so it can be cached forever.",
       "source": "/assets/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
