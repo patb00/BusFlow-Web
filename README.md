@@ -25,6 +25,7 @@ Engleski je u prekidaču jezika najavljen, ali još nije preveden.
 | `assets/css/fonts.css` + `assets/fonts/` | samostalno posluživani fontovi Barlow, Barlow Condensed i JetBrains Mono (latin + latin-ext) |
 | `assets/js/config.js` | postavke (kontakt, kalendar termina, trajanje sastanka, adresa za slanje upita) |
 | `assets/js/landing.js` | izbornik, skaliranje filma, tračnica i paljenje stanica, ulazne animacije, putna karta (korak 1 upita) |
+| `assets/js/analytics.js` | statistika posjeta (Vercel Web Analytics), učitava se samo na busflow.email |
 | `assets/js/upit.js` | logika upita: koraci, provjera, sažetak, slanje preko Formspreea (rezerva: e-mail iz preglednika); njemački i hrvatski tekstovi u rječniku `I18N` |
 | `assets/img/favicon.svg` | ikona |
 | `scripts/build.mjs`, `package.json` | provjera (`npm run lint`) i build u `dist/` (`npm run build`), bez ovisnosti |
@@ -101,8 +102,19 @@ kao `{ de: "…", hr: "…" }`.
 stranice bez JavaScripta, s oznakom `noindex`. Podaci o tvrtki (puni naziv, sjedište u Križevcima, direktor, OIB,
 PDV ID, MBS i Trgovački sud u Bjelovaru, banka i IBAN) upisani su izravno u te četiri datoteke; temeljni kapital se
 namjerno ne navodi. E-mail adresa je u njima upisana ručno, pa je pri promjeni treba promijeniti i ondje. Datenschutz opisuje stvarne obrade: hosting na Vercelu, slanje upita preko Formspreea,
-`sessionStorage` za odgovore, e-mail na Microsoft 365, termin preko Microsoft Bookings i Teamsa; stranica nema
-kolačića ni analitike. Ako se doda nova usluga (npr. analitika ili karta), treba je dodati i u Datenschutz. Kratke
+`sessionStorage` za odgovore, statistiku posjeta (Vercel Web Analytics), e-mail na Microsoft 365, termin preko
+Microsoft Bookings i Teamsa; stranica nema kolačića. Ako se doda nova usluga (npr. karta ili drugi alat za
+statistiku), treba je dodati i u Datenschutz.
+
+## Statistika posjeta
+
+Broj posjeta mjeri **Vercel Web Analytics** (bez kolačića, samo zbirni podaci). Sve stranice učitavaju
+`assets/js/analytics.js`, koji na adresi busflow.email dodaje Vercelovu skriptu `/_vercel/insights/script.js`; lokalno,
+na GitHub Pages i u pregledu ne radi ništa. Da bi statistika radila, vlasnik Vercel projekta (Patrik) mora uključiti
+**Analytics → Enable** u projektu busflow.email i zatim ponovno objaviti stranicu (novi push na `main` ili
+**Redeploy**); prije toga skripta vraća 404. Podaci su u Vercel nadzornoj ploči pod **Analytics**. Na besplatnom
+(Hobby) planu uključeno je 50.000 događaja mjesečno za sve projekte na računu, a izvještaji pokrivaju zadnji mjesec.
+Datenschutz i Pravila privatnosti opisuju tu obradu u odjeljku 4; ako se alat promijeni, treba promijeniti i njih. Kratke
 adrese `/impressum`, `/datenschutz`, `/hr/impresum` i `/hr/privatnost` preusmjeravaju na te stranice (`vercel.json`).
 
 Izjavu vlasnika i ime u sekciji 07 te `[IHR LOGO]` / `[ihre-domain.de]` (i hrvatske inačice) zamijenite izravno u
