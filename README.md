@@ -82,7 +82,7 @@ npm run build   # isto, pa kopija u dist/ te robots.txt i sitemap.xml (VITE_SITE
 ## Prije objave: `assets/js/config.js`
 
 Sve što je na stranici u uglatim zagradama (npr. `[Aussage des Inhabers …]` / `[Izjava vlasnika…]`, `[IHR LOGO]` /
-`[VAŠ LOGO]`, `[IBAN]` u Impressumu) je oznaka za podatak koji još nije unesen. Tekstovi koji ovise o jeziku upisuju se
+`[VAŠ LOGO]`) je oznaka za podatak koji još nije unesen. Tekstovi koji ovise o jeziku upisuju se
 kao `{ de: "…", hr: "…" }`.
 
 - `email` – `info@flow-solutions.hr`: podnožje, potvrda upita i adresa na koju upit stiže e-mailom.
@@ -98,10 +98,9 @@ kao `{ de: "…", hr: "…" }`.
 ## Pravne stranice
 
 `impressum.html` i `datenschutz.html` (njemački) te `hr/impresum.html` i `hr/privatnost.html` (hrvatski) su statične
-stranice bez JavaScripta, s oznakom `noindex`. Podaci o tvrtki (puni naziv, sjedište u Križevcima, OIB, MBS i
-Trgovački sud u Bjelovaru, temeljni kapital, direktor, banka) upisani su izravno u te četiri datoteke; **IBAN je još
-oznaka `[IBAN]`** i `npm run lint` upozorava dok je tako. E-mail adresa je u njima upisana ručno, pa je pri promjeni
-treba promijeniti i ondje. Datenschutz opisuje stvarne obrade: hosting na Vercelu, slanje upita preko Formspreea,
+stranice bez JavaScripta, s oznakom `noindex`. Podaci o tvrtki (puni naziv, sjedište u Križevcima, direktor, OIB,
+PDV ID, MBS i Trgovački sud u Bjelovaru, banka i IBAN) upisani su izravno u te četiri datoteke; temeljni kapital se
+namjerno ne navodi. E-mail adresa je u njima upisana ručno, pa je pri promjeni treba promijeniti i ondje. Datenschutz opisuje stvarne obrade: hosting na Vercelu, slanje upita preko Formspreea,
 `sessionStorage` za odgovore, e-mail na Microsoft 365, termin preko Microsoft Bookings i Teamsa; stranica nema
 kolačića ni analitike. Ako se doda nova usluga (npr. analitika ili karta), treba je dodati i u Datenschutz. Kratke
 adrese `/impressum`, `/datenschutz`, `/hr/impresum` i `/hr/privatnost` preusmjeravaju na te stranice (`vercel.json`).
