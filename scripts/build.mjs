@@ -13,10 +13,11 @@ const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const DIST = join(ROOT, "dist");
 const SITE = (process.env.VITE_SITE_URL || "https://busflow.email").trim().replace(/\/+$/, "");
 const BASE = (process.env.VITE_BASE || "/").replace(/\/*$/, "/");
-const COPY = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "404.html", "hr", "kontakt", "assets"];
+const COPY = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "404.html", "hr", "en", "kontakt", "assets"];
 const HTML = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "hr/index.html", "hr/upit.html",
-  "hr/impresum.html", "hr/privatnost.html", "kontakt/index.html", "404.html"];
-const LANGS = { de: "/", hr: "/hr/" }; // ista stranica na dva jezika; x-default = de
+  "hr/impresum.html", "hr/privatnost.html", "en/index.html", "en/upit.html", "en/legal-notice.html", "en/privacy.html",
+  "kontakt/index.html", "404.html"];
+const LANGS = { de: "/", hr: "/hr/", en: "/en/" }; // ista stranica na tri jezika; x-default = de
 
 const read = (file) => readFileSync(join(ROOT, file), "utf8");
 const idsOf = (file) => new Set([...read(file).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));

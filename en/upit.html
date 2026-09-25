@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inquiry for a first meeting – BusFlow</title>
+<meta name="description" content="Inquiry for a first meeting and an online demo of BusFlow: two short steps, then a time in the online calendar.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0D1C42">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/fonts.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/upit.css">
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/analytics.js" defer></script>
+</head>
+<body class="upit-body">
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="upit-header">
+  <div class="wrap">
+    <div class="upit-header__bar">
+      <a class="logo" href="index.html" aria-label="BusFlow, back to the home page">
+        <svg class="logo__mark logo__mark--sm" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="var(--ink)"></rect><path d="M12 33H19C25 33 22 15 28 15H36" fill="none" stroke="var(--ground)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="33" r="4.5" fill="var(--ink)" stroke="var(--ground)" stroke-width="3"></circle><circle cx="36" cy="15" r="5" fill="var(--accent)"></circle></svg>
+        <span class="logo__wm">BusFlow</span>
+      </a>
+      <div class="upit-header__title"><strong><span class="upit-header__long">Inquiry for a first meeting</span><span class="upit-header__short">Inquiry</span></strong><span id="eta">about a minute</span></div>
+      <div class="upit-header__actions">
+        <a class="upit-header__lang" href="../upit.html" hreflang="de" lang="de" title="Deutsche Version">DE</a>
+        <a class="upit-header__lang" href="../hr/upit.html" hreflang="hr" lang="hr" title="Hrvatska verzija">HR</a>
+        <a class="upit-header__close" href="index.html" aria-label="Close the inquiry and return to the page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+      </div>
+    </div>
+    <div class="route-progress" id="progress" aria-label="Progress: step 1 of 2">
+      <div class="route-progress__bars"><span class="is-current"></span><span></span></div>
+      <div class="route-progress__labels">
+        <span class="is-current" data-n="01"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>01 Departure</span>
+        <span data-n="02"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>02 Destination</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="content" class="upit-main">
+  <div class="wrap upit-grid">
+    <form id="upit" novalidate>
+
+      <!-- 01 Polazište -->
+      <section class="step-panel" data-step="1" aria-labelledby="h-step1">
+        <div class="step-panel__head">
+          <h1 class="display" id="h-step1">01 · Departure: who are you?</h1>
+          <p>So we know who we're talking to and how to reach you fastest.</p>
+        </div>
+        <div class="fields">
+          <div class="q"><label class="q__label" for="tvrtka">Company name <span aria-hidden="true">*</span></label><input class="field" id="tvrtka" name="tvrtka" type="text" required autocomplete="organization"><span class="q__err">Please enter the company name.</span></div>
+          <div class="q"><label class="q__label" for="ime">Full name <span aria-hidden="true">*</span></label><input class="field" id="ime" name="ime" type="text" required autocomplete="name"><span class="q__err">Please enter your full name.</span></div>
+          <div class="q"><label class="q__label" for="email">Email <span aria-hidden="true">*</span></label><input class="field" id="email" name="email" type="email" required autocomplete="email" inputmode="email"><span class="q__err">Please enter a valid email address.</span></div>
+          <div class="q"><label class="q__label" for="telefon">Phone <span class="opt">– for follow-up questions</span></label><input class="field" id="telefon" name="telefon" type="tel" autocomplete="tel" inputmode="tel"></div>
+          <div class="q"><label class="q__label" for="drzava">Country of head office</label><select class="field" id="drzava" name="drzava"><option value="">Please choose…</option><option value="DE">Germany</option><option value="AT">Austria</option><option value="CH">Switzerland</option><option value="HR">Croatia</option><option value="SI">Slovenia</option><option value="BA">Bosnia and Herzegovina</option><option value="RS">Serbia</option><option value="other">Other country</option></select></div>
+          <div class="q"><div class="q__why"><strong>Why do we ask for the country?</strong> BusFlow is tailored to the German market today; for another country we estimate the additional development right away.</div></div>
+        </div>
+        <div class="step-nav">
+          <a class="btn btn--ghost" href="index.html">Back to the page</a>
+          <div class="step-nav__buttons"><span class="step-nav__note">Your answers are kept until you send them.</span><button class="btn btn--navy" type="button" data-next>Next: your business<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></div>
+        </div>
+      </section>
+
+      <!-- 02 Odredište: vaš prijevoz i sastanak -->
+      <section class="step-panel" data-step="2" aria-labelledby="h-step2" hidden>
+        <div class="step-panel__head">
+          <h1 class="display" id="h-step2">02 · Destination: your coach business and the meeting</h1>
+          <p>A few clicks, so we can show the demo using your example. You pick the time in the calendar right after the inquiry.</p>
+        </div>
+        <fieldset class="q" data-required="1"><legend>How many coaches do you have?</legend>
+          <div class="chips">
+            <label><input type="radio" name="flota" value="1-3"><span>1–3</span></label>
+            <label><input type="radio" name="flota" value="4-10"><span>4–10</span></label>
+            <label><input type="radio" name="flota" value="11-25"><span>11–25</span></label>
+            <label><input type="radio" name="flota" value="26-50"><span>26–50</span></label>
+            <label><input type="radio" name="flota" value="50+"><span>50+</span></label>
+          </div><span class="q__err">Please choose your fleet size.</span>
+        </fieldset>
+        <fieldset class="q" data-required="1"><legend>Which services do you offer? <span class="opt">– several answers possible</span></legend>
+          <div class="chips">
+            <label><input type="checkbox" name="usluge" value="charter"><span>Charter and groups</span></label>
+            <label><input type="checkbox" name="usluge" value="transferi"><span>Transfers and airports</span></label>
+            <label><input type="checkbox" name="usluge" value="izleti"><span>Day trips</span></label>
+            <label><input type="checkbox" name="usluge" value="visednevna"><span>Multi-day tours</span></label>
+            <label><input type="checkbox" name="usluge" value="linije"><span>Scheduled lines and ticket sales</span></label>
+            <label><input type="checkbox" name="usluge" value="vozaci"><span>Driver hire</span></label>
+            <label><input type="checkbox" name="usluge" value="sos"><span>Emergency replacement (SOS)</span></label>
+            <label><input type="checkbox" name="usluge" value="partneri"><span>Working with partners</span></label>
+          </div><span class="q__err">Please choose at least one service.</span>
+        </fieldset>
+        <fieldset class="q"><legend>How are your offers created today? <span class="opt">– optional</span></legend>
+          <div class="chips">
+            <label><input type="radio" name="ponude" value="excel"><span>Excel or Word</span></label>
+            <label><input type="radio" name="ponude" value="telefon"><span>Phone and email</span></label>
+            <label><input type="radio" name="ponude" value="softver"><span>Other software</span></label>
+            <label><input type="radio" name="ponude" value="kombinacija"><span>A mix of everything</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q" data-required="1"><legend>When would you like to start?</legend>
+          <div class="chips">
+            <label><input type="radio" name="kada" value="odmah"><span>As soon as possible</span></label>
+            <label><input type="radio" name="kada" value="1-3mj"><span>In 1–3 months</span></label>
+            <label><input type="radio" name="kada" value="3-6mj"><span>In 3–6 months</span></label>
+            <label><input type="radio" name="kada" value="istrazujemo"><span>Just exploring</span></label>
+          </div><span class="q__err">Please choose one answer.</span>
+        </fieldset>
+        <fieldset class="q"><legend>What do you already have? <span class="opt">– speeds up onboarding</span></legend>
+          <div class="checks">
+            <label><input type="checkbox" name="imate" value="domena">Own domain</label>
+            <label><input type="checkbox" name="imate" value="logo">Logo as a vector file</label>
+            <label><input type="checkbox" name="imate" value="placanje">myPOS or PayPal merchant account</label>
+            <label><input type="checkbox" name="imate" value="pravno">Terms and privacy policy texts</label>
+          </div>
+          <span class="q__hint">Something missing? Don't worry, we'll sort it out together at the first meeting.</span>
+        </fieldset>
+        <fieldset class="q" data-required="1"><legend>How would you like to talk?</legend>
+          <div class="choice-cards">
+            <label><input type="radio" name="format" value="video" checked><span class="choice-card"><strong>Video call</strong><span>Microsoft Teams; you get the link by email after booking the time.</span></span></label>
+            <label><input type="radio" name="format" value="telefon"><span class="choice-card"><strong>Phone call</strong><span>We call you at the time you book.</span></span></label>
+          </div><span class="q__err">Please choose how we should talk.</span>
+        </fieldset>
+        <div class="q"><label class="q__label" for="napomena">Anything we should know before the meeting? <span class="opt">– optional</span></label><textarea class="field field--area" id="napomena" name="napomena" rows="3"></textarea></div>
+        <div class="q" data-required="1">
+          <label class="consent"><input type="checkbox" name="privola" value="da" required><span>I agree that FlowSolutions d.o.o. may use my details to process this inquiry and contact me. More in the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</span></label>
+          <span class="q__err">Without your consent we can't send the inquiry.</span>
+        </div>
+        <p class="form-status" id="form-status" role="alert" aria-live="assertive"></p>
+        <div class="step-nav">
+          <button class="btn btn--ghost" type="button" data-prev>Back</button>
+          <div class="step-nav__buttons"><button class="btn btn--navy btn--lg" type="submit" id="submit">Send inquiry<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></div>
+        </div>
+      </section>
+
+      <!-- Potvrda -->
+      <section class="step-panel done" data-step="3" aria-labelledby="h-done" hidden>
+        <div class="done__head">
+          <span class="tag" id="done-tag">Ready</span>
+          <h1 class="display" id="h-done">Your inquiry is ready.</h1>
+          <p id="done-text">We've opened your email program with a prepared message; please check it and send it. Then pick a time for the first meeting.</p>
+          <p class="done__note" id="done-note" hidden></p>
+        </div>
+        <div class="done__buttons">
+          <a class="btn btn--navy" id="book" data-cfg-href="bookingUrl" target="_blank" rel="noopener" aria-disabled="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Book an online meeting</a>
+          <a class="btn btn--ghost" id="mail-again" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3.5 7l8.5 6 8.5-6"></path></svg>Open the message again</a>
+          <button class="btn btn--ghost" id="copy" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"></path></svg>Copy inquiry</button>
+          <span class="done__status" id="copy-status" role="status" aria-live="polite"></span>
+        </div>
+        <div class="done__summary">
+          <h2 class="display">Your inquiry</h2>
+          <pre class="done__pre" id="done-summary"></pre>
+        </div>
+        <div class="done__grid">
+          <div class="card done__box">
+            <h2 class="display">What happens next</h2>
+            <ol>
+              <li><span><strong>Your message</strong> goes to <span data-cfg="email">[email]</span>; we'll get back to you <span data-cfg="replyWithin">[within one working day]</span>.</span></li>
+              <li><span><strong>Appointment</strong>: you pick a free slot in the calendar, <span data-cfg="meetingMinutes">[30 min]</span>, video call or phone.</span></li>
+              <li><span><strong>Demo in the test environment</strong>: planner, booking, admin inbox and invoice.</span></li>
+              <li><span><strong>Offer</strong>: one-off onboarding and a monthly fee.</span></li>
+            </ol>
+          </div>
+          <div class="card done__box">
+            <h2 class="display">If you like, prepare for the meeting</h2>
+            <ul>
+              <li>A list of your coaches and their seats</li>
+              <li>An example of a current offer</li>
+              <li>An example invoice</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-nav step-nav--done">
+          <div class="step-nav__buttons"><a class="btn btn--ghost" href="index.html">Back to the page</a><button class="btn btn--ghost" type="button" data-prev>Edit answers</button></div>
+          <span class="step-nav__note">Questions before the meeting? Write to <a data-cfg-href="email" data-cfg="email">[email]</a>.</span>
+        </div>
+      </section>
+    </form>
+
+    <aside class="talon-wrap" aria-label="Inquiry summary">
+      <div class="talon">
+        <div class="talon__head"><span>Stub · BF · inquiry</span><b id="talon-step">01/02</b></div>
+        <div class="talon__body">
+          <div class="talon__row"><span class="talon__key">Company</span><span class="talon__val is-empty" data-talon="tvrtka">—</span></div>
+          <div class="talon__row"><span class="talon__key">Contact</span><span class="talon__val is-empty" data-talon="kontakt">—</span></div>
+          <div class="talon__row"><span class="talon__key">Fleet</span><span class="talon__val is-empty" data-talon="flota">—</span></div>
+          <div class="talon__row"><span class="talon__key">Services</span><span class="talon__val is-empty" data-talon="usluge">—</span></div>
+          <div class="talon__row"><span class="talon__key">Meeting</span><span class="talon__val is-empty" data-talon="sastanak">—</span></div>
+        </div>
+        <div class="talon__foot"><div class="talon__route">Departure → Destination</div>We use the details from your inquiry only to arrange the meeting.</div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="upit-legal">
+  <div class="wrap upit-legal__inner"><span>© 2026 FlowSolutions d.o.o.</span><nav aria-label="Legal"><a href="legal-notice.html">Legal notice</a><a href="privacy.html">Privacy policy</a></nav></div>
+</footer>
+
+<script src="../assets/js/upit.js" defer></script>
+</body>
+</html>

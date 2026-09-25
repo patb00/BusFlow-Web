@@ -13,8 +13,8 @@
   function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
   var LANG = (html.lang || "de").slice(0, 2).toLowerCase();
-  var MIN = { de: "Min.", hr: "min" }[LANG] || "min";
-  /* vrijednost iz config.js; { de: …, hr: … } daje tekst za jezik stranice */
+  var MIN = { de: "Min.", hr: "min", en: "min" }[LANG] || "min";
+  /* vrijednost iz config.js; { de: …, hr: …, en: … } daje tekst za jezik stranice */
   function localize(v) { return v && typeof v === "object" && ("de" in v || "hr" in v) ? (LANG in v ? v[LANG] : v.de) : v; }
   function get(key) { return localize(key.split(".").reduce(function (o, p) { return o && o[p]; }, cfg)); }
 

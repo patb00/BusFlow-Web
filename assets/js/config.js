@@ -8,13 +8,13 @@ window.BUSFLOW = {
   phoneDisplay: "",     /* kako se prikazuje, npr. "+385 91 123 4567" */
 
   /* Obećanje u tekstu („odgovor unutar 1 radnog dana“, isto piše i u dijalogu na mikanovic.de).
-     Tekstovi koji ovise o jeziku stranice pišu se kao { de: "…", hr: "…" }. */
-  replyWithin: { de: "innerhalb eines Werktages", hr: "unutar 1 radnog dana" },
+     Tekstovi koji ovise o jeziku stranice pišu se kao { de: "…", hr: "…", en: "…" }. */
+  replyWithin: { de: "innerhalb eines Werktages", hr: "unutar 1 radnog dana", en: "within one working day" },
 
   /* Prvi sastanak: Microsoft Bookings (isti kalendar kao na mikanovic.de), trajanje i radno vrijeme tog tipa termina. */
   bookingUrl: "https://bookings.cloud.microsoft/bookwithme/user/3537dbd8af364e94963da5c3748b24f2@flow-solutions.hr/meetingtype/Z7I12j5WzEuFcvfPyJhC0A2?anonymous",
   meetingMinutes: 30,
-  bookingHours: { de: "Mo–Fr, 9–16 Uhr", hr: "pon–pet 9–16 h" },
+  bookingHours: { de: "Mo–Fr, 9–16 Uhr", hr: "pon–pet 9–16 h", en: "Mon–Fri, 9:00–16:00 CET" },
 
   /* Upit se šalje automatski preko Formspreea: isti obrazac kao na flow-solutions.hr, poruka stiže na info@flow-solutions.hr.
      Šalje se JSON (POST, Content-Type: application/json; polja _subject, _replyto, poruka i svi odgovori), očekuje se HTTP 2xx.

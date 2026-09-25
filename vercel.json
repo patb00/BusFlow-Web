@@ -6,15 +6,21 @@
   "outputDirectory": "dist",
   "redirects": [
     { "source": "/hr", "destination": "/hr/", "permanent": true },
+    { "source": "/en", "destination": "/en/", "permanent": true },
     { "source": "/", "has": [{ "type": "query", "key": "lang", "value": "hr" }], "destination": "/hr/", "permanent": false },
+    { "source": "/", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/en/", "permanent": false },
     { "source": "/demo", "has": [{ "type": "query", "key": "lang", "value": "hr" }], "destination": "/hr/#karta", "permanent": false },
+    { "source": "/demo", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/en/#system-map", "permanent": false },
     { "source": "/demo", "destination": "/#systemkarte", "permanent": false },
     { "source": "/klijenti/:path*", "has": [{ "type": "query", "key": "lang", "value": "hr" }], "destination": "/hr/#referenca", "permanent": false },
+    { "source": "/klijenti/:path*", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/en/#reference", "permanent": false },
     { "source": "/klijenti/:path*", "destination": "/#referenz", "permanent": false },
     { "source": "/impressum", "destination": "/impressum.html", "permanent": false },
     { "source": "/datenschutz", "destination": "/datenschutz.html", "permanent": false },
     { "source": "/hr/impresum", "destination": "/hr/impresum.html", "permanent": false },
-    { "source": "/hr/privatnost", "destination": "/hr/privatnost.html", "permanent": false }
+    { "source": "/hr/privatnost", "destination": "/hr/privatnost.html", "permanent": false },
+    { "source": "/en/legal-notice", "destination": "/en/legal-notice.html", "permanent": false },
+    { "source": "/en/privacy", "destination": "/en/privacy.html", "permanent": false }
   ],
   "headers": [
     { "source": "/assets/fonts/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }

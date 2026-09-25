@@ -6,16 +6,18 @@
 <title>Kontakt – BusFlow</title>
 <meta name="robots" content="noindex">
 <script>
-/* /kontakt: Anfrage auf Deutsch; ?lang=hr oder ein kroatischer Browser → kroatische Anfrage. Parameter und # bleiben erhalten. */
+/* /kontakt: Anfrage auf Deutsch; ?lang=hr|en oder ein kroatischer bzw. englischer Browser → Anfrage in dieser Sprache
+   (?lang hat Vorrang). Parameter und # bleiben erhalten. */
 (function () {
-  var hr = /(?:^|[?&])lang=hr(?:&|$)/.test(location.search) ||
-    /^hr\b/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "");
-  location.replace((hr ? "../hr/upit.html" : "../upit.html") + location.search + location.hash);
+  var q = /(?:^|[?&])lang=(de|hr|en)(?:&|$)/i.exec(location.search);
+  var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+  var lang = q ? q[1].toLowerCase() : /^hr\b/i.test(nav) ? "hr" : /^en\b/i.test(nav) ? "en" : "de";
+  location.replace({ de: "../upit.html", hr: "../hr/upit.html", en: "../en/upit.html" }[lang] + location.search + location.hash);
 })();
 </script>
 <noscript><meta http-equiv="refresh" content="0; url=../upit.html"></noscript>
 </head>
 <body>
-<p><a href="../upit.html">Anfrage für ein Erstgespräch</a> · <a href="../hr/upit.html" hreflang="hr" lang="hr">Upit za prvi sastanak (hrvatski)</a></p>
+<p><a href="../upit.html">Anfrage für ein Erstgespräch</a> · <a href="../hr/upit.html" hreflang="hr" lang="hr">Upit za prvi sastanak (hrvatski)</a> · <a href="../en/upit.html" hreflang="en" lang="en">Inquiry for a first meeting (English)</a></p>
 </body>
 </html>

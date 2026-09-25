@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if (/\/en$/.test(location.pathname)) location.replace(location.pathname + "/" + location.search + location.hash);</script>
+<title>BusFlow – software for coach operators: binding price, booking, payment and invoice</title>
+<meta name="description" content="BusFlow for coach operators: your customer gets a binding price in seconds, with a route across Europe, a crew planned under EU rules and VAT by country. Online payment and an invoice after payment. In production at Omnibus Mikanović since August 2026.">
+<meta property="og:title" content="BusFlow – while you drive, BusFlow sells.">
+<meta property="og:description" content="Software for coach operators: a binding price in seconds, online payment, invoice. Your own instance, data in the EU.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="hr_HR">
+<meta property="og:url" content="https://busflow.email/en/">
+<link rel="canonical" href="https://busflow.email/en/">
+<link rel="alternate" hreflang="de" href="https://busflow.email/">
+<link rel="alternate" hreflang="hr" href="https://busflow.email/hr/">
+<link rel="alternate" hreflang="en" href="https://busflow.email/en/">
+<link rel="alternate" hreflang="x-default" href="https://busflow.email/">
+<meta name="theme-color" content="#0D1C42">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/barlow-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/fonts.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/landing.css">
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/analytics.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__bar">
+    <a class="logo" href="#top" aria-label="BusFlow, back to top">
+      <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="var(--ink)"></rect><path d="M12 33H19C25 33 22 15 28 15H36" fill="none" stroke="var(--ground)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="33" r="4.5" fill="var(--ink)" stroke="var(--ground)" stroke-width="3"></circle><circle cx="36" cy="15" r="5" fill="var(--accent)"></circle></svg>
+      <span class="logo__wm">BusFlow</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main navigation">
+      <a href="#system-map">System map</a>
+      <a href="#features">Features</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#onboarding">Onboarding</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav__lang" href="../index.html" hreflang="de" lang="de">Deutsch</a>
+      <a class="nav__lang" href="../hr/index.html" hreflang="hr" lang="hr">Hrvatski</a>
+    </nav>
+    <div class="site-header__actions">
+      <nav class="lang" aria-label="Page language">
+        <a href="../index.html" hreflang="de" lang="de">DE</a>
+        <a href="../hr/index.html" hreflang="hr" lang="hr">HR</a>
+        <a href="index.html" hreflang="en" lang="en" aria-current="page">EN</a>
+      </nav>
+      <a class="btn btn--navy btn--sm" href="upit.html"><span class="hide-m">Book a meeting</span><span class="show-m">Meeting</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      <button class="nav-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu">
+        <svg class="nav-toggle__open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        <svg class="nav-toggle__close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap progress" aria-hidden="true">
+    <div class="progress__line"></div>
+    <div class="progress__fill"></div>
+    <div class="progress__dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="progress__bus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path></svg></div>
+  </div>
+</header>
+
+<main id="content">
+<div class="page">
+
+  <!-- Kontinuirana ispuna linije i autobus -->
+  <div class="rail-progress" aria-hidden="true">
+    <div class="rail-fill"></div>
+    <div class="rail-bus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path><circle cx="8.5" cy="14.5" r="1"></circle><circle cx="15.5" cy="14.5" r="1"></circle></svg></div>
+  </div>
+
+  <!-- Polazak · hero -->
+  <section id="top" class="st hero" data-stop="0">
+    <div class="st__rail st__rail--start" aria-hidden="true">
+      <div class="rail-track"></div>
+      <div class="badge badge--sq" data-badge="0"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path><circle cx="8.5" cy="14.5" r="1"></circle><circle cx="15.5" cy="14.5" r="1"></circle></svg></div>
+      <span class="rail-label">Departure</span>
+    </div>
+    <div class="st__body">
+      <div class="hero__grid">
+        <div class="hero__text">
+          <span class="eyebrow f-up" style="animation-delay: .05s">BusFlow line · software for coach operators</span>
+          <h1 class="display hero__title"><span class="w-in" style="animation-delay: .25s">While</span> <span class="w-in" style="animation-delay: .37s">you</span> <span class="w-in" style="animation-delay: .49s">drive,</span><br><span class="w-in u" style="animation-delay: .7s">BusFlow</span> <span class="w-in" style="animation-delay: .85s">sells.</span></h1>
+          <p class="hero__lead f-up" style="animation-delay: 1s">Your customer enters departure, destination and number of passengers. BusFlow calculates the route across Europe, the crew under EU rules, VAT by country and a binding price, in seconds. The customer pays online and the invoice follows automatically.</p>
+          <div class="proof f-up" style="animation-delay: 1.15s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.8 2.8L16.5 9"></path></svg><span><strong>Proven on the road.</strong> Since August 2026, BusFlow has been running every day at the coach operator Omnibus Mikanović. Now we are introducing it at your company.</span></div>
+          <div class="hero__cta f-up" style="animation-delay: 1.3s">
+            <a class="btn btn--navy btn--lg" href="upit.html">Book a first meeting<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+            <a class="link-u" href="#system-map">See the system map</a>
+          </div>
+          <span class="hero__micro f-up" style="animation-delay: 1.45s">Online demo · no obligation · reply <span data-cfg="replyWithin">[within one working day]</span></span>
+        </div>
+
+        <div class="stage-frame f-up" style="animation-delay: .3s">
+          <!-- Hero-film: 14 s petlja, čisti CSS -->
+          <div class="stage" role="img" aria-label="Animation: a coach arrives at dawn, the route Munich–Zagreb is drawn country by country, the calculation returns a binding price, the customer pays and the invoice is sent.">
+            <div class="stage__sky-dawn j j-dawn"></div>
+            <div class="stage__sun j j-sun"></div>
+            <div class="stage__hills"></div>
+            <div class="stage__grass-far"></div>
+            <div class="stage__road"></div>
+            <div class="stage__dash"></div>
+            <div class="stage__grass-near"></div>
+            <div class="stage__hatch"></div>
+            <div class="stage__post"></div>
+            <div class="stage__sign"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path></svg></div>
+            <div class="bus j j-bus">
+              <div class="bus__shadow"></div>
+              <div class="bus__persp">
+                <div class="bus__bob j j-bob">
+                  <div class="bus__turn j j-turn">
+                    <div class="face face--side">
+                      <div class="bus__glass"></div>
+                      <div class="bus__door"></div>
+                      <div class="bus__stripe"></div>
+                      <div class="bus__led bus__led--side"><span class="j j-led">ZAGREB</span></div>
+                      <div class="bus__brand"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#FFFFFF"></rect><path d="M12 33H19C25 33 22 15 28 15H36" fill="none" stroke="#010736" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="33" r="4.5" fill="#FFFFFF" stroke="#010736" stroke-width="3"></circle><circle cx="36" cy="15" r="5" fill="#FCF1D0"></circle></svg>BusFlow</div>
+                      <div class="wheel wheel--1 j j-wheel"></div>
+                      <div class="wheel wheel--2 j j-wheel"></div>
+                    </div>
+                    <div class="face face--back"></div>
+                    <div class="face face--front">
+                      <div class="bus__led bus__led--front"><span class="j j-led">ZAGREB</span></div>
+                      <div class="bus__windshield"></div>
+                      <div class="bus__lamp bus__lamp--l j j-glow"></div>
+                      <div class="bus__lamp bus__lamp--r j j-glow"></div>
+                      <div class="bus__bumper"></div>
+                    </div>
+                    <div class="face face--rear"><div class="bus__tail bus__tail--l"></div><div class="bus__tail bus__tail--r"></div></div>
+                    <div class="face face--roof"><div class="bus__ac"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="calc-list">
+              <span class="calc j j-c1"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>ROUTE · 549 KM</span>
+              <span class="calc j j-c2"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>DRIVING RULES · EU 561/2006</span>
+              <span class="calc j j-c3"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>VAT BY COUNTRY</span>
+              <span class="calc j j-c4"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>PRICE</span>
+            </div>
+            <div class="price j j-price"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>BINDING PRICE</div>
+            <div class="panel">
+              <div class="panel__head">
+                <span class="eyebrow">Sample trip</span>
+                <span class="panel__route">Munich → Zagreb</span>
+                <span class="panel__km j j-km">549 km · 49 passengers</span>
+              </div>
+              <svg width="656" height="64" viewBox="0 0 656 64" aria-hidden="true" style="display: block">
+                <path d="M16 30H640" fill="none" stroke="rgba(13,28,66,.14)" stroke-width="9" stroke-linecap="round"></path>
+                <path class="j j-de" d="M16 30H170" fill="none" stroke="var(--ink)" stroke-width="9" stroke-linecap="round" stroke-dasharray="154" stroke-dashoffset="154"></path>
+                <path class="j j-at" d="M170 30H372" fill="none" stroke="var(--line-f)" stroke-width="9" stroke-linecap="round" stroke-dasharray="202" stroke-dashoffset="202"></path>
+                <path class="j j-si" d="M372 30H520" fill="none" stroke="var(--accent-strong)" stroke-width="9" stroke-linecap="round" stroke-dasharray="148" stroke-dashoffset="148"></path>
+                <path class="j j-hr" d="M520 30H604" fill="none" stroke="var(--line-b)" stroke-width="9" stroke-linecap="round" stroke-dasharray="84" stroke-dashoffset="84"></path>
+                <circle class="j j-ms" cx="16" cy="30" r="8" fill="var(--surface)" stroke="var(--ink)" stroke-width="3"></circle>
+                <circle class="j j-me" cx="604" cy="30" r="9" fill="var(--accent)" stroke="var(--ink)" stroke-width="3"></circle>
+                <text class="j j-ms" x="16" y="14" text-anchor="start" font-family="Barlow, sans-serif" font-size="12" font-weight="700" fill="var(--text)">Munich</text>
+                <text class="j j-me" x="604" y="14" text-anchor="end" font-family="Barlow, sans-serif" font-size="12" font-weight="700" fill="var(--text)">Zagreb</text>
+                <text class="j j-lde" x="93" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--text-2)">DE</text>
+                <text class="j j-lat" x="271" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--text-2)">AT</text>
+                <text class="j j-lsi" x="446" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--text-2)">SI</text>
+                <text class="j j-lhr" x="562" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--text-2)">HR</text>
+              </svg>
+              <div class="panel__foot">
+                <div class="panel__chips">
+                  <span class="sale j j-s1"><span class="dot-ico dot-ico--acc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></span>Coach held 30 min</span>
+                  <span class="sale j j-s2"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>Paid · PayPal</span>
+                  <span class="sale j j-s3"><span class="dot-ico dot-ico--ink"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11v18l-2.75-1.8L12 21l-2.75-1.8L6.5 21z"></path></svg></span>Invoice sent</span>
+                </div>
+                <div class="seats">
+                  <div class="seats__grid"><div class="seats__empty j j-seats"></div></div>
+                  <span class="seats__n j j-seatn">49<small> / 52</small></span>
+                </div>
+              </div>
+            </div>
+            <div class="stage__veil j j-veil"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Traka reference -->
+  <div class="st st--dark ref-band">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div></div>
+    <div class="st__body">
+      <div class="ref-band__facts">
+        <span class="eyebrow" style="color: var(--accent)">Reference in operation</span>
+        <span class="ref-band__name">Omnibus Mikanović, Offenbach am Main</span>
+        <span class="ref-band__since">BusFlow in production since August 2026</span>
+      </div>
+      <div class="ref-band__pills"><span class="pill-o">DE · EN · HR</span><span class="pill-o">Factur-X</span></div>
+    </div>
+  </div>
+
+  <!-- 01 · Karta sustava -->
+  <section id="system-map" class="st" data-stop="1">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="1">01</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">01</span>Stop 01 · System map</span>
+        <h2 class="display rev rev--left" style="--i: 1">Your whole coach business on one map.</h2>
+        <p class="rev rev--left" style="--i: 2">BusFlow connects passengers, office, finance and partners. Each line is work you do by hand today, and each stop is a module that does it for you. At the center sits the pricing engine: every trip runs through it.</p>
+      </div>
+      <div class="map-frame rev rev--up" style="--i: 3">
+        <svg class="map" viewBox="0 0 1168 620" role="img" aria-label="BusFlow system map: the lines Passengers, Office and dispatch, Finance, and Partners and B2B, joined at the pricing engine">
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="ln" pathLength="1" d="M60 300H1110" stroke="#22396F" stroke-width="14" style="--d: 0s"></path>
+            <path class="ln" pathLength="1" d="M520 70V420L600 500H900" stroke="#0D1C42" stroke-width="12" style="--d: .5s"></path>
+            <path d="M900 300L980 220V70" stroke="#5A6C99" stroke-width="12" stroke-linecap="butt" stroke-dasharray="16 10"></path>
+            <path class="cover" pathLength="1" d="M900 300L980 220V70" stroke="var(--surface-2)" stroke-width="16" stroke-linecap="butt" style="--d: .7s"></path>
+            <path d="M235 90V460L315 540H470" stroke="#010736" stroke-width="12" stroke-dasharray="0.1 18"></path>
+            <path class="cover" pathLength="1" d="M235 90V460L315 540H470" stroke="var(--surface-2)" stroke-width="16" stroke-linecap="butt" style="--d: .45s"></path>
+          </g>
+          <g stroke-width="4">
+            <circle class="stop" cx="60" cy="300" r="12" fill="#22396F" stroke="var(--ink)" style="--d: .15s"></circle>
+            <circle class="stop" cx="60" cy="300" r="4" fill="var(--surface-2)" style="--d: .15s"></circle>
+            <circle class="stop" cx="760" cy="300" r="10" fill="var(--surface-2)" stroke="#22396F" style="--d: .55s"></circle>
+            <circle class="stop" cx="1110" cy="300" r="12" fill="#22396F" stroke="var(--ink)" style="--d: .9s"></circle>
+            <circle class="stop" cx="1110" cy="300" r="4" fill="var(--surface-2)" style="--d: .9s"></circle>
+            <circle class="stop" cx="520" cy="70" r="12" fill="#0D1C42" stroke="var(--ink)" style="--d: .55s"></circle>
+            <circle class="stop" cx="520" cy="70" r="4" fill="var(--surface-2)" style="--d: .55s"></circle>
+            <circle class="stop" cx="520" cy="185" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .7s"></circle>
+            <circle class="stop" cx="520" cy="420" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .95s"></circle>
+            <circle class="stop" cx="700" cy="500" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: 1.15s"></circle>
+            <circle class="stop" cx="900" cy="500" r="12" fill="#0D1C42" stroke="var(--ink)" style="--d: 1.3s"></circle>
+            <circle class="stop" cx="900" cy="500" r="4" fill="var(--surface-2)" style="--d: 1.3s"></circle>
+            <circle class="stop" cx="980" cy="220" r="10" fill="var(--surface-2)" stroke="#5A6C99" style="--d: .95s"></circle>
+            <circle class="stop" cx="980" cy="145" r="10" fill="var(--surface-2)" stroke="#5A6C99" style="--d: 1.1s"></circle>
+            <circle class="stop" cx="980" cy="70" r="12" fill="#5A6C99" stroke="var(--ink)" style="--d: 1.3s"></circle>
+            <circle class="stop" cx="980" cy="70" r="4" fill="var(--surface-2)" style="--d: 1.3s"></circle>
+            <circle class="stop" cx="235" cy="90" r="12" fill="#010736" stroke="var(--ink)" style="--d: .5s"></circle>
+            <circle class="stop" cx="235" cy="90" r="4" fill="var(--surface-2)" style="--d: .5s"></circle>
+            <circle class="stop" cx="235" cy="420" r="10" fill="var(--surface-2)" stroke="#010736" style="--d: .85s"></circle>
+            <circle class="stop" cx="360" cy="540" r="13" fill="var(--ink)" stroke="var(--accent)" style="--d: 1.15s"></circle>
+            <circle class="stop" cx="470" cy="540" r="12" fill="#010736" stroke="var(--ink)" style="--d: 1.35s"></circle>
+            <circle class="stop" cx="470" cy="540" r="4" fill="var(--surface-2)" style="--d: 1.35s"></circle>
+            <circle class="stop" cx="235" cy="300" r="15" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="5" style="--d: .3s"></circle>
+            <circle class="stop" cx="900" cy="300" r="15" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="5" style="--d: .75s"></circle>
+          </g>
+          <g class="stop" style="--d: .4s">
+            <rect x="405" y="262" width="230" height="76" rx="38" fill="var(--ink)"></rect>
+            <rect x="412" y="269" width="216" height="62" rx="31" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 5"></rect>
+            <text class="mono" x="520" y="295" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.6" fill="var(--accent)">PRICING ENGINE</text>
+            <text x="520" y="317" text-anchor="middle" font-size="13.5" fill="var(--on-ink-3)">route · crew · VAT · price</text>
+          </g>
+          <g class="mono" font-size="13" font-weight="700" text-anchor="middle">
+            <g class="lbl" style="--d: .15s"><rect x="18" y="288" width="24" height="24" rx="6" fill="#22396F"></rect><text x="30" y="305" fill="var(--on-ink)">P</text></g>
+            <g class="lbl" style="--d: .55s"><rect x="508" y="22" width="24" height="24" rx="6" fill="#0D1C42"></rect><text x="520" y="39" fill="#FFFFFF">O</text></g>
+            <g class="lbl" style="--d: 1.3s"><rect x="968" y="22" width="24" height="24" rx="6" fill="#5A6C99"></rect><text x="980" y="39" fill="#FFFFFF">F</text></g>
+            <g class="lbl" style="--d: .5s"><rect x="223" y="42" width="24" height="24" rx="6" fill="#010736"></rect><text x="235" y="59" fill="var(--on-ink)">B</text></g>
+          </g>
+          <g font-size="15" font-weight="600" fill="var(--text)">
+            <text class="lbl" x="44" y="262" style="--d: .15s">Web inquiry</text>
+            <text class="lbl" x="254" y="336" style="--d: .3s">Dates and price</text>
+            <text class="lbl" x="760" y="262" text-anchor="middle" style="--d: .55s">Booking</text>
+            <text class="lbl" x="900" y="340" text-anchor="middle" style="--d: .75s">Payment</text>
+            <text class="lbl" x="1128" y="340" text-anchor="end" style="--d: .9s">My bookings</text>
+            <text class="lbl" x="542" y="66" style="--d: .55s">“Needs your attention” board</text>
+            <text class="lbl" x="542" y="181" style="--d: .7s">Inbox and large groups</text>
+            <text class="lbl" x="498" y="416" text-anchor="end" style="--d: .95s">Availability and depots</text>
+            <text class="lbl" x="700" y="538" text-anchor="middle" style="--d: 1.15s">Crew and EU rules</text>
+            <text class="lbl" x="900" y="538" text-anchor="middle" style="--d: 1.3s">Navigation and trip sheet</text>
+            <text class="lbl" x="1002" y="216" style="--d: .95s">Invoice after payment</text>
+            <text class="lbl" x="1002" y="141" style="--d: 1.1s">VAT by country</text>
+            <text class="lbl" x="1002" y="66" style="--d: 1.3s">Expenses</text>
+            <text class="lbl" x="256" y="86" style="--d: .5s">Inquiries by email</text>
+            <text class="lbl" x="214" y="416" text-anchor="end" style="--d: .85s">Partner operators</text>
+            <text class="lbl" x="360" y="580" text-anchor="middle" style="--d: 1.15s">BUS-SOS</text>
+            <text class="lbl" x="470" y="580" text-anchor="middle" style="--d: 1.35s">Driver hire</text>
+          </g>
+          <g class="mono" font-size="11.5" fill="var(--text-2)">
+            <text class="lbl" x="44" y="280" style="--d: .15s">planner and live map</text>
+            <text class="lbl" x="254" y="354" style="--d: .3s">alternatives if booked</text>
+            <text class="lbl" x="760" y="280" text-anchor="middle" style="--d: .55s">coach held 30 min</text>
+            <text class="lbl" x="900" y="358" text-anchor="middle" style="--d: .75s">myPOS · PayPal</text>
+            <text class="lbl" x="1128" y="358" text-anchor="end" style="--d: .9s">cancellation and balance</text>
+            <text class="lbl" x="542" y="84" style="--d: .55s">office tasks in one place</text>
+            <text class="lbl" x="542" y="199" style="--d: .7s">confirm offers in one click</text>
+            <text class="lbl" x="498" y="434" text-anchor="end" style="--d: .95s">blackouts · multiple depots</text>
+            <text class="lbl" x="700" y="556" text-anchor="middle" style="--d: 1.15s">561/2006 · up to 3 drivers</text>
+            <text class="lbl" x="900" y="556" text-anchor="middle" style="--d: 1.3s">Google Maps for drivers</text>
+            <text class="lbl" x="1002" y="234" style="--d: .95s">right after payment</text>
+            <text class="lbl" x="1002" y="159" style="--d: 1.1s">UStVA figures for ELSTER</text>
+            <text class="lbl" x="1002" y="84" style="--d: 1.3s">receipt recognition</text>
+            <text class="lbl" x="256" y="104" style="--d: .5s">paste email, send to partners</text>
+            <text class="lbl" x="214" y="434" text-anchor="end" style="--d: .85s">first to accept</text>
+            <text class="lbl" x="360" y="598" text-anchor="middle" style="--d: 1.15s">replacement coach now</text>
+            <text class="lbl" x="470" y="598" text-anchor="middle" style="--d: 1.35s">up to 6 days</text>
+          </g>
+        </svg>
+        <ul class="map-list" aria-label="System map in brief: the Passengers line with its interchanges">
+          <li><b>Web inquiry</b><span>Route, stops and schedule are drawn as the customer types.</span></li>
+          <li><b>Dates and price</b><span>Binding price; if the coach is booked, free alternatives.</span></li>
+          <li class="map-list__x">B · interchange: fleet fully booked → partners</li>
+          <li><span class="map-list__motor"><b>PRICING ENGINE</b><span>route · free coach · crew under EU rules · VAT · price</span></span></li>
+          <li class="map-list__x">O · interchange: office and phone inquiries</li>
+          <li><b>Booking</b><span>The coach is held for 30 minutes while the customer pays.</span></li>
+          <li><b>Payment</b><span>Card (myPOS) or PayPal; the booking is confirmed once the money arrives.</span></li>
+          <li class="map-list__x">F · interchange: invoice and VAT</li>
+          <li><b>My bookings</b><span>Cancellation with an automatic fee and payment of the balance.</span></li>
+        </ul>
+      </div>
+      <ul class="legend rev rev--up" style="--i: 4">
+        <li><span class="sw sw--p"></span>P · Passengers and customers</li>
+        <li><span class="sw sw--o"></span>O · Office and dispatch</li>
+        <li><span class="sw sw--f"></span>F · Finance</li>
+        <li><span class="sw sw--b"></span>B · Partners and B2B</li>
+        <li><span class="sw sw--x"></span>interchange: lines share a stop</li>
+        <li><span class="sw sw--sos"></span>emergency replacement coach</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 02 · Mogućnosti -->
+  <section id="features" class="st st--tint" data-stop="2">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="2">02</div></div>
+    <div class="st__body">
+      <div class="st-head st-head--row">
+        <div class="st-head">
+          <span class="st-label rev rev--left"><span class="badge badge--inline">02</span>Stop 02 · Features</span>
+          <h2 class="display rev rev--left" style="--i: 1">The feature timetable.</h2>
+          <p class="rev rev--left" style="--i: 2">Everything BusFlow does, sorted by the lines on the map: thirty stops, from the first inquiry to the VAT return.</p>
+        </div>
+        <ul class="key rev rev--up" style="--i: 3">
+          <li><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span>Runs automatically, no office needed</li>
+          <li><span class="key__ico" style="color: var(--on-ink)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>The decision stays yours</li>
+        </ul>
+      </div>
+      <div class="boards">
+        <article class="board board--p rev rev--up" style="--i: 0">
+          <div class="board__head"><span class="board__letter">P</span><div><div class="board__title">Passengers and customers</div><div class="board__meta">Line P · 8 stops</div></div></div>
+          <div class="board__row"><span class="board__code">P1</span><span class="board__t">Planner with live map</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Route, stops and timetable are drawn as the customer types.</span></div>
+          <div class="board__row"><span class="board__code">P2</span><span class="board__t">Dates and price</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Binding price in total and per person, with free alternatives.</span></div>
+          <div class="board__row"><span class="board__code">P3</span><span class="board__t">Every inquiry is a contact</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">The price appears after sign-up: you have the name, email and phone number.</span></div>
+          <div class="board__row"><span class="board__code">P4</span><span class="board__t">Booking and payment</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Coach held for 30 minutes; card (myPOS) or PayPal.</span></div>
+          <div class="board__row"><span class="board__code">P5</span><span class="board__t">My bookings</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Cancellation with an automatically calculated fee and payment of the balance.</span></div>
+          <div class="board__row"><span class="board__code">P6</span><span class="board__t">Frequent routes and airports</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">One click fills in the whole route or the meeting point.</span></div>
+          <div class="board__row"><span class="board__code">P7</span><span class="board__t">Timetable and tickets</span><span class="board__ico" aria-label="Your decision"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">You publish departures; customers buy tickets with the passengers' names.</span></div>
+          <div class="board__row"><span class="board__code">P8</span><span class="board__t">Day trip</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Flat rate per coach class and immediate payment; switched on if you want it.</span></div>
+        </article>
+        <article class="board board--o rev rev--up" style="--i: 1">
+          <div class="board__head"><span class="board__letter">O</span><div><div class="board__title">Office and dispatch</div><div class="board__meta">Line O · 8 stops</div></div></div>
+          <div class="board__row"><span class="board__code">O1</span><span class="board__t">“Needs your attention” board</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Task counters and departures for the next 7 days.</span></div>
+          <div class="board__row"><span class="board__code">O2</span><span class="board__t">Booking inbox</span><span class="board__ico" aria-label="Your decision"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Filters, feasibility check and CSV export.</span></div>
+          <div class="board__row"><span class="board__code">O3</span><span class="board__t">Large groups</span><span class="board__ico" aria-label="Your decision"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Check the offer, confirm it and send it to the customer in one click.</span></div>
+          <div class="board__row"><span class="board__code">O4</span><span class="board__t">Coach availability</span><span class="board__ico" aria-label="Your decision"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Calendar per coach, blackouts and release for another trip.</span></div>
+          <div class="board__row"><span class="board__code">O5</span><span class="board__t">Multiple depots</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">The nearest depot and the smallest free coach are chosen automatically.</span></div>
+          <div class="board__row"><span class="board__code">O6</span><span class="board__t">Crew under EU 561/2006</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Breaks, shifts, up to 3 drivers and overnight stays, with the reasoning.</span></div>
+          <div class="board__row"><span class="board__code">O7</span><span class="board__t">Navigation for drivers</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">A Google Maps link with the whole route and the trip sheet by email.</span></div>
+          <div class="board__row"><span class="board__code">O8</span><span class="board__t">Phone inquiries</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Quick quotes and manual bookings with the same pricing engine.</span></div>
+        </article>
+        <article class="board board--f rev rev--up" style="--i: 2">
+          <div class="board__head"><span class="board__letter">F</span><div><div class="board__title">Finance</div><div class="board__meta">Line F · 8 stops</div></div></div>
+          <div class="board__row"><span class="board__code">F1</span><span class="board__t">Invoice after payment</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Factur-X / ZUGFeRD (PDF/A-3b) on your letterhead.</span></div>
+          <div class="board__row"><span class="board__code">F2</span><span class="board__t">VAT by country</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">The route is split at the borders; the rates are versioned by date.</span></div>
+          <div class="board__row"><span class="board__code">F3</span><span class="board__t">VAT report</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Figures for the German UStVA return, ready to enter in ELSTER.</span></div>
+          <div class="board__row"><span class="board__code">F4</span><span class="board__t">Expenses with receipt recognition</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">A photo of a receipt fills in the fields and suggests the SKR03 account.</span></div>
+          <div class="board__row"><span class="board__code">F5</span><span class="board__t">Payment overview</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Deposit and balance, myPOS, PayPal and bank transfer; unmatched payments are flagged.</span></div>
+          <div class="board__row"><span class="board__code">F6</span><span class="board__t">School deposits</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Reminders 7 days and 1 day before the deadline, then automatic cancellation.</span></div>
+          <div class="board__row"><span class="board__code">F7</span><span class="board__t">Price list and fleet</span><span class="board__ico" aria-label="Your decision"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Distance bands, flat rates, daily minimum, diesel, tolls and trip types ±%.</span></div>
+          <div class="board__row"><span class="board__code">F8</span><span class="board__t">Internal cost and margin</span><span class="board__ico" aria-label="Your decision"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">What a trip really costs you, visible only to the office.</span></div>
+        </article>
+        <article class="board board--b rev rev--up" style="--i: 3">
+          <div class="board__head"><span class="board__letter">B</span><div><div class="board__title">Partners and B2B</div><div class="board__meta">Line B · 6 stops</div></div></div>
+          <div class="board__row"><span class="board__code">B1</span><span class="board__t">Fleet fully booked → partners</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">The inquiry goes to partner operators; the first to accept runs the trip.</span></div>
+          <div class="board__row"><span class="board__code">B2</span><span class="board__t">Inquiries by email</span><span class="board__ico" aria-label="Your decision"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Paste the email, enter the price and send it to partners.</span></div>
+          <div class="board__row"><span class="board__code">B3</span><span class="board__t">BUS-SOS</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">A replacement coach to the phone's location, from the nearest depot, with an SOS surcharge.</span></div>
+          <div class="board__row"><span class="board__code">B4</span><span class="board__t">Driver hire</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Other operators book a driver for up to 6 days, with an instant offer.</span></div>
+          <div class="board__row"><span class="board__code">B5</span><span class="board__t">Framework agreement online</span><span class="board__ico" aria-label="Runs automatically"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">The partner accepts the terms once; emails carry your letterhead.</span></div>
+          <div class="board__row"><span class="board__code">B6</span><span class="board__t">Partner depots</span><span class="board__ico" aria-label="Your decision"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">You sell trips on your partner's coaches under your brand, with a notice to the customer.</span></div>
+        </article>
+      </div>
+      <ul class="bg-strip rev rev--up">
+        <li class="bg-strip__label">Behind the scenes</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"></rect><path d="M4 7l8 6 8-6"></path></svg>Around 40 automatic emails in DE · EN · HR</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg>Sign-in with Google and two-factor protection</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"></circle><path d="M3.5 19.5c.9-3.3 3-5 5.5-5s4.6 1.7 5.5 5"></path><path d="M15.5 5.6a3.2 3.2 0 0 1 0 5.8M17.5 14.8c1.5.7 2.5 2.2 3 4.7"></path></svg>Roles Owner · Office · Customer and an activity log</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V10M10 19V5M16 19v-8M22 19H2"></path></svg>Visitor statistics without cookies</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.3-4.3"></path></svg>SEO in three languages</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 03 · Što se poboljšava -->
+  <section id="improvements" class="st" data-stop="3">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="3">03</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">03</span>Stop 03 · What gets better</span>
+        <h2 class="display rev rev--left" style="--i: 1">What changes, task by task.</h2>
+        <p class="rev rev--left" style="--i: 2">Seven everyday tasks of a coach operator: how they look today and how BusFlow handles them.</p>
+      </div>
+      <div class="cmp">
+        <div class="cmp__th"><span>Task</span><span>Before</span><span></span><span>With BusFlow</span></div>
+        <div class="cmp__row" style="--i: 0">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 6.8A6.5 6.5 0 1 0 17 17.2"></path><path d="M5 10.2h8.5M5 13.8h8.5"></path></svg></span>Quote for a trip</div>
+          <p class="cmp__before">Kilometers, days, drivers and tolls are calculated by hand, and the customer waits for a callback.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>The customer gets a binding price in seconds, without a callback, even when the office is closed.</p><span class="cmp__tag">route across Europe · rates per coach · driving rules</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 1">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="2.2"></circle><path d="M3.8 10.8l6.1.9M20.2 10.8l-6.1.9M12 14.2v6.3"></path></svg></span>Drivers and rest periods</div>
+          <p class="cmp__before">Driving and rest times are checked from memory, and the second driver is easily left off the bill.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Every offer includes the plan for shifts, breaks and overnight stays and charges for the crew that is really needed.</p><span class="cmp__tag">EU 561/2006 · schedule by real clock time · up to 3 drivers</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 2">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></span>Booking and payment</div>
+          <p class="cmp__before">The offer goes out by email, followed by waiting for the payment and chasing it by hand.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>The coach is held for 30 minutes while the customer pays; the booking is confirmed once the money arrives.</p><span class="cmp__tag">myPOS · PayPal · unpaid bookings released automatically</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 3">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11v18l-2.75-1.8L12 21l-2.75-1.8L6.5 21z"></path><path d="M9.5 8h5M9.5 11.5h5M9.5 15h3"></path></svg></span>Invoices and VAT</div>
+          <p class="cmp__before">The invoice is written in another program, and VAT for cross-border trips is calculated by hand.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>The invoice goes out automatically after payment, with VAT split by the countries on the route.</p><span class="cmp__tag">Factur-X / ZUGFeRD · PDF/A-3b · checked with every change</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 4">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5h3.2l1.8-2.5h6l1.8 2.5H20V19H4z"></path><circle cx="12" cy="13" r="3.3"></circle></svg></span>Expenses and VAT return</div>
+          <p class="cmp__before">Receipts pile up in a box and are typed up for the accountant at the end of the month.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>A photo of a receipt fills in the fields and suggests the account; the UStVA figures are ready for the return.</p><span class="cmp__tag">document recognition · SKR03 · duplicate warning</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 5">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"></path></svg></span>Fleet fully booked</div>
+          <p class="cmp__before">An inquiry you can't run means a lost job, and often a lost customer.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>The inquiry goes to partner operators; the first to accept runs the trip, and the customer stays yours.</p><span class="cmp__tag">partner links · framework agreement online</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 6">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9.5-4.1-1.6-7-5.3-7-9.5V6z"></path><path d="M9 12l2.2 2.2L15.5 10"></path></svg></span>Margin protection</div>
+          <p class="cmp__before">A minimum price or an extra excursion can quietly eat into your profit.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Tolls, driver accommodation, extra drivers and excursions are always charged, even with the minimum price.</p><span class="cmp__tag">distance bands · daily minimum · transfer flat rates</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · Što se ubrzava (tamno) -->
+  <section id="speed" class="st st--dark" data-stop="4">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="4">04</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">04</span>Stop 04 · What gets faster</span>
+        <h2 class="display rev rev--left" style="--i: 1">From inquiry to price in seconds.</h2>
+        <p class="rev rev--left" style="--i: 2">Everything a dispatcher would otherwise work out – route, free coach, number of drivers, VAT and price – BusFlow does while the customer is still filling in the form. Your office uses the same engine for phone inquiries.</p>
+      </div>
+      <ol class="pipe" aria-label="Calculation steps">
+        <div class="pipe__bar" aria-hidden="true"><i></i></div>
+        <li class="pipe__step" style="--i: 0"><span class="pipe__num">01</span><div><div class="pipe__t">Trip entry</div><div class="pipe__d">Passengers, departure, destination, stops and excursions.</div></div></li>
+        <li class="pipe__step" style="--i: 1"><span class="pipe__num">02</span><div><div class="pipe__t">Route</div><div class="pipe__d">Our own routing server, for all of Europe.</div></div></li>
+        <li class="pipe__step" style="--i: 2"><span class="pipe__num">03</span><div><div class="pipe__t">Free coach</div><div class="pipe__d">The nearest depot and the smallest coach with enough seats.</div></div></li>
+        <li class="pipe__step" style="--i: 3"><span class="pipe__num">04</span><div><div class="pipe__t">Driving rules</div><div class="pipe__d">Shifts, breaks, number of drivers and overnight stays.</div></div></li>
+        <li class="pipe__step" style="--i: 4"><span class="pipe__num">05</span><div><div class="pipe__t">VAT by country</div><div class="pipe__d">The route is split at every border it crosses.</div></div></li>
+        <li class="pipe__step" style="--i: 5"><span class="pipe__num">06</span><div><div class="pipe__t">Price and trip plan</div><div class="pipe__d">Total and per person, with the crew plan and VAT.</div></div></li>
+      </ol>
+      <div class="auto rev rev--up">
+        <div class="auto__head"><span class="key__ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span>The system works on its own, even when you're on the road</div>
+        <ul class="auto__grid">
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></span>Releases unpaid bookings after 30 minutes</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11v18l-2.75-1.8L12 21l-2.75-1.8L6.5 21z"></path><path d="M9.5 8h5M9.5 11.5h5M9.5 15h3"></path></svg></span>Issues the invoice as soon as the payment arrives</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"></rect><path d="M4 7l8 6 8-6"></path></svg></span>Sends a reminder with the trip sheet 2 days before departure</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg></span>Reminds schools about the deposit and the balance</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="2.2"></circle><path d="M3.8 10.8l6.1.9M20.2 10.8l-6.1.9M12 14.2v6.3"></path></svg></span>Accepts driver hire requests and sends an offer right away</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.4-5.7"></path><path d="M20 4v5h-5"></path></svg></span>Resends undelivered emails, up to 8 attempts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · Prednosti -->
+  <section id="benefits" class="st" data-stop="5">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="5">05</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">05</span>Stop 05 · Benefits</span>
+        <h2 class="display rev rev--left" style="--i: 1">Six reasons for BusFlow.</h2>
+        <p class="rev rev--left" style="--i: 2">You're not introducing empty software, but a system that already sells, plans and invoices real trips every day.</p>
+      </div>
+      <div class="adv">
+        <article class="card adv__card rev rev--up" style="--i: 0"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"></path></svg></span><h3>Sales around the clock</h3><p>Customers get a binding price and book even when the office is closed. You only step in when the decision really is yours: a large group, a fully booked fleet or a refund.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 1"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9.5-4.1-1.6-7-5.3-7-9.5V6z"></path><path d="M9 12l2.2 2.2L15.5 10"></path></svg></span><h3>Margin under control</h3><p>Rates per coach, distance bands, daily minimum and transfer flat rates. Tolls, accommodation and extra drivers are always in the price.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 2"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="2.2"></circle><path d="M3.8 10.8l6.1.9M20.2 10.8l-6.1.9M12 14.2v6.3"></path></svg></span><h3>EU rules in every offer</h3><p>Shifts, breaks and overnight stays under Regulation (EC) No 561/2006 are part of the calculation, and the system flags a trip that cannot be run legally before you sell it.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 3"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11v18l-2.75-1.8L12 21l-2.75-1.8L6.5 21z"></path><path d="M9.5 8h5M9.5 11.5h5M9.5 15h3"></path></svg></span><h3>Paperless invoices and tax</h3><p>Invoices after payment, VAT by country, UStVA figures and an expense book that reads photographed receipts.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 4"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"></path></svg></span><h3>No inquiry is lost</h3><p>When your fleet is fully booked, partners take over the trip. When another operator is short of a coach or a driver, BUS-SOS and driver hire bring the job to you.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 5"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.3 0 1.9-.8 1.9-1.7 0-1.2-1-1.6-1-2.6 0-.9.8-1.6 1.7-1.6h2.1a3.8 3.8 0 0 0 3.8-3.8C20.5 6.6 16.7 3.5 12 3.5z"></path><circle cx="7.8" cy="11" r="1.1"></circle><circle cx="10.6" cy="7.6" r="1.1"></circle><circle cx="14.6" cy="7.6" r="1.1"></circle></svg></span><h3>Your brand, your domain</h3><p>Logo, colors, domain, email sender, letterhead and legal texts are yours. Your customers see your company, and BusFlow works in the background.</p></article>
+      </div>
+      <div class="brand-row">
+        <div class="brand-panel rev rev--up">
+          <span class="eyebrow">Your name at every step</span>
+          <p>Website, sign-in, emails, offers and invoices carry your name and your colors.</p>
+          <svg viewBox="0 0 560 196" role="img" aria-label="Coach in your colors, with room for your logo and domain">
+            <path d="M0 186H560" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="18 12" opacity="0.3"></path>
+            <ellipse cx="280" cy="186" rx="248" ry="6" fill="var(--ink-900)" opacity="0.14"></ellipse>
+            <path d="M40 16H452C470 16 482 24 490 38L520 98C524 106 526 114 526 122V148C526 156 520 162 512 162H36C28 162 22 156 22 148V34C22 24 30 16 40 16Z" fill="var(--ink)"></path>
+            <g fill="var(--on-ink-3)"><rect x="36" y="30" width="58" height="44" rx="6"></rect><rect x="100" y="30" width="58" height="44" rx="6"></rect><rect x="164" y="30" width="58" height="44" rx="6"></rect><rect x="228" y="30" width="58" height="44" rx="6"></rect><rect x="292" y="30" width="58" height="44" rx="6"></rect><rect x="356" y="30" width="58" height="44" rx="6"></rect><rect x="424" y="30" width="28" height="108" rx="5"></rect><path d="M462 30H470C476 30 481 34 484 40L508 90C510 94 508 98 503 98H462Z"></path></g>
+            <g fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.6"><path d="M46 66L66 38"></path><path d="M110 66L130 38"></path><path d="M174 66L194 38"></path><path d="M238 66L258 38"></path><path d="M302 66L322 38"></path><path d="M366 66L386 38"></path><path d="M470 84L482 52"></path></g>
+            <path d="M22 86H418" fill="none" stroke="var(--accent)" stroke-width="10"></path>
+            <path d="M22 98H418" fill="none" stroke="var(--ground)" stroke-width="3"></path>
+            <text x="40" y="128" font-family="Barlow Condensed, sans-serif" font-size="22" font-weight="800" fill="var(--ground)">[YOUR LOGO]</text>
+            <text x="236" y="126" font-family="JetBrains Mono, monospace" font-size="13" fill="var(--ground)">[your-domain.com]</text>
+            <rect x="506" y="130" width="16" height="9" rx="3" fill="var(--accent)"></rect>
+            <circle cx="102" cy="162" r="27" fill="var(--ground-2)"></circle><circle cx="160" cy="162" r="27" fill="var(--ground-2)"></circle><circle cx="440" cy="162" r="27" fill="var(--ground-2)"></circle>
+            <circle cx="102" cy="162" r="21" fill="var(--ink-900)"></circle><circle cx="102" cy="162" r="8" fill="var(--muted-fill)"></circle>
+            <circle cx="160" cy="162" r="21" fill="var(--ink-900)"></circle><circle cx="160" cy="162" r="8" fill="var(--muted-fill)"></circle>
+            <circle cx="440" cy="162" r="21" fill="var(--ink-900)"></circle><circle cx="440" cy="162" r="8" fill="var(--muted-fill)"></circle>
+          </svg>
+        </div>
+        <div class="sec-panel rev rev--up" style="--i: 1">
+          <span class="eyebrow">Security and ownership</span>
+          <ul>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="7" rx="2"></rect><rect x="4" y="13" width="16" height="7" rx="2"></rect><path d="M8 7.5h.01M8 16.5h.01"></path></svg>Your own instance just for your company: the database is not shared with other operators.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.5 12h17M12 3.5c2.4 2.6 3.6 5.4 3.6 8.5s-1.2 5.9-3.6 8.5c-2.4-2.6-3.6-5.4-3.6-8.5S9.6 6.1 12 3.5z"></path></svg>Your data stays in the EU.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"></path><path d="M20 4v5h-5"></path></svg>Daily backup, a copy off the server and regular restore drills.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"></path><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"></path></svg>Roll back to the previous version in one click.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5"></path><path d="M9.5 14.5l2 2 3.5-4"></path></svg>At the end of the contract you receive an export of the database.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Invoices are checked automatically with every software change.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · Uvođenje -->
+  <section id="onboarding" class="st st--tint" data-stop="6">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="6">06</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">06</span>Stop 06 · Onboarding</span>
+        <h2 class="display rev rev--left" style="--i: 1">From first meeting to go‑live: 8–10 weeks.</h2>
+        <p class="rev rev--left" style="--i: 2">You get your own instance on our hosting, with your brand, your price list and your fleet. The phases overlap, and you always know which stop comes next.</p>
+      </div>
+      <ol class="phases" aria-label="Onboarding phases">
+        <div class="phases__bar" aria-hidden="true"><i></i></div>
+        <li class="phase rev rev--up" style="--i: 0"><span class="phase__num">0</span><span class="phase__t">Inquiry and contract</span><span class="phase__dur">1–2 wk.</span></li>
+        <li class="phase rev rev--up" style="--i: 1"><span class="phase__num">1</span><span class="phase__t">Kick-off and materials</span><span class="phase__dur">1–3 wk.</span></li>
+        <li class="phase rev rev--up" style="--i: 2"><span class="phase__num">2</span><span class="phase__t">Instance and domains</span><span class="phase__dur">1 wk.</span></li>
+        <li class="phase rev rev--up" style="--i: 3"><span class="phase__num">3</span><span class="phase__t">Setup and branding</span><span class="phase__dur">2–3 wk.</span></li>
+        <li class="phase rev rev--up" style="--i: 4"><span class="phase__num">4</span><span class="phase__t">Payments and email</span><span class="phase__dur">1–2 wk.</span></li>
+        <li class="phase rev rev--up" style="--i: 5"><span class="phase__num">5</span><span class="phase__t">Fleet and price list</span><span class="phase__dur">1 wk.</span></li>
+        <li class="phase rev rev--up" style="--i: 6"><span class="phase__num">6</span><span class="phase__t">Testing and acceptance</span><span class="phase__dur">1–2 wk.</span></li>
+        <li class="phase phase--live rev rev--up" style="--i: 7"><span class="phase__num">7</span><span class="phase__t">Training and <span class="nobr">go-live</span></span><span class="phase__dur">1 wk.</span></li>
+        <li class="phase phase--plus rev rev--up" style="--i: 8"><span class="phase__num">+</span><span class="phase__t">Hypercare</span><span class="phase__dur">2 wk.</span></li>
+      </ol>
+      <div class="lanes">
+        <div class="lane lane--you rev rev--up">
+          <div class="lane__title">You provide <small>what we need from you</small></div>
+          <ul class="lane__chips"><li class="chip-o">Logo and colors</li><li class="chip-o">Website texts</li><li class="chip-o">Domain and DNS</li><li class="chip-o">myPOS or PayPal account</li><li class="chip-o">Terms and privacy policy</li><li class="chip-o">VAT rules by country</li><li class="chip-o">Fleet and rates</li><li class="chip-o">A decision-maker</li></ul>
+        </div>
+        <div class="lane lane--we rev rev--up" style="--i: 1">
+          <div class="lane__title">We handle <small>everything else</small></div>
+          <ul class="lane__chips"><li class="chip-o">Instance, domains and TLS</li><li class="chip-o">Branding and legal pages</li><li class="chip-o">Letterhead and invoices</li><li class="chip-o">Payments and email</li><li class="chip-o">Entering fleet and rates</li><li class="chip-o">Tests and a backup drill</li><li class="chip-o">Office training</li><li class="chip-o">Two weeks of intensive support</li></ul>
+        </div>
+      </div>
+      <div class="two">
+        <div class="crit rev rev--up">
+          <div class="crit__title"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>Critical path</div>
+          <p>Delays usually come from waiting, not from our work: legal texts and tax rules, merchant verification at myPOS and PayPal, DNS and the invoice letterhead.</p>
+          <p><strong>That's why the inquiry already asks what you have – we agree on the rest at the first meeting.</strong></p>
+          <a class="link-u" href="upit.html">Open the inquiry</a>
+        </div>
+        <div class="model rev rev--up" style="--i: 1">
+          <div class="model__title">How we work together</div>
+          <div class="model__tiles">
+            <div class="model__tile"><b>One-off</b><span>onboarding: all phases from kick-off to go-live</span></div>
+            <span class="model__plus" aria-hidden="true">+</span>
+            <div class="model__tile"><b>Monthly</b><span>hosting, backup, monitoring, updates and support</span></div>
+          </div>
+          <p>You receive the offer after the first meeting, based on the size of your fleet and the scope of work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · Referenca (tamno) -->
+  <section id="reference" class="st st--dark" data-stop="7">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="7">07</div></div>
+    <div class="st__body">
+      <div class="ref-grid">
+        <div class="ref-text">
+          <span class="st-label rev rev--left"><span class="badge badge--inline">07</span>Stop 07 · Reference</span>
+          <h2 class="display rev rev--left" style="--i: 1; font-size: clamp(36px, 3.8vw, 52px)">Built in real operation.</h2>
+          <p class="rev rev--left" style="--i: 2; font-size: 19px; line-height: 1.5; color: var(--on-ink-2)">BusFlow was created together with the Mikanović family, a coach operator from Offenbach am Main. Since August 2026, their sales, trip planning and invoicing have been running on BusFlow.</p>
+          <div class="facts rev rev--up" style="--i: 3">
+            <div class="fact"><b>2010</b><span>Mikanović on the road since</span></div>
+            <div class="fact"><b>08/2026</b><span>BusFlow in production</span></div>
+            <div class="fact"><b>3 languages</b><span>DE · EN · HR for customers</span></div>
+          </div>
+          <a class="ref-link rev rev--up" style="--i: 4" href="https://mikanovic.de" target="_blank" rel="noopener">See it live: mikanovic.de<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"></path><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a>
+        </div>
+        <figure class="quote rev rev--up" style="--i: 2">
+          <div class="quote__head">
+            <img class="quote__logo" src="../assets/img/mikanovic-logo.webp" width="560" height="181" alt="Logo Omnibusunternehmen Mikanovic" loading="lazy" decoding="async">
+            <span class="quote__tag">Customer review</span>
+          </div>
+          <div class="quote__body">
+            <svg class="quote__mark" width="40" height="33" viewBox="0 0 44 36" aria-hidden="true"><path d="M0 36V20C0 9 6 2 18 0l2 6c-6 2-9 6-9 12h9v18zm24 0V20C24 9 30 2 42 0l2 6c-6 2-9 6-9 12h9v18z" fill="currentColor"></path></svg>
+            <blockquote><p>I am completely satisfied with the collaboration and can recommend this company without reservation. […] What I especially liked was that my personal wishes, ideas and plans were taken seriously from the start and implemented exactly as I had imagined. […] Clear recommendation!</p></blockquote>
+            <details class="quote__more">
+              <summary>Read the full review<svg class="quote__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></summary>
+              <div class="quote__full">
+                <p>I am completely satisfied with the collaboration and can recommend this company without reservation.</p>
+                <p>An individual website including a booking system was created and technically implemented for me. What I especially liked was that my personal wishes, ideas and plans were taken seriously from the start and implemented exactly as I had imagined.</p>
+                <p>Suitable technical solutions were found for individual requirements as well. Communication was pleasant, reliable and professional, and requests and changes were handled flexibly.</p>
+                <p>The result is exactly what I had in mind: a professional, modern and functional website with a booking system tailored to my requirements.</p>
+                <p>Many thanks for the excellent work and the great collaboration. I am very satisfied with the result and would choose this company again at any time. Clear recommendation!</p>
+                <p class="quote__orig-label">Original in German</p>
+                <div lang="de">
+                  <p>Ich bin mit der Zusammenarbeit rundum zufrieden und kann dieses Unternehmen uneingeschränkt weiterempfehlen.</p>
+                  <p>Für mich wurde eine individuelle Webseite inklusive Buchungssystem erstellt und technisch umgesetzt. Besonders positiv war, dass meine persönlichen Wünsche, Vorstellungen und Ideen von Anfang an ernst genommen und genau so umgesetzt wurden, wie ich es mir vorgestellt hatte.</p>
+                  <p>Auch bei individuellen Anforderungen wurden passende technische Lösungen gefunden. Die Kommunikation war angenehm, zuverlässig und professionell, und auf Wünsche sowie Änderungen wurde flexibel eingegangen.</p>
+                  <p>Das Ergebnis entspricht genau meinen Vorstellungen: eine professionelle, moderne und funktionale Webseite mit einem Buchungssystem, das auf meine Anforderungen zugeschnitten ist.</p>
+                  <p>Vielen Dank für die hervorragende Arbeit und die tolle Zusammenarbeit. Ich bin mit dem Ergebnis sehr zufrieden und würde mich jederzeit wieder für dieses Unternehmen entscheiden. Klare Empfehlung!</p>
+                </div>
+              </div>
+            </details>
+          </div>
+          <figcaption><b>Ilija Mikanović</b><span>Owner, Omnibus Mikanović, Offenbach am Main</span><small>Translated from German.</small></figcaption>
+        </figure>
+        <div class="ref-done rev rev--up" style="--i: 3">
+          <span class="ref-done__label">What we built for Omnibus Mikanović</span>
+          <ul>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Their own website with a booking system, tailored to the business</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>A binding price online, even when the office is closed</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Online payment, with the invoice sent automatically after payment</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Suitable solutions for special requirements too</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · Pitanja -->
+  <section id="faq" class="st" data-stop="8">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="8">08</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">08</span>Stop 08 · FAQ</span>
+        <h2 class="display rev rev--left" style="--i: 1">Questions before departure.</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item rev rev--up" style="--i: 0"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>How long does onboarding take?</h3><p class="faq__a">Typically 8–10 weeks from contract to go-live. Delays usually come from waiting for legal texts, payment verification and DNS, which is why the inquiry already asks what you have.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 1"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Where is our data?</h3><p class="faq__a">In your own instance, on servers in the EU. The database is not shared with other operators, backups run daily, and at the end of the contract you receive an export of the database.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 2"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Will our customers see our brand?</h3><p class="faq__a">Yes: your logo, colors, domain, email sender, invoice letterhead and legal texts. BusFlow stays in the background.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 3"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Does BusFlow work outside Germany?</h3><p class="faq__a">Today it is tailored to the German market: euro, the German invoice format (Factur-X) and UStVA. Another country, currency or language means additional development, which we estimate at the meeting.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 4"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>How do customers pay?</h3><p class="faq__a">By card via myPOS or with PayPal. You open the merchant account, and we connect it and test it with a trial payment.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 5"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Who enters the fleet and price list?</h3><p class="faq__a">We prepare templates and enter the data together with you in the “Fleet and price list” phase. There is currently no automatic import from an old system.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 6"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Do drivers need a separate app?</h3><p class="faq__a">No. The driver gets a Google Maps link with the whole route, and the trip sheet arrives by email before departure.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 7"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>What does it cost?</h3><p class="faq__a">A one-off onboarding fee and a monthly fee for hosting, backup, monitoring, updates and support. We send the offer after the first meeting, based on the size of the fleet and the scope.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Odredište · prvi sastanak -->
+  <section id="meeting" class="st" data-stop="9">
+    <div class="st__rail st__rail--end" aria-hidden="true">
+      <div class="rail-track"></div>
+      <div class="badge badge--sq badge--end" data-badge="9"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path><circle cx="8.5" cy="14.5" r="1"></circle><circle cx="15.5" cy="14.5" r="1"></circle></svg></div>
+      <span class="rail-label">Destination</span>
+    </div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">→</span>Destination · First meeting</span>
+        <h2 class="display rev rev--left" style="--i: 1">Book your first meeting.</h2>
+        <p class="rev rev--left" style="--i: 2">Two short steps, about a minute. You then pick a time in our online calendar.</p>
+      </div>
+      <div class="dest">
+        <form class="ticket rev rev--up" id="karta-upit" novalidate aria-label="Inquiry for a first meeting, step 1 of 2">
+          <div class="ticket__main">
+            <div class="ticket__head"><span>Ticket · onboarding inquiry</span><span>Step 1 of 2</span></div>
+            <ol class="stepper" aria-label="Inquiry steps">
+              <li class="is-active"><i></i><span>01 Departure</span></li>
+              <li><i></i><span>02 Destination</span></li>
+            </ol>
+            <div class="ticket__title"><h3>01 · Departure: who are you?</h3><p>So we know who we're talking to and how to reach you fastest.</p></div>
+            <div class="ticket__fields">
+              <div class="q"><label class="q__label" for="l-tvrtka">Company name <span aria-hidden="true">*</span></label><input class="field" id="l-tvrtka" name="tvrtka" type="text" placeholder="e.g. City Coaches Ltd" required autocomplete="organization"><span class="q__err">Please enter the company name.</span></div>
+              <div class="q"><label class="q__label" for="l-ime">Full name <span aria-hidden="true">*</span></label><input class="field" id="l-ime" name="ime" type="text" placeholder="Your name" required autocomplete="name"><span class="q__err">Please enter your full name.</span></div>
+              <div class="q"><label class="q__label" for="l-email">Email <span aria-hidden="true">*</span></label><input class="field" id="l-email" name="email" type="email" placeholder="name@company.com" required autocomplete="email" inputmode="email"><span class="q__err">Please enter a valid email address.</span></div>
+              <div class="q"><label class="q__label" for="l-tel">Phone <span class="opt">– for follow-up questions</span></label><input class="field" id="l-tel" name="telefon" type="tel" placeholder="+49 …" autocomplete="tel" inputmode="tel"></div>
+              <div class="q"><label class="q__label" for="l-drzava">Country of head office</label><select class="field" id="l-drzava" name="drzava"><option value="">Please choose…</option><option value="DE">Germany</option><option value="AT">Austria</option><option value="CH">Switzerland</option><option value="HR">Croatia</option><option value="SI">Slovenia</option><option value="BA">Bosnia and Herzegovina</option><option value="RS">Serbia</option><option value="other">Other country</option></select></div>
+            </div>
+            <div class="ticket__foot">
+              <span class="ticket__note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg>Your answers are kept until you send them.</span>
+              <button class="btn btn--navy" type="submit">Next: your business<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            </div>
+          </div>
+          <div class="ticket__stub stub" aria-hidden="true">
+            <div class="stub__head"><span>Stub</span><span>BF · inquiry</span></div>
+            <div class="stub__num">01<small>/02</small></div>
+            <dl>
+              <div><dt>Company</dt><dd class="is-empty" data-stub="tvrtka">—</dd></div>
+              <div><dt>Contact</dt><dd class="is-empty" data-stub="kontakt">—</dd></div>
+              <div><dt>Fleet</dt><dd class="is-empty">—</dd></div>
+              <div><dt>Services</dt><dd class="is-empty">—</dd></div>
+              <div><dt>Meeting</dt><dd class="is-empty">—</dd></div>
+            </dl>
+            <div class="stub__route"><svg width="34" height="12" viewBox="0 0 34 12" aria-hidden="true"><path d="M4 6H30" stroke="var(--ink)" stroke-width="3"></path><circle cx="4" cy="6" r="3.5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"></circle><circle cx="30" cy="6" r="3.5" fill="var(--accent-strong)" stroke="var(--ink)" stroke-width="2"></circle></svg>Departure → Destination</div>
+          </div>
+        </form>
+        <aside class="dest__side">
+          <div class="panel-meet rev rev--up" style="--i: 1">
+            <h3>At the first meeting</h3>
+            <ul>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Demo in the test environment: planner, booking, admin inbox and invoice</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>How you work today and what would change</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>A rough onboarding plan and a list of materials</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>After the meeting we send you an offer</li>
+            </ul>
+            <div class="panel-meet__chips">
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6.5" width="12.5" height="11" rx="2"></rect><path d="M16 10.5l4.5-2.5v8l-4.5-2.5z"></path></svg>Video or phone</span>
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg><span data-cfg="meetingMinutes">[30 min]</span></span>
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg><span data-cfg="bookingHours">[Mon–Fri, 9:00–16:00 CET]</span></span>
+            </div>
+          </div>
+          <div class="panel-book rev rev--up" style="--i: 2">
+            <h3>Rather book a time right away?</h3>
+            <p>Pick a free slot in our online calendar: video call or phone, <span data-cfg="meetingMinutes">[30 min]</span>, <span data-cfg="bookingHours">[Mon–Fri, 9:00–16:00 CET]</span>.</p>
+            <a class="btn btn--cream" data-cfg-href="bookingUrl" target="_blank" rel="noopener" aria-disabled="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Book an online meeting</a>
+            <small>Or write to us: <a data-cfg-href="email" data-cfg="email" style="color: inherit">[email]</a></small>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="logo" href="#top" aria-label="BusFlow, back to top">
+          <svg class="logo__mark logo__mark--sm" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#FCF1D0"></rect><path d="M12 33H19C25 33 22 15 28 15H36" fill="none" stroke="#010736" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="33" r="4.5" fill="#FCF1D0" stroke="#010736" stroke-width="3"></circle><circle cx="36" cy="15" r="5" fill="#22396F"></circle></svg>
+          <span class="logo__wm">BusFlow</span>
+        </a>
+        <p>Software for coach operators: offer, booking, payment and invoice on one line.</p>
+        <small>Development and support: FlowSolutions d.o.o.</small>
+      </div>
+      <nav class="footer__col" aria-label="Line">
+        <span class="footer__title">Line</span>
+        <a href="#system-map">System map</a>
+        <a href="#features">Features</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#onboarding">Onboarding</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="footer__col">
+        <span class="footer__title">Contact</span>
+        <a data-cfg-href="email" data-cfg="email">[email]</a>
+        <a data-cfg-href="phone" data-cfg="phoneDisplay">[phone]</a>
+        <a href="upit.html">Book a meeting</a>
+      </div>
+      <nav class="footer__col" aria-label="Legal">
+        <span class="footer__title">Legal</span>
+        <a href="legal-notice.html">Legal notice</a>
+        <a href="privacy.html">Privacy policy</a>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 FlowSolutions d.o.o. · Reference: Omnibus Mikanović</span>
+      <nav class="langs" aria-label="Page language"><a href="../index.html" hreflang="de" lang="de">DE</a><a href="../hr/index.html" hreflang="hr" lang="hr">HR</a><a href="index.html" hreflang="en" lang="en" aria-current="page">EN</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/landing.js" defer></script>
+</body>
+</html>

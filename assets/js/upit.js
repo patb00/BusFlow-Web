@@ -1,7 +1,7 @@
-/* BusFlow — upit za prvi sastanak (DE na /upit.html, HR na /hr/upit.html): dva koraka, provjera, talon (sažetak), slanje upita
+/* BusFlow — upit za prvi sastanak (DE na /upit.html, HR na /hr/upit.html, EN na /en/upit.html): dva koraka, provjera, talon (sažetak), slanje upita
    na formEndpoint (Formspree) ili, kao rezerva, e-mailom iz preglednika (mailto s ispunjenim odgovorima), potvrda s poveznicom na kalendar termina
    (Microsoft Bookings). Jezik dolazi iz <html lang>; tekstovi koje piše skripta su u rječniku I18N. Odgovori se čuvaju u
-   sessionStorage dok se upit ne pošalje (kodovi odgovora, pa vrijede u oba jezika). Bez ovisnosti. */
+   sessionStorage dok se upit ne pošalje (kodovi odgovora, pa vrijede u svim jezicima). Bez ovisnosti. */
 (function () {
   "use strict";
 
@@ -55,6 +55,25 @@
       noEmail: "E-mail adresa nije postavljena u config.js; kopirajte upit.",
       checkFields: "Provjerite označena polja.",
       sendFailed: "Automatsko slanje nije uspjelo, pa upit šaljete iz svog e-mail programa."
+    },
+    en: {
+      eta1: "about a minute", eta2: "last step",
+      progress: "Progress: step {n} of {total}", progressSent: "Inquiry sent", progressReady: "Inquiry prepared",
+      stepSent: "SENT", stepReady: "READY", tagSent: "Sent", tagReady: "Ready",
+      hSent: "Inquiry sent.", hReady: "Your inquiry is ready.", min: "min", buses: "{n} coaches",
+      rows: { tvrtka: "Company", ime: "Name", email: "Email", telefon: "Phone", drzava: "Country", flota: "Number of coaches",
+              usluge: "Services", ponude: "Offers today", kada: "Desired start", imate: "Already in place", format: "Meeting",
+              napomena: "Note" },
+      title: "Inquiry about introducing BusFlow", sentFrom: "Sent from: ", subject: "Inquiry about BusFlow - ",
+      noteCut: " … (the rest of the note is in the copy of the inquiry)", noteMoved: "(the note is in the copy of the inquiry)",
+      copied: "Inquiry copied.", copyManual: "The text is selected: press Ctrl+C (Cmd+C on a Mac).",
+      replyFallback: "[within one working day]",
+      doneSent: "Your inquiry has reached {email}. We'll get back to you {reply}. If you like, pick a time for the first meeting right away.",
+      doneMail: "We've opened your email program with a message to {email}; please check it and send it. Then pick a time for the first meeting.",
+      doneCopy: "Copy the inquiry and send it to us by email, then pick a time for the first meeting.",
+      noEmail: "No email address is set in config.js; please copy the inquiry.",
+      checkFields: "Please check the highlighted fields.",
+      sendFailed: "Automatic sending didn't work, so please send the inquiry from your email program."
     }
   };
   var DICT = I18N[LANG] || I18N.de;
@@ -68,7 +87,7 @@
   function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
-  /* vrijednost iz config.js; { de: …, hr: … } daje tekst za jezik stranice */
+  /* vrijednost iz config.js; { de: …, hr: …, en: … } daje tekst za jezik stranice */
   function localize(v) { return v && typeof v === "object" && ("de" in v || "hr" in v) ? (LANG in v ? v[LANG] : v.de) : v; }
   function get(key) { return localize(key.split(".").reduce(function (o, p) { return o && o[p]; }, cfg)); }
   function text(key) { var v = get(key); return v === undefined || v === null ? "" : String(v).trim(); }
