@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seite nicht gefunden – BusFlow</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0D1C42">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  body { min-height: 100svh; display: grid; place-items: center; padding: 32px 16px; }
+  .nf { max-width: 560px; display: flex; flex-direction: column; gap: 16px; }
+  .nf .tag { align-self: flex-start; }
+  .nf h1 { font-size: clamp(36px, 8vw, 52px); }
+  .nf p { color: var(--text-2); line-height: 1.55; }
+  .nf__links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .nf__legal { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
+  .nf__legal a { color: var(--text-2); }
+</style>
+</head>
+<body>
+<main class="nf">
+  <span class="tag">404</span>
+  <h1 class="display">Diese Seite gibt es nicht.</h1>
+  <p>Die Adresse ist falsch, oder die Seite wurde verschoben.</p>
+  <p lang="hr">Ova stranica ne postoji. Adresa je pogrešna ili je stranica premještena.</p>
+  <div class="nf__links">
+    <a class="btn btn--navy" href="/">Zur Startseite</a>
+    <a class="btn btn--ghost" href="/hr/" hreflang="hr" lang="hr">Početna stranica (hrvatski)</a>
+  </div>
+  <nav class="nf__legal" aria-label="Rechtliches"><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a></nav>
+</main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt – BusFlow</title>
+<meta name="robots" content="noindex">
+<script>
+/* /kontakt: Anfrage auf Deutsch; ?lang=hr oder ein kroatischer Browser → kroatische Anfrage. Parameter und # bleiben erhalten. */
+(function () {
+  var hr = /(?:^|[?&])lang=hr(?:&|$)/.test(location.search) ||
+    /^hr\b/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "");
+  location.replace((hr ? "../hr/upit.html" : "../upit.html") + location.search + location.hash);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=../upit.html"></noscript>
+</head>
+<body>
+<p><a href="../upit.html">Anfrage für ein Erstgespräch</a> · <a href="../hr/upit.html" hreflang="hr" lang="hr">Upit za prvi sastanak (hrvatski)</a></p>
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if (/\/hr$/.test(location.pathname)) location.replace(location.pathname + "/" + location.search + location.hash);</script>
+<title>BusFlow – softver za autobusne prijevoznike: obvezujuća cijena, rezervacija, plaćanje i račun</title>
+<meta name="description" content="BusFlow za autobusne prijevoznike: kupac dobije obvezujuću cijenu u nekoliko sekundi, s rutom kroz Europu, posadom po EU pravilima i PDV-om po državama. Online plaćanje i račun nakon uplate. U produkciji kod Omnibus Mikanović od kolovoza 2026.">
+<meta property="og:title" content="BusFlow – dok vi vozite, BusFlow prodaje.">
+<meta property="og:description" content="Softver za autobusne prijevoznike: obvezujuća cijena u nekoliko sekundi, online plaćanje, račun. Vlastita instanca, podaci u EU.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="hr_HR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:url" content="https://busflow.email/hr/">
+<link rel="canonical" href="https://busflow.email/hr/">
+<link rel="alternate" hreflang="de" href="https://busflow.email/">
+<link rel="alternate" hreflang="hr" href="https://busflow.email/hr/">
+<link rel="alternate" hreflang="x-default" href="https://busflow.email/">
+<meta name="theme-color" content="#0D1C42">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/barlow-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/fonts.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/landing.css">
+<script src="../assets/js/config.js"></script>
+</head>
+<body>
+<a class="skip" href="#glavni">Preskoči na sadržaj</a>
+
+<header class="site-header">
+  <div class="wrap site-header__bar">
+    <a class="logo" href="#vrh" aria-label="BusFlow, na vrh stranice">
+      <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="var(--ink)"></rect><path d="M12 33H19C25 33 22 15 28 15H36" fill="none" stroke="var(--ground)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="33" r="4.5" fill="var(--ink)" stroke="var(--ground)" stroke-width="3"></circle><circle cx="36" cy="15" r="5" fill="var(--accent)"></circle></svg>
+      <span class="logo__wm">BusFlow</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Glavna navigacija">
+      <a href="#karta">Karta sustava</a>
+      <a href="#mogucnosti">Mogućnosti</a>
+      <a href="#prednosti">Prednosti</a>
+      <a href="#uvodenje">Uvođenje</a>
+      <a href="#pitanja">Pitanja</a>
+      <a class="nav__lang" href="../index.html" hreflang="de" lang="de">Deutsch</a>
+    </nav>
+    <div class="site-header__actions">
+      <nav class="lang" aria-label="Jezik stranice">
+        <a href="../index.html" hreflang="de" lang="de">DE</a>
+        <a href="index.html" hreflang="hr" lang="hr" aria-current="page">HR</a>
+        <span title="Engleska verzija je u pripremi">EN</span>
+      </nav>
+      <a class="btn btn--navy btn--sm" href="upit.html"><span class="hide-m">Zakaži sastanak</span><span class="show-m">Sastanak</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      <button class="nav-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Izbornik">
+        <svg class="nav-toggle__open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        <svg class="nav-toggle__close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap progress" aria-hidden="true">
+    <div class="progress__line"></div>
+    <div class="progress__fill"></div>
+    <div class="progress__dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="progress__bus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path></svg></div>
+  </div>
+</header>
+
+<main id="glavni">
+<div class="page">
+
+  <!-- Kontinuirana ispuna linije i autobus -->
+  <div class="rail-progress" aria-hidden="true">
+    <div class="rail-fill"></div>
+    <div class="rail-bus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path><circle cx="8.5" cy="14.5" r="1"></circle><circle cx="15.5" cy="14.5" r="1"></circle></svg></div>
+  </div>
+
+  <!-- Polazak · hero -->
+  <section id="vrh" class="st hero" data-stop="0">
+    <div class="st__rail st__rail--start" aria-hidden="true">
+      <div class="rail-track"></div>
+      <div class="badge badge--sq" data-badge="0"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path><circle cx="8.5" cy="14.5" r="1"></circle><circle cx="15.5" cy="14.5" r="1"></circle></svg></div>
+      <span class="rail-label">Polazak</span>
+    </div>
+    <div class="st__body">
+      <div class="hero__grid">
+        <div class="hero__text">
+          <span class="eyebrow f-up" style="animation-delay: .05s">Linija BusFlow · softver za autobusne prijevoznike</span>
+          <h1 class="display hero__title"><span class="w-in" style="animation-delay: .25s">Dok</span> <span class="w-in" style="animation-delay: .37s">vi</span> <span class="w-in" style="animation-delay: .49s">vozite,</span><br><span class="w-in u" style="animation-delay: .7s">BusFlow</span> <span class="w-in" style="animation-delay: .85s">prodaje.</span></h1>
+          <p class="hero__lead f-up" style="animation-delay: 1s">Kupac upiše polazak, odredište i broj putnika. BusFlow izračuna rutu kroz Europu, posadu po EU pravilima, PDV po državama i obvezujuću cijenu, u nekoliko sekundi. Kupac plati online, a račun stigne sam.</p>
+          <div class="proof f-up" style="animation-delay: 1.15s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.8 2.8L16.5 9"></path></svg><span><strong>Dokazano u prometu.</strong> Od kolovoza 2026. BusFlow svaki dan radi kod prijevoznika Omnibus Mikanović. Sada ga uvodimo i u vašu tvrtku.</span></div>
+          <div class="hero__cta f-up" style="animation-delay: 1.3s">
+            <a class="btn btn--navy btn--lg" href="upit.html">Zakaži prvi sastanak<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+            <a class="link-u" href="#karta">Pogledaj kartu sustava</a>
+          </div>
+          <span class="hero__micro f-up" style="animation-delay: 1.45s">Online demo · bez obveze · odgovor <span data-cfg="replyWithin">[unutar 24 h]</span></span>
+        </div>
+
+        <div class="stage-frame f-up" style="animation-delay: .3s">
+          <!-- Hero-film: 14 s petlja, čisti CSS -->
+          <div class="stage" role="img" aria-label="Animacija: autobus stiže u zoru, ruta München–Zagreb iscrtava se po državama, izračun daje obvezujuću cijenu, kupac plaća i račun se šalje.">
+            <div class="stage__sky-dawn j j-dawn"></div>
+            <div class="stage__sun j j-sun"></div>
+            <div class="stage__hills"></div>
+            <div class="stage__grass-far"></div>
+            <div class="stage__road"></div>
+            <div class="stage__dash"></div>
+            <div class="stage__grass-near"></div>
+            <div class="stage__hatch"></div>
+            <div class="stage__post"></div>
+            <div class="stage__sign"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path></svg></div>
+            <div class="bus j j-bus">
+              <div class="bus__shadow"></div>
+              <div class="bus__persp">
+                <div class="bus__bob j j-bob">
+                  <div class="bus__turn j j-turn">
+                    <div class="face face--side">
+                      <div class="bus__glass"></div>
+                      <div class="bus__door"></div>
+                      <div class="bus__stripe"></div>
+                      <div class="bus__led bus__led--side"><span class="j j-led">ZAGREB</span></div>
+                      <div class="bus__brand"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#FFFFFF"></rect><path d="M12 33H19C25 33 22 15 28 15H36" fill="none" stroke="#010736" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="33" r="4.5" fill="#FFFFFF" stroke="#010736" stroke-width="3"></circle><circle cx="36" cy="15" r="5" fill="#FCF1D0"></circle></svg>BusFlow</div>
+                      <div class="wheel wheel--1 j j-wheel"></div>
+                      <div class="wheel wheel--2 j j-wheel"></div>
+                    </div>
+                    <div class="face face--back"></div>
+                    <div class="face face--front">
+                      <div class="bus__led bus__led--front"><span class="j j-led">ZAGREB</span></div>
+                      <div class="bus__windshield"></div>
+                      <div class="bus__lamp bus__lamp--l j j-glow"></div>
+                      <div class="bus__lamp bus__lamp--r j j-glow"></div>
+                      <div class="bus__bumper"></div>
+                    </div>
+                    <div class="face face--rear"><div class="bus__tail bus__tail--l"></div><div class="bus__tail bus__tail--r"></div></div>
+                    <div class="face face--roof"><div class="bus__ac"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="calc-list">
+              <span class="calc j j-c1"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>RUTA · 549 KM</span>
+              <span class="calc j j-c2"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>PRAVILA VOŽNJE · EU 561/2006</span>
+              <span class="calc j j-c3"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>PDV PO DRŽAVAMA</span>
+              <span class="calc j j-c4"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>CIJENA</span>
+            </div>
+            <div class="price j j-price"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>OBVEZUJUĆA CIJENA</div>
+            <div class="panel">
+              <div class="panel__head">
+                <span class="eyebrow">Primjer vožnje</span>
+                <span class="panel__route">München → Zagreb</span>
+                <span class="panel__km j j-km">549 km · 49 putnika</span>
+              </div>
+              <svg width="656" height="64" viewBox="0 0 656 64" aria-hidden="true" style="display: block">
+                <path d="M16 30H640" fill="none" stroke="rgba(13,28,66,.14)" stroke-width="9" stroke-linecap="round"></path>
+                <path class="j j-de" d="M16 30H170" fill="none" stroke="var(--ink)" stroke-width="9" stroke-linecap="round" stroke-dasharray="154" stroke-dashoffset="154"></path>
+                <path class="j j-at" d="M170 30H372" fill="none" stroke="var(--line-f)" stroke-width="9" stroke-linecap="round" stroke-dasharray="202" stroke-dashoffset="202"></path>
+                <path class="j j-si" d="M372 30H520" fill="none" stroke="var(--accent-strong)" stroke-width="9" stroke-linecap="round" stroke-dasharray="148" stroke-dashoffset="148"></path>
+                <path class="j j-hr" d="M520 30H604" fill="none" stroke="var(--line-b)" stroke-width="9" stroke-linecap="round" stroke-dasharray="84" stroke-dashoffset="84"></path>
+                <circle class="j j-ms" cx="16" cy="30" r="8" fill="var(--surface)" stroke="var(--ink)" stroke-width="3"></circle>
+                <circle class="j j-me" cx="604" cy="30" r="9" fill="var(--accent)" stroke="var(--ink)" stroke-width="3"></circle>
+                <text class="j j-ms" x="16" y="14" text-anchor="start" font-family="Barlow, sans-serif" font-size="12" font-weight="700" fill="var(--text)">München</text>
+                <text class="j j-me" x="604" y="14" text-anchor="end" font-family="Barlow, sans-serif" font-size="12" font-weight="700" fill="var(--text)">Zagreb</text>
+                <text class="j j-lde" x="93" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--text-2)">DE</text>
+                <text class="j j-lat" x="271" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--text-2)">AT</text>
+                <text class="j j-lsi" x="446" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--text-2)">SI</text>
+                <text class="j j-lhr" x="562" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--text-2)">HR</text>
+              </svg>
+              <div class="panel__foot">
+                <div class="panel__chips">
+                  <span class="sale j j-s1"><span class="dot-ico dot-ico--acc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></span>Autobus držan 30 min</span>
+                  <span class="sale j j-s2"><span class="dot-ico dot-ico--f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>Plaćeno · PayPal</span>
+                  <span class="sale j j-s3"><span class="dot-ico dot-ico--ink"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11v18l-2.75-1.8L12 21l-2.75-1.8L6.5 21z"></path></svg></span>Račun poslan</span>
+                </div>
+                <div class="seats">
+                  <div class="seats__grid"><div class="seats__empty j j-seats"></div></div>
+                  <span class="seats__n j j-seatn">49<small> / 52</small></span>
+                </div>
+              </div>
+            </div>
+            <div class="stage__veil j j-veil"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Traka reference -->
+  <div class="st st--dark ref-band">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div></div>
+    <div class="st__body">
+      <div class="ref-band__facts">
+        <span class="eyebrow" style="color: var(--accent)">Referenca u prometu</span>
+        <span class="ref-band__name">Omnibus Mikanović, Offenbach na Majni</span>
+        <span class="ref-band__since">BusFlow u produkciji od kolovoza 2026.</span>
+      </div>
+      <div class="ref-band__pills"><span class="pill-o">DE · EN · HR</span><span class="pill-o">Factur-X</span></div>
+    </div>
+  </div>
+
+  <!-- 01 · Karta sustava -->
+  <section id="karta" class="st" data-stop="1">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="1">01</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">01</span>Stanica 01 · Karta sustava</span>
+        <h2 class="display rev rev--left" style="--i: 1">Cijeli prijevoz na jednoj karti.</h2>
+        <p class="rev rev--left" style="--i: 2">BusFlow povezuje putnike, ured, financije i partnere. Svaka linija je dio posla koji danas radite ručno, a svaka stanica modul koji ga radi umjesto vas. U središtu je cjenovni motor, kroz njega prolazi svaka vožnja.</p>
+      </div>
+      <div class="map-frame rev rev--up" style="--i: 3">
+        <svg class="map" viewBox="0 0 1168 620" role="img" aria-label="Karta sustava BusFlow: linije Putnici, Ured i operativa, Financije te Partneri i B2B, spojene u cjenovnom motoru">
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="ln" pathLength="1" d="M60 300H1110" stroke="#22396F" stroke-width="14" style="--d: 0s"></path>
+            <path class="ln" pathLength="1" d="M520 70V420L600 500H900" stroke="#0D1C42" stroke-width="12" style="--d: .5s"></path>
+            <path d="M900 300L980 220V70" stroke="#5A6C99" stroke-width="12" stroke-linecap="butt" stroke-dasharray="16 10"></path>
+            <path class="cover" pathLength="1" d="M900 300L980 220V70" stroke="var(--surface-2)" stroke-width="16" stroke-linecap="butt" style="--d: .7s"></path>
+            <path d="M235 90V460L315 540H470" stroke="#010736" stroke-width="12" stroke-dasharray="0.1 18"></path>
+            <path class="cover" pathLength="1" d="M235 90V460L315 540H470" stroke="var(--surface-2)" stroke-width="16" stroke-linecap="butt" style="--d: .45s"></path>
+          </g>
+          <g stroke-width="4">
+            <circle class="stop" cx="60" cy="300" r="12" fill="#22396F" stroke="var(--ink)" style="--d: .15s"></circle>
+            <circle class="stop" cx="60" cy="300" r="4" fill="var(--surface-2)" style="--d: .15s"></circle>
+            <circle class="stop" cx="760" cy="300" r="10" fill="var(--surface-2)" stroke="#22396F" style="--d: .55s"></circle>
+            <circle class="stop" cx="1110" cy="300" r="12" fill="#22396F" stroke="var(--ink)" style="--d: .9s"></circle>
+            <circle class="stop" cx="1110" cy="300" r="4" fill="var(--surface-2)" style="--d: .9s"></circle>
+            <circle class="stop" cx="520" cy="70" r="12" fill="#0D1C42" stroke="var(--ink)" style="--d: .55s"></circle>
+            <circle class="stop" cx="520" cy="70" r="4" fill="var(--surface-2)" style="--d: .55s"></circle>
+            <circle class="stop" cx="520" cy="185" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .7s"></circle>
+            <circle class="stop" cx="520" cy="420" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .95s"></circle>
+            <circle class="stop" cx="700" cy="500" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: 1.15s"></circle>
+            <circle class="stop" cx="900" cy="500" r="12" fill="#0D1C42" stroke="var(--ink)" style="--d: 1.3s"></circle>
+            <circle class="stop" cx="900" cy="500" r="4" fill="var(--surface-2)" style="--d: 1.3s"></circle>
+            <circle class="stop" cx="980" cy="220" r="10" fill="var(--surface-2)" stroke="#5A6C99" style="--d: .95s"></circle>
+            <circle class="stop" cx="980" cy="145" r="10" fill="var(--surface-2)" stroke="#5A6C99" style="--d: 1.1s"></circle>
+            <circle class="stop" cx="980" cy="70" r="12" fill="#5A6C99" stroke="var(--ink)" style="--d: 1.3s"></circle>
+            <circle class="stop" cx="980" cy="70" r="4" fill="var(--surface-2)" style="--d: 1.3s"></circle>
+            <circle class="stop" cx="235" cy="90" r="12" fill="#010736" stroke="var(--ink)" style="--d: .5s"></circle>
+            <circle class="stop" cx="235" cy="90" r="4" fill="var(--surface-2)" style="--d: .5s"></circle>
+            <circle class="stop" cx="235" cy="420" r="10" fill="var(--surface-2)" stroke="#010736" style="--d: .85s"></circle>
+            <circle class="stop" cx="360" cy="540" r="13" fill="var(--ink)" stroke="var(--accent)" style="--d: 1.15s"></circle>
+            <circle class="stop" cx="470" cy="540" r="12" fill="#010736" stroke="var(--ink)" style="--d: 1.35s"></circle>
+            <circle class="stop" cx="470" cy="540" r="4" fill="var(--surface-2)" style="--d: 1.35s"></circle>
+            <circle class="stop" cx="235" cy="300" r="15" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="5" style="--d: .3s"></circle>
+            <circle class="stop" cx="900" cy="300" r="15" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="5" style="--d: .75s"></circle>
+          </g>
+          <g class="stop" style="--d: .4s">
+            <rect x="405" y="262" width="230" height="76" rx="38" fill="var(--ink)"></rect>
+            <rect x="412" y="269" width="216" height="62" rx="31" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 5"></rect>
+            <text class="mono" x="520" y="295" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.6" fill="var(--accent)">CJENOVNI MOTOR</text>
+            <text x="520" y="317" text-anchor="middle" font-size="13.5" fill="var(--on-ink-3)">ruta · posada · PDV · cijena</text>
+          </g>
+          <g class="mono" font-size="13" font-weight="700" text-anchor="middle">
+            <g class="lbl" style="--d: .15s"><rect x="18" y="288" width="24" height="24" rx="6" fill="#22396F"></rect><text x="30" y="305" fill="var(--on-ink)">P</text></g>
+            <g class="lbl" style="--d: .55s"><rect x="508" y="22" width="24" height="24" rx="6" fill="#0D1C42"></rect><text x="520" y="39" fill="#FFFFFF">O</text></g>
+            <g class="lbl" style="--d: 1.3s"><rect x="968" y="22" width="24" height="24" rx="6" fill="#5A6C99"></rect><text x="980" y="39" fill="#FFFFFF">F</text></g>
+            <g class="lbl" style="--d: .5s"><rect x="223" y="42" width="24" height="24" rx="6" fill="#010736"></rect><text x="235" y="59" fill="var(--on-ink)">B</text></g>
+          </g>
+          <g font-size="15" font-weight="600" fill="var(--text)">
+            <text class="lbl" x="44" y="262" style="--d: .15s">Upit na webu</text>
+            <text class="lbl" x="254" y="336" style="--d: .3s">Termini i cijena</text>
+            <text class="lbl" x="760" y="262" text-anchor="middle" style="--d: .55s">Rezervacija</text>
+            <text class="lbl" x="900" y="340" text-anchor="middle" style="--d: .75s">Plaćanje</text>
+            <text class="lbl" x="1128" y="340" text-anchor="end" style="--d: .9s">Moje rezervacije</text>
+            <text class="lbl" x="542" y="66" style="--d: .55s">Ploča „Traži vašu pažnju“</text>
+            <text class="lbl" x="542" y="181" style="--d: .7s">Inbox i velike grupe</text>
+            <text class="lbl" x="498" y="416" text-anchor="end" style="--d: .95s">Zauzeće i baze</text>
+            <text class="lbl" x="700" y="538" text-anchor="middle" style="--d: 1.15s">Posada i EU pravila</text>
+            <text class="lbl" x="900" y="538" text-anchor="middle" style="--d: 1.3s">Navigacija i putni list</text>
+            <text class="lbl" x="1002" y="216" style="--d: .95s">Račun nakon uplate</text>
+            <text class="lbl" x="1002" y="141" style="--d: 1.1s">PDV po državama</text>
+            <text class="lbl" x="1002" y="66" style="--d: 1.3s">Troškovi</text>
+            <text class="lbl" x="256" y="86" style="--d: .5s">Upiti izvan weba</text>
+            <text class="lbl" x="214" y="416" text-anchor="end" style="--d: .85s">Partnerski prijevoznici</text>
+            <text class="lbl" x="360" y="580" text-anchor="middle" style="--d: 1.15s">BUS-SOS</text>
+            <text class="lbl" x="470" y="580" text-anchor="middle" style="--d: 1.35s">Najam vozača</text>
+          </g>
+          <g class="mono" font-size="11.5" fill="var(--text-2)">
+            <text class="lbl" x="44" y="280" style="--d: .15s">planer i karta uživo</text>
+            <text class="lbl" x="254" y="354" style="--d: .3s">alternative ako je zauzeto</text>
+            <text class="lbl" x="760" y="280" text-anchor="middle" style="--d: .55s">bus držan 30 min</text>
+            <text class="lbl" x="900" y="358" text-anchor="middle" style="--d: .75s">myPOS · PayPal</text>
+            <text class="lbl" x="1128" y="358" text-anchor="end" style="--d: .9s">otkazivanje i ostatak</text>
+            <text class="lbl" x="542" y="84" style="--d: .55s">zadaci ureda na jednom mjestu</text>
+            <text class="lbl" x="542" y="199" style="--d: .7s">potvrda ponude jednim klikom</text>
+            <text class="lbl" x="498" y="434" text-anchor="end" style="--d: .95s">blackouti · više baza</text>
+            <text class="lbl" x="700" y="556" text-anchor="middle" style="--d: 1.15s">561/2006 · do 3 vozača</text>
+            <text class="lbl" x="900" y="556" text-anchor="middle" style="--d: 1.3s">Google Maps za vozače</text>
+            <text class="lbl" x="1002" y="234" style="--d: .95s">odmah nakon uplate</text>
+            <text class="lbl" x="1002" y="159" style="--d: 1.1s">UStVA polja za ELSTER</text>
+            <text class="lbl" x="1002" y="84" style="--d: 1.3s">prepoznavanje računa</text>
+            <text class="lbl" x="256" y="104" style="--d: .5s">zalijepi e-mail, pošalji partnerima</text>
+            <text class="lbl" x="214" y="434" text-anchor="end" style="--d: .85s">prvi koji prihvati</text>
+            <text class="lbl" x="360" y="598" text-anchor="middle" style="--d: 1.15s">zamjenski bus odmah</text>
+            <text class="lbl" x="470" y="598" text-anchor="middle" style="--d: 1.35s">do 6 dana</text>
+          </g>
+        </svg>
+        <ul class="map-list" aria-label="Karta sustava, sažeto: linija Putnici s presjedanjima">
+          <li><b>Upit na webu</b><span>Ruta, stanice i raspored crtaju se dok kupac tipka.</span></li>
+          <li><b>Termini i cijena</b><span>Obvezujuća cijena; ako je zauzeto, slobodne alternative.</span></li>
+          <li class="map-list__x">B · presjedanje: puna flota → partneri</li>
+          <li><span class="map-list__motor"><b>CJENOVNI MOTOR</b><span>ruta · slobodan bus · posada po EU pravilima · PDV · cijena</span></span></li>
+          <li class="map-list__x">O · presjedanje: ured i telefonski upiti</li>
+          <li><b>Rezervacija</b><span>Autobus se drži 30 minuta dok kupac plaća.</span></li>
+          <li><b>Plaćanje</b><span>Kartica (myPOS) ili PayPal; rezervacija nastaje kad novac stigne.</span></li>
+          <li class="map-list__x">F · presjedanje: račun i PDV</li>
+          <li><b>Moje rezervacije</b><span>Otkazivanje s automatskom naknadom i plaćanje ostatka.</span></li>
+        </ul>
+      </div>
+      <ul class="legend rev rev--up" style="--i: 4">
+        <li><span class="sw sw--p"></span>P · Putnici i kupci</li>
+        <li><span class="sw sw--o"></span>O · Ured i operativa</li>
+        <li><span class="sw sw--f"></span>F · Financije</li>
+        <li><span class="sw sw--b"></span>B · Partneri i B2B</li>
+        <li><span class="sw sw--x"></span>presjedanje: linije dijele stanicu</li>
+        <li><span class="sw sw--sos"></span>hitna zamjena autobusa</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 02 · Mogućnosti -->
+  <section id="mogucnosti" class="st st--tint" data-stop="2">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="2">02</div></div>
+    <div class="st__body">
+      <div class="st-head st-head--row">
+        <div class="st-head">
+          <span class="st-label rev rev--left"><span class="badge badge--inline">02</span>Stanica 02 · Mogućnosti</span>
+          <h2 class="display rev rev--left" style="--i: 1">Vozni red mogućnosti.</h2>
+          <p class="rev rev--left" style="--i: 2">Sve što BusFlow radi, složeno po linijama s karte: trideset stanica, od prvog upita do porezne prijave.</p>
+        </div>
+        <ul class="key rev rev--up" style="--i: 3">
+          <li><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span>Radi sam, bez ureda</li>
+          <li><span class="key__ico" style="color: var(--on-ink)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Odluka ostaje vaša</li>
+        </ul>
+      </div>
+      <div class="boards">
+        <article class="board board--p rev rev--up" style="--i: 0">
+          <div class="board__head"><span class="board__letter">P</span><div><div class="board__title">Putnici i kupci</div><div class="board__meta">Linija P · 8 stanica</div></div></div>
+          <div class="board__row"><span class="board__code">P1</span><span class="board__t">Planer s kartom uživo</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Ruta, stanice i vremenski raspored crtaju se dok kupac tipka.</span></div>
+          <div class="board__row"><span class="board__code">P2</span><span class="board__t">Termini i cijena</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Obvezujuća cijena ukupno i po osobi, uz slobodne alternative.</span></div>
+          <div class="board__row"><span class="board__code">P3</span><span class="board__t">Svaki upit je kontakt</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Cijena se prikazuje nakon registracije: imate ime, e-mail i telefon.</span></div>
+          <div class="board__row"><span class="board__code">P4</span><span class="board__t">Rezervacija i plaćanje</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Autobus držan 30 minuta; kartica (myPOS) ili PayPal.</span></div>
+          <div class="board__row"><span class="board__code">P5</span><span class="board__t">Moje rezervacije</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Otkazivanje s automatskim izračunom naknade i plaćanje ostatka.</span></div>
+          <div class="board__row"><span class="board__code">P6</span><span class="board__t">Česte rute i zračne luke</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Jedan klik popuni cijelu rutu ili mjesto sastanka.</span></div>
+          <div class="board__row"><span class="board__code">P7</span><span class="board__t">Vozni red i karte</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Objavljujete polaske; kupci kupuju karte s imenima putnika.</span></div>
+          <div class="board__row"><span class="board__code">P8</span><span class="board__t">Jednodnevna vožnja</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Paušal po klasi autobusa i plaćanje odmah; uključuje se po želji.</span></div>
+        </article>
+        <article class="board board--o rev rev--up" style="--i: 1">
+          <div class="board__head"><span class="board__letter">O</span><div><div class="board__title">Ured i operativa</div><div class="board__meta">Linija O · 8 stanica</div></div></div>
+          <div class="board__row"><span class="board__code">O1</span><span class="board__t">Ploča „Traži vašu pažnju“</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Brojači zadataka i polasci za sljedećih 7 dana.</span></div>
+          <div class="board__row"><span class="board__code">O2</span><span class="board__t">Inbox rezervacija</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Filteri, značka izvedivosti i izvoz u CSV.</span></div>
+          <div class="board__row"><span class="board__code">O3</span><span class="board__t">Velike grupe</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Ponudu provjerite, potvrdite i pošaljete kupcu jednim klikom.</span></div>
+          <div class="board__row"><span class="board__code">O4</span><span class="board__t">Zauzeće autobusa</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Kalendar po busu, nedostupnosti i oslobađanje za drugu vožnju.</span></div>
+          <div class="board__row"><span class="board__code">O5</span><span class="board__t">Više baza</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Najbliža baza i najmanji slobodni bus biraju se sami.</span></div>
+          <div class="board__row"><span class="board__code">O6</span><span class="board__t">Posada po EU 561/2006</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Pauze, smjene, do 3 vozača i noćenja, s obrazloženjem.</span></div>
+          <div class="board__row"><span class="board__code">O7</span><span class="board__t">Navigacija za vozače</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Google Maps poveznica s cijelom rutom i putni list e-mailom.</span></div>
+          <div class="board__row"><span class="board__code">O8</span><span class="board__t">Telefonski upiti</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Brzi izračun i ručna rezervacija istim cjenovnim motorom.</span></div>
+        </article>
+        <article class="board board--f rev rev--up" style="--i: 2">
+          <div class="board__head"><span class="board__letter">F</span><div><div class="board__title">Financije</div><div class="board__meta">Linija F · 8 stanica</div></div></div>
+          <div class="board__row"><span class="board__code">F1</span><span class="board__t">Račun nakon uplate</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Factur-X / ZUGFeRD (PDF/A-3b) na vašem memorandumu.</span></div>
+          <div class="board__row"><span class="board__code">F2</span><span class="board__t">PDV po državama</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Ruta se dijeli po granicama; stope su verzionirane po datumu.</span></div>
+          <div class="board__row"><span class="board__code">F3</span><span class="board__t">Izvještaj PDV-a</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Polja njemačke prijave UStVA spremna za unos u ELSTER.</span></div>
+          <div class="board__row"><span class="board__code">F4</span><span class="board__t">Troškovi s prepoznavanjem</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Fotografija računa popuni polja i predloži SKR03 konto.</span></div>
+          <div class="board__row"><span class="board__code">F5</span><span class="board__t">Pregled plaćanja</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Kapara i ostatak, myPOS, PayPal i virman; neuparene uplate označene.</span></div>
+          <div class="board__row"><span class="board__code">F6</span><span class="board__t">Školske kapare</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Podsjetnici 7 dana i 1 dan prije roka, zatim automatsko otkazivanje.</span></div>
+          <div class="board__row"><span class="board__code">F7</span><span class="board__t">Cjenik i flota</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Km razredi, paušali, dnevni minimum, dizel, cestarine i vrste vožnje ±%.</span></div>
+          <div class="board__row"><span class="board__code">F8</span><span class="board__t">Interni trošak i marža</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Koliko vas vožnja stvarno košta, vidljivo samo uredu.</span></div>
+        </article>
+        <article class="board board--b rev rev--up" style="--i: 3">
+          <div class="board__head"><span class="board__letter">B</span><div><div class="board__title">Partneri i B2B</div><div class="board__meta">Linija B · 6 stanica</div></div></div>
+          <div class="board__row"><span class="board__code">B1</span><span class="board__t">Puna flota → partneri</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Upit ide partnerskim prijevoznicima; prvi koji prihvati, vozi.</span></div>
+          <div class="board__row"><span class="board__code">B2</span><span class="board__t">Upiti izvan weba</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Zalijepite e-mail, upišite cijenu i pošaljite partnerima.</span></div>
+          <div class="board__row"><span class="board__code">B3</span><span class="board__t">BUS-SOS</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Zamjenski autobus s lokacije telefona, iz najbliže baze, uz SOS doplatu.</span></div>
+          <div class="board__row"><span class="board__code">B4</span><span class="board__t">Najam vozača</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Drugi prijevoznici rezerviraju vozača do 6 dana, uz trenutnu ponudu.</span></div>
+          <div class="board__row"><span class="board__code">B5</span><span class="board__t">Okvirni ugovor online</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Partner prihvaća uvjete jednom; e-mailovi idu na vašem memorandumu.</span></div>
+          <div class="board__row"><span class="board__code">B6</span><span class="board__t">Partnerske baze</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Prodajete partnerove autobuse pod svojim brendom, uz obavijest kupcu.</span></div>
+        </article>
+      </div>
+      <ul class="bg-strip rev rev--up">
+        <li class="bg-strip__label">U pozadini</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"></rect><path d="M4 7l8 6 8-6"></path></svg>40-ak automatskih e-mailova na DE · EN · HR</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg>Prijava s Googleom i dvofaktorskom zaštitom</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"></circle><path d="M3.5 19.5c.9-3.3 3-5 5.5-5s4.6 1.7 5.5 5"></path><path d="M15.5 5.6a3.2 3.2 0 0 1 0 5.8M17.5 14.8c1.5.7 2.5 2.2 3 4.7"></path></svg>Uloge Vlasnik · Ured · Kupac i dnevnik radnji</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V10M10 19V5M16 19v-8M22 19H2"></path></svg>Statistika posjeta bez kolačića</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.3-4.3"></path></svg>SEO na tri jezika</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 03 · Što se poboljšava -->
+  <section id="poboljsanja" class="st" data-stop="3">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="3">03</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">03</span>Stanica 03 · Što se poboljšava</span>
+        <h2 class="display rev rev--left" style="--i: 1">Što se mijenja, posao po posao.</h2>
+        <p class="rev rev--left" style="--i: 2">Sedam svakodnevnih poslova autobusnog prijevoznika: kako izgledaju danas i kako ih radi BusFlow.</p>
+      </div>
+      <div class="cmp">
+        <div class="cmp__th"><span>Posao</span><span>Prije</span><span></span><span>S BusFlowom</span></div>
+        <div class="cmp__row" style="--i: 0">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 6.8A6.5 6.5 0 1 0 17 17.2"></path><path d="M5 10.2h8.5M5 13.8h8.5"></path></svg></span>Ponuda za vožnju</div>
+          <p class="cmp__before">Kilometri, dani, vozači i cestarine računaju se ručno, a kupac čeka povratni poziv.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Kupac sam dobije obvezujuću cijenu u nekoliko sekundi, i kad je ured zatvoren.</p><span class="cmp__tag">ruta za cijelu Europu · tarife po autobusu · pravila vožnje</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 1">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="2.2"></circle><path d="M3.8 10.8l6.1.9M20.2 10.8l-6.1.9M12 14.2v6.3"></path></svg></span>Vozači i odmori</div>
+          <p class="cmp__before">Vremena vožnje i odmora provjeravaju se napamet, a drugi vozač se lako zaboravi naplatiti.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Svaka ponuda nosi plan smjena, pauza i noćenja i naplaćuje posadu koja je stvarno potrebna.</p><span class="cmp__tag">EU 561/2006 · raspored po stvarnom satu · do 3 vozača</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 2">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></span>Rezervacija i naplata</div>
+          <p class="cmp__before">Ponuda ode e-mailom, a zatim slijede čekanje uplate i ručno praćenje.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Autobus se drži 30 minuta dok kupac plaća; rezervacija nastaje kad novac stigne.</p><span class="cmp__tag">myPOS · PayPal · automatsko oslobađanje neplaćenih</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 3">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11v18l-2.75-1.8L12 21l-2.75-1.8L6.5 21z"></path><path d="M9.5 8h5M9.5 11.5h5M9.5 15h3"></path></svg></span>Računi i PDV</div>
+          <p class="cmp__before">Račun se piše u drugom programu, a PDV za prekogranične vožnje računa se ručno.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Račun izlazi sam nakon uplate, s PDV-om razdijeljenim po državama rute.</p><span class="cmp__tag">Factur-X / ZUGFeRD · PDF/A-3b · provjera pri svakoj izmjeni</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 4">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5h3.2l1.8-2.5h6l1.8 2.5H20V19H4z"></path><circle cx="12" cy="13" r="3.3"></circle></svg></span>Troškovi i prijava PDV-a</div>
+          <p class="cmp__before">Računi se skupljaju u kutiji i na kraju mjeseca prepisuju za knjigovođu.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Fotografija računa popuni polja i predloži konto; polja za UStVA spremna su za prijavu.</p><span class="cmp__tag">prepoznavanje dokumenata · SKR03 · upozorenje na duplikat</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 5">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"></path></svg></span>Puna flota</div>
+          <p class="cmp__before">Upit koji ne možete odvesti znači izgubljen posao, i često izgubljenog kupca.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Upit ide partnerskim prijevoznicima; prvi koji prihvati vozi, a kupac ostaje vaš.</p><span class="cmp__tag">partnerske poveznice · okvirni ugovor online</span></div>
+        </div>
+        <div class="cmp__row" style="--i: 6">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9.5-4.1-1.6-7-5.3-7-9.5V6z"></path><path d="M9 12l2.2 2.2L15.5 10"></path></svg></span>Zaštita marže</div>
+          <p class="cmp__before">Minimalna cijena ili dodatni izlet mogu tiho pojesti zaradu.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Cestarine, smještaj vozača, dodatni vozači i izleti uvijek su naplaćeni, i uz minimalnu cijenu.</p><span class="cmp__tag">km razredi · dnevni minimum · paušali transfera</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · Što se ubrzava (tamno) -->
+  <section id="ubrzanja" class="st st--dark" data-stop="4">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="4">04</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">04</span>Stanica 04 · Što se ubrzava</span>
+        <h2 class="display rev rev--left" style="--i: 1">Od upita do cijene u nekoliko sekundi.</h2>
+        <p class="rev rev--left" style="--i: 2">Sve što bi inače računao dispečer, ruta, slobodan autobus, broj vozača, PDV i cijena, BusFlow napravi dok kupac još gleda formu. Isti motor koristi i vaš ured za telefonske upite.</p>
+      </div>
+      <ol class="pipe" aria-label="Koraci izračuna">
+        <div class="pipe__bar" aria-hidden="true"><i></i></div>
+        <li class="pipe__step" style="--i: 0"><span class="pipe__num">01</span><div><div class="pipe__t">Unos vožnje</div><div class="pipe__d">Putnici, polazak, odredište, međustanice i izleti.</div></div></li>
+        <li class="pipe__step" style="--i: 1"><span class="pipe__num">02</span><div><div class="pipe__t">Ruta</div><div class="pipe__d">Vlastiti server za rutiranje, za cijelu Europu.</div></div></li>
+        <li class="pipe__step" style="--i: 2"><span class="pipe__num">03</span><div><div class="pipe__t">Slobodan autobus</div><div class="pipe__d">Najbliža baza i najmanji bus s dovoljno mjesta.</div></div></li>
+        <li class="pipe__step" style="--i: 3"><span class="pipe__num">04</span><div><div class="pipe__t">Pravila vožnje</div><div class="pipe__d">Smjene, pauze, broj vozača i noćenja.</div></div></li>
+        <li class="pipe__step" style="--i: 4"><span class="pipe__num">05</span><div><div class="pipe__t">PDV po državama</div><div class="pipe__d">Ruta se dijeli po granicama koje prelazi.</div></div></li>
+        <li class="pipe__step" style="--i: 5"><span class="pipe__num">06</span><div><div class="pipe__t">Cijena i plan vožnje</div><div class="pipe__d">Ukupno i po osobi, s planom posade i PDV-om.</div></div></li>
+      </ol>
+      <div class="auto rev rev--up">
+        <div class="auto__head"><span class="key__ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span>Sustav radi sam, i kad ste na cesti</div>
+        <ul class="auto__grid">
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></span>Oslobađa neplaćene rezervacije nakon 30 minuta</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11v18l-2.75-1.8L12 21l-2.75-1.8L6.5 21z"></path><path d="M9.5 8h5M9.5 11.5h5M9.5 15h3"></path></svg></span>Izdaje račun čim uplata stigne</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"></rect><path d="M4 7l8 6 8-6"></path></svg></span>Šalje podsjetnik s putnim listom 2 dana prije polaska</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg></span>Podsjeća škole na kaparu i ostatak uplate</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="2.2"></circle><path d="M3.8 10.8l6.1.9M20.2 10.8l-6.1.9M12 14.2v6.3"></path></svg></span>Prihvaća najam vozača i odmah šalje ponudu</li>
+          <li><span class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.4-5.7"></path><path d="M20 4v5h-5"></path></svg></span>Ponovno šalje neisporučene e-mailove, do 8 pokušaja</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · Prednosti -->
+  <section id="prednosti" class="st" data-stop="5">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="5">05</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">05</span>Stanica 05 · Prednosti</span>
+        <h2 class="display rev rev--left" style="--i: 1">Šest razloga za BusFlow.</h2>
+        <p class="rev rev--left" style="--i: 2">Ne uvodite prazan softver, nego sustav koji već svaki dan prodaje, planira i fakturira stvarne vožnje.</p>
+      </div>
+      <div class="adv">
+        <article class="card adv__card rev rev--up" style="--i: 0"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"></path></svg></span><h3>Prodaja 0–24</h3><p>Kupci dobivaju obvezujuću cijenu i rezerviraju i kad je ured zatvoren. U proces ulazite samo kad je odluka stvarno vaša: velika grupa, puna flota ili povrat.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 1"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9.5-4.1-1.6-7-5.3-7-9.5V6z"></path><path d="M9 12l2.2 2.2L15.5 10"></path></svg></span><h3>Marža pod kontrolom</h3><p>Tarife po autobusu, km razredi, dnevni minimum i paušali transfera. Cestarine, smještaj i dodatni vozači uvijek su u cijeni.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 2"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="2.2"></circle><path d="M3.8 10.8l6.1.9M20.2 10.8l-6.1.9M12 14.2v6.3"></path></svg></span><h3>EU pravila u svakoj ponudi</h3><p>Smjene, pauze i noćenja po Uredbi 561/2006 dio su izračuna, a vožnju koja se ne može zakonito odvesti sustav označi prije nego što je prodate.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 3"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11v18l-2.75-1.8L12 21l-2.75-1.8L6.5 21z"></path><path d="M9.5 8h5M9.5 11.5h5M9.5 15h3"></path></svg></span><h3>Računi i porez bez papira</h3><p>Računi nakon uplate, PDV po državama, polja za UStVA i knjiga troškova koja čita fotografirane račune.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 4"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"></path></svg></span><h3>Nijedan upit ne propada</h3><p>Kad je flota puna, vožnju preuzimaju partneri. Kad drugom prijevozniku zafali autobus ili vozač, BUS-SOS i najam vozača donose posao vama.</p></article>
+        <article class="card adv__card rev rev--up" style="--i: 5"><span class="adv__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.3 0 1.9-.8 1.9-1.7 0-1.2-1-1.6-1-2.6 0-.9.8-1.6 1.7-1.6h2.1a3.8 3.8 0 0 0 3.8-3.8C20.5 6.6 16.7 3.5 12 3.5z"></path><circle cx="7.8" cy="11" r="1.1"></circle><circle cx="10.6" cy="7.6" r="1.1"></circle><circle cx="14.6" cy="7.6" r="1.1"></circle></svg></span><h3>Vaš brend, vaša domena</h3><p>Logo, boje, domena, e-mail pošiljatelj, memorandum i pravni tekstovi su vaši. Kupci vide vašu tvrtku, a BusFlow radi u pozadini.</p></article>
+      </div>
+      <div class="brand-row">
+        <div class="brand-panel rev rev--up">
+          <span class="eyebrow">Vaše ime na svakom koraku</span>
+          <p>Web, prijava, e-mailovi, ponude i računi nose vaše ime i vaše boje.</p>
+          <svg viewBox="0 0 560 196" role="img" aria-label="Turistički autobus u vašim bojama, s mjestom za vaš logo i domenu">
+            <path d="M0 186H560" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="18 12" opacity="0.3"></path>
+            <ellipse cx="280" cy="186" rx="248" ry="6" fill="var(--ink-900)" opacity="0.14"></ellipse>
+            <path d="M40 16H452C470 16 482 24 490 38L520 98C524 106 526 114 526 122V148C526 156 520 162 512 162H36C28 162 22 156 22 148V34C22 24 30 16 40 16Z" fill="var(--ink)"></path>
+            <g fill="var(--on-ink-3)"><rect x="36" y="30" width="58" height="44" rx="6"></rect><rect x="100" y="30" width="58" height="44" rx="6"></rect><rect x="164" y="30" width="58" height="44" rx="6"></rect><rect x="228" y="30" width="58" height="44" rx="6"></rect><rect x="292" y="30" width="58" height="44" rx="6"></rect><rect x="356" y="30" width="58" height="44" rx="6"></rect><rect x="424" y="30" width="28" height="108" rx="5"></rect><path d="M462 30H470C476 30 481 34 484 40L508 90C510 94 508 98 503 98H462Z"></path></g>
+            <g fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.6"><path d="M46 66L66 38"></path><path d="M110 66L130 38"></path><path d="M174 66L194 38"></path><path d="M238 66L258 38"></path><path d="M302 66L322 38"></path><path d="M366 66L386 38"></path><path d="M470 84L482 52"></path></g>
+            <path d="M22 86H418" fill="none" stroke="var(--accent)" stroke-width="10"></path>
+            <path d="M22 98H418" fill="none" stroke="var(--ground)" stroke-width="3"></path>
+            <text x="40" y="128" font-family="Barlow Condensed, sans-serif" font-size="22" font-weight="800" fill="var(--ground)">[VAŠ LOGO]</text>
+            <text x="236" y="126" font-family="JetBrains Mono, monospace" font-size="13" fill="var(--ground)">[vaša-domena.de]</text>
+            <rect x="506" y="130" width="16" height="9" rx="3" fill="var(--accent)"></rect>
+            <circle cx="102" cy="162" r="27" fill="var(--ground-2)"></circle><circle cx="160" cy="162" r="27" fill="var(--ground-2)"></circle><circle cx="440" cy="162" r="27" fill="var(--ground-2)"></circle>
+            <circle cx="102" cy="162" r="21" fill="var(--ink-900)"></circle><circle cx="102" cy="162" r="8" fill="var(--muted-fill)"></circle>
+            <circle cx="160" cy="162" r="21" fill="var(--ink-900)"></circle><circle cx="160" cy="162" r="8" fill="var(--muted-fill)"></circle>
+            <circle cx="440" cy="162" r="21" fill="var(--ink-900)"></circle><circle cx="440" cy="162" r="8" fill="var(--muted-fill)"></circle>
+          </svg>
+        </div>
+        <div class="sec-panel rev rev--up" style="--i: 1">
+          <span class="eyebrow">Sigurnost i vlasništvo</span>
+          <ul>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="7" rx="2"></rect><rect x="4" y="13" width="16" height="7" rx="2"></rect><path d="M8 7.5h.01M8 16.5h.01"></path></svg>Vlastita instanca samo za vašu tvrtku: baza se ne dijeli s drugim prijevoznicima.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.5 12h17M12 3.5c2.4 2.6 3.6 5.4 3.6 8.5s-1.2 5.9-3.6 8.5c-2.4-2.6-3.6-5.4-3.6-8.5S9.6 6.1 12 3.5z"></path></svg>Podaci ostaju u EU.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"></path><path d="M20 4v5h-5"></path></svg>Dnevni backup, kopija izvan servera i redovna vježba vraćanja.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"></path><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"></path></svg>Povratak na prethodnu verziju jednim klikom.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5"></path><path d="M9.5 14.5l2 2 3.5-4"></path></svg>Na kraju ugovora dobivate izvoz baze.</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Računi se automatski provjeravaju pri svakoj izmjeni softvera.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · Uvođenje -->
+  <section id="uvodenje" class="st st--tint" data-stop="6">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="6">06</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">06</span>Stanica 06 · Uvođenje</span>
+        <h2 class="display rev rev--left" style="--i: 1">Od prvog sastanka do go‑livea: 8–10 tjedana.</h2>
+        <p class="rev rev--left" style="--i: 2">Dobivate vlastitu instancu na našem hostingu, s vašim brendom, cjenikom i flotom. Faze se preklapaju, a u svakom trenutku znate koja je sljedeća stanica.</p>
+      </div>
+      <ol class="phases" aria-label="Faze uvođenja">
+        <div class="phases__bar" aria-hidden="true"><i></i></div>
+        <li class="phase rev rev--up" style="--i: 0"><span class="phase__num">0</span><span class="phase__t">Upit i ugovor</span><span class="phase__dur">1–2 tj.</span></li>
+        <li class="phase rev rev--up" style="--i: 1"><span class="phase__num">1</span><span class="phase__t">Kick-off i materijali</span><span class="phase__dur">1–3 tj.</span></li>
+        <li class="phase rev rev--up" style="--i: 2"><span class="phase__num">2</span><span class="phase__t">Instanca i domene</span><span class="phase__dur">1 tj.</span></li>
+        <li class="phase rev rev--up" style="--i: 3"><span class="phase__num">3</span><span class="phase__t">Prilagodba i brend</span><span class="phase__dur">2–3 tj.</span></li>
+        <li class="phase rev rev--up" style="--i: 4"><span class="phase__num">4</span><span class="phase__t">Plaćanja i e-mail</span><span class="phase__dur">1–2 tj.</span></li>
+        <li class="phase rev rev--up" style="--i: 5"><span class="phase__num">5</span><span class="phase__t">Flota i cjenik</span><span class="phase__dur">1 tj.</span></li>
+        <li class="phase rev rev--up" style="--i: 6"><span class="phase__num">6</span><span class="phase__t">Test i prihvat</span><span class="phase__dur">1–2 tj.</span></li>
+        <li class="phase phase--live rev rev--up" style="--i: 7"><span class="phase__num">7</span><span class="phase__t">Obuka i go-live</span><span class="phase__dur">1 tj.</span></li>
+        <li class="phase phase--plus rev rev--up" style="--i: 8"><span class="phase__num">+</span><span class="phase__t">Hypercare</span><span class="phase__dur">2 tj.</span></li>
+      </ol>
+      <div class="lanes">
+        <div class="lane lane--you rev rev--up">
+          <div class="lane__title">Vi osiguravate <small>što nam treba od vas</small></div>
+          <ul class="lane__chips"><li class="chip-o">Logo i boje</li><li class="chip-o">Tekstovi stranica</li><li class="chip-o">Domena i DNS</li><li class="chip-o">myPOS ili PayPal račun</li><li class="chip-o">AGB i Datenschutz</li><li class="chip-o">PDV pravila po zemljama</li><li class="chip-o">Flota i tarife</li><li class="chip-o">Osoba za odluke</li></ul>
+        </div>
+        <div class="lane lane--we rev rev--up" style="--i: 1">
+          <div class="lane__title">Mi radimo <small>sve ostalo</small></div>
+          <ul class="lane__chips"><li class="chip-o">Instanca, domene i TLS</li><li class="chip-o">Brendiranje i pravne stranice</li><li class="chip-o">Memorandum i računi</li><li class="chip-o">Plaćanja i e-mail</li><li class="chip-o">Unos flote i tarifa</li><li class="chip-o">Testovi i vježba backupa</li><li class="chip-o">Obuka ureda</li><li class="chip-o">Dva tjedna pojačane podrške</li></ul>
+        </div>
+      </div>
+      <div class="two">
+        <div class="crit rev rev--up">
+          <div class="crit__title"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>Kritični put</div>
+          <p>Rok najčešće produljuje čekanje, a ne naš rad: pravni tekstovi i porezna pravila, verifikacija trgovca kod myPOS-a i PayPala, DNS i memorandum za račune.</p>
+          <p><strong>Zato već u upitu pitamo što od toga imate, a ostalo dogovaramo na prvom sastanku.</strong></p>
+          <a class="link-u" href="upit.html">Otvori upit</a>
+        </div>
+        <div class="model rev rev--up" style="--i: 1">
+          <div class="model__title">Model suradnje</div>
+          <div class="model__tiles">
+            <div class="model__tile"><b>Jednokratno</b><span>uvođenje: sve faze od kick-offa do go-livea</span></div>
+            <span class="model__plus" aria-hidden="true">+</span>
+            <div class="model__tile"><b>Mjesečno</b><span>hosting, backup, nadzor, ažuriranja i podrška</span></div>
+          </div>
+          <p>Ponudu dobivate nakon prvog sastanka, prema veličini flote i opsegu posla.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · Referenca (tamno) -->
+  <section id="referenca" class="st st--dark" data-stop="7">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="7">07</div></div>
+    <div class="st__body">
+      <div class="ref-grid">
+        <div class="ref-text">
+          <span class="st-label rev rev--left"><span class="badge badge--inline">07</span>Stanica 07 · Referenca</span>
+          <h2 class="display rev rev--left" style="--i: 1; font-size: clamp(36px, 3.8vw, 52px)">Razvijeno u stvarnom radu.</h2>
+          <p class="rev rev--left" style="--i: 2; font-size: 19px; line-height: 1.5; color: var(--on-ink-2)">BusFlow je nastao zajedno s obitelji Mikanović, prijevoznikom iz Offenbacha na Majni. Od kolovoza 2026. njihova prodaja, planiranje vožnji i fakturiranje odvijaju se u BusFlowu.</p>
+          <div class="facts rev rev--up" style="--i: 3">
+            <div class="fact"><b>2010.</b><span>Mikanović vozi od</span></div>
+            <div class="fact"><b>08/2026</b><span>BusFlow u produkciji</span></div>
+            <div class="fact"><b>3 jezika</b><span>DE · EN · HR za kupce</span></div>
+          </div>
+          <a class="ref-link rev rev--up" style="--i: 4" href="https://mikanovic.de" target="_blank" rel="noopener">Pogledajte uživo: mikanovic.de<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"></path><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a>
+        </div>
+        <figure class="quote rev rev--up" style="--i: 2">
+          <svg width="44" height="36" viewBox="0 0 44 36" aria-hidden="true"><path d="M0 36V20C0 9 6 2 18 0l2 6c-6 2-9 6-9 12h9v18zm24 0V20C24 9 30 2 42 0l2 6c-6 2-9 6-9 12h9v18z" fill="currentColor"></path></svg>
+          <blockquote>[Izjava vlasnika Omnibus Mikanović: što se promijenilo u radu ureda otkad upiti, plaćanja i računi idu kroz BusFlow.]</blockquote>
+          <figcaption><span class="quote__avatar" aria-hidden="true"></span><span><b>[Ime i prezime]</b>Omnibus Mikanović, Offenbach na Majni</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · Pitanja -->
+  <section id="pitanja" class="st" data-stop="8">
+    <div class="st__rail" aria-hidden="true"><div class="rail-track"></div><div class="badge" data-badge="8">08</div></div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">08</span>Stanica 08 · Pitanja</span>
+        <h2 class="display rev rev--left" style="--i: 1">Pitanja prije polaska.</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item rev rev--up" style="--i: 0"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Koliko traje uvođenje?</h3><p class="faq__a">Tipično 8–10 tjedana od ugovora do go-livea. Rok najčešće produljuje čekanje na pravne tekstove, verifikaciju plaćanja i DNS, zato već u upitu pitamo što od toga imate.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 1"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Gdje su naši podaci?</h3><p class="faq__a">U vašoj vlastitoj instanci, na serverima u EU. Baza se ne dijeli s drugim prijevoznicima, backup se radi dnevno, a na kraju ugovora dobivate izvoz baze.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 2"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Hoće li kupci vidjeti naš brend?</h3><p class="faq__a">Da: vaš logo, boje, domena, e-mail pošiljatelj, memorandum računa i pravni tekstovi. BusFlow ostaje u pozadini.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 3"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Radi li BusFlow izvan Njemačke?</h3><p class="faq__a">Danas je prilagođen njemačkom tržištu: euro, njemački format računa (Factur-X) i UStVA. Druga zemlja, valuta ili jezik znače dodatni razvoj, koji procjenjujemo na sastanku.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 4"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Kako kupci plaćaju?</h3><p class="faq__a">Karticom preko myPOS-a ili PayPalom. Trgovački račun otvarate vi, a mi ga povezujemo i provjeravamo probnom uplatom.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 5"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Tko unosi flotu i cjenik?</h3><p class="faq__a">Pripremamo predloške i podatke unosimo zajedno s vama u fazi matičnih podataka. Automatski uvoz iz starog sustava zasad ne postoji.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 6"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Trebaju li vozači posebnu aplikaciju?</h3><p class="faq__a">Ne. Vozač dobiva Google Maps poveznicu s cijelom rutom, a putni list stiže e-mailom prije polaska.</p></div>
+        <div class="faq__item rev rev--up" style="--i: 7"><h3 class="faq__q"><span class="faq__mark" aria-hidden="true">?</span>Koliko košta?</h3><p class="faq__a">Jednokratno uvođenje i mjesečna naknada za hosting, backup, nadzor, ažuriranja i podršku. Ponudu šaljemo nakon prvog sastanka, prema veličini flote i opsegu.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Odredište · prvi sastanak -->
+  <section id="sastanak" class="st" data-stop="9">
+    <div class="st__rail st__rail--end" aria-hidden="true">
+      <div class="rail-track"></div>
+      <div class="badge badge--sq badge--end" data-badge="9"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 18v2.5M16 18v2.5"></path><circle cx="8.5" cy="14.5" r="1"></circle><circle cx="15.5" cy="14.5" r="1"></circle></svg></div>
+      <span class="rail-label">Odredište</span>
+    </div>
+    <div class="st__body">
+      <div class="st-head">
+        <span class="st-label rev rev--left"><span class="badge badge--inline">→</span>Odredište · Prvi sastanak</span>
+        <h2 class="display rev rev--left" style="--i: 1">Rezervirajte prvi sastanak.</h2>
+        <p class="rev rev--left" style="--i: 2">Dva kratka koraka, oko minutu. Termin zatim birate u našem online kalendaru.</p>
+      </div>
+      <div class="dest">
+        <form class="ticket rev rev--up" id="karta-upit" novalidate aria-label="Upit za prvi sastanak, korak 1 od 2">
+          <div class="ticket__main">
+            <div class="ticket__head"><span>Putna karta · upit za uvođenje</span><span>Korak 1 od 2</span></div>
+            <ol class="stepper" aria-label="Koraci upita">
+              <li class="is-active"><i></i><span>01 Polazište</span></li>
+              <li><i></i><span>02 Odredište</span></li>
+            </ol>
+            <div class="ticket__title"><h3>01 · Polazište: tko ste?</h3><p>Da znamo s kim razgovaramo i kako vas najbrže dobiti.</p></div>
+            <div class="ticket__fields">
+              <div class="q"><label class="q__label" for="l-tvrtka">Naziv tvrtke <span aria-hidden="true">*</span></label><input class="field" id="l-tvrtka" name="tvrtka" type="text" placeholder="npr. Reisen GmbH" required autocomplete="organization"><span class="q__err">Upišite naziv tvrtke.</span></div>
+              <div class="q"><label class="q__label" for="l-ime">Ime i prezime <span aria-hidden="true">*</span></label><input class="field" id="l-ime" name="ime" type="text" placeholder="Vaše ime" required autocomplete="name"><span class="q__err">Upišite ime i prezime.</span></div>
+              <div class="q"><label class="q__label" for="l-email">E-mail <span aria-hidden="true">*</span></label><input class="field" id="l-email" name="email" type="email" placeholder="ime@tvrtka.de" required autocomplete="email" inputmode="email"><span class="q__err">Upišite ispravnu e-mail adresu.</span></div>
+              <div class="q"><label class="q__label" for="l-tel">Telefon <span class="opt">— za brži dogovor</span></label><input class="field" id="l-tel" name="telefon" type="tel" placeholder="+49 …" autocomplete="tel" inputmode="tel"></div>
+              <div class="q"><label class="q__label" for="l-drzava">Država sjedišta</label><select class="field" id="l-drzava" name="drzava"><option value="">Odaberite…</option><option value="DE">Njemačka</option><option value="AT">Austrija</option><option value="CH">Švicarska</option><option value="HR">Hrvatska</option><option value="SI">Slovenija</option><option value="BA">Bosna i Hercegovina</option><option value="RS">Srbija</option><option value="other">Druga država</option></select></div>
+            </div>
+            <div class="ticket__foot">
+              <span class="ticket__note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"></rect><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg>Odgovori se čuvaju dok ne pošaljete.</span>
+              <button class="btn btn--navy" type="submit">Dalje: vaš prijevoz<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            </div>
+          </div>
+          <div class="ticket__stub stub" aria-hidden="true">
+            <div class="stub__head"><span>Talon</span><span>BF · upit</span></div>
+            <div class="stub__num">01<small>/02</small></div>
+            <dl>
+              <div><dt>Tvrtka</dt><dd class="is-empty" data-stub="tvrtka">—</dd></div>
+              <div><dt>Kontakt</dt><dd class="is-empty" data-stub="kontakt">—</dd></div>
+              <div><dt>Flota</dt><dd class="is-empty">—</dd></div>
+              <div><dt>Usluge</dt><dd class="is-empty">—</dd></div>
+              <div><dt>Sastanak</dt><dd class="is-empty">—</dd></div>
+            </dl>
+            <div class="stub__route"><svg width="34" height="12" viewBox="0 0 34 12" aria-hidden="true"><path d="M4 6H30" stroke="var(--ink)" stroke-width="3"></path><circle cx="4" cy="6" r="3.5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"></circle><circle cx="30" cy="6" r="3.5" fill="var(--accent-strong)" stroke="var(--ink)" stroke-width="2"></circle></svg>Polazište → Odredište</div>
+          </div>
+        </form>
+        <aside class="dest__side">
+          <div class="panel-meet rev rev--up" style="--i: 1">
+            <h3>Na prvom sastanku</h3>
+            <ul>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Demo na test-okolini: planer, rezervacija, admin inbox i račun</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Kako danas radite i što bi se promijenilo</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Okvirni plan uvođenja i popis materijala</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Nakon sastanka šaljemo ponudu</li>
+            </ul>
+            <div class="panel-meet__chips">
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6.5" width="12.5" height="11" rx="2"></rect><path d="M16 10.5l4.5-2.5v8l-4.5-2.5z"></path></svg>Video ili telefon</span>
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg><span data-cfg="meetingMinutes">[30 min]</span></span>
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg><span data-cfg="bookingHours">[pon–pet 9–16 h]</span></span>
+            </div>
+          </div>
+          <div class="panel-book rev rev--up" style="--i: 2">
+            <h3>Radije odmah termin?</h3>
+            <p>Odaberite slobodan termin u našem online kalendaru: video poziv ili telefon, <span data-cfg="meetingMinutes">[30 min]</span>, <span data-cfg="bookingHours">[pon–pet 9–16 h]</span>.</p>
+            <a class="btn btn--cream" data-cfg-href="bookingUrl" target="_blank" rel="noopener" aria-disabled="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Zakažite online sastanak</a>
+            <small>Ili nam pišite: <a data-cfg-href="email" data-cfg="email" style="color: inherit">[e-mail]</a></small>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="logo" href="#vrh" aria-label="BusFlow, na vrh stranice">
+          <svg class="logo__mark logo__mark--sm" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#FCF1D0"></rect><path d="M12 33H19C25 33 22 15 28 15H36" fill="none" stroke="#010736" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="33" r="4.5" fill="#FCF1D0" stroke="#010736" stroke-width="3"></circle><circle cx="36" cy="15" r="5" fill="#22396F"></circle></svg>
+          <span class="logo__wm">BusFlow</span>
+        </a>
+        <p>Softver za autobusne prijevoznike: ponuda, rezervacija, naplata i račun na jednoj liniji.</p>
+        <small>Razvoj i podrška: FlowSolutions d.o.o.</small>
+      </div>
+      <nav class="footer__col" aria-label="Linija">
+        <span class="footer__title">Linija</span>
+        <a href="#karta">Karta sustava</a>
+        <a href="#mogucnosti">Mogućnosti</a>
+        <a href="#prednosti">Prednosti</a>
+        <a href="#uvodenje">Uvođenje</a>
+        <a href="#pitanja">Pitanja</a>
+      </nav>
+      <div class="footer__col">
+        <span class="footer__title">Kontakt</span>
+        <a data-cfg-href="email" data-cfg="email">[e-mail]</a>
+        <a data-cfg-href="phone" data-cfg="phoneDisplay">[telefon]</a>
+        <a href="upit.html">Zakaži sastanak</a>
+      </div>
+      <nav class="footer__col" aria-label="Pravno">
+        <span class="footer__title">Pravno</span>
+        <a href="impresum.html">Impresum</a>
+        <a href="privatnost.html">Pravila privatnosti</a>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 FlowSolutions d.o.o. · Referenca: Omnibus Mikanović</span>
+      <nav class="langs" aria-label="Jezik stranice"><a href="../index.html" hreflang="de" lang="de">DE</a><a href="index.html" hreflang="hr" lang="hr" aria-current="page">HR</a><span title="Engleska verzija je u pripremi">EN</span></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/landing.js" defer></script>
+</body>
+</html>

@@ -1,13 +1,2 @@
-node_modules
-dist
-dist-ssr
-*.local
-.DS_Store
-.vscode/*
-!.vscode/extensions.json
-logs
-*.log
-npm-debug.log*
-
-.vercel
-.env*
+dist/
+node_modules/

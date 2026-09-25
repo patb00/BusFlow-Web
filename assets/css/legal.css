@@ -1,0 +1,119 @@
+/* BusFlow — pravne stranice: Impressum i Datenschutz (DE), Impresum i Pravila privatnosti (HR).
+   Statične stranice bez JS-a; koriste tokene i komponente iz style.css. */
+
+.legal-body { min-height: 100svh; display: flex; flex-direction: column; }
+
+/* Zaglavlje */
+.legal-header { background: var(--ground); border-bottom: var(--border); }
+.legal-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 72px;
+}
+.legal-header__actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.legal-header__lang,
+.legal-header__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.legal-header__lang {
+  border: var(--border);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+.legal-header__back { font-size: 15px; font-weight: 600; color: var(--text); }
+.legal-header__lang:hover,
+.legal-header__back:hover { background: var(--ground-2); color: var(--text); }
+
+/* Sadržaj */
+.legal {
+  flex: 1;
+  width: min(760px, 100% - 32px);
+  margin: 0 auto;
+  padding: 56px 0 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.legal__head { display: flex; flex-direction: column; gap: 12px; }
+.legal h1 { font-size: clamp(40px, 7vw, 60px); }
+.legal__lead { font-size: 18px; line-height: 1.55; color: var(--text-2); }
+.legal section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: var(--border);
+}
+.legal h2 { font-family: var(--font-display); font-weight: 800; font-size: 26px; line-height: 1.1; color: var(--text); }
+.legal h3 { margin-top: 6px; font-size: 17px; font-weight: 700; color: var(--text); }
+.legal p,
+.legal li,
+.legal address { font-size: 16px; line-height: 1.6; color: var(--text-3); }
+.legal address { font-style: normal; }
+.legal ul { list-style: disc; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+.legal a { color: var(--text-2); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.legal a:hover { color: var(--text); }
+
+/* Podaci tvrtke */
+.legal__facts {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  gap: 10px 24px;
+  margin: 0;
+  padding: 20px 22px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--ground-3);
+}
+.legal__facts dt {
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.legal__facts dd { margin: 0; font-weight: 600; line-height: 1.5; color: var(--text); overflow-wrap: anywhere; }
+.legal .legal__stand { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+
+/* Podnožje */
+.legal-footer { background: var(--ground-3); border-top: var(--border); }
+.legal-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding: 20px 0;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.legal-footer nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.legal-footer a { color: var(--text-2); text-decoration: none; }
+.legal-footer a:hover,
+.legal-footer a[aria-current="page"] { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 600px) {
+  .legal { padding: 36px 0 56px; gap: 28px; }
+  .legal__lead { font-size: 17px; }
+  .legal__facts { grid-template-columns: minmax(0, 1fr); gap: 2px; padding: 18px; }
+  .legal__facts dd + dt { margin-top: 12px; }
+}
+
+/* Uski telefoni: gumb „početna“ samo sa strelicom (ime ostaje u aria-label) */
+@media (max-width: 420px) {
+  .legal-header__back span { display: none; }
+}
