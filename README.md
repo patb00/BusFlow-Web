@@ -42,7 +42,8 @@ Engleski je u prekidaču jezika najavljen, ali još nije preveden.
 6. **04 Was schneller wird / Što se ubrzava** (tamno): cjevovod od upita do cijene u šest koraka i što sustav radi sam.
 7. **05 Vorteile / Prednosti**: šest razloga, vaš brend na autobusu, sigurnost i vlasništvo.
 8. **06 Einführung / Uvođenje**: faze 0–7 + hypercare, „Sie liefern / Wir erledigen“, kritični put, model suradnje.
-9. **07 Referenz / Referenca** (tamno): činjenice i mjesto za izjavu vlasnika.
+9. **07 Referenz / Referenca** (tamno): činjenice, izjava vlasnika Ilije Mikanovića s logom tvrtke (izvadak, cijeli tekst
+   na klik; na hrvatskoj stranici prijevod i njemački izvornik) i popis onoga što smo za Omnibus Mikanović napravili.
 10. **08 Fragen / Pitanja**: osam pitanja.
 11. **Ziel / Odredište**: putna karta (korak 1 upita na stranici), „Im Erstgespräch“, „Lieber gleich einen Termin?“ (gumb na Microsoft Bookings).
 
@@ -82,8 +83,8 @@ npm run build   # isto, pa kopija u dist/ te robots.txt i sitemap.xml (VITE_SITE
 
 ## Prije objave: `assets/js/config.js`
 
-Sve što je na stranici u uglatim zagradama (npr. `[Aussage des Inhabers …]` / `[Izjava vlasnika…]`, `[IHR LOGO]` /
-`[VAŠ LOGO]`) je oznaka za podatak koji još nije unesen. Tekstovi koji ovise o jeziku upisuju se
+Na autobusu u sekciji 05 `[IHR LOGO]` / `[ihre-domain.de]` (i hrvatske inačice) namjerno su oznake: pokazuju gdje dolazi
+logo i domena prijevoznika. Tekstovi koji ovise o jeziku upisuju se
 kao `{ de: "…", hr: "…" }`.
 
 - `email` – `info@flow-solutions.hr`: podnožje, potvrda upita i adresa na koju upit stiže e-mailom.
@@ -117,8 +118,8 @@ na GitHub Pages i u pregledu ne radi ništa. Da bi statistika radila, vlasnik Ve
 Datenschutz i Pravila privatnosti opisuju tu obradu u odjeljku 4; ako se alat promijeni, treba promijeniti i njih. Kratke
 adrese `/impressum`, `/datenschutz`, `/hr/impresum` i `/hr/privatnost` preusmjeravaju na te stranice (`vercel.json`).
 
-Izjavu vlasnika i ime u sekciji 07 te `[IHR LOGO]` / `[ihre-domain.de]` (i hrvatske inačice) zamijenite izravno u
-`index.html` i `hr/index.html`.
+Izjava vlasnika u sekciji 07 je doslovan tekst koji je Ilija Mikanović napisao na njemačkom; izvadak koristi „[…]“ za
+izostavljene dijelove. Logo je `assets/img/mikanovic-logo.webp` (iz aplikacije BusFlow_Mikanovic, smanjen na 560 px).
 
 ## Upit za prvi sastanak
 

@@ -900,12 +900,59 @@ html:not(.js) .pipe__num, .pipe.is-in .pipe__num { animation: pipe-light 0.5s cu
 .fact b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 30px; color: var(--accent); line-height: 1.05; }
 .fact span { font-size: 14px; color: var(--on-ink-2); }
 .ref-link { display: inline-flex; align-items: center; gap: 8px; color: var(--on-ink); font-weight: 600; }
-.quote { background: var(--ground); color: var(--text); border-radius: 26px; padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+/* Izjava klijenta: tamna traka s logom (logo ima bijela slova, pa je na tamnom najčitljiviji), izvadak, cijeli tekst na klik */
+.quote { margin: 0; background: var(--ground); color: var(--text); border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; }
 .quote svg { color: var(--accent-strong); }
-.quote blockquote { margin: 0; font-size: 17px; line-height: 1.55; color: var(--text-2); font-style: italic; }
-.quote figcaption { display: flex; align-items: center; gap: 12px; font-size: 14px; }
-.quote__avatar { width: 44px; height: 44px; border-radius: 50%; border: 2px dashed rgba(var(--ink-rgb), 0.35); flex-shrink: 0; }
-.quote figcaption b { display: block; }
+.quote__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  background: var(--ink-900);
+  border-bottom: 3px solid var(--accent);
+}
+.quote__logo { width: min(230px, 62%); height: auto; }
+.quote__tag { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); text-align: right; }
+.quote__body { padding: 24px 28px 0; display: flex; flex-direction: column; gap: 14px; }
+.quote__mark { flex-shrink: 0; }
+.quote blockquote { margin: 0; font-size: 17px; line-height: 1.6; color: var(--text-2); font-style: italic; }
+.quote__more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.quote__more summary::-webkit-details-marker { display: none; }
+.quote__chev { transition: transform 0.2s; }
+.quote__more[open] .quote__chev { transform: rotate(180deg); }
+.quote__full { display: flex; flex-direction: column; gap: 10px; padding: 4px 0 6px; font-size: 15px; line-height: 1.6; color: var(--text-3); }
+.quote__full > div { display: flex; flex-direction: column; gap: 10px; }
+.quote__orig-label { margin-top: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-2); }
+.quote figcaption { display: flex; flex-direction: column; gap: 2px; padding: 16px 28px 26px; font-size: 14px; color: var(--text-2); }
+.quote figcaption b { font-size: 16px; color: var(--text); }
+.quote figcaption small { margin-top: 4px; font-size: 12px; color: var(--text-muted); }
+
+/* Što smo napravili za referencu: puna širina ispod teksta i izjave */
+.ref-done {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.2);
+}
+.ref-done__label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.ref-done ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 28px; }
+.ref-done li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.45; color: var(--on-ink); }
+.ref-done li svg { flex-shrink: 0; margin-top: 1px; color: var(--accent); }
 
 /* ---------- 08 · Pitanja ---------- */
 .faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
@@ -1041,6 +1088,7 @@ html:not(.js) .pipe__num, .pipe.is-in .pipe__num { animation: pipe-light 0.5s cu
   .phases__bar { display: none; }
   .auto__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ref-grid { grid-template-columns: 1fr; }
+  .ref-done ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .brand-row { grid-template-columns: 1fr; }
   .dest { grid-template-columns: 1fr; }
   .dest__side { display: grid; grid-template-columns: 1fr 1fr; }
@@ -1161,6 +1209,11 @@ html:not(.js) .pipe__num, .pipe.is-in .pipe__num { animation: pipe-light 0.5s cu
 
 @media (max-width: 560px) {
   .hero__cta .btn { width: 100%; }
+  .ref-done ul { grid-template-columns: 1fr; }
+  .quote__head { padding: 14px 18px; }
+  .quote__body { padding: 20px 20px 0; }
+  .quote figcaption { padding: 14px 20px 22px; }
+  .quote blockquote { font-size: 16px; }
   .ref-band__pills { width: 100%; }
   .stepper { max-width: none; }
   .stepper li span { display: none; }
