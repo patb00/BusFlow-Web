@@ -48,6 +48,7 @@
     <ul>
       <li>Ne koristimo kolačiće ni alate za praćenje. Broj posjeta mjerimo anonimno alatom Vercel Web Analytics (odjeljak 4).</li>
       <li>Fontovi su na našem poslužitelju; stranica se ne spaja na Google Fonts.</li>
+      <li>Demo-kalkulator na početnoj stranici traži pretragu mjesta, rutu i kartu od vanjskih servisa tek kad ga koristite; nama se pritom ništa ne šalje (odjeljak 5).</li>
       <li>Osobne podatke od vas dobivamo samo kad nam pošaljete upit, napišete e-mail ili rezervirate termin.</li>
       <li>Tvrdnja „Podaci ostaju u EU“ na početnoj stranici odnosi se na BusFlow instance koje vodimo za prijevoznike. Za ovu stranicu vrijede podaci u nastavku.</li>
     </ul>
@@ -66,8 +67,21 @@
     <p>Pravna osnova je čl. 6. st. 1. t. (f) GDPR-a; naš legitimni interes je poboljšanje stranice prema načinu korištenja. Za prijenos u SAD vrijedi odluka Europske komisije o primjerenosti za EU-U.S. Data Privacy Framework (čl. 45. GDPR-a). Bilježenju se možete usprotiviti, primjerice isključivanjem JavaScripta ili blokatorom sadržaja.</p>
   </section>
 
+  <section aria-labelledby="h-demo">
+    <h2 id="h-demo">5. Demo-kalkulator</h2>
+    <p>U odjeljku „Što se ubrzava“ na početnoj stranici možete izračunati autobusnu vožnju s vlastitim primjernim cijenama. Dok ondje ništa ne upišete, ne uspostavlja se veza sa servisima navedenima u nastavku. Tek kad upišete mjesto ili kliknete „Izračunajte cijenu“, vaš preglednik šalje zahtjeve izravno tim servisima:</p>
+    <ul>
+      <li><strong>Pretraga mjesta:</strong> Photon (komoot GmbH, Njemačka). Šalju se upisani nazivi mjesta (od trećeg znaka, dok tipkate), vaša IP adresa i podaci o pregledniku. <a href="https://www.komoot.com/privacy" target="_blank" rel="noopener">Pravila privatnosti komoota</a></li>
+      <li><strong>Ruta:</strong> javni OSRM demo poslužitelj router.project-osrm.org, koji vodi udruga FOSSGIS e.V. (Njemačka). Šalju se koordinate mjesta polaska i odredišta, vaša IP adresa i podaci o pregledniku.</li>
+      <li><strong>Karta:</strong> kartografske pločice s tile.openstreetmap.org zaklade OpenStreetMap Foundation (Cambridge, Ujedinjeno Kraljevstvo). Šalju se prikazani isječak karte, vaša IP adresa i podaci o pregledniku. Za Ujedinjeno Kraljevstvo vrijedi odluka Europske komisije o primjerenosti (čl. 45. GDPR-a). <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">Pravila privatnosti OpenStreetMap Foundationa</a></li>
+    </ul>
+    <p>Ti pružatelji obrađuju podatke na vlastitu odgovornost prema svojim pravilima privatnosti. Od njih ne dobivamo ni podatke ni izvještaje.</p>
+    <p>Broj putnika, datumi, vrsta vožnje i vaše primjerne cijene ostaju u vašem pregledniku. Primjerne cijene preglednik sprema u memoriju sesije (sessionStorage) da ostanu za sljedeći izračun; brišu se najkasnije kad zatvorite karticu. Nama se ništa ne šalje. Kartografsku biblioteku Leaflet poslužujemo s vlastitog poslužitelja.</p>
+    <p>Pravna osnova je čl. 6. st. 1. t. (f) GDPR-a; naš legitimni interes je pokazati vam izračun koji ste sami pokrenuli. Ako ne želite slati podatke tim servisima, ne koristite demo-kalkulator; sav ostali sadržaj stranice radi bez njega.</p>
+  </section>
+
   <section aria-labelledby="h-upit">
-    <h2 id="h-upit">5. Upit za prvi sastanak</h2>
+    <h2 id="h-upit">6. Upit za prvi sastanak</h2>
     <p>Kad koristite naš obrazac za upit, obrađujemo vaše podatke: naziv tvrtke, ime i prezime, e-mail adresu, po želji broj telefona i državu sjedišta, podatke o vašem prijevozu (broj autobusa, usluge, dosadašnji način izrade ponuda, željeni početak, što već imate), željeni način razgovora i vašu napomenu.</p>
     <p>Svrha je obrada vašeg upita i priprema prvog sastanka. Pravna osnova je čl. 6. st. 1. t. (b) GDPR-a (radnje prije sklapanja ugovora na vaš zahtjev) te vaša privola prema čl. 6. st. 1. t. (a) GDPR-a, koju dajete kvačicom u obrascu. Privolu možete u svakom trenutku povući za ubuduće, primjerice e-mailom na <a href="mailto:info@flow-solutions.hr">info@flow-solutions.hr</a>.</p>
     <h3>Slanje preko servisa Formspree</h3>
@@ -80,22 +94,22 @@
   </section>
 
   <section aria-labelledby="h-email">
-    <h2 id="h-email">6. E-mail</h2>
+    <h2 id="h-email">7. E-mail</h2>
     <p>Naš sandučić <a href="mailto:info@flow-solutions.hr">info@flow-solutions.hr</a> vodimo u servisu Microsoft 365 (Microsoft Ireland Operations Limited, One Microsoft Place, South County Business Park, Leopardstown, Dublin 18, Irska). Kad nam pišete ili kad odgovaramo na vaš upit, Microsoft poruke obrađuje u naše ime. Pravna osnova je čl. 6. st. 1. t. (b) GDPR-a, a kod općih upita čl. 6. st. 1. t. (f) GDPR-a. Prijenos društvu Microsoft Corporation u SAD nije isključen; ono je certificirano prema EU-U.S. Data Privacy Frameworku (čl. 45. GDPR-a).</p>
   </section>
 
   <section aria-labelledby="h-termin">
-    <h2 id="h-termin">7. Rezervacija termina i razgovor</h2>
+    <h2 id="h-termin">8. Rezervacija termina i razgovor</h2>
     <p>Preko gumba „Zakažite online sastanak“ dolazite na Microsoft Bookings. Ondje upisujete ime, e-mail adresu i po želji broj telefona i napomenu. Microsoft te podatke obrađuje u naše ime kako bismo mogli potvrditi termin. Razgovor vodimo preko Microsoft Teamsa ili telefonom. Pravna osnova je čl. 6. st. 1. t. (b) GDPR-a. Više u <a href="https://privacy.microsoft.com/hr-hr/privacystatement" target="_blank" rel="noopener">Microsoftovoj izjavi o privatnosti</a>.</p>
   </section>
 
   <section aria-labelledby="h-poveznice">
-    <h2 id="h-poveznice">8. Poveznice na druge stranice</h2>
+    <h2 id="h-poveznice">9. Poveznice na druge stranice</h2>
     <p>Kad otvorite poveznicu na drugu stranicu, primjerice mikanovic.de, ondje vrijede pravila privatnosti tog pružatelja.</p>
   </section>
 
   <section aria-labelledby="h-prava">
-    <h2 id="h-prava">9. Vaša prava</h2>
+    <h2 id="h-prava">10. Vaša prava</h2>
     <p>U svakom trenutku imate pravo na:</p>
     <ul>
       <li>pristup svojim podacima (čl. 15. GDPR-a),</li>
@@ -110,24 +124,24 @@
   </section>
 
   <section aria-labelledby="h-prituzba">
-    <h2 id="h-prituzba">10. Pravo na pritužbu</h2>
+    <h2 id="h-prituzba">11. Pravo na pritužbu</h2>
     <p>Pritužbu možete podnijeti nadzornom tijelu za zaštitu podataka (čl. 77. GDPR-a). Za nas je nadležna Agencija za zaštitu osobnih podataka (AZOP), Selska cesta 136, 10000 Zagreb, <a href="https://azop.hr" target="_blank" rel="noopener">azop.hr</a>. Možete se obratiti i nadzornom tijelu u državi u kojoj živite ili radite.</p>
   </section>
 
   <section aria-labelledby="h-tls">
-    <h2 id="h-tls">11. Šifriranje</h2>
+    <h2 id="h-tls">12. Šifriranje</h2>
     <p>Stranica se isporučuje samo preko šifrirane veze (HTTPS). I obrazac za upit vaše podatke šalje šifrirano.</p>
   </section>
 
   <section aria-labelledby="h-auto">
-    <h2 id="h-auto">12. Bez automatiziranog odlučivanja</h2>
+    <h2 id="h-auto">13. Bez automatiziranog odlučivanja</h2>
     <p>Ne donosimo automatizirane odluke u smislu čl. 22. GDPR-a i ne izrađujemo profile.</p>
   </section>
 
   <section aria-labelledby="h-izmjene">
-    <h2 id="h-izmjene">13. Izmjene</h2>
+    <h2 id="h-izmjene">14. Izmjene</h2>
     <p>Ova pravila mijenjamo kad se promijene stranica ili propisi.</p>
-    <p class="legal__stand">Stanje: rujan 2026.</p>
+    <p class="legal__stand">Stanje: listopad 2026.</p>
   </section>
 </main>
 
