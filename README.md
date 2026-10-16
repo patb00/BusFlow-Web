@@ -26,7 +26,7 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 | `assets/css/legal.css` | stilovi pravnih stranica |
 | `assets/css/fonts.css` + `assets/fonts/` | samostalno posluživani fontovi Barlow, Barlow Condensed i JetBrains Mono (latin + latin-ext) |
 | `assets/js/config.js` | postavke (kontakt, kalendar termina, trajanje sastanka, adresa za slanje upita) |
-| `assets/js/landing.js` | izbornik, skaliranje filma, tračnica i paljenje stanica, ulazne animacije, putna karta (korak 1 upita) |
+| `assets/js/landing.js` | izbornik, skaliranje filma, tračnica i paljenje stanica, ulazne animacije, tabovi mini Einsatzplana (sekcija 03), putna karta (korak 1 upita) |
 | `assets/js/analytics.js` | statistika posjeta (Vercel Web Analytics), učitava se samo na busflow.email |
 | `assets/js/upit.js` | logika upita: koraci, provjera, sažetak, slanje preko Formspreea (rezerva: e-mail iz preglednika); njemački, hrvatski i engleski tekstovi u rječniku `I18N` |
 | `assets/js/demo.js` | demo-kalkulator u sekciji 04: pretraga mjesta (Photon), ruta (OSRM), karta (Leaflet + OpenStreetMap), države na ruti, posada, dani i ilustrativna cijena iz posjetiteljevih parametara; tekstovi de/hr/en u rječniku `I18N` |
@@ -46,8 +46,10 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 4. **02 Funktionen / Mogućnosti**: četiri ploče s 32 stanice i oznakama „Läuft automatisch“ / „Sie entscheiden“; linija O
    ima 10 stanica, od kojih O9 „Fahrerakte und Fristen“ i O10 „Einsatzplan und Stunden“ opisuju modul Fahrer.
 5. **03 Was besser wird / Što se poboljšava**: osam poslova, prije → s BusFlowom (osmi je „Fahrer einteilen“), a ispod
-   tablice mini Einsatzplan: statični CSS prikaz tjednog rasporeda četiriju izmišljenih vozača (vožnje, dvodnevna vožnja
-   preko dvije ćelije, žuto upozorenje na dokument, crveno na dvostruku podjelu).
+   tablice mini Einsatzplan s tabovima **Übersicht / Einsatzplan / Stunden** (ARIA tablist, JS samo mijenja panele; sadržaj
+   je statičan): kartice po vozaču s dokumentima i sljedećom vožnjom, tjedna mreža četiriju izmišljenih vozača (vožnje,
+   dvodnevna vožnja preko dvije ćelije, žuto upozorenje na dokument, crveno na dvostruku podjelu, legenda) i tablica sati s
+   oznakom CSV-izvoza.
 6. **04 Was schneller wird / Što se ubrzava** (tamno): cjevovod od upita do cijene u šest koraka, **demo-kalkulator**
    (`#demo`, vidi dolje) i što sustav radi sam.
 7. **05 Vorteile / Prednosti**: šest razloga, vaš brend na autobusu, sigurnost i vlasništvo.
@@ -142,15 +144,19 @@ izostavljene dijelove; hrvatska i engleska stranica prikazuju prijevod i njemač
 
 Posjetitelj unese mjesto polaska i odredište, vrstu vožnje (Transfer – samo jedan smjer / Hin- und Rückfahrt /
 Tagesfahrt), datume, po želji vrijeme polaska, broj putnika i **vlastite primjerne cijene** (€/km, dnevni minimum,
-dodatni vozač po danu, noćenje vozača, postotak za vrstu vožnje). Gumb „Fahrpreis berechnen“ nacrta rutu na karti i
-ispiše udaljenost, vožnju po smjeru, vozilo, dane, numerirani put izračuna (ruta → ×1,2 → pauze → vozači → dani →
-dolazak → vozilo), države na ruti s kilometrima i cijenu sa **svim stavkama** (cijena po km i dnevni minimum oboje, s
-oznakom koja vrijedi; dodatni vozač, noćenja i postotak i kad su 0; zbroj; po osobi). Nakon izračuna koraci cjevovoda
-01–06 dobiju čipove s vrijednostima. Zadane cijene (2,20 €/km, 650 €/dan, 250 €, 90 €, 0 %) su okrugli primjeri, **ne**
-cjenik Omnibusa Mikanović; primjerne cijene pamte se u `sessionStorage` (ključ `busflow-demo`).
+dodatni vozač po danu, noćenje vozača, postotak za vrstu vožnje) te neobvezno **Betriebshof** (garažu) za prazne
+kilometre. Gumb „Fahrpreis berechnen“ nacrta rutu na karti (prazne dionice isprekidano, garaža s vlastitim markerom) i
+ispiše udaljenost, praznu vožnju, ukupne km, vožnju po smjeru, vozilo, dane, numerirani put izračuna (ruta → prazna vožnja
+→ ×1,2 → pauze → vozači → dani → dolazak → vozilo), države na ruti s kilometrima i cijenu sa **svim stavkama** (cijena po
+km i dnevni minimum oboje, s oznakom koja vrijedi; dodatni vozač, noćenja i postotak i kad su 0; zbroj; po osobi), uz
+napomenu da je sve samo ilustracija načina rada. Nakon izračuna koraci cjevovoda 01–06 dobiju čipove s vrijednostima.
+Zadane cijene (2,20 €/km, 650 €/dan, 250 €, 90 €, 0 %) su okrugli primjeri, **ne** cjenik Omnibusa Mikanović; primjerne
+cijene i garaža pamte se u `sessionStorage` (ključ `busflow-demo`).
 
-Pravila izračuna (`demo.js`, komentirano u kodu): vožnja po smjeru = OSRM trajanje × 1,2 (OSRM računa za automobil);
-pauza 45 min na svakih 4,5 h; 1 vozač do 9 h vožnje, inače 2 (do 18 h dnevno); transfer uključuje praznu vožnju natrag;
+Pravila izračuna (`demo.js`, komentirano u kodu): s garažom se rutiraju dionice garaža → polazak i, kod transfera,
+odredište → garaža (jedan OSRM poziv po dionici); vožnja po smjeru = (OSRM trajanje dionice s putnicima + dolazak iz
+garaže) × 1,2 (OSRM računa za automobil); pauza 45 min na svakih 4,5 h; 1 vozač do 9 h vožnje, inače 2 (do 18 h dnevno);
+transfer bez garaže uključuje praznu vožnju natrag na mjesto polaska, s garažom prazne dionice iz garaže i u garažu;
 povratna vožnja traje od datuma polaska do povratka, najmanje 2 × dani vožnje; jednodnevna vožnja > 18 h nije izvediva
 (računa se s noćenjima); vozilo po broju putnika (≤ 8 Kleinbus, ≤ 19 Minibus, ≤ 35 Midibus, ≤ 54 Reisebus, ≤ 74
 Doppeldecker); cijena neto = max(km × cijena, dani × minimum) + dodatni vozači + noćenja + postotak. Države: točke rute
