@@ -43,20 +43,37 @@
       seats: "{n} Plätze", km: "{n} km", kmEst: "{n} km (geschätzt)", dur: "{h} Std. {m} Min.", durShort: "{h} Std.",
       days: { 1: "1 Tag", n: "{n} Tage" }, nights: { 0: "keine Übernachtung", 1: "1 Übernachtung", n: "{n} Übernachtungen" },
       drivers: { 1: "1 Fahrer", n: "{n} Fahrer" },
-      crewSingle: "1 Fahrer: {h} Lenkzeit je Richtung, {b} × 45 Min. Pause, {d} je Richtung.",
-      crewTeam: "2 Fahrer (Doppelbesatzung): {h} Lenkzeit je Richtung, bis zu 18 Std. am Tag, {d} je Richtung.",
       legDays: { 1: "1 Fahrtag", n: "{n} Fahrtage" },
-      kindTransfer: "Transfer: Fahrgäste nur hin; der Bus kommt leer zurück (Leerfahrt {km}).",
-      kindRound: "Hin- und Rückfahrt: Bus und Fahrer bleiben {n} bei der Gruppe.",
-      kindDay: "Tagesfahrt: Hin- und Rückfahrt am selben Tag, {h} Lenkzeit gesamt.",
+      /* Rechenweg – ein Schritt je Zeile: [Label, Text] */
+      stRoute: "Route", stRouteT: "{km} Straße, {t} Pkw-Fahrzeit laut OSRM auf OpenStreetMap.",
+      stRouteEst: "Routing-Dienst nicht erreichbar: Luftlinie × 1,3 = {km}, Fahrzeit mit 75 km/h gerechnet.",
+      stCoach: "Lenkzeit Bus", stCoachT: "{t} × 1,2 = {h} je Richtung – ein Reisebus ist langsamer als der Pkw im Routing.",
+      stBreaks: "Pausen", stBreaksT: "{b} × 45 Min. nach je 4,5 Std. Lenkzeit → {duty} Dienst {scope}.",
+      stBreaksNone: "Unter 4,5 Std. Lenkzeit {scope} – keine Pflichtpause.",
+      scopeLeg: "je Richtung", scopeAll: "gesamt",
+      stDrivers: "Fahrer", stDriversOne: "{h} Lenkzeit {scope} ≤ 9 Std. → 1 Fahrer.",
+      stDriversTwo: "{h} Lenkzeit {scope} > 9 Std. → 2 Fahrer (Doppelbesatzung, bis 18 Std. am Tag).",
+      stDays: "Tage",
+      stDaysTransfer: "Hinfahrt {h} + Leerfahrt zurück {h} = {H} bei {per} Std. je Tag → {days}, {nights}.",
+      stDaysRound: "Vom {d1} bis {d2} = {span}; Bus und Fahrer bleiben bei der Gruppe → {days}, {nights}.",
+      stDaysRoundMin: "Vom {d1} bis {d2} wären es {span}, die Fahrt braucht aber 2 × {legDays} → {days}, {nights}.",
+      stDaysDay: "Hin und zurück am selben Tag, {H} Lenkzeit gesamt ≤ 18 Std. → 1 Tag, keine Übernachtung.",
+      stDaysDayNo: "{H} Lenkzeit gesamt > 18 Std. → an einem Tag nicht machbar, gerechnet mit {days}, {nights}.",
+      stArrive: "Ankunft", stArriveT: "Abfahrt {dep} Uhr + {h} Lenkzeit{br}: {a}", brT: " + {n} × 45 Min. Pause",
+      stBus: "Fahrzeug", stBusT: "Personenzahl {n} → {bus} mit {seats} Plätzen.",
       arrive: "Ankunft gegen {t} Uhr.", arriveNext: "Ankunft am Folgetag gegen {t} Uhr.",
       feasOk: "Machbar nach EU 561/2006.", feasTight: "Knapp: rund {h} Std. Dienst für einen Fahrer – BusFlow prüft hier die Variante mit zweitem Fahrer.",
       feasNoDay: "An einem Tag nicht machbar ({h} Lenkzeit) – BusFlow schlägt Übernachtungen vor; gerechnet mit {n}.",
       feasReturn: "Rückfahrt frühestens am {date} – gerechnet mit {n}.",
       countriesNone: "Keine Länderzuordnung möglich (grobe Grenzen).", other: "sonstige",
-      lineKm: "{km} × {rate}/km", lineMin: "Tagesminimum greift: {days} × {rate}",
-      lineExtra: "Zusätzlicher Fahrer: {n} × {days} × {rate}", lineHotel: "Übernachtungen: {nights} × {d} × {rate}",
-      lineKind: "Fahrtart {pct} %", perPerson: "{p} pro Person",
+      /* Preis – jede Position, auch wenn sie 0 ist */
+      lnDist: "Gesamtstrecke: {km1} hin + {km1} zurück", lnDistTransfer: "Gesamtstrecke: {km1} Hinfahrt + {km1} Leerfahrt zurück",
+      lnKm: "Kilometerpreis: {km} × {rate}/km", lnMin: "Tagesminimum: {days} × {rate}",
+      lnApplies: " – greift (höherer Wert)", lnOff: " – entfällt (niedriger)",
+      lnExtra: "Zusätzlicher Fahrer: {n} × {days} × {rate}", lnExtraNone: "Zusätzlicher Fahrer: nicht nötig (1 Fahrer)",
+      lnHotel: "Übernachtungen: {nights} × {d} × {rate}", lnHotelNone: "Übernachtungen: keine",
+      lnKind: "Fahrtart {pct} % auf {base}", lnKindNone: "Fahrtart: kein Zuschlag oder Rabatt (0 %)",
+      lnSum: "Summe netto", lnPP: "Pro Person: {total} ÷ {n}", perPerson: "{p} pro Person",
       chipKind: { transfer: "Transfer", round: "Hin & Rück", day: "Tagesfahrt" }, chipPax: "{n} Pers. · {kind}",
       chipCrew: "{d} · {n}", chipPrice: "{p} netto",
       busy: "Berechne …", calc: "Fahrpreis berechnen",
@@ -71,20 +88,35 @@
       seats: "{n} mjesta", km: "{n} km", kmEst: "{n} km (procjena)", dur: "{h} h {m} min", durShort: "{h} h",
       days: { 1: "1 dan", n: "{n} dana" }, nights: { 0: "bez noćenja", 1: "1 noćenje", n: "{n} noćenja" },
       drivers: { 1: "1 vozač", n: "{n} vozača" },
-      crewSingle: "1 vozač: {h} vožnje po smjeru, {b} × 45 min pauze, {d} po smjeru.",
-      crewTeam: "2 vozača (dvostruka posada): {h} vožnje po smjeru, do 18 h dnevno, {d} po smjeru.",
       legDays: { 1: "1 dan vožnje", n: "{n} dana vožnje" },
-      kindTransfer: "Transfer: putnici samo u odlasku; autobus se vraća prazan (prazna vožnja {km}).",
-      kindRound: "Povratna vožnja: autobus i vozači ostaju {n} s grupom.",
-      kindDay: "Jednodnevna vožnja: odlazak i povratak isti dan, {h} vožnje ukupno.",
+      stRoute: "Ruta", stRouteT: "{km} cestom, {t} vožnje osobnim autom prema OSRM-u na OpenStreetMapu.",
+      stRouteEst: "Servis za rutiranje nije dostupan: zračna linija × 1,3 = {km}, vrijeme računano sa 75 km/h.",
+      stCoach: "Vožnja autobusom", stCoachT: "{t} × 1,2 = {h} po smjeru – autobus je sporiji od automobila iz rutiranja.",
+      stBreaks: "Pauze", stBreaksT: "{b} × 45 min nakon svakih 4,5 h vožnje → {duty} dužnosti {scope}.",
+      stBreaksNone: "Manje od 4,5 h vožnje {scope} – obvezna pauza nije potrebna.",
+      scopeLeg: "po smjeru", scopeAll: "ukupno",
+      stDrivers: "Vozači", stDriversOne: "{h} vožnje {scope} ≤ 9 h → 1 vozač.",
+      stDriversTwo: "{h} vožnje {scope} > 9 h → 2 vozača (dvostruka posada, do 18 h dnevno).",
+      stDays: "Dani",
+      stDaysTransfer: "Odlazak {h} + prazna vožnja natrag {h} = {H} uz {per} h dnevno → {days}, {nights}.",
+      stDaysRound: "Od {d1} do {d2} = {span}; autobus i vozači ostaju s grupom → {days}, {nights}.",
+      stDaysRoundMin: "Od {d1} do {d2} bilo bi {span}, ali vožnja traži 2 × {legDays} → {days}, {nights}.",
+      stDaysDay: "Odlazak i povratak isti dan, {H} vožnje ukupno ≤ 18 h → 1 dan, bez noćenja.",
+      stDaysDayNo: "{H} vožnje ukupno > 18 h → nije izvedivo u jednom danu, računano s {days}, {nights}.",
+      stArrive: "Dolazak", stArriveT: "Polazak u {dep} + {h} vožnje{br}: {a}", brT: " + {n} × 45 min pauze",
+      stBus: "Vozilo", stBusT: "Broj putnika {n} → {bus} s {seats} mjesta.",
       arrive: "Dolazak oko {t}.", arriveNext: "Dolazak sutradan oko {t}.",
       feasOk: "Izvedivo prema EU 561/2006.", feasTight: "Tijesno: oko {h} h dužnosti za jednog vozača – BusFlow ovdje provjerava varijantu s drugim vozačem.",
       feasNoDay: "Nije izvedivo u jednom danu ({h} vožnje) – BusFlow predlaže noćenja; računano s {n}.",
       feasReturn: "Povratak najranije {date} – računano s {n}.",
       countriesNone: "Države nije moguće odrediti (grube granice).", other: "ostalo",
-      lineKm: "{km} × {rate}/km", lineMin: "Vrijedi dnevni minimum: {days} × {rate}",
-      lineExtra: "Dodatni vozač: {n} × {days} × {rate}", lineHotel: "Noćenja: {nights} × {d} × {rate}",
-      lineKind: "Vrsta vožnje {pct} %", perPerson: "{p} po osobi",
+      lnDist: "Ukupna udaljenost: {km1} odlazak + {km1} povratak", lnDistTransfer: "Ukupna udaljenost: {km1} odlazak + {km1} prazna vožnja natrag",
+      lnKm: "Cijena po km: {km} × {rate}/km", lnMin: "Dnevni minimum: {days} × {rate}",
+      lnApplies: " – vrijedi (veći iznos)", lnOff: " – ne vrijedi (manji iznos)",
+      lnExtra: "Dodatni vozač: {n} × {days} × {rate}", lnExtraNone: "Dodatni vozač: nije potreban (1 vozač)",
+      lnHotel: "Noćenja: {nights} × {d} × {rate}", lnHotelNone: "Noćenja: nema",
+      lnKind: "Vrsta vožnje {pct} % na {base}", lnKindNone: "Vrsta vožnje: bez dodatka ili popusta (0 %)",
+      lnSum: "Ukupno neto", lnPP: "Po osobi: {total} ÷ {n}", perPerson: "{p} po osobi",
       chipKind: { transfer: "Transfer", round: "Povratna", day: "Jednodnevna" }, chipPax: "{n} os. · {kind}",
       chipCrew: "{d} · {n}", chipPrice: "{p} neto",
       busy: "Računam …", calc: "Izračunajte cijenu",
@@ -99,20 +131,35 @@
       seats: "{n} seats", km: "{n} km", kmEst: "{n} km (estimated)", dur: "{h} h {m} min", durShort: "{h} h",
       days: { 1: "1 day", n: "{n} days" }, nights: { 0: "no overnight stay", 1: "1 overnight stay", n: "{n} overnight stays" },
       drivers: { 1: "1 driver", n: "{n} drivers" },
-      crewSingle: "1 driver: {h} driving per direction, {b} × 45 min break, {d} per direction.",
-      crewTeam: "2 drivers (multi-manning): {h} driving per direction, up to 18 h a day, {d} per direction.",
       legDays: { 1: "1 driving day", n: "{n} driving days" },
-      kindTransfer: "Transfer: passengers one way; the coach returns empty (empty run {km}).",
-      kindRound: "Round trip: coach and drivers stay {n} with the group.",
-      kindDay: "Day trip: out and back on the same day, {h} driving in total.",
+      stRoute: "Route", stRouteT: "{km} by road, {t} car driving time per OSRM on OpenStreetMap.",
+      stRouteEst: "Routing service unavailable: great-circle × 1.3 = {km}, time calculated at 75 km/h.",
+      stCoach: "Coach driving time", stCoachT: "{t} × 1.2 = {h} per direction – a coach is slower than the car used for routing.",
+      stBreaks: "Breaks", stBreaksT: "{b} × 45 min after every 4.5 h of driving → {duty} on duty {scope}.",
+      stBreaksNone: "Under 4.5 h of driving {scope} – no mandatory break.",
+      scopeLeg: "per direction", scopeAll: "in total",
+      stDrivers: "Drivers", stDriversOne: "{h} driving {scope} ≤ 9 h → 1 driver.",
+      stDriversTwo: "{h} driving {scope} > 9 h → 2 drivers (multi-manning, up to 18 h a day).",
+      stDays: "Days",
+      stDaysTransfer: "Outbound {h} + empty return {h} = {H} at {per} h per day → {days}, {nights}.",
+      stDaysRound: "From {d1} to {d2} = {span}; coach and drivers stay with the group → {days}, {nights}.",
+      stDaysRoundMin: "From {d1} to {d2} would be {span}, but the trip needs 2 × {legDays} → {days}, {nights}.",
+      stDaysDay: "Out and back on the same day, {H} driving in total ≤ 18 h → 1 day, no overnight stay.",
+      stDaysDayNo: "{H} driving in total > 18 h → not feasible in one day, calculated with {days}, {nights}.",
+      stArrive: "Arrival", stArriveT: "Departure {dep} + {h} driving{br}: {a}", brT: " + {n} × 45 min break",
+      stBus: "Vehicle", stBusT: "Passengers {n} → {bus} with {seats} seats.",
       arrive: "Arrival at about {t}.", arriveNext: "Arrival the next day at about {t}.",
       feasOk: "Feasible under EU 561/2006.", feasTight: "Tight: about {h} h on duty for one driver – BusFlow checks the second-driver option here.",
       feasNoDay: "Not feasible in one day ({h} driving) – BusFlow suggests overnight stays; calculated with {n}.",
       feasReturn: "Return at the earliest on {date} – calculated with {n}.",
       countriesNone: "Countries could not be assigned (coarse borders).", other: "other",
-      lineKm: "{km} × {rate}/km", lineMin: "Daily minimum applies: {days} × {rate}",
-      lineExtra: "Additional driver: {n} × {days} × {rate}", lineHotel: "Overnight stays: {nights} × {d} × {rate}",
-      lineKind: "Trip type {pct} %", perPerson: "{p} per person",
+      lnDist: "Total distance: {km1} out + {km1} back", lnDistTransfer: "Total distance: {km1} outbound + {km1} empty return",
+      lnKm: "Per-km price: {km} × {rate}/km", lnMin: "Daily minimum: {days} × {rate}",
+      lnApplies: " – applies (higher amount)", lnOff: " – dropped (lower amount)",
+      lnExtra: "Additional driver: {n} × {days} × {rate}", lnExtraNone: "Additional driver: not needed (1 driver)",
+      lnHotel: "Overnight stays: {nights} × {d} × {rate}", lnHotelNone: "Overnight stays: none",
+      lnKind: "Trip type {pct} % of {base}", lnKindNone: "Trip type: no surcharge or discount (0 %)",
+      lnSum: "Total net", lnPP: "Per person: {total} ÷ {n}", perPerson: "{p} per person",
       chipKind: { transfer: "Transfer", round: "Round trip", day: "Day trip" }, chipPax: "{n} pax · {kind}",
       chipCrew: "{d} · {n}", chipPrice: "{p} net",
       busy: "Calculating …", calc: "Calculate the fare",
@@ -214,9 +261,10 @@
     return fetchJson(url).then(function (json) {
       var r = json.routes && json.routes[0];
       if (json.code !== "Ok" || !r) throw new Error("OSRM " + json.code);
-      return { km: r.distance / 1000, hours: r.duration / 3600, coords: r.geometry.coordinates, estimated: false };
+      /* auf ganze km runden, damit „hin + zurück“ im Rechenweg exakt aufgeht */
+      return { km: Math.round(r.distance / 1000), hours: r.duration / 3600, coords: r.geometry.coordinates, estimated: false };
     }).catch(function () {
-      var km = haversine(from, to) * AIR_FACTOR;
+      var km = Math.round(haversine(from, to) * AIR_FACTOR);
       return { km: km, hours: km / AIR_SPEED, coords: [[from.lon, from.lat], [to.lon, to.lat]], estimated: true };
     });
   }
@@ -299,6 +347,8 @@
     }
     return leafletPromise;
   }
+  /* Ortsnamen kommen von Photon – als Text einsetzen, nicht als HTML */
+  function textNode(text) { var s = document.createElement("span"); s.textContent = text; return s; }
   function drawMap(L, from, to, coords) {
     var el = $("#demo-map");
     if (!el) return;
@@ -313,8 +363,8 @@
     var latlngs = coords.map(function (c) { return [c[1], c[0]]; });
     layer = L.featureGroup([
       L.polyline(latlngs, { color: "#0D1C42", weight: 5, opacity: 0.95 }),
-      L.marker([from.lat, from.lon], { title: T.mapFrom }).bindPopup(from.label),
-      L.marker([to.lat, to.lon], { title: T.mapTo }).bindPopup(to.label)
+      L.marker([from.lat, from.lon], { title: T.mapFrom }).bindPopup(textNode(from.label)),
+      L.marker([to.lat, to.lon], { title: T.mapTo }).bindPopup(textNode(to.label))
     ]).addTo(map);
     map.invalidateSize();
     map.fitBounds(layer.getBounds(), { padding: [28, 28] });
@@ -331,7 +381,7 @@
     var drivers = h <= DAY_DRIVE ? 1 : 2;
     var perDay = drivers === 1 ? DAY_DRIVE : TEAM_DRIVE;
     var legDays = Math.max(1, Math.ceil(h / perDay));
-    var out = { h: h, breaks: breaks, drivers: drivers, legDays: legDays, kind: inp.kind, km: r.km * 2, warn: null, tight: false };
+    var out = { h: h, breaks: breaks, drivers: drivers, perDay: perDay, legDays: legDays, kind: inp.kind, km: r.km * 2, warn: null, tight: false };
 
     if (inp.kind === "transfer") {
       out.days = Math.max(legDays, Math.ceil(2 * h / perDay));
@@ -340,6 +390,7 @@
     } else if (inp.kind === "round") {
       var minDays = 2 * legDays;
       var span = Math.round((inp.returnDate - inp.date) / 864e5) + 1;
+      out.span = span;
       out.days = Math.max(span, minDays);
       out.nights = out.days - 1;
       if (span < minDays) out.warn = fmt(T.feasReturn, { date: fmtDate(addDays(inp.date, minDays - 1)), n: plural(T.days, out.days) });
@@ -359,12 +410,14 @@
       var dep = new Date(inp.date);
       dep.setHours(inp.time[0], inp.time[1], 0, 0);
       var arr = new Date(dep.getTime() + (h + (out.drivers === 1 ? breaks * BREAK_H : 0)) * 36e5);
-      out.arrive = { time: fmtTime(arr), next: arr.getDate() !== dep.getDate() };
+      out.arrive = { dep: fmtTime(dep), time: fmtTime(arr), next: arr.getDate() !== dep.getDate() };
     }
     out.bus = busFor(inp.pax);
 
     var kmPrice = out.km * p.rate;
     var minimum = out.days * p.dayMin;
+    out.kmPrice = kmPrice;
+    out.minimum = minimum;
     out.minApplies = minimum > kmPrice;
     out.base = Math.max(kmPrice, minimum);
     out.extra = (out.drivers - 1) * out.days * p.extraDriver;
@@ -384,14 +437,42 @@
     setOut("bus", T.bus[res.bus.key] + " · " + fmt(T.seats, { n: res.bus.seats }));
     setOut("days", plural(T.days, res.days) + " · " + plural(T.nights, res.nights));
 
-    var crew = res.drivers === 1
-      ? fmt(T.crewSingle, { h: fmtDur(res.h), b: res.breaks, d: plural(T.legDays, res.legDays) })
-      : fmt(T.crewTeam, { h: fmtDur(res.h), d: plural(T.legDays, res.legDays) });
-    var kindText = res.kind === "transfer" ? fmt(T.kindTransfer, { km: fmtKm(res.leer, r.estimated) })
-      : res.kind === "round" ? fmt(T.kindRound, { n: plural(T.days, res.days) })
-      : fmt(T.kindDay, { h: fmtDur(res.hTotal) });
-    if (res.arrive) kindText += " " + fmt(res.arrive.next ? T.arriveNext : T.arrive, { t: res.arrive.time });
-    setOut("crew", crew + " " + kindText);
+    /* Rechenweg: jeder Schritt mit der Regel, die angewendet wurde */
+    var est = r.estimated;
+    var scope = res.kind === "day" ? T.scopeAll : T.scopeLeg;
+    var hRef = res.kind === "day" ? res.hTotal : res.h;   /* Lenkzeit, nach der Fahrer und Pausen bemessen werden */
+    var dn = { days: plural(T.days, res.days), nights: plural(T.nights, res.nights) };
+    var daysText = res.kind === "transfer"
+      ? fmt(T.stDaysTransfer, { h: fmtDur(res.h), H: fmtDur(2 * res.h), per: res.perDay, days: dn.days, nights: dn.nights })
+      : res.kind === "round"
+        ? fmt(res.span < res.days ? T.stDaysRoundMin : T.stDaysRound, { d1: fmtDate(inp.date), d2: fmtDate(inp.returnDate), span: plural(T.days, res.span), legDays: plural(T.legDays, res.legDays), days: dn.days, nights: dn.nights })
+        : fmt(res.warn ? T.stDaysDayNo : T.stDaysDay, { H: fmtDur(res.hTotal), days: dn.days, nights: dn.nights });
+    var steps = [
+      [T.stRoute, est ? fmt(T.stRouteEst, { km: fmtKm(r.km) }) : fmt(T.stRouteT, { km: fmtKm(r.km), t: fmtDur(r.hours) })],
+      [T.stCoach, fmt(T.stCoachT, { t: fmtDur(r.hours), h: fmtDur(res.h) })],
+      [T.stBreaks, res.breaks
+        ? fmt(T.stBreaksT, { b: res.breaks, duty: fmtDur(hRef + res.breaks * BREAK_H), scope: scope })
+        : fmt(T.stBreaksNone, { scope: scope })],
+      [T.stDrivers, fmt(res.drivers === 1 ? T.stDriversOne : T.stDriversTwo, { h: fmtDur(hRef), scope: scope })],
+      [T.stDays, daysText]
+    ];
+    if (res.arrive) steps.push([T.stArrive, fmt(T.stArriveT, {
+      dep: res.arrive.dep, h: fmtDur(res.h),
+      br: res.drivers === 1 && res.breaks ? fmt(T.brT, { n: res.breaks }) : "",
+      a: fmt(res.arrive.next ? T.arriveNext : T.arrive, { t: res.arrive.time })
+    })]);
+    steps.push([T.stBus, fmt(T.stBusT, { n: inp.pax, bus: T.bus[res.bus.key], seats: res.bus.seats })]);
+    var stepsEl = $('[data-out="steps"]');
+    if (stepsEl) {
+      stepsEl.innerHTML = "";
+      steps.forEach(function (st) {
+        var li = document.createElement("li");
+        li.innerHTML = "<b></b><span></span>";
+        li.firstChild.textContent = st[0];
+        li.lastChild.textContent = st[1];
+        stepsEl.appendChild(li);
+      });
+    }
     var feas = res.warn ? res.warn : res.tight ? fmt(T.feasTight, { h: Math.round(res.duty) }) : T.feasOk;
     var feasEl = $('[data-out="feasible"]');
     if (feasEl) { feasEl.textContent = feas; feasEl.classList.toggle("is-warn", !!(res.warn || res.tight)); }
@@ -416,18 +497,28 @@
     var lines = $('[data-out="lines"]');
     if (lines) {
       lines.innerHTML = "";
-      var items = [];
-      items.push([res.minApplies
-        ? fmt(T.lineMin, { days: plural(T.days, res.days), rate: eur.format(p.dayMin) })
-        : fmt(T.lineKm, { km: fmtKm(res.km, r.estimated), rate: eur2.format(p.rate) }), res.base]);
-      if (res.extra) items.push([fmt(T.lineExtra, { n: res.drivers - 1, days: plural(T.days, res.days), rate: eur.format(p.extraDriver) }), res.extra]);
-      if (res.hotel) items.push([fmt(T.lineHotel, { nights: res.nights, d: plural(T.drivers, res.drivers), rate: eur.format(p.night) }), res.hotel]);
-      if (res.kindAdj) items.push([fmt(T.lineKind, { pct: (p.pct > 0 ? "+" : "") + p.pct }), res.kindAdj]);
+      /* Jede Position wird gezeigt – auch mit 0 –, damit der Rechenweg nachvollziehbar bleibt. [Text, Wert, Klasse] */
+      var items = [
+        [fmt(res.kind === "transfer" ? T.lnDistTransfer : T.lnDist, { km1: fmtKm(r.km, est) }), fmtKm(res.km, est), ""],
+        [fmt(T.lnKm, { km: fmtKm(res.km, est), rate: eur2.format(p.rate) }) + (res.minApplies ? T.lnOff : T.lnApplies),
+          eur2.format(res.kmPrice), res.minApplies ? "is-off" : "is-base"],
+        [fmt(T.lnMin, { days: dn.days, rate: eur.format(p.dayMin) }) + (res.minApplies ? T.lnApplies : T.lnOff),
+          eur2.format(res.minimum), res.minApplies ? "is-base" : "is-off"],
+        [res.drivers > 1 ? fmt(T.lnExtra, { n: res.drivers - 1, days: dn.days, rate: eur.format(p.extraDriver) }) : T.lnExtraNone,
+          eur2.format(res.extra), res.drivers > 1 ? "" : "is-zero"],
+        [res.nights > 0 ? fmt(T.lnHotel, { nights: res.nights, d: plural(T.drivers, res.drivers), rate: eur.format(p.night) }) : T.lnHotelNone,
+          eur2.format(res.hotel), res.nights > 0 ? "" : "is-zero"],
+        [p.pct ? fmt(T.lnKind, { pct: (p.pct > 0 ? "+" : "") + p.pct, base: eur2.format(res.base) }) : T.lnKindNone,
+          eur2.format(res.kindAdj), p.pct ? "" : "is-zero"],
+        [T.lnSum, eur2.format(res.total), "is-sum"],
+        [fmt(T.lnPP, { total: eur2.format(res.total), n: inp.pax }), eur2.format(res.perPerson), ""]
+      ];
       items.forEach(function (it) {
         var li = document.createElement("li");
+        if (it[2]) li.className = it[2];
         li.innerHTML = "<span></span><b></b>";
         li.firstChild.textContent = it[0];
-        li.lastChild.textContent = eur.format(it[1]);
+        li.lastChild.textContent = it[1];
         lines.appendChild(li);
       });
     }
