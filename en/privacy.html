@@ -48,6 +48,7 @@
     <ul>
       <li>We don't use cookies or tracking tools. We measure the number of visits anonymously with Vercel Web Analytics (section 4).</li>
       <li>The fonts are hosted on our server; the website does not connect to Google Fonts.</li>
+      <li>The demo calculator on the home page only requests place search, route and map from third-party services once you use it; nothing is sent to us in the process (section 5).</li>
       <li>We only receive personal data from you when you send us an inquiry, write to us or book an appointment.</li>
       <li>The statement “Your data stays in the EU” on the home page refers to the BusFlow instances we run for coach operators. The details below apply to this website.</li>
     </ul>
@@ -66,8 +67,21 @@
     <p>The legal basis is Art. 6(1)(f) GDPR; our legitimate interest is improving the website based on how it is used. For the transfer to the USA, the European Commission's adequacy decision for the EU-U.S. Data Privacy Framework applies (Art. 45 GDPR). You can object to the recording, for example by disabling JavaScript or using a content blocker.</p>
   </section>
 
+  <section aria-labelledby="h-demo">
+    <h2 id="h-demo">5. Demo calculator</h2>
+    <p>In the “What gets faster” section of our home page you can price a coach trip with your own sample rates. As long as you enter nothing there, no connection is made to the services listed below. Only when you type a place or click “Calculate the fare” does your browser send requests directly to these services:</p>
+    <ul>
+      <li><strong>Place search:</strong> Photon (komoot GmbH, Germany). The place names you enter (from the third character, as you type), your IP address and browser details are transmitted. <a href="https://www.komoot.com/privacy" target="_blank" rel="noopener">komoot privacy policy</a></li>
+      <li><strong>Route:</strong> the public OSRM demo server router.project-osrm.org, operated by FOSSGIS e.V. (Germany). The coordinates of departure and destination, your IP address and browser details are transmitted.</li>
+      <li><strong>Map:</strong> map tiles from tile.openstreetmap.org of the OpenStreetMap Foundation (Cambridge, United Kingdom). The displayed map section, your IP address and browser details are transmitted. For the United Kingdom, an adequacy decision of the European Commission applies (Art. 45 GDPR). <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">OpenStreetMap Foundation privacy policy</a></li>
+    </ul>
+    <p>These providers process the data under their own responsibility and their own privacy policies. We receive neither data nor reports from them.</p>
+    <p>Passengers, dates, trip type and your sample rates stay in your browser. The browser keeps the sample rates in session storage (sessionStorage) so they are still there for the next calculation; they are deleted at the latest when you close the tab. Nothing is sent to us. We serve the Leaflet map library from our own server.</p>
+    <p>The legal basis is Art. 6(1)(f) GDPR; our legitimate interest is to show you the calculation you triggered yourself. If you do not want to send data to these services, do not use the demo calculator; everything else on the website works without it.</p>
+  </section>
+
   <section aria-labelledby="h-upit">
-    <h2 id="h-upit">5. Inquiry for a first meeting</h2>
+    <h2 id="h-upit">6. Inquiry for a first meeting</h2>
     <p>When you use our inquiry form, we process your details: company name, full name, email address, optionally phone number and country of head office, details about your coach business (number of coaches, services, how you create offers today, desired start, what you already have), your preferred way of talking and your note.</p>
     <p>The purpose is to process your inquiry and prepare the first meeting. The legal basis is Art. 6(1)(b) GDPR (steps prior to entering into a contract at your request) and your consent under Art. 6(1)(a) GDPR, which you give with the checkbox in the form. You can withdraw your consent at any time with effect for the future, for example by email to <a href="mailto:info@flow-solutions.hr">info@flow-solutions.hr</a>.</p>
     <h3>Sending via Formspree</h3>
@@ -80,22 +94,22 @@
   </section>
 
   <section aria-labelledby="h-email">
-    <h2 id="h-email">6. Email</h2>
+    <h2 id="h-email">7. Email</h2>
     <p>We run our mailbox <a href="mailto:info@flow-solutions.hr">info@flow-solutions.hr</a> on Microsoft 365 (Microsoft Ireland Operations Limited, One Microsoft Place, South County Business Park, Leopardstown, Dublin 18, Ireland). When you write to us or we reply to your inquiry, Microsoft processes the messages on our behalf. The legal basis is Art. 6(1)(b) GDPR, and for general inquiries Art. 6(1)(f) GDPR. A transfer to Microsoft Corporation in the USA cannot be ruled out; it is certified under the EU-U.S. Data Privacy Framework (Art. 45 GDPR).</p>
   </section>
 
   <section aria-labelledby="h-termin">
-    <h2 id="h-termin">7. Booking an appointment and the conversation</h2>
+    <h2 id="h-termin">8. Booking an appointment and the conversation</h2>
     <p>The “Book an online meeting” button takes you to Microsoft Bookings. There you enter your name, email address and optionally your phone number and a note. Microsoft processes this data on our behalf so that we can confirm the appointment. We hold the conversation via Microsoft Teams or by phone. The legal basis is Art. 6(1)(b) GDPR. More in <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank" rel="noopener">Microsoft's privacy statement</a>.</p>
   </section>
 
   <section aria-labelledby="h-poveznice">
-    <h2 id="h-poveznice">8. Links to other websites</h2>
+    <h2 id="h-poveznice">9. Links to other websites</h2>
     <p>When you follow a link to another website, for example mikanovic.de, that provider's privacy policy applies there.</p>
   </section>
 
   <section aria-labelledby="h-prava">
-    <h2 id="h-prava">9. Your rights</h2>
+    <h2 id="h-prava">10. Your rights</h2>
     <p>At any time you have the following rights:</p>
     <ul>
       <li>access to your data (Art. 15 GDPR),</li>
@@ -110,24 +124,24 @@
   </section>
 
   <section aria-labelledby="h-prituzba">
-    <h2 id="h-prituzba">10. Right to lodge a complaint</h2>
+    <h2 id="h-prituzba">11. Right to lodge a complaint</h2>
     <p>You can lodge a complaint with a data protection supervisory authority (Art. 77 GDPR). The authority responsible for us is the Croatian Personal Data Protection Agency (Agencija za zaštitu osobnih podataka, AZOP), Selska cesta 136, 10000 Zagreb, <a href="https://azop.hr" target="_blank" rel="noopener">azop.hr</a>. You can also contact the supervisory authority in the country where you live or work.</p>
   </section>
 
   <section aria-labelledby="h-tls">
-    <h2 id="h-tls">11. Encryption</h2>
+    <h2 id="h-tls">12. Encryption</h2>
     <p>This website is only delivered over an encrypted connection (HTTPS). The inquiry form also sends your details encrypted.</p>
   </section>
 
   <section aria-labelledby="h-auto">
-    <h2 id="h-auto">12. No automated decision-making</h2>
+    <h2 id="h-auto">13. No automated decision-making</h2>
     <p>We do not make automated decisions within the meaning of Art. 22 GDPR and do not create profiles.</p>
   </section>
 
   <section aria-labelledby="h-izmjene">
-    <h2 id="h-izmjene">13. Changes</h2>
+    <h2 id="h-izmjene">14. Changes</h2>
     <p>We update this policy when the website or the law changes.</p>
-    <p class="legal__stand">As of: September 2026</p>
+    <p class="legal__stand">As of: October 2026</p>
   </section>
 </main>
 
