@@ -772,6 +772,43 @@ html.js .map.is-in .lbl { animation: map-fade 0.4s ease-out both; animation-dela
 .cmp__after { display: flex; flex-direction: column; gap: 8px; }
 .cmp__after p { font-size: 16px; line-height: 1.5; font-weight: 600; }
 .cmp__tag { font-family: var(--font-mono); font-size: 12px; color: var(--text-2); }
+
+/* Einsatzplan: statična ilustracija modula Fahrer (tjedan × vozači), bez JS-a */
+.roster { display: flex; flex-direction: column; gap: 12px; margin: 8px 0 0; }
+.roster__card { background: var(--surface); border: var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 30px 60px -40px rgba(var(--ink900-rgb), 0.35); }
+.roster__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 14px 20px; background: var(--ink); color: var(--on-ink); }
+.roster__title { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+.roster__title .key__ico { background: var(--accent); color: var(--ink); }
+.roster__tabs { display: flex; gap: 4px; font-size: 13px; font-weight: 600; }
+.roster__tabs span { padding: 6px 12px; border-radius: 999px; color: var(--on-ink-2); }
+.roster__tabs .is-active { background: var(--accent); color: var(--ink-900); }
+.roster__week { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--on-ink-2); }
+.roster__scroll { overflow-x: auto; }
+.roster__grid { display: grid; grid-template-columns: 190px repeat(7, minmax(112px, 1fr)); min-width: 920px; }
+.roster__row { display: contents; }
+.roster__grid > * { min-height: 56px; padding: 10px 12px; border-bottom: var(--border); border-right: 1px solid rgba(var(--ink-rgb), 0.08); font-size: 13px; }
+.roster__head { display: flex; flex-direction: column; justify-content: center; min-height: 44px; background: var(--ground-3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); }
+.roster__head b { font-family: var(--font-body); font-size: 13px; letter-spacing: 0; color: var(--text); }
+.roster__drv { position: sticky; left: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px; background: var(--surface); }
+.roster__drv b { font-size: 14px; }
+.roster__drv small { font-size: 12px; color: var(--text-2); }
+.roster__badge { display: inline-flex; align-items: center; gap: 5px; width: max-content; max-width: 100%; padding: 2px 8px; line-height: 1.35; border-radius: 999px; font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; }
+.roster__badge--ok { background: #E3F3E8; color: #1E6B3A; }
+.roster__badge--due { background: #FFF2CC; color: #7A5A00; }
+.roster__cell { display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.roster__cell--off { font-size: 12px; color: var(--text-muted); }
+.roster__cell--span { grid-column: span 2; }
+.roster__trip { display: flex; flex-direction: column; gap: 2px; padding: 6px 9px; border-radius: 8px; background: var(--ink); color: var(--on-ink); font-size: 12.5px; line-height: 1.3; }
+.roster__trip small { font-size: 11px; color: var(--on-ink-2); }
+.roster__trip--o { background: #22396F; }
+.roster__trip--warn { background: #FFF2CC; color: #7A5A00; }
+.roster__trip--warn small { color: #7A5A00; }
+.roster__trip--dbl { outline: 2px solid var(--danger); outline-offset: -2px; }
+.roster__hours { font-family: var(--font-mono); font-size: 11px; color: var(--text-2); }
+.roster__foot { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 12px 20px; border-top: var(--border); background: var(--ground-3); font-size: 13px; color: var(--text-2); }
+.roster figcaption { font-size: 14px; color: var(--text-2); }
+html.js .roster__grid > * { opacity: 0; translate: 0 10px; transition: opacity 0.45s ease, translate 0.45s ease; transition-delay: calc(var(--r, 0) * 90ms); }
+html.js .roster.is-in .roster__grid > * { opacity: 1; translate: 0 0; }
 html.js .cmp__row:not(.is-in) .cmp__job, html.js .cmp__row:not(.is-in) .cmp__before { opacity: 0; }
 html.js .cmp__row:not(.is-in) .cmp__arrow .arr { stroke-dashoffset: 60; }
 html.js .cmp__row:not(.is-in) .cmp__arrow .arr-dot { opacity: 0; }
@@ -810,6 +847,114 @@ html:not(.js) .pipe__num, .pipe.is-in .pipe__num { animation: pipe-light 0.5s cu
 .auto__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 20px; }
 .auto__grid li { display: flex; align-items: center; gap: 12px; font-size: 15px; line-height: 1.4; }
 .auto__grid .icon-tile { background: rgba(var(--accent-rgb), 0.12); color: var(--accent); }
+
+/* Čipovi s rezultatom demo-kalkulatora na koracima 01–06 (puni ih demo.js) */
+.pipe__chip {
+  display: none;
+  margin-top: 2px;
+  width: max-content; max-width: 100%;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--ink-900);
+  font-family: var(--font-mono);
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.pipe__chip.is-live { display: inline-block; animation: chip-in 0.4s cubic-bezier(0.2, 1.2, 0.3, 1) both; }
+@keyframes chip-in { from { opacity: 0; translate: 0 6px; scale: 0.92; } to { opacity: 1; translate: 0 0; scale: 1; } }
+
+/* ---------- 04 · Demo-Rechner: ruta, posada i cijena iz parametara posjetitelja ---------- */
+.demo {
+  display: flex; flex-direction: column; gap: 24px;
+  padding: 28px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  scroll-margin-top: 110px;
+}
+.demo__head { display: flex; flex-direction: column; gap: 8px; max-width: 760px; }
+.demo__head .eyebrow { color: var(--accent); }
+.demo__head h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(26px, 3vw, 34px); line-height: 1.05; color: var(--on-ink); }
+.demo__head p { color: var(--on-ink-2); font-size: 16px; line-height: 1.5; }
+.demo__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.demo__form { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.demo__row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+.demo__row3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px 16px; }
+.demo .q__label, .demo .q > legend { font-size: 14px; color: var(--on-ink); }
+.demo .opt { color: var(--on-ink-2); }
+.demo .q__err { color: #FFB4AB; }
+.demo .q.is-invalid .field { border-color: #FFB4AB; }
+.demo .field { height: 46px; border-color: transparent; color-scheme: light; }
+.demo .field:focus { border-color: var(--accent); outline-color: rgba(var(--accent-rgb), 0.35); }
+.demo__kinds { border: 0; padding: 0; margin: 0; min-width: 0; }
+.demo__options { display: flex; flex-wrap: wrap; gap: 8px; }
+.demo__radio {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  font-size: 14px; font-weight: 600;
+  cursor: pointer;
+}
+.demo__radio input { accent-color: var(--accent); margin: 0; }
+.demo__radio:has(input:checked) { background: var(--accent); color: var(--ink-900); border-color: var(--accent); }
+.demo__radio:has(input:focus-visible) { outline: 3px solid rgba(var(--accent-rgb), 0.35); outline-offset: 1px; }
+.demo__params { border: 1px dashed rgba(var(--accent-rgb), 0.4); border-radius: 14px; padding: 0 16px; }
+.demo__params summary {
+  list-style: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0;
+  cursor: pointer;
+  font-weight: 700; font-size: 15px;
+}
+.demo__params summary::-webkit-details-marker { display: none; }
+.demo__params summary small { font-weight: 400; font-size: 13px; color: var(--on-ink-2); }
+.demo__params summary::after { content: ""; width: 9px; height: 9px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); rotate: 45deg; flex-shrink: 0; transition: rotate 0.2s; }
+.demo__params[open] summary::after { rotate: -135deg; }
+.demo__paramgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px 16px; padding: 4px 0 18px; }
+.demo__paramgrid .q__label { font-size: 13px; }
+.demo__actions { display: flex; flex-direction: column; gap: 10px; }
+.demo__hint { font-size: 12.5px; line-height: 1.45; color: var(--on-ink-2); }
+.demo__hint a { color: var(--accent); }
+.demo__msg { font-size: 14px; line-height: 1.45; padding: 10px 14px; border-radius: 10px; background: rgba(var(--accent-rgb), 0.1); }
+.demo__msg.is-warn { background: rgba(255, 180, 171, 0.14); color: #FFD9D4; }
+.demo__out { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.demo__map {
+  position: relative; isolation: isolate;
+  height: 320px;
+  border-radius: 14px; overflow: hidden;
+  background: #09122E;
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
+}
+.demo__map .leaflet-container { font-family: var(--font-body); }
+.demo__empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 24px; text-align: center; color: var(--on-ink-2); }
+.demo__empty .eyebrow { color: var(--accent); }
+.demo__empty b { font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--on-ink); }
+.demo__result { display: flex; flex-direction: column; gap: 16px; }
+.demo__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; }
+.demo__facts div { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); }
+.demo__facts dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-ink-2); }
+.demo__facts dd { margin: 0; font-weight: 700; font-size: 17px; }
+.demo__block { display: flex; flex-direction: column; gap: 6px; }
+.demo__block h4 { display: flex; gap: 8px; align-items: baseline; font-size: 15px; font-weight: 700; }
+.demo__block h4 small { font-weight: 400; font-size: 12px; color: var(--on-ink-2); }
+.demo__block p { font-size: 14px; line-height: 1.5; }
+.demo__block .demo__note { font-size: 13px; color: var(--on-ink-2); }
+.demo__block .demo__note.is-warn { color: #FFD9D4; }
+.demo__countries { display: flex; flex-wrap: wrap; gap: 8px; }
+.demo__country { display: inline-flex; align-items: baseline; gap: 6px; padding: 5px 10px; border-radius: 8px; background: rgba(var(--accent-rgb), 0.1); font-size: 13px; }
+.demo__country b { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+.demo__price { display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 14px; background: var(--accent); color: var(--ink-900); }
+.demo__price-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.demo__price-label { width: 100%; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+.demo__price strong { font-family: var(--font-display); font-weight: 800; font-size: 40px; line-height: 1; }
+.demo__price-pp { font-size: 14px; font-weight: 600; }
+.demo__lines { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 10px 0 0; border-top: 1px dashed rgba(var(--ink900-rgb), 0.3); list-style: none; }
+.demo__lines li { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+.demo__lines b { font-family: var(--font-mono); font-weight: 700; white-space: nowrap; }
+.demo__foot { font-size: 12.5px; line-height: 1.45; color: var(--on-ink-2); }
+.demo__result .btn { align-self: flex-start; }
 
 /* ---------- 05 · Prednosti ---------- */
 .adv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -1075,6 +1220,8 @@ html:not(.js) .pipe__num, .pipe.is-in .pipe__num { animation: pipe-light 0.5s cu
   .pipe__bar i, .pipe.is-in .pipe__bar i { scale: 1 1 !important; animation: none !important; }
   .pipe__num, .pipe.is-in .pipe__num { animation: none !important; background: var(--accent); color: var(--ink-900); }
   .phases__bar i { scale: 1 1 !important; transition: none !important; }
+  .pipe__chip.is-live { animation: none !important; }
+  html.js .roster__grid > * { opacity: 1 !important; translate: 0 0 !important; transition: none !important; }
 }
 
 /* ---------- Prilagodbe širini ---------- */
@@ -1164,6 +1311,16 @@ html:not(.js) .pipe__num, .pipe.is-in .pipe__num { animation: pipe-light 0.5s cu
   .pipe__step { flex-direction: row; align-items: flex-start; gap: 14px; }
   .pipe__num { width: 44px; height: 44px; flex-shrink: 0; font-size: 13px; }
   .auto__grid { grid-template-columns: 1fr; }
+  .demo { padding: 20px 16px; gap: 20px; }
+  .demo__grid { grid-template-columns: 1fr; gap: 22px; }
+  .demo__row2 { grid-template-columns: 1fr; }
+  .demo__map { height: 240px; }
+  .demo__actions .btn { width: 100%; }
+  .demo__price strong { font-size: 34px; }
+  .demo__result .btn { align-self: stretch; }
+  .roster__bar { padding: 12px 16px; }
+  .roster__grid { grid-template-columns: 150px repeat(7, minmax(104px, 1fr)); min-width: 860px; }
+  .roster__foot { padding: 10px 16px; }
   .adv { grid-template-columns: 1fr; }
   .phases { grid-template-columns: 1fr; gap: 8px; }
   .phase { flex-direction: row; text-align: left; align-items: center; gap: 12px; }
