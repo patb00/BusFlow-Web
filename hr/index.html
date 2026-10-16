@@ -455,57 +455,98 @@
       <figure class="roster rev rev--up" aria-labelledby="roster-cap">
         <div class="roster__card">
           <div class="roster__bar">
-            <div class="roster__title"><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Vozači · Raspored</div>
-            <div class="roster__tabs" aria-hidden="true"><span>Pregled</span><span class="is-active">Raspored</span><span>Sati</span></div>
+            <div class="roster__title"><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Vozači</div>
+            <div class="roster__tabs" role="tablist" aria-label="Prikaz">
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-overview" aria-controls="roster-overview" aria-selected="false" tabindex="-1">Pregled</button>
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-plan" aria-controls="roster-plan" aria-selected="true">Raspored</button>
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-hours" aria-controls="roster-hours" aria-selected="false" tabindex="-1">Sati</button>
+            </div>
             <span class="roster__week">43. tjedan · 19.–25. 10. 2026.</span>
           </div>
-          <div class="roster__scroll" aria-hidden="true">
-            <div class="roster__grid">
-              <div class="roster__row" style="--r: 0">
-                <div class="roster__head"><b>Vozač</b></div>
-                <div class="roster__head">pon <b>19.</b></div><div class="roster__head">uto <b>20.</b></div><div class="roster__head">sri <b>21.</b></div><div class="roster__head">čet <b>22.</b></div><div class="roster__head">pet <b>23.</b></div><div class="roster__head">sub <b>24.</b></div><div class="roster__head">ned <b>25.</b></div>
-              </div>
-              <div class="roster__row" style="--r: 1">
-                <div class="roster__drv"><b>J. Weber</b><small>Na dužnosti 9 h · Vožnja 7,5 h</small><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">München → Zagreb<small>Vozač 1 · školski izlet · 2 dana</small></div></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Zagreb → München<small>Vozač 1 · povratak</small></div></div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-                <div class="roster__cell"><div class="roster__trip">Shuttle zračna luka MUC<small>Vozač 1 · 06:00</small></div></div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-              </div>
-              <div class="roster__row" style="--r: 2">
-                <div class="roster__drv"><b>M. Kovač</b><small>Na dužnosti 8 h · Vožnja 6 h</small><span class="roster__badge roster__badge--due">Kartica vozača istječe za 12 dana</span></div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Školski izlet Berlin<small>Vozač 2 · 2 dana</small></div></div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-                <div class="roster__cell"><div class="roster__trip">Umirovljenici Bodensko jezero<small>Vozač 1</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Shuttle sajam Frankfurt<small>Vozač 1</small></div><div class="roster__trip roster__trip--dbl">Vjenčanje Würzburg<small>Upozorenje: dvostruko zauzet</small></div></div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-              </div>
-              <div class="roster__row" style="--r: 3">
-                <div class="roster__drv"><b>S. Yilmaz</b><small>Na dužnosti 10 h · Vožnja 8 h</small><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Shuttle za tvornicu Ingolstadt<small>svaki dan 05:30</small></div></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Shuttle za tvornicu Ingolstadt<small>svaki dan 05:30</small></div></div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--warn">Kontrola vozačke dospjela<small>svakih 28 dana · potvrditi</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Udruga Salzburg<small>Vozač 1</small></div></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Skijanje Zillertal<small>Vozač 2 · 2 dana</small></div></div>
-              </div>
-              <div class="roster__row" style="--r: 4">
-                <div class="roster__drv"><b>A. Brandt</b><small>Na dužnosti 9 h · Vožnja 7 h</small><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-                <div class="roster__cell"><div class="roster__trip">Shuttle sajam Frankfurt<small>Vozač 1</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Shuttle sajam Frankfurt<small>Vozač 1</small></div></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Maturalac Prag<small>Vozač 1 · 2 dana</small></div></div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
-                <div class="roster__cell roster__cell--off">slobodno</div>
+          <div class="roster__panel" id="roster-overview" role="tabpanel" aria-labelledby="roster-tab-overview" tabindex="0" hidden>
+            <ul class="roster__people">
+                <li class="roster__person" style="--r: 0">
+                  <div class="roster__person-head"><b>J. Weber</b><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
+                  <dl><div><dt>Sljedeća vožnja</dt><dd>pon · München → Zagreb</dd></div><div><dt>Ovaj tjedan</dt><dd>3 vožnje · 3 dana slobodno</dd></div><div><dt>Dokumenti</dt><dd>Vozačka, kartica i kvalifikacija vrijede</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 1">
+                  <div class="roster__person-head"><b>M. Kovač</b><span class="roster__badge roster__badge--due">Kartica 12 dana</span></div>
+                  <dl><div><dt>Sljedeća vožnja</dt><dd>uto · Školski izlet Berlin</dd></div><div><dt>Ovaj tjedan</dt><dd class="is-warn">4 vožnje · 3 dana slobodno · sub dvostruko zauzet</dd></div><div><dt>Dokumenti</dt><dd class="is-warn">Kartica vozača istječe 31. 10. – za 12 dana</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 2">
+                  <div class="roster__person-head"><b>S. Yilmaz</b><span class="roster__badge roster__badge--due">Kontrola dospjela</span></div>
+                  <dl><div><dt>Sljedeća vožnja</dt><dd>pon · Tvornica Ingolstadt</dd></div><div><dt>Ovaj tjedan</dt><dd>5 vožnji · 1 dan slobodno</dd></div><div><dt>Dokumenti</dt><dd class="is-warn">Kontrola vozačke dospjela (svakih 28 dana) – potvrditi čet</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 3">
+                  <div class="roster__person-head"><b>A. Brandt</b><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
+                  <dl><div><dt>Sljedeća vožnja</dt><dd>uto · Sajam Frankfurt</dd></div><div><dt>Ovaj tjedan</dt><dd>4 vožnje · 3 dana slobodno</dd></div><div><dt>Dokumenti</dt><dd>Svi dokumenti vrijede</dd></div></dl>
+                </li>
+            </ul>
+          </div>
+          <div class="roster__panel" id="roster-plan" role="tabpanel" aria-labelledby="roster-tab-plan" tabindex="0">
+            <div class="roster__scroll">
+              <div class="roster__grid">
+                  <div class="roster__row" style="--r: 0">
+                    <div class="roster__head"><b>Vozač</b></div>
+                    <div class="roster__head">pon <b>19.</b></div><div class="roster__head">uto <b>20.</b></div><div class="roster__head">sri <b>21.</b></div><div class="roster__head">čet <b>22.</b></div><div class="roster__head">pet <b>23.</b></div><div class="roster__head">sub <b>24.</b></div><div class="roster__head">ned <b>25.</b></div>
+                  </div>
+                  <div class="roster__row" style="--r: 1">
+                    <div class="roster__drv"><b>J. Weber</b><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">München → Zagreb<small>Vozač 1 · 2 dana</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Zagreb → München<small>povratak</small></div></div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                    <div class="roster__cell"><div class="roster__trip">Shuttle MUC<small>06:00</small></div></div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                  </div>
+                  <div class="roster__row" style="--r: 2">
+                    <div class="roster__drv"><b>M. Kovač</b><span class="roster__badge roster__badge--due">Kartica 12 dana</span></div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Školski izlet Berlin<small>Vozač 2 · 2 dana</small></div></div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                    <div class="roster__cell"><div class="roster__trip">Bodensko jezero<small>umirovljenici</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Sajam Frankfurt<small>Vozač 1</small></div><div class="roster__trip roster__trip--dbl">Vjenčanje Würzburg<small>dvostruko zauzet</small></div></div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                  </div>
+                  <div class="roster__row" style="--r: 3">
+                    <div class="roster__drv"><b>S. Yilmaz</b><span class="roster__badge roster__badge--due">Kontrola dospjela</span></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Tvornica Ingolstadt<small>05:30</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Tvornica Ingolstadt<small>05:30</small></div></div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--warn">Kontrola vozačke<small>dospjela · potvrditi</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Salzburg<small>udruga</small></div></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Skijanje Zillertal<small>Vozač 2 · 2 dana</small></div></div>
+                  </div>
+                  <div class="roster__row" style="--r: 4">
+                    <div class="roster__drv"><b>A. Brandt</b><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                    <div class="roster__cell"><div class="roster__trip">Sajam Frankfurt<small>Vozač 1</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Sajam Frankfurt<small>Vozač 1</small></div></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Maturalac Prag<small>Vozač 1 · 2 dana</small></div></div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                    <div class="roster__cell roster__cell--off">slobodno</div>
+                  </div>
               </div>
             </div>
+            <div class="roster__legend"><span><i class="roster__sw"></i>Vožnja</span><span><i class="roster__sw roster__sw--o"></i>Linijska / shuttle vožnja</span><span><i class="roster__sw roster__sw--warn"></i>Dokument dospio</span><span><i class="roster__sw roster__sw--dbl"></i>Dvostruko zauzet</span></div>
           </div>
-          <div class="roster__foot" aria-hidden="true"><span>Svaka promjena ide vozaču e-mailom kao putni nalog</span><span>Nedjelja 16 h: tjedni plan svima</span><span>Sati kao CSV</span></div>
+          <div class="roster__panel" id="roster-hours" role="tabpanel" aria-labelledby="roster-tab-hours" tabindex="0" hidden>
+            <div class="roster__scroll">
+              <table class="roster__table">
+                <thead><tr><th scope="col">Vozač</th><th scope="col">Dužnost</th><th scope="col">Vožnja</th><th scope="col">Vožnje</th><th scope="col">Odmor</th><th scope="col">Napomena</th></tr></thead>
+                <tbody>
+                    <tr><th scope="row">J. Weber</th><td class="num">38 h</td><td class="num">29,5 h</td><td class="num">3</td><td>u redu</td><td>—</td></tr>
+                    <tr><th scope="row">M. Kovač</th><td class="num">36 h</td><td class="num">27 h</td><td class="num">4</td><td>u redu</td><td class="is-warn">sub dvostruko zauzet</td></tr>
+                    <tr><th scope="row">S. Yilmaz</th><td class="num">44 h</td><td class="num">33 h</td><td class="num">5</td><td>u redu</td><td class="is-warn">Kontrola vozačke čet</td></tr>
+                    <tr><th scope="row">A. Brandt</th><td class="num">40 h</td><td class="num">30 h</td><td class="num">4</td><td>u redu</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="roster__legend"><span class="roster__pill">Izvoz sati u CSV</span><span>Dužnost i vožnja po vozaču, 43. tjedan</span></div>
+          </div>
+          <div class="roster__foot"><span>Svaka promjena ide vozaču e-mailom kao putni nalog</span><span>Nedjelja 16 h: tjedni plan svima</span><span>Sati kao CSV</span></div>
         </div>
-        <figcaption id="roster-cap">Raspored u BusFlowu: jedan tjedan, četiri vozača – vožnje, dokumenti i slobodni dani na jednom mjestu. Dvostruko zauzeće i dospjeli dokumenti se označavaju, ne blokiraju; vozač vidi svoje vožnje pod „Moje vožnje“.</figcaption>
+        <figcaption id="roster-cap">Modul Vozači u BusFlowu: pregled, raspored i sati jednog tjedna s četiri vozača – vožnje, dokumenti i slobodni dani na jednom mjestu. Dvostruko zauzeće i dospjeli dokumenti se označavaju, ne blokiraju; vozač vidi svoje vožnje pod „Moje vožnje“.</figcaption>
       </figure>
     </div>
   </section>
@@ -555,6 +596,7 @@
             </div>
             <details class="demo__params" open>
               <summary><span>Vaš cjenik</span><small>primjerne vrijednosti – upišite svoje</small></summary>
+              <div class="q demo__depot"><label class="q__label" for="demo-depot">Garaža / sjedište <span class="opt">– prazni km od tu, neobvezno</span></label><input class="field" id="demo-depot" name="depot" type="text" list="demo-depot-list" placeholder="npr. Zagreb" autocomplete="off"><datalist id="demo-depot-list"></datalist><span class="q__err">Mjesto nije pronađeno – odaberite s popisa ili ostavite prazno.</span></div>
               <div class="demo__paramgrid">
                 <div class="q"><label class="q__label" for="demo-rate">Cijena po km <span class="opt">€</span></label><input class="field" id="demo-rate" name="rate" type="number" min="0.1" step="0.1" value="2.2" required inputmode="decimal"><span class="q__err">Broj veći od 0.</span></div>
                 <div class="q"><label class="q__label" for="demo-daymin">Dnevni minimum <span class="opt">€ po danu</span></label><input class="field" id="demo-daymin" name="dayMin" type="number" min="0" step="10" value="650" required inputmode="numeric"><span class="q__err">Broj od 0.</span></div>
@@ -576,6 +618,8 @@
             <div class="demo__result" id="demo-result" hidden>
               <dl class="demo__facts">
                 <div><dt>Udaljenost u jednom smjeru</dt><dd data-out="km">—</dd></div>
+                <div><dt>Prazna vožnja</dt><dd data-out="leer">—</dd></div>
+                <div><dt>Ukupno km</dt><dd data-out="kmTotal">—</dd></div>
                 <div><dt>Vožnja po smjeru</dt><dd data-out="dur">—</dd></div>
                 <div><dt>Vozilo</dt><dd data-out="bus">—</dd></div>
                 <div><dt>Dani</dt><dd data-out="days">—</dd></div>
@@ -587,12 +631,13 @@
                 <p class="demo__note">U rasporedu vidite koji su vozači tog dana slobodni.</p>
               </div>
               <div class="demo__block">
-                <h4>Države na ruti <small>približno, u oba smjera</small></h4>
+                <h4>Države na ruti <small>približno, sve dionice uklj. prazne vožnje</small></h4>
                 <div class="demo__countries" data-out="countries"></div>
                 <p class="demo__note">BusFlow dijeli rutu na svakoj granici i obračunava PDV po državi.</p>
               </div>
               <div class="demo__price">
                 <div class="demo__price-head"><span class="demo__price-label">Ukupna cijena neto</span><strong data-out="total">—</strong><span class="demo__price-pp" data-out="perPerson"></span></div>
+                <p class="demo__illus">Samo ilustrativno: ovako računa BusFlow – s vašim primjernim cijenama, bez cestarina, goriva i PDV-a. Nije ponuda ni tržišna cijena.</p>
                 <ul class="demo__lines" data-out="lines"></ul>
               </div>
               <p class="demo__foot">Demo s vašim primjernim vrijednostima, bez PDV-a – nije ponuda. U BusFlowu računa vaš cjenik po klasi autobusa, cestarina i gorivo po državi te prazna vožnja od baze.</p>

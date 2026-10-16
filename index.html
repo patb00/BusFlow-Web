@@ -454,57 +454,98 @@
       <figure class="roster rev rev--up" aria-labelledby="roster-cap">
         <div class="roster__card">
           <div class="roster__bar">
-            <div class="roster__title"><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Fahrer · Einsatzplan</div>
-            <div class="roster__tabs" aria-hidden="true"><span>Übersicht</span><span class="is-active">Einsatzplan</span><span>Stunden</span></div>
+            <div class="roster__title"><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Fahrer</div>
+            <div class="roster__tabs" role="tablist" aria-label="Ansicht">
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-overview" aria-controls="roster-overview" aria-selected="false" tabindex="-1">Übersicht</button>
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-plan" aria-controls="roster-plan" aria-selected="true">Einsatzplan</button>
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-hours" aria-controls="roster-hours" aria-selected="false" tabindex="-1">Stunden</button>
+            </div>
             <span class="roster__week">KW 43 · 19.–25. Okt. 2026</span>
           </div>
-          <div class="roster__scroll" aria-hidden="true">
-            <div class="roster__grid">
-              <div class="roster__row" style="--r: 0">
-                <div class="roster__head"><b>Fahrer</b></div>
-                <div class="roster__head">Mo <b>19.</b></div><div class="roster__head">Di <b>20.</b></div><div class="roster__head">Mi <b>21.</b></div><div class="roster__head">Do <b>22.</b></div><div class="roster__head">Fr <b>23.</b></div><div class="roster__head">Sa <b>24.</b></div><div class="roster__head">So <b>25.</b></div>
-              </div>
-              <div class="roster__row" style="--r: 1">
-                <div class="roster__drv"><b>J. Weber</b><small>Im Dienst 9 h · Lenkzeit 7,5 h</small><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">München → Zagreb<small>Fahrer 1 · Klassenfahrt · 2 Tage</small></div></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Zagreb → München<small>Fahrer 1 · Rückfahrt</small></div></div>
-                <div class="roster__cell roster__cell--off">frei</div>
-                <div class="roster__cell"><div class="roster__trip">Flughafen-Shuttle MUC<small>Fahrer 1 · 06:00</small></div></div>
-                <div class="roster__cell roster__cell--off">frei</div>
-                <div class="roster__cell roster__cell--off">frei</div>
-              </div>
-              <div class="roster__row" style="--r: 2">
-                <div class="roster__drv"><b>M. Kovač</b><small>Im Dienst 8 h · Lenkzeit 6 h</small><span class="roster__badge roster__badge--due">Fahrerkarte läuft in 12 Tagen ab</span></div>
-                <div class="roster__cell roster__cell--off">frei</div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Klassenfahrt Berlin<small>Fahrer 2 · 2 Tage</small></div></div>
-                <div class="roster__cell roster__cell--off">frei</div>
-                <div class="roster__cell"><div class="roster__trip">Seniorenfahrt Bodensee<small>Fahrer 1</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Messe-Shuttle Frankfurt<small>Fahrer 1</small></div><div class="roster__trip roster__trip--dbl">Hochzeit Würzburg<small>Warnung: doppelt eingeteilt</small></div></div>
-                <div class="roster__cell roster__cell--off">frei</div>
-              </div>
-              <div class="roster__row" style="--r: 3">
-                <div class="roster__drv"><b>S. Yilmaz</b><small>Im Dienst 10 h · Lenkzeit 8 h</small><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Pendelfahrt Werk Ingolstadt<small>täglich 05:30</small></div></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Pendelfahrt Werk Ingolstadt<small>täglich 05:30</small></div></div>
-                <div class="roster__cell roster__cell--off">frei</div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--warn">Führerscheinkontrolle fällig<small>alle 28 Tage · bestätigen</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Vereinsfahrt Salzburg<small>Fahrer 1</small></div></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Skifahrt Zillertal<small>Fahrer 2 · 2 Tage</small></div></div>
-              </div>
-              <div class="roster__row" style="--r: 4">
-                <div class="roster__drv"><b>A. Brandt</b><small>Im Dienst 9 h · Lenkzeit 7 h</small><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
-                <div class="roster__cell roster__cell--off">frei</div>
-                <div class="roster__cell"><div class="roster__trip">Messe-Shuttle Frankfurt<small>Fahrer 1</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Messe-Shuttle Frankfurt<small>Fahrer 1</small></div></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Abschlussfahrt Prag<small>Fahrer 1 · 2 Tage</small></div></div>
-                <div class="roster__cell roster__cell--off">frei</div>
-                <div class="roster__cell roster__cell--off">frei</div>
+          <div class="roster__panel" id="roster-overview" role="tabpanel" aria-labelledby="roster-tab-overview" tabindex="0" hidden>
+            <ul class="roster__people">
+                <li class="roster__person" style="--r: 0">
+                  <div class="roster__person-head"><b>J. Weber</b><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
+                  <dl><div><dt>Nächste Fahrt</dt><dd>Mo · München → Zagreb</dd></div><div><dt>Diese Woche</dt><dd>3 Fahrten · 3 Tage frei</dd></div><div><dt>Dokumente</dt><dd>Führerschein, Fahrerkarte und Qualifikation gültig</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 1">
+                  <div class="roster__person-head"><b>M. Kovač</b><span class="roster__badge roster__badge--due">Fahrerkarte 12 Tage</span></div>
+                  <dl><div><dt>Nächste Fahrt</dt><dd>Di · Klassenfahrt Berlin</dd></div><div><dt>Diese Woche</dt><dd class="is-warn">4 Fahrten · 3 Tage frei · Sa doppelt eingeteilt</dd></div><div><dt>Dokumente</dt><dd class="is-warn">Fahrerkarte läuft am 31.10. ab – in 12 Tagen</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 2">
+                  <div class="roster__person-head"><b>S. Yilmaz</b><span class="roster__badge roster__badge--due">Kontrolle fällig</span></div>
+                  <dl><div><dt>Nächste Fahrt</dt><dd>Mo · Pendel Ingolstadt</dd></div><div><dt>Diese Woche</dt><dd>5 Fahrten · 1 Tag frei</dd></div><div><dt>Dokumente</dt><dd class="is-warn">Führerscheinkontrolle fällig (alle 28 Tage) – Do bestätigen</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 3">
+                  <div class="roster__person-head"><b>A. Brandt</b><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
+                  <dl><div><dt>Nächste Fahrt</dt><dd>Di · Messe Frankfurt</dd></div><div><dt>Diese Woche</dt><dd>4 Fahrten · 3 Tage frei</dd></div><div><dt>Dokumente</dt><dd>Alle Dokumente gültig</dd></div></dl>
+                </li>
+            </ul>
+          </div>
+          <div class="roster__panel" id="roster-plan" role="tabpanel" aria-labelledby="roster-tab-plan" tabindex="0">
+            <div class="roster__scroll">
+              <div class="roster__grid">
+                  <div class="roster__row" style="--r: 0">
+                    <div class="roster__head"><b>Fahrer</b></div>
+                    <div class="roster__head">Mo <b>19.</b></div><div class="roster__head">Di <b>20.</b></div><div class="roster__head">Mi <b>21.</b></div><div class="roster__head">Do <b>22.</b></div><div class="roster__head">Fr <b>23.</b></div><div class="roster__head">Sa <b>24.</b></div><div class="roster__head">So <b>25.</b></div>
+                  </div>
+                  <div class="roster__row" style="--r: 1">
+                    <div class="roster__drv"><b>J. Weber</b><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">München → Zagreb<small>Fahrer 1 · 2 Tage</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Zagreb → München<small>Rückfahrt</small></div></div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                    <div class="roster__cell"><div class="roster__trip">Shuttle MUC<small>06:00</small></div></div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                  </div>
+                  <div class="roster__row" style="--r: 2">
+                    <div class="roster__drv"><b>M. Kovač</b><span class="roster__badge roster__badge--due">Fahrerkarte 12 Tage</span></div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Klassenfahrt Berlin<small>Fahrer 2 · 2 Tage</small></div></div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                    <div class="roster__cell"><div class="roster__trip">Bodensee<small>Seniorenfahrt</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Messe Frankfurt<small>Fahrer 1</small></div><div class="roster__trip roster__trip--dbl">Hochzeit Würzburg<small>doppelt eingeteilt</small></div></div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                  </div>
+                  <div class="roster__row" style="--r: 3">
+                    <div class="roster__drv"><b>S. Yilmaz</b><span class="roster__badge roster__badge--due">Kontrolle fällig</span></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Pendel Ingolstadt<small>05:30</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Pendel Ingolstadt<small>05:30</small></div></div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--warn">Führerscheinkontrolle<small>fällig · bestätigen</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Salzburg<small>Vereinsfahrt</small></div></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Skifahrt Zillertal<small>Fahrer 2 · 2 Tage</small></div></div>
+                  </div>
+                  <div class="roster__row" style="--r: 4">
+                    <div class="roster__drv"><b>A. Brandt</b><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                    <div class="roster__cell"><div class="roster__trip">Messe Frankfurt<small>Fahrer 1</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Messe Frankfurt<small>Fahrer 1</small></div></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Abschlussfahrt Prag<small>Fahrer 1 · 2 Tage</small></div></div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                    <div class="roster__cell roster__cell--off">frei</div>
+                  </div>
               </div>
             </div>
+            <div class="roster__legend"><span><i class="roster__sw"></i>Fahrt</span><span><i class="roster__sw roster__sw--o"></i>Linien-/Pendelfahrt</span><span><i class="roster__sw roster__sw--warn"></i>Dokument fällig</span><span><i class="roster__sw roster__sw--dbl"></i>Doppelt eingeteilt</span></div>
           </div>
-          <div class="roster__foot" aria-hidden="true"><span>Jede Änderung geht als Fahrauftrag per E-Mail an den Fahrer</span><span>Sonntag 16 Uhr: Wochenplan an alle</span><span>Stunden als CSV</span></div>
+          <div class="roster__panel" id="roster-hours" role="tabpanel" aria-labelledby="roster-tab-hours" tabindex="0" hidden>
+            <div class="roster__scroll">
+              <table class="roster__table">
+                <thead><tr><th scope="col">Fahrer</th><th scope="col">Dienst</th><th scope="col">Lenkzeit</th><th scope="col">Fahrten</th><th scope="col">Ruhezeit</th><th scope="col">Hinweis</th></tr></thead>
+                <tbody>
+                    <tr><th scope="row">J. Weber</th><td class="num">38 Std.</td><td class="num">29,5 Std.</td><td class="num">3</td><td>ok</td><td>—</td></tr>
+                    <tr><th scope="row">M. Kovač</th><td class="num">36 Std.</td><td class="num">27 Std.</td><td class="num">4</td><td>ok</td><td class="is-warn">Sa doppelt eingeteilt</td></tr>
+                    <tr><th scope="row">S. Yilmaz</th><td class="num">44 Std.</td><td class="num">33 Std.</td><td class="num">5</td><td>ok</td><td class="is-warn">Führerscheinkontrolle Do</td></tr>
+                    <tr><th scope="row">A. Brandt</th><td class="num">40 Std.</td><td class="num">30 Std.</td><td class="num">4</td><td>ok</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="roster__legend"><span class="roster__pill">Stunden als CSV exportieren</span><span>Dienst- und Lenkzeit je Fahrer, Woche 43</span></div>
+          </div>
+          <div class="roster__foot"><span>Jede Änderung geht als Fahrauftrag per E-Mail an den Fahrer</span><span>Sonntag 16 Uhr: Wochenplan an alle</span><span>Stunden als CSV</span></div>
         </div>
-        <figcaption id="roster-cap">Einsatzplan in BusFlow: eine Woche, vier Fahrer – Fahrten, Dokumente und freie Tage auf einen Blick. Doppelbelegung und fällige Papiere werden markiert, nicht blockiert; der Fahrer sieht seine Fahrten unter „Meine Fahrten“.</figcaption>
+        <figcaption id="roster-cap">Modul Fahrer in BusFlow: Übersicht, Einsatzplan und Stunden einer Woche mit vier Fahrern – Fahrten, Dokumente und freie Tage auf einen Blick. Doppelbelegung und fällige Papiere werden markiert, nicht blockiert; der Fahrer sieht seine Fahrten unter „Meine Fahrten“.</figcaption>
       </figure>
     </div>
   </section>
@@ -554,6 +595,7 @@
             </div>
             <details class="demo__params" open>
               <summary><span>Ihre Preisliste</span><small>Beispielwerte – tragen Sie Ihre ein</small></summary>
+              <div class="q demo__depot"><label class="q__label" for="demo-depot">Betriebshof <span class="opt">– Leerfahrt ab hier, optional</span></label><input class="field" id="demo-depot" name="depot" type="text" list="demo-depot-list" placeholder="z. B. Offenbach am Main" autocomplete="off"><datalist id="demo-depot-list"></datalist><span class="q__err">Ort nicht gefunden – bitte aus der Liste wählen oder leer lassen.</span></div>
               <div class="demo__paramgrid">
                 <div class="q"><label class="q__label" for="demo-rate">Preis je km <span class="opt">€</span></label><input class="field" id="demo-rate" name="rate" type="number" min="0.1" step="0.1" value="2.2" required inputmode="decimal"><span class="q__err">Zahl größer 0.</span></div>
                 <div class="q"><label class="q__label" for="demo-daymin">Tagesminimum <span class="opt">€ je Tag</span></label><input class="field" id="demo-daymin" name="dayMin" type="number" min="0" step="10" value="650" required inputmode="numeric"><span class="q__err">Zahl ab 0.</span></div>
@@ -575,6 +617,8 @@
             <div class="demo__result" id="demo-result" hidden>
               <dl class="demo__facts">
                 <div><dt>Einfache Strecke</dt><dd data-out="km">—</dd></div>
+                <div><dt>Leerfahrt</dt><dd data-out="leer">—</dd></div>
+                <div><dt>Gesamtstrecke</dt><dd data-out="kmTotal">—</dd></div>
                 <div><dt>Lenkzeit je Richtung</dt><dd data-out="dur">—</dd></div>
                 <div><dt>Fahrzeug</dt><dd data-out="bus">—</dd></div>
                 <div><dt>Tage</dt><dd data-out="days">—</dd></div>
@@ -586,12 +630,13 @@
                 <p class="demo__note">Im Einsatzplan sehen Sie, welche Fahrer an diesem Tag frei sind.</p>
               </div>
               <div class="demo__block">
-                <h4>Durchfahrene Länder <small>ungefähr, je Richtung hin und zurück</small></h4>
+                <h4>Durchfahrene Länder <small>ungefähr, alle Teilstrecken inkl. Leerfahrt</small></h4>
                 <div class="demo__countries" data-out="countries"></div>
                 <p class="demo__note">BusFlow teilt die Route an jeder Grenze auf und berechnet die Umsatzsteuer je Land.</p>
               </div>
               <div class="demo__price">
                 <div class="demo__price-head"><span class="demo__price-label">Gesamtpreis netto</span><strong data-out="total">—</strong><span class="demo__price-pp" data-out="perPerson"></span></div>
+                <p class="demo__illus">Nur zur Veranschaulichung: So rechnet BusFlow – mit Ihren Beispielwerten, ohne Maut, Diesel und Umsatzsteuer. Kein Angebot, kein Marktpreis.</p>
                 <ul class="demo__lines" data-out="lines"></ul>
               </div>
               <p class="demo__foot">Demo mit Ihren Beispielwerten, Umsatzsteuer nicht enthalten – kein Angebot. In BusFlow rechnet Ihre Preisliste je Busklasse, Maut und Diesel je Land und die Leerfahrt ab Betriebshof.</p>
