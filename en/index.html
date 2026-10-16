@@ -455,57 +455,98 @@
       <figure class="roster rev rev--up" aria-labelledby="roster-cap">
         <div class="roster__card">
           <div class="roster__bar">
-            <div class="roster__title"><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Drivers · Roster</div>
-            <div class="roster__tabs" aria-hidden="true"><span>Overview</span><span class="is-active">Roster</span><span>Hours</span></div>
+            <div class="roster__title"><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Drivers</div>
+            <div class="roster__tabs" role="tablist" aria-label="View">
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-overview" aria-controls="roster-overview" aria-selected="false" tabindex="-1">Overview</button>
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-plan" aria-controls="roster-plan" aria-selected="true">Roster</button>
+              <button class="roster__tab" type="button" role="tab" id="roster-tab-hours" aria-controls="roster-hours" aria-selected="false" tabindex="-1">Hours</button>
+            </div>
             <span class="roster__week">Week 43 · 19–25 Oct 2026</span>
           </div>
-          <div class="roster__scroll" aria-hidden="true">
-            <div class="roster__grid">
-              <div class="roster__row" style="--r: 0">
-                <div class="roster__head"><b>Driver</b></div>
-                <div class="roster__head">Mon <b>19</b></div><div class="roster__head">Tue <b>20</b></div><div class="roster__head">Wed <b>21</b></div><div class="roster__head">Thu <b>22</b></div><div class="roster__head">Fri <b>23</b></div><div class="roster__head">Sat <b>24</b></div><div class="roster__head">Sun <b>25</b></div>
-              </div>
-              <div class="roster__row" style="--r: 1">
-                <div class="roster__drv"><b>J. Weber</b><small>On duty 9 h · Driving 7.5 h</small><span class="roster__badge roster__badge--ok">Documents ok</span></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Munich → Zagreb<small>Driver 1 · school trip · 2 days</small></div></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Zagreb → Munich<small>Driver 1 · return</small></div></div>
-                <div class="roster__cell roster__cell--off">off</div>
-                <div class="roster__cell"><div class="roster__trip">Airport shuttle MUC<small>Driver 1 · 06:00</small></div></div>
-                <div class="roster__cell roster__cell--off">off</div>
-                <div class="roster__cell roster__cell--off">off</div>
-              </div>
-              <div class="roster__row" style="--r: 2">
-                <div class="roster__drv"><b>M. Kovač</b><small>On duty 8 h · Driving 6 h</small><span class="roster__badge roster__badge--due">Tachograph card expires in 12 days</span></div>
-                <div class="roster__cell roster__cell--off">off</div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">School trip Berlin<small>Driver 2 · 2 days</small></div></div>
-                <div class="roster__cell roster__cell--off">off</div>
-                <div class="roster__cell"><div class="roster__trip">Seniors’ trip Lake Constance<small>Driver 1</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Trade-fair shuttle Frankfurt<small>Driver 1</small></div><div class="roster__trip roster__trip--dbl">Wedding Würzburg<small>Warning: double-booked</small></div></div>
-                <div class="roster__cell roster__cell--off">off</div>
-              </div>
-              <div class="roster__row" style="--r: 3">
-                <div class="roster__drv"><b>S. Yilmaz</b><small>On duty 10 h · Driving 8 h</small><span class="roster__badge roster__badge--ok">Documents ok</span></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Staff shuttle Ingolstadt plant<small>daily 05:30</small></div></div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--o">Staff shuttle Ingolstadt plant<small>daily 05:30</small></div></div>
-                <div class="roster__cell roster__cell--off">off</div>
-                <div class="roster__cell"><div class="roster__trip roster__trip--warn">Licence check due<small>every 28 days · confirm</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Club trip Salzburg<small>Driver 1</small></div></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Ski trip Zillertal<small>Driver 2 · 2 days</small></div></div>
-              </div>
-              <div class="roster__row" style="--r: 4">
-                <div class="roster__drv"><b>A. Brandt</b><small>On duty 9 h · Driving 7 h</small><span class="roster__badge roster__badge--ok">Documents ok</span></div>
-                <div class="roster__cell roster__cell--off">off</div>
-                <div class="roster__cell"><div class="roster__trip">Trade-fair shuttle Frankfurt<small>Driver 1</small></div></div>
-                <div class="roster__cell"><div class="roster__trip">Trade-fair shuttle Frankfurt<small>Driver 1</small></div></div>
-                <div class="roster__cell roster__cell--span"><div class="roster__trip">Graduation trip Prague<small>Driver 1 · 2 days</small></div></div>
-                <div class="roster__cell roster__cell--off">off</div>
-                <div class="roster__cell roster__cell--off">off</div>
+          <div class="roster__panel" id="roster-overview" role="tabpanel" aria-labelledby="roster-tab-overview" tabindex="0" hidden>
+            <ul class="roster__people">
+                <li class="roster__person" style="--r: 0">
+                  <div class="roster__person-head"><b>J. Weber</b><span class="roster__badge roster__badge--ok">Documents ok</span></div>
+                  <dl><div><dt>Next trip</dt><dd>Mon · Munich → Zagreb</dd></div><div><dt>This week</dt><dd>3 trips · 3 days off</dd></div><div><dt>Documents</dt><dd>Licence, driver card and CPC valid</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 1">
+                  <div class="roster__person-head"><b>M. Kovač</b><span class="roster__badge roster__badge--due">Card 12 days</span></div>
+                  <dl><div><dt>Next trip</dt><dd>Tue · School trip Berlin</dd></div><div><dt>This week</dt><dd class="is-warn">4 trips · 3 days off · Sat double-booked</dd></div><div><dt>Documents</dt><dd class="is-warn">Driver card expires 31 Oct – in 12 days</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 2">
+                  <div class="roster__person-head"><b>S. Yilmaz</b><span class="roster__badge roster__badge--due">Check due</span></div>
+                  <dl><div><dt>Next trip</dt><dd>Mon · Ingolstadt plant</dd></div><div><dt>This week</dt><dd>5 trips · 1 day off</dd></div><div><dt>Documents</dt><dd class="is-warn">Licence check due (every 28 days) – confirm Thu</dd></div></dl>
+                </li>
+                <li class="roster__person" style="--r: 3">
+                  <div class="roster__person-head"><b>A. Brandt</b><span class="roster__badge roster__badge--ok">Documents ok</span></div>
+                  <dl><div><dt>Next trip</dt><dd>Tue · Trade fair Frankfurt</dd></div><div><dt>This week</dt><dd>4 trips · 3 days off</dd></div><div><dt>Documents</dt><dd>All documents valid</dd></div></dl>
+                </li>
+            </ul>
+          </div>
+          <div class="roster__panel" id="roster-plan" role="tabpanel" aria-labelledby="roster-tab-plan" tabindex="0">
+            <div class="roster__scroll">
+              <div class="roster__grid">
+                  <div class="roster__row" style="--r: 0">
+                    <div class="roster__head"><b>Driver</b></div>
+                    <div class="roster__head">Mon <b>19</b></div><div class="roster__head">Tue <b>20</b></div><div class="roster__head">Wed <b>21</b></div><div class="roster__head">Thu <b>22</b></div><div class="roster__head">Fri <b>23</b></div><div class="roster__head">Sat <b>24</b></div><div class="roster__head">Sun <b>25</b></div>
+                  </div>
+                  <div class="roster__row" style="--r: 1">
+                    <div class="roster__drv"><b>J. Weber</b><span class="roster__badge roster__badge--ok">Documents ok</span></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Munich → Zagreb<small>Driver 1 · 2 days</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Zagreb → Munich<small>return</small></div></div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                    <div class="roster__cell"><div class="roster__trip">Shuttle MUC<small>06:00</small></div></div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                  </div>
+                  <div class="roster__row" style="--r: 2">
+                    <div class="roster__drv"><b>M. Kovač</b><span class="roster__badge roster__badge--due">Card 12 days</span></div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">School trip Berlin<small>Driver 2 · 2 days</small></div></div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                    <div class="roster__cell"><div class="roster__trip">Lake Constance<small>seniors’ trip</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Trade fair Frankfurt<small>Driver 1</small></div><div class="roster__trip roster__trip--dbl">Wedding Würzburg<small>double-booked</small></div></div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                  </div>
+                  <div class="roster__row" style="--r: 3">
+                    <div class="roster__drv"><b>S. Yilmaz</b><span class="roster__badge roster__badge--due">Check due</span></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Ingolstadt plant<small>05:30</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--o">Ingolstadt plant<small>05:30</small></div></div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                    <div class="roster__cell"><div class="roster__trip roster__trip--warn">Licence check<small>due · confirm</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Salzburg<small>club trip</small></div></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Ski trip Zillertal<small>Driver 2 · 2 days</small></div></div>
+                  </div>
+                  <div class="roster__row" style="--r: 4">
+                    <div class="roster__drv"><b>A. Brandt</b><span class="roster__badge roster__badge--ok">Documents ok</span></div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                    <div class="roster__cell"><div class="roster__trip">Trade fair Frankfurt<small>Driver 1</small></div></div>
+                    <div class="roster__cell"><div class="roster__trip">Trade fair Frankfurt<small>Driver 1</small></div></div>
+                    <div class="roster__cell roster__cell--span"><div class="roster__trip">Graduation trip Prague<small>Driver 1 · 2 days</small></div></div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                    <div class="roster__cell roster__cell--off">off</div>
+                  </div>
               </div>
             </div>
+            <div class="roster__legend"><span><i class="roster__sw"></i>Trip</span><span><i class="roster__sw roster__sw--o"></i>Line / shuttle run</span><span><i class="roster__sw roster__sw--warn"></i>Document due</span><span><i class="roster__sw roster__sw--dbl"></i>Double-booked</span></div>
           </div>
-          <div class="roster__foot" aria-hidden="true"><span>Every change goes to the driver by e-mail as a trip order</span><span>Sunday 4 pm: weekly plan to everyone</span><span>Hours as CSV</span></div>
+          <div class="roster__panel" id="roster-hours" role="tabpanel" aria-labelledby="roster-tab-hours" tabindex="0" hidden>
+            <div class="roster__scroll">
+              <table class="roster__table">
+                <thead><tr><th scope="col">Driver</th><th scope="col">On duty</th><th scope="col">Driving</th><th scope="col">Trips</th><th scope="col">Rest</th><th scope="col">Note</th></tr></thead>
+                <tbody>
+                    <tr><th scope="row">J. Weber</th><td class="num">38 h</td><td class="num">29.5 h</td><td class="num">3</td><td>ok</td><td>—</td></tr>
+                    <tr><th scope="row">M. Kovač</th><td class="num">36 h</td><td class="num">27 h</td><td class="num">4</td><td>ok</td><td class="is-warn">Sat double-booked</td></tr>
+                    <tr><th scope="row">S. Yilmaz</th><td class="num">44 h</td><td class="num">33 h</td><td class="num">5</td><td>ok</td><td class="is-warn">Licence check Thu</td></tr>
+                    <tr><th scope="row">A. Brandt</th><td class="num">40 h</td><td class="num">30 h</td><td class="num">4</td><td>ok</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="roster__legend"><span class="roster__pill">Export hours as CSV</span><span>Duty and driving time per driver, week 43</span></div>
+          </div>
+          <div class="roster__foot"><span>Every change goes to the driver by e-mail as a trip order</span><span>Sunday 4 pm: weekly plan to everyone</span><span>Hours as CSV</span></div>
         </div>
-        <figcaption id="roster-cap">The roster in BusFlow: one week, four drivers – trips, documents and days off at a glance. Double bookings and documents due are flagged, not blocked; drivers see their own trips under “My trips”.</figcaption>
+        <figcaption id="roster-cap">The Drivers module in BusFlow: overview, roster and hours for one week with four drivers – trips, documents and days off at a glance. Double bookings and documents due are flagged, not blocked; drivers see their own trips under “My trips”.</figcaption>
       </figure>
     </div>
   </section>
@@ -555,6 +596,7 @@
             </div>
             <details class="demo__params" open>
               <summary><span>Your price list</span><small>example values – enter your own</small></summary>
+              <div class="q demo__depot"><label class="q__label" for="demo-depot">Depot <span class="opt">– empty run starts here, optional</span></label><input class="field" id="demo-depot" name="depot" type="text" list="demo-depot-list" placeholder="e.g. Offenbach am Main" autocomplete="off"><datalist id="demo-depot-list"></datalist><span class="q__err">Place not found – pick one from the list or leave empty.</span></div>
               <div class="demo__paramgrid">
                 <div class="q"><label class="q__label" for="demo-rate">Price per km <span class="opt">€</span></label><input class="field" id="demo-rate" name="rate" type="number" min="0.1" step="0.1" value="2.2" required inputmode="decimal"><span class="q__err">A number above 0.</span></div>
                 <div class="q"><label class="q__label" for="demo-daymin">Daily minimum <span class="opt">€ per day</span></label><input class="field" id="demo-daymin" name="dayMin" type="number" min="0" step="10" value="650" required inputmode="numeric"><span class="q__err">A number from 0.</span></div>
@@ -576,6 +618,8 @@
             <div class="demo__result" id="demo-result" hidden>
               <dl class="demo__facts">
                 <div><dt>One-way distance</dt><dd data-out="km">—</dd></div>
+                <div><dt>Empty run</dt><dd data-out="leer">—</dd></div>
+                <div><dt>Total distance</dt><dd data-out="kmTotal">—</dd></div>
                 <div><dt>Driving per direction</dt><dd data-out="dur">—</dd></div>
                 <div><dt>Vehicle</dt><dd data-out="bus">—</dd></div>
                 <div><dt>Days</dt><dd data-out="days">—</dd></div>
@@ -587,12 +631,13 @@
                 <p class="demo__note">The roster shows you which drivers are free that day.</p>
               </div>
               <div class="demo__block">
-                <h4>Countries crossed <small>approximate, both directions</small></h4>
+                <h4>Countries crossed <small>approximate, all legs incl. empty runs</small></h4>
                 <div class="demo__countries" data-out="countries"></div>
                 <p class="demo__note">BusFlow splits the route at every border and calculates VAT per country.</p>
               </div>
               <div class="demo__price">
                 <div class="demo__price-head"><span class="demo__price-label">Total price net</span><strong data-out="total">—</strong><span class="demo__price-pp" data-out="perPerson"></span></div>
+                <p class="demo__illus">For illustration only: this is how BusFlow calculates – with your sample rates, without tolls, fuel and VAT. Not an offer, not a market price.</p>
                 <ul class="demo__lines" data-out="lines"></ul>
               </div>
               <p class="demo__foot">Demo with your example values, VAT not included – not an offer. In BusFlow your price list applies per coach class, tolls and fuel per country, and the empty run from the depot.</p>

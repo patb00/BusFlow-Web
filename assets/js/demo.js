@@ -81,7 +81,17 @@
       errRoute: "Routing-Dienst gerade nicht erreichbar – Entfernung als Luftlinie × 1,3 geschätzt.",
       errHard: "Ortssuche gerade nicht erreichbar. Bitte versuchen Sie es in einer Minute noch einmal.",
       errFields: "Bitte prüfen Sie die markierten Felder.",
-      mapAttr: "© OpenStreetMap-Mitwirkende", mapFrom: "Abfahrt", mapTo: "Ziel"
+      mapAttr: "© OpenStreetMap-Mitwirkende", mapFrom: "Abfahrt", mapTo: "Ziel", mapDepot: "Betriebshof",
+      /* Leerfahrt ab Betriebshof */
+      stLeer: "Leerfahrt",
+      stLeerDepot: "Betriebshof {d} → Abfahrtsort {km1}, am Ende zurück {km1}: {leer} ohne Fahrgäste.",
+      stLeerDepotTransfer: "Betriebshof {d} → Abfahrtsort {km1}, Zielort → Betriebshof {km2}: {leer} ohne Fahrgäste.",
+      stLeerNoneTransfer: "Kein Betriebshof angegeben: der Bus fährt leer zum Abfahrtsort zurück ({leer}).",
+      stLeerNone: "Kein Betriebshof angegeben: keine Leerfahrt gerechnet.",
+      stCoachDepot: "{t} × 1,2 = {hm}, plus Anfahrt vom Betriebshof {ha} = {h} je Richtung.",
+      stDaysTransferDepot: "Anfahrt {ha} + Hinfahrt {hm} + Leerfahrt zum Betriebshof {hb} = {H} bei {per} Std. je Tag → {days}, {nights}.",
+      lnDistDepot: "Gesamtstrecke: {km1} hin + {km1} zurück + {leer} Leerfahrt",
+      lnDistTransferDepot: "Gesamtstrecke: {km1} Hinfahrt + {leer} Leerfahrt ab und zum Betriebshof"
     },
     hr: {
       bus: { kleinbus: "Kombi", minibus: "Minibus", midibus: "Midibus", reisebus: "Turistički autobus", doppeldecker: "Autobus na kat" },
@@ -124,7 +134,16 @@
       errRoute: "Servis za rutiranje trenutačno nije dostupan – udaljenost je procijenjena kao zračna × 1,3.",
       errHard: "Pretraga mjesta trenutačno nije dostupna. Pokušajte ponovno za minutu.",
       errFields: "Provjerite označena polja.",
-      mapAttr: "© suradnici OpenStreetMapa", mapFrom: "Polazak", mapTo: "Odredište"
+      mapAttr: "© suradnici OpenStreetMapa", mapFrom: "Polazak", mapTo: "Odredište", mapDepot: "Garaža",
+      stLeer: "Prazna vožnja",
+      stLeerDepot: "Garaža {d} → mjesto polaska {km1}, na kraju natrag {km1}: {leer} bez putnika.",
+      stLeerDepotTransfer: "Garaža {d} → mjesto polaska {km1}, odredište → garaža {km2}: {leer} bez putnika.",
+      stLeerNoneTransfer: "Garaža nije upisana: autobus se prazan vraća na mjesto polaska ({leer}).",
+      stLeerNone: "Garaža nije upisana: prazna vožnja nije računana.",
+      stCoachDepot: "{t} × 1,2 = {hm}, plus dolazak iz garaže {ha} = {h} po smjeru.",
+      stDaysTransferDepot: "Dolazak iz garaže {ha} + odlazak {hm} + prazna vožnja u garažu {hb} = {H} uz {per} h dnevno → {days}, {nights}.",
+      lnDistDepot: "Ukupna udaljenost: {km1} odlazak + {km1} povratak + {leer} prazne vožnje",
+      lnDistTransferDepot: "Ukupna udaljenost: {km1} odlazak + {leer} prazne vožnje iz garaže i u garažu"
     },
     en: {
       bus: { kleinbus: "Minivan", minibus: "Minibus", midibus: "Midibus", reisebus: "Coach", doppeldecker: "Double-decker" },
@@ -167,7 +186,16 @@
       errRoute: "Routing service unavailable right now – distance estimated as great-circle × 1.3.",
       errHard: "Place search unavailable right now. Please try again in a minute.",
       errFields: "Please check the highlighted fields.",
-      mapAttr: "© OpenStreetMap contributors", mapFrom: "Departure", mapTo: "Destination"
+      mapAttr: "© OpenStreetMap contributors", mapFrom: "Departure", mapTo: "Destination", mapDepot: "Depot",
+      stLeer: "Empty run",
+      stLeerDepot: "Depot {d} → departure {km1}, back at the end {km1}: {leer} without passengers.",
+      stLeerDepotTransfer: "Depot {d} → departure {km1}, destination → depot {km2}: {leer} without passengers.",
+      stLeerNoneTransfer: "No depot given: the coach returns empty to the departure place ({leer}).",
+      stLeerNone: "No depot given: no empty run calculated.",
+      stCoachDepot: "{t} × 1.2 = {hm}, plus approach from the depot {ha} = {h} per direction.",
+      stDaysTransferDepot: "Approach {ha} + outbound {hm} + empty run to the depot {hb} = {H} at {per} h per day → {days}, {nights}.",
+      lnDistDepot: "Total distance: {km1} out + {km1} back + {leer} empty run",
+      lnDistTransferDepot: "Total distance: {km1} outbound + {leer} empty run from and to the depot"
     }
   };
   var T = I18N[LANG] || I18N.de;
@@ -327,6 +355,17 @@
     }
     return order.map(function (code) { return { code: code, km: km[code] }; }).filter(function (e) { return e.km >= 1; });
   }
+  /* mehrere Teilstrecken (mit Faktor, z. B. 2 für hin und zurück) zu einer Länderliste zusammenfassen */
+  function splitLegs(countries, legFactors) {
+    var km = {}, order = [];
+    legFactors.forEach(function (lf) {
+      splitByCountry(countries, lf[0]).forEach(function (e) {
+        if (!(e.code in km)) { km[e.code] = 0; order.push(e.code); }
+        km[e.code] += e.km * lf[1];
+      });
+    });
+    return order.map(function (code) { return { code: code, km: km[code] }; });
+  }
 
   /* ---------- Karte (Leaflet lokal, Kacheln von OpenStreetMap) ---------- */
   var leafletPromise = null, map = null, layer = null;
@@ -349,7 +388,7 @@
   }
   /* Ortsnamen kommen von Photon – als Text einsetzen, nicht als HTML */
   function textNode(text) { var s = document.createElement("span"); s.textContent = text; return s; }
-  function drawMap(L, from, to, coords) {
+  function drawMap(L, places, legs) {
     var el = $("#demo-map");
     if (!el) return;
     var empty = $(".demo__empty", el);
@@ -360,12 +399,16 @@
       L.tileLayer(TILES, { maxZoom: 18, attribution: T.mapAttr }).addTo(map);
     }
     if (layer) layer.remove();
-    var latlngs = coords.map(function (c) { return [c[1], c[0]]; });
-    layer = L.featureGroup([
-      L.polyline(latlngs, { color: "#0D1C42", weight: 5, opacity: 0.95 }),
-      L.marker([from.lat, from.lon], { title: T.mapFrom }).bindPopup(textNode(from.label)),
-      L.marker([to.lat, to.lon], { title: T.mapTo }).bindPopup(textNode(to.label))
-    ]).addTo(map);
+    var toLatLng = function (c) { return [c[1], c[0]]; };
+    /* Fahrgaststrecke durchgezogen, Leerfahrten gestrichelt */
+    var items = [L.polyline(legs.main.coords.map(toLatLng), { color: "#0D1C42", weight: 5, opacity: 0.95 })];
+    [legs.toA, legs.back].forEach(function (lg) {
+      if (lg) items.push(L.polyline(lg.coords.map(toLatLng), { color: "#0D1C42", weight: 3, opacity: 0.6, dashArray: "6 8" }));
+    });
+    items.push(L.marker([places.from.lat, places.from.lon], { title: T.mapFrom }).bindPopup(textNode(places.from.label)));
+    items.push(L.marker([places.to.lat, places.to.lon], { title: T.mapTo }).bindPopup(textNode(places.to.label)));
+    if (places.depot) items.push(L.marker([places.depot.lat, places.depot.lon], { title: T.mapDepot, opacity: 0.7 }).bindPopup(textNode(T.mapDepot + ": " + places.depot.label)));
+    layer = L.featureGroup(items).addTo(map);
     map.invalidateSize();
     map.fitBounds(layer.getBounds(), { padding: [28, 28] });
   }
@@ -375,19 +418,34 @@
     for (var i = 0; i < BUSES.length; i++) if (pax <= BUSES[i][0]) return { seats: BUSES[i][0], key: BUSES[i][1] };
     return { seats: 74, key: "doppeldecker" };
   }
-  function calc(r, inp, p) {
-    var h = r.hours * COACH_FACTOR;                       /* Lenkzeit je Richtung */
+  /* legs.main = Abfahrtsort → Zielort; legs.toA = Betriebshof → Abfahrtsort; legs.back = Zielort → Betriebshof (nur Transfer) */
+  function calc(legs, inp, p) {
+    var r = legs.main, toA = legs.toA, back = legs.back;
+    var hMain = r.hours * COACH_FACTOR;                   /* Lenkzeit mit Fahrgästen je Richtung */
+    var hA = toA ? toA.hours * COACH_FACTOR : 0;          /* Anfahrt vom Betriebshof */
+    var hB = back ? back.hours * COACH_FACTOR : hA;       /* Rückweg zum Betriebshof; bei Hin- und Rückfahrt wie die Anfahrt */
+    var kmA = toA ? toA.km : 0, kmB = back ? back.km : kmA;
+    var h = hMain + hA;                                   /* Lenkzeit je Richtung inkl. Anfahrt – danach bemessen sich Fahrer und Fahrtage */
     var breaks = Math.floor(h / BREAK_EVERY);
     var drivers = h <= DAY_DRIVE ? 1 : 2;
     var perDay = drivers === 1 ? DAY_DRIVE : TEAM_DRIVE;
     var legDays = Math.max(1, Math.ceil(h / perDay));
-    var out = { h: h, breaks: breaks, drivers: drivers, perDay: perDay, legDays: legDays, kind: inp.kind, km: r.km * 2, warn: null, tight: false };
+    var out = {
+      h: h, hMain: hMain, hA: hA, hB: hB, kmA: kmA, kmB: kmB, depot: !!toA, breaks: breaks, drivers: drivers, perDay: perDay,
+      legDays: legDays, kind: inp.kind, warn: null, tight: false,
+      estimated: !!(r.estimated || (toA && toA.estimated) || (back && back.estimated))
+    };
 
     if (inp.kind === "transfer") {
-      out.days = Math.max(legDays, Math.ceil(2 * h / perDay));
+      /* ohne Betriebshof fährt der Bus leer zum Abfahrtsort zurück */
+      out.leer = toA ? kmA + kmB : r.km;
+      out.km = r.km + out.leer;
+      out.hTotal = toA ? hA + hMain + hB : 2 * hMain;
+      out.days = Math.max(legDays, Math.ceil(out.hTotal / perDay));
       out.nights = out.days - 1;
-      out.leer = r.km;
     } else if (inp.kind === "round") {
+      out.leer = 2 * kmA;
+      out.km = 2 * r.km + out.leer;
       var minDays = 2 * legDays;
       var span = Math.round((inp.returnDate - inp.date) / 864e5) + 1;
       out.span = span;
@@ -395,6 +453,8 @@
       out.nights = out.days - 1;
       if (span < minDays) out.warn = fmt(T.feasReturn, { date: fmtDate(addDays(inp.date, minDays - 1)), n: plural(T.days, out.days) });
     } else { /* Tagesfahrt / Andere: hin und zurück am selben Tag */
+      out.leer = 2 * kmA;
+      out.km = 2 * r.km + out.leer;
       var Hd = 2 * h;
       out.hTotal = Hd;
       out.breaks = Math.floor(Hd / BREAK_EVERY);
@@ -406,10 +466,11 @@
       var duty = (inp.kind === "day" ? out.hTotal : h) + out.breaks * BREAK_H;
       if (duty > TIGHT_DUTY) { out.tight = true; out.duty = duty; }
     }
-    if (inp.time) { /* Ankunft der Hinfahrt */
+    if (inp.time) { /* Ankunft der Hinfahrt: Abfahrtszeit gilt am Abfahrtsort, also ohne Anfahrt */
       var dep = new Date(inp.date);
       dep.setHours(inp.time[0], inp.time[1], 0, 0);
-      var arr = new Date(dep.getTime() + (h + (out.drivers === 1 ? breaks * BREAK_H : 0)) * 36e5);
+      var mainBreaks = Math.floor(hMain / BREAK_EVERY);
+      var arr = new Date(dep.getTime() + (hMain + (out.drivers === 1 ? mainBreaks * BREAK_H : 0)) * 36e5);
       out.arrive = { dep: fmtTime(dep), time: fmtTime(arr), next: arr.getDate() !== dep.getDate() };
     }
     out.bus = busFor(inp.pax);
@@ -430,35 +491,48 @@
 
   /* ---------- Ausgabe ---------- */
   function setOut(key, text) { var el = $('[data-out="' + key + '"]'); if (el) el.textContent = text; }
-  function render(res, r, inp, p, countries) {
+  function render(res, legs, inp, p, countries, places) {
+    var r = legs.main;
     var box = $("#demo-result");
     setOut("km", fmtKm(r.km, r.estimated));
+    setOut("leer", fmtKm(res.leer, res.estimated));
+    setOut("kmTotal", fmtKm(res.km, res.estimated));
     setOut("dur", fmtDur(res.h));
     setOut("bus", T.bus[res.bus.key] + " · " + fmt(T.seats, { n: res.bus.seats }));
     setOut("days", plural(T.days, res.days) + " · " + plural(T.nights, res.nights));
 
     /* Rechenweg: jeder Schritt mit der Regel, die angewendet wurde */
-    var est = r.estimated;
+    var est = res.estimated;
     var scope = res.kind === "day" ? T.scopeAll : T.scopeLeg;
     var hRef = res.kind === "day" ? res.hTotal : res.h;   /* Lenkzeit, nach der Fahrer und Pausen bemessen werden */
     var dn = { days: plural(T.days, res.days), nights: plural(T.nights, res.nights) };
     var daysText = res.kind === "transfer"
-      ? fmt(T.stDaysTransfer, { h: fmtDur(res.h), H: fmtDur(2 * res.h), per: res.perDay, days: dn.days, nights: dn.nights })
+      ? (res.depot
+        ? fmt(T.stDaysTransferDepot, { ha: fmtDur(res.hA), hm: fmtDur(res.hMain), hb: fmtDur(res.hB), H: fmtDur(res.hTotal), per: res.perDay, days: dn.days, nights: dn.nights })
+        : fmt(T.stDaysTransfer, { h: fmtDur(res.h), H: fmtDur(res.hTotal), per: res.perDay, days: dn.days, nights: dn.nights }))
       : res.kind === "round"
         ? fmt(res.span < res.days ? T.stDaysRoundMin : T.stDaysRound, { d1: fmtDate(inp.date), d2: fmtDate(inp.returnDate), span: plural(T.days, res.span), legDays: plural(T.legDays, res.legDays), days: dn.days, nights: dn.nights })
         : fmt(res.warn ? T.stDaysDayNo : T.stDaysDay, { H: fmtDur(res.hTotal), days: dn.days, nights: dn.nights });
+    var depotName = places && places.depot ? places.depot.label.split(",")[0] : "";
+    var leerText = res.depot
+      ? fmt(res.kind === "transfer" ? T.stLeerDepotTransfer : T.stLeerDepot, { d: depotName, km1: fmtKm(res.kmA, est), km2: fmtKm(res.kmB, est), leer: fmtKm(res.leer, est) })
+      : fmt(res.kind === "transfer" ? T.stLeerNoneTransfer : T.stLeerNone, { leer: fmtKm(res.leer, est) });
     var steps = [
-      [T.stRoute, est ? fmt(T.stRouteEst, { km: fmtKm(r.km) }) : fmt(T.stRouteT, { km: fmtKm(r.km), t: fmtDur(r.hours) })],
-      [T.stCoach, fmt(T.stCoachT, { t: fmtDur(r.hours), h: fmtDur(res.h) })],
+      [T.stRoute, r.estimated ? fmt(T.stRouteEst, { km: fmtKm(r.km) }) : fmt(T.stRouteT, { km: fmtKm(r.km), t: fmtDur(r.hours) })],
+      [T.stLeer, leerText],
+      [T.stCoach, res.depot
+        ? fmt(T.stCoachDepot, { t: fmtDur(r.hours), hm: fmtDur(res.hMain), ha: fmtDur(res.hA), h: fmtDur(res.h) })
+        : fmt(T.stCoachT, { t: fmtDur(r.hours), h: fmtDur(res.h) })],
       [T.stBreaks, res.breaks
         ? fmt(T.stBreaksT, { b: res.breaks, duty: fmtDur(hRef + res.breaks * BREAK_H), scope: scope })
         : fmt(T.stBreaksNone, { scope: scope })],
       [T.stDrivers, fmt(res.drivers === 1 ? T.stDriversOne : T.stDriversTwo, { h: fmtDur(hRef), scope: scope })],
       [T.stDays, daysText]
     ];
+    var mainBreaks = Math.floor(res.hMain / BREAK_EVERY);
     if (res.arrive) steps.push([T.stArrive, fmt(T.stArriveT, {
-      dep: res.arrive.dep, h: fmtDur(res.h),
-      br: res.drivers === 1 && res.breaks ? fmt(T.brT, { n: res.breaks }) : "",
+      dep: res.arrive.dep, h: fmtDur(res.hMain),
+      br: res.drivers === 1 && mainBreaks ? fmt(T.brT, { n: mainBreaks }) : "",
       a: fmt(res.arrive.next ? T.arriveNext : T.arrive, { t: res.arrive.time })
     })]);
     steps.push([T.stBus, fmt(T.stBusT, { n: inp.pax, bus: T.bus[res.bus.key], seats: res.bus.seats })]);
@@ -477,7 +551,13 @@
     var feasEl = $('[data-out="feasible"]');
     if (feasEl) { feasEl.textContent = feas; feasEl.classList.toggle("is-warn", !!(res.warn || res.tight)); }
 
-    var split = countries ? splitByCountry(countries, r.coords) : [];
+    /* Länder über alle Teilstrecken: Fahrgaststrecke (×2 bei Hin- und Rückfahrt) plus Leerfahrten */
+    var legFactors = [[r.coords, res.kind === "transfer" ? 1 : 2]];
+    if (res.kind === "transfer") {
+      if (legs.toA) { legFactors.push([legs.toA.coords, 1]); legFactors.push([legs.back.coords, 1]); }
+      else legFactors.push([r.coords, 1]); /* Leerfahrt zurück auf derselben Strecke */
+    } else if (legs.toA) legFactors.push([legs.toA.coords, 2]);
+    var split = countries ? splitLegs(countries, legFactors) : [];
     var cEl = $('[data-out="countries"]');
     if (cEl) {
       cEl.innerHTML = "";
@@ -487,7 +567,7 @@
         s.className = "demo__country";
         s.innerHTML = "<b></b> <span></span>";
         s.firstChild.textContent = e.code === "?" ? T.other : e.code;
-        s.lastChild.textContent = fmtKm(e.km * 2); /* hin und zurück bzw. inkl. Leerfahrt */
+        s.lastChild.textContent = fmtKm(e.km, est);
         cEl.appendChild(s);
       });
     }
@@ -499,7 +579,8 @@
       lines.innerHTML = "";
       /* Jede Position wird gezeigt – auch mit 0 –, damit der Rechenweg nachvollziehbar bleibt. [Text, Wert, Klasse] */
       var items = [
-        [fmt(res.kind === "transfer" ? T.lnDistTransfer : T.lnDist, { km1: fmtKm(r.km, est) }), fmtKm(res.km, est), ""],
+        [fmt(res.kind === "transfer" ? (res.depot ? T.lnDistTransferDepot : T.lnDistTransfer) : (res.depot ? T.lnDistDepot : T.lnDist),
+          { km1: fmtKm(r.km, est), leer: fmtKm(res.leer, est) }), fmtKm(res.km, est), ""],
         [fmt(T.lnKm, { km: fmtKm(res.km, est), rate: eur2.format(p.rate) }) + (res.minApplies ? T.lnOff : T.lnApplies),
           eur2.format(res.kmPrice), res.minApplies ? "is-off" : "is-base"],
         [fmt(T.lnMin, { days: dn.days, rate: eur.format(p.dayMin) }) + (res.minApplies ? T.lnApplies : T.lnOff),
@@ -548,7 +629,7 @@
   }
 
   /* ---------- Formular ---------- */
-  var fromIn = $("#demo-from"), toIn = $("#demo-to");
+  var fromIn = $("#demo-from"), toIn = $("#demo-to"), depotIn = $("#demo-depot");
   var msg = $("#demo-msg"), submit = $("#demo-submit");
   var kindInputs = $$('input[name="kind"]');
   var PARAMS = ["rate", "dayMin", "extraDriver", "night", "pct"];
@@ -598,12 +679,14 @@
   function saveParams() {
     var p = {};
     PARAMS.forEach(function (k) { p[k] = form.elements[k] ? form.elements[k].value : ""; });
+    if (depotIn) p.depot = depotIn.value;
     try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (e) { /* privater Modus */ }
   }
   function restoreParams() {
     try {
       var p = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null");
       if (p) PARAMS.forEach(function (k) { if (form.elements[k] && p[k] !== undefined && p[k] !== "") form.elements[k].value = p[k]; });
+      if (p && depotIn && typeof p.depot === "string") depotIn.value = p.depot;
     } catch (e) { /* ignorieren */ }
   }
   function defaultDates() {
@@ -619,7 +702,7 @@
     var t;
     return function () { var a = arguments, c = this; clearTimeout(t); t = setTimeout(function () { fn.apply(c, a); }, ms); };
   }
-  [[fromIn, "#demo-from-list"], [toIn, "#demo-to-list"]].forEach(function (pair) {
+  [[fromIn, "#demo-from-list"], [toIn, "#demo-to-list"], [depotIn, "#demo-depot-list"]].forEach(function (pair) {
     var list = $(pair[1]);
     if (pair[0] && list) pair[0].addEventListener("input", debounce(function () { suggest(pair[0], list); }, 300));
   });
@@ -627,7 +710,7 @@
   form.addEventListener("input", function (e) {
     var q = e.target.closest(".q");
     if (q && q.classList.contains("is-invalid")) q.classList.remove("is-invalid");
-    if (PARAMS.indexOf(e.target.name) >= 0) saveParams();
+    if (PARAMS.indexOf(e.target.name) >= 0 || e.target.name === "depot") saveParams();
   });
   form.addEventListener("change", function (e) {
     if (e.target.name === "date" && form.elements.returnDate) {
@@ -642,18 +725,29 @@
     if (!data) return;
     showMsg("");
     setBusy(true);
-    Promise.all([geocode(fromIn.value.trim()), geocode(toIn.value.trim())]).then(function (pl) {
-      return route(pl[0], pl[1]).then(function (r) {
+    var depotQ = depotIn ? depotIn.value.trim() : "";
+    var geos = [geocode(fromIn.value.trim()), geocode(toIn.value.trim())];
+    if (depotQ) geos.push(geocode(depotQ));
+    Promise.all(geos).then(function (pl) {
+      var places = { from: pl[0], to: pl[1], depot: pl[2] || null };
+      /* Teilstrecken: Fahrgäste A→B; mit Betriebshof dazu D→A und – nur beim Transfer – B→D */
+      var routes = [route(places.from, places.to)];
+      if (places.depot) {
+        routes.push(route(places.depot, places.from));
+        if (data.inp.kind === "transfer") routes.push(route(places.to, places.depot));
+      }
+      return Promise.all(routes).then(function (rs) {
+        var legs = { main: rs[0], toA: rs[1] || null, back: rs[2] || null };
         return Promise.all([loadCountries(), loadLeaflet().catch(function () { return null; })]).then(function (deps) {
-          var res = calc(r, data.inp, data.p);
-          render(res, r, data.inp, data.p, deps[0]);
-          if (deps[1]) drawMap(deps[1], pl[0], pl[1], r.coords);
-          if (r.estimated) showMsg(T.errRoute, true);
+          var res = calc(legs, data.inp, data.p);
+          render(res, legs, data.inp, data.p, deps[0], places);
+          if (deps[1]) drawMap(deps[1], places, legs);
+          if (res.estimated) showMsg(T.errRoute, true);
         });
       });
     }).catch(function (err) {
       if (err && err.kind === "place") {
-        var el = fromIn.value.trim() === err.q ? fromIn : toIn;
+        var el = [fromIn, toIn, depotIn].filter(function (i) { return i && i.value.trim() === err.q; })[0] || fromIn;
         invalid(el, true);
         el.focus();
         showMsg(fmt(T.errPlace, { q: err.q }), true);
