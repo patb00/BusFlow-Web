@@ -224,6 +224,7 @@
             <circle class="stop" cx="1110" cy="300" r="4" fill="var(--surface-2)" style="--d: .9s"></circle>
             <circle class="stop" cx="520" cy="70" r="12" fill="#0D1C42" stroke="var(--ink)" style="--d: .55s"></circle>
             <circle class="stop" cx="520" cy="70" r="4" fill="var(--surface-2)" style="--d: .55s"></circle>
+            <circle class="stop" cx="520" cy="128" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .62s"></circle>
             <circle class="stop" cx="520" cy="185" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .7s"></circle>
             <circle class="stop" cx="520" cy="420" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .95s"></circle>
             <circle class="stop" cx="700" cy="500" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: 1.15s"></circle>
@@ -261,6 +262,7 @@
             <text class="lbl" x="900" y="340" text-anchor="middle" style="--d: .75s">Zahlung</text>
             <text class="lbl" x="1128" y="340" text-anchor="end" style="--d: .9s">Meine Reservierungen</text>
             <text class="lbl" x="542" y="66" style="--d: .55s">Übersicht „Erfordert Ihre Aufmerksamkeit“</text>
+            <text class="lbl" x="542" y="124" style="--d: .62s">Fahrer und Einsatzplan</text>
             <text class="lbl" x="542" y="181" style="--d: .7s">Anfragen und Großgruppen</text>
             <text class="lbl" x="498" y="416" text-anchor="end" style="--d: .95s">Auslastung und Betriebshöfe</text>
             <text class="lbl" x="700" y="538" text-anchor="middle" style="--d: 1.15s">Besatzung und Lenkzeiten</text>
@@ -280,6 +282,7 @@
             <text class="lbl" x="900" y="358" text-anchor="middle" style="--d: .75s">myPOS · PayPal</text>
             <text class="lbl" x="1128" y="358" text-anchor="end" style="--d: .9s">Storno und Restzahlung</text>
             <text class="lbl" x="542" y="84" style="--d: .55s">Aufgaben des Büros an einem Ort</text>
+            <text class="lbl" x="542" y="142" style="--d: .62s">Dokumente · Stunden · Meine Fahrten</text>
             <text class="lbl" x="542" y="199" style="--d: .7s">Angebot mit einem Klick bestätigen</text>
             <text class="lbl" x="498" y="434" text-anchor="end" style="--d: .95s">Sperrzeiten · mehrere Betriebshöfe</text>
             <text class="lbl" x="700" y="556" text-anchor="middle" style="--d: 1.15s">561/2006 · bis zu 3 Fahrer</text>
@@ -324,7 +327,7 @@
         <div class="st-head">
           <span class="st-label rev rev--left"><span class="badge badge--inline">02</span>Haltestelle 02 · Funktionen</span>
           <h2 class="display rev rev--left" style="--i: 1">Der Fahrplan der Funktionen.</h2>
-          <p class="rev rev--left" style="--i: 2">Alles, was BusFlow erledigt, sortiert nach den Linien der Karte: dreißig Stationen, von der ersten Anfrage bis zur Umsatzsteuer-Voranmeldung.</p>
+          <p class="rev rev--left" style="--i: 2">Alles, was BusFlow erledigt, sortiert nach den Linien der Karte: zweiunddreißig Stationen, von der ersten Anfrage bis zur Umsatzsteuer-Voranmeldung.</p>
         </div>
         <ul class="key rev rev--up" style="--i: 3">
           <li><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span>Läuft automatisch, ohne Büro</li>
@@ -344,7 +347,7 @@
           <div class="board__row"><span class="board__code">P8</span><span class="board__t">Tagesfahrt</span><span class="board__ico" aria-label="Läuft automatisch"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Pauschalpreis je Busklasse und sofortige Zahlung; auf Wunsch zuschaltbar.</span></div>
         </article>
         <article class="board board--o rev rev--up" style="--i: 1">
-          <div class="board__head"><span class="board__letter">O</span><div><div class="board__title">Office und Disposition</div><div class="board__meta">Linie O · 8 Stationen</div></div></div>
+          <div class="board__head"><span class="board__letter">O</span><div><div class="board__title">Office und Disposition</div><div class="board__meta">Linie O · 10 Stationen</div></div></div>
           <div class="board__row"><span class="board__code">O1</span><span class="board__t">Übersicht „Erfordert Ihre Aufmerksamkeit“</span><span class="board__ico" aria-label="Läuft automatisch"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Offene Aufgaben und Abfahrten der nächsten 7 Tage.</span></div>
           <div class="board__row"><span class="board__code">O2</span><span class="board__t">Buchungen &amp; Anfragen</span><span class="board__ico" aria-label="Sie entscheiden"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Filter, Machbarkeitsprüfung und CSV-Export.</span></div>
           <div class="board__row"><span class="board__code">O3</span><span class="board__t">Großgruppen</span><span class="board__ico" aria-label="Sie entscheiden"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Angebot prüfen, bestätigen und mit einem Klick an den Kunden senden.</span></div>
@@ -353,6 +356,8 @@
           <div class="board__row"><span class="board__code">O6</span><span class="board__t">Besatzung nach EU 561/2006</span><span class="board__ico" aria-label="Läuft automatisch"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Pausen, Schichten, bis zu 3 Fahrer und Übernachtungen – mit Begründung.</span></div>
           <div class="board__row"><span class="board__code">O7</span><span class="board__t">Navigation für Fahrer</span><span class="board__ico" aria-label="Läuft automatisch"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Google-Maps-Link mit der ganzen Route und Fahrauftrag per E-Mail.</span></div>
           <div class="board__row"><span class="board__code">O8</span><span class="board__t">Telefonische Anfragen</span><span class="board__ico" aria-label="Läuft automatisch"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Schnelle Berechnung und manuelle Buchung mit demselben Kalkulationsmotor.</span></div>
+          <div class="board__row"><span class="board__code">O9</span><span class="board__t">Fahrerakte und Fristen</span><span class="board__ico" aria-label="Läuft automatisch"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Führerschein, Fahrerkarte und Qualifikation mit Ablaufdatum; alle 28 Tage Führerscheinkontrolle und Kartendownload, Fälliges wird gelb markiert.</span></div>
+          <div class="board__row"><span class="board__code">O10</span><span class="board__t">Einsatzplan und Stunden</span><span class="board__ico" aria-label="Sie entscheiden"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Fahrer je Fahrt einteilen, Einsatzplan nach Datum, Stunden im Dienst und am Steuer mit CSV-Export; der Fahrer sieht seine Fahrten unter „Meine Fahrten“ und erhält den Fahrauftrag bei jeder Änderung.</span></div>
         </article>
         <article class="board board--f rev rev--up" style="--i: 2">
           <div class="board__head"><span class="board__letter">F</span><div><div class="board__title">Finanzen</div><div class="board__meta">Linie F · 8 Stationen</div></div></div>
@@ -393,7 +398,7 @@
       <div class="st-head">
         <span class="st-label rev rev--left"><span class="badge badge--inline">03</span>Haltestelle 03 · Was besser wird</span>
         <h2 class="display rev rev--left" style="--i: 1">Was sich ändert – Aufgabe für Aufgabe.</h2>
-        <p class="rev rev--left" style="--i: 2">Sieben alltägliche Aufgaben eines Busunternehmens: wie sie heute aussehen und wie BusFlow sie erledigt.</p>
+        <p class="rev rev--left" style="--i: 2">Acht alltägliche Aufgaben eines Busunternehmens: wie sie heute aussehen und wie BusFlow sie erledigt.</p>
       </div>
       <div class="cmp">
         <div class="cmp__th"><span>Aufgabe</span><span>Vorher</span><span></span><span>Mit BusFlow</span></div>
@@ -439,7 +444,68 @@
           <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
           <div class="cmp__after"><p>Maut, Unterkunft der Fahrer, zusätzliche Fahrer und Ausflüge sind immer eingerechnet – auch beim Mindestpreis.</p><span class="cmp__tag">Kilometerstaffeln · Tagesminimum · Transferpauschalen</span></div>
         </div>
+        <div class="cmp__row" style="--i: 7">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><path d="M7.5 14.5h3M13.5 14.5h3M7.5 17.5h3"></path></svg></span>Fahrer einteilen</div>
+          <p class="cmp__before">Wer wann fährt, steht auf einem Zettel oder in WhatsApp; ob Führerschein und Fahrerkarte noch gültig sind, prüft niemand regelmäßig.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Der Einsatzplan zeigt jeden Fahrer je Tag, warnt bei Doppelbelegung und fehlenden Dokumenten, und jede Änderung geht als Fahrauftrag per E-Mail an den Fahrer.</p><span class="cmp__tag">Einsatzplan · Stunden-Export · Führerscheinkontrolle alle 28 Tage</span></div>
+        </div>
       </div>
+      <figure class="roster rev rev--up" aria-labelledby="roster-cap">
+        <div class="roster__card">
+          <div class="roster__bar">
+            <div class="roster__title"><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Fahrer · Einsatzplan</div>
+            <div class="roster__tabs" aria-hidden="true"><span>Übersicht</span><span class="is-active">Einsatzplan</span><span>Stunden</span></div>
+            <span class="roster__week">KW 43 · 19.–25. Okt. 2026</span>
+          </div>
+          <div class="roster__scroll" aria-hidden="true">
+            <div class="roster__grid">
+              <div class="roster__row" style="--r: 0">
+                <div class="roster__head"><b>Fahrer</b></div>
+                <div class="roster__head">Mo <b>19.</b></div><div class="roster__head">Di <b>20.</b></div><div class="roster__head">Mi <b>21.</b></div><div class="roster__head">Do <b>22.</b></div><div class="roster__head">Fr <b>23.</b></div><div class="roster__head">Sa <b>24.</b></div><div class="roster__head">So <b>25.</b></div>
+              </div>
+              <div class="roster__row" style="--r: 1">
+                <div class="roster__drv"><b>J. Weber</b><small>Im Dienst 9 h · Lenkzeit 7,5 h</small><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
+                <div class="roster__cell roster__cell--span"><div class="roster__trip">München → Zagreb<small>Fahrer 1 · Klassenfahrt · 2 Tage</small></div></div>
+                <div class="roster__cell"><div class="roster__trip roster__trip--o">Zagreb → München<small>Fahrer 1 · Rückfahrt</small></div></div>
+                <div class="roster__cell roster__cell--off">frei</div>
+                <div class="roster__cell"><div class="roster__trip">Flughafen-Shuttle MUC<small>Fahrer 1 · 06:00</small></div></div>
+                <div class="roster__cell roster__cell--off">frei</div>
+                <div class="roster__cell roster__cell--off">frei</div>
+              </div>
+              <div class="roster__row" style="--r: 2">
+                <div class="roster__drv"><b>M. Kovač</b><small>Im Dienst 8 h · Lenkzeit 6 h</small><span class="roster__badge roster__badge--due">Fahrerkarte läuft in 12 Tagen ab</span></div>
+                <div class="roster__cell roster__cell--off">frei</div>
+                <div class="roster__cell roster__cell--span"><div class="roster__trip">Klassenfahrt Berlin<small>Fahrer 2 · 2 Tage</small></div></div>
+                <div class="roster__cell roster__cell--off">frei</div>
+                <div class="roster__cell"><div class="roster__trip">Seniorenfahrt Bodensee<small>Fahrer 1</small></div></div>
+                <div class="roster__cell"><div class="roster__trip">Messe-Shuttle Frankfurt<small>Fahrer 1</small></div><div class="roster__trip roster__trip--dbl">Hochzeit Würzburg<small>Warnung: doppelt eingeteilt</small></div></div>
+                <div class="roster__cell roster__cell--off">frei</div>
+              </div>
+              <div class="roster__row" style="--r: 3">
+                <div class="roster__drv"><b>S. Yilmaz</b><small>Im Dienst 10 h · Lenkzeit 8 h</small><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
+                <div class="roster__cell"><div class="roster__trip roster__trip--o">Pendelfahrt Werk Ingolstadt<small>täglich 05:30</small></div></div>
+                <div class="roster__cell"><div class="roster__trip roster__trip--o">Pendelfahrt Werk Ingolstadt<small>täglich 05:30</small></div></div>
+                <div class="roster__cell roster__cell--off">frei</div>
+                <div class="roster__cell"><div class="roster__trip roster__trip--warn">Führerscheinkontrolle fällig<small>alle 28 Tage · bestätigen</small></div></div>
+                <div class="roster__cell"><div class="roster__trip">Vereinsfahrt Salzburg<small>Fahrer 1</small></div></div>
+                <div class="roster__cell roster__cell--span"><div class="roster__trip">Skifahrt Zillertal<small>Fahrer 2 · 2 Tage</small></div></div>
+              </div>
+              <div class="roster__row" style="--r: 4">
+                <div class="roster__drv"><b>A. Brandt</b><small>Im Dienst 9 h · Lenkzeit 7 h</small><span class="roster__badge roster__badge--ok">Dokumente ok</span></div>
+                <div class="roster__cell roster__cell--off">frei</div>
+                <div class="roster__cell"><div class="roster__trip">Messe-Shuttle Frankfurt<small>Fahrer 1</small></div></div>
+                <div class="roster__cell"><div class="roster__trip">Messe-Shuttle Frankfurt<small>Fahrer 1</small></div></div>
+                <div class="roster__cell roster__cell--span"><div class="roster__trip">Abschlussfahrt Prag<small>Fahrer 1 · 2 Tage</small></div></div>
+                <div class="roster__cell roster__cell--off">frei</div>
+                <div class="roster__cell roster__cell--off">frei</div>
+              </div>
+            </div>
+          </div>
+          <div class="roster__foot" aria-hidden="true"><span>Jede Änderung geht als Fahrauftrag per E-Mail an den Fahrer</span><span>Sonntag 16 Uhr: Wochenplan an alle</span><span>Stunden als CSV</span></div>
+        </div>
+        <figcaption id="roster-cap">Einsatzplan in BusFlow: eine Woche, vier Fahrer – Fahrten, Dokumente und freie Tage auf einen Blick. Doppelbelegung und fällige Papiere werden markiert, nicht blockiert; der Fahrer sieht seine Fahrten unter „Meine Fahrten“.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -461,6 +527,79 @@
         <li class="pipe__step" style="--i: 4"><span class="pipe__num">05</span><div><div class="pipe__t">Umsatzsteuer je Land</div><div class="pipe__d">Die Route wird an jeder Grenze aufgeteilt, die sie überquert.</div></div></li>
         <li class="pipe__step" style="--i: 5"><span class="pipe__num">06</span><div><div class="pipe__t">Preis und Fahrtplan</div><div class="pipe__d">Gesamt und pro Person, mit Besatzungsplan und Umsatzsteuer.</div></div></li>
       </ol>
+      <div class="demo rev rev--up" id="demo">
+        <div class="demo__head">
+          <span class="eyebrow">Probieren Sie es aus</span>
+          <h3>Ihre Route, Ihre Preisliste – der Rechner läuft wie in BusFlow.</h3>
+          <p>Geben Sie eine Fahrt ein und tragen Sie Ihre eigenen Tarife ein. Das Ergebnis ist ein Demo-Preis aus Ihren Beispielwerten – kein Angebot.</p>
+        </div>
+        <div class="demo__grid">
+          <form class="demo__form" id="demo-form" novalidate aria-label="Demo-Rechner: Route, Besatzung und Preis">
+            <div class="demo__row2">
+              <div class="q"><label class="q__label" for="demo-from">Abfahrtsort</label><input class="field" id="demo-from" name="from" type="text" list="demo-from-list" placeholder="z. B. München" required autocomplete="off"><datalist id="demo-from-list"></datalist><span class="q__err">Bitte geben Sie den Abfahrtsort ein.</span></div>
+              <div class="q"><label class="q__label" for="demo-to">Zielort</label><input class="field" id="demo-to" name="to" type="text" list="demo-to-list" placeholder="z. B. Zagreb" required autocomplete="off"><datalist id="demo-to-list"></datalist><span class="q__err">Bitte geben Sie den Zielort ein.</span></div>
+            </div>
+            <fieldset class="q demo__kinds"><legend class="q__label">Fahrtart</legend>
+              <div class="demo__options">
+                <label class="demo__radio"><input type="radio" name="kind" value="transfer"><span>Transfer – nur eine Richtung</span></label>
+                <label class="demo__radio"><input type="radio" name="kind" value="round" checked><span>Hin- und Rückfahrt</span></label>
+                <label class="demo__radio"><input type="radio" name="kind" value="day"><span>Tagesfahrt / Andere (Events, Shuttle)</span></label>
+              </div>
+            </fieldset>
+            <div class="demo__row3">
+              <div class="q"><label class="q__label" for="demo-date">Hinfahrtdatum</label><input class="field" id="demo-date" name="date" type="date" required><span class="q__err">Bitte wählen Sie ein Datum.</span></div>
+              <div class="q" data-kind="round"><label class="q__label" for="demo-return">Rückfahrtdatum</label><input class="field" id="demo-return" name="returnDate" type="date"><span class="q__err">Die Rückfahrt muss am oder nach dem Hinfahrtdatum liegen.</span></div>
+              <div class="q"><label class="q__label" for="demo-time">Abfahrtszeit <span class="opt">– optional</span></label><input class="field" id="demo-time" name="time" type="time"></div>
+              <div class="q"><label class="q__label" for="demo-pax">Personenzahl</label><input class="field" id="demo-pax" name="pax" type="number" min="1" max="74" value="50" required inputmode="numeric"><span class="q__err">1 bis 74 Personen.</span></div>
+            </div>
+            <details class="demo__params" open>
+              <summary><span>Ihre Preisliste</span><small>Beispielwerte – tragen Sie Ihre ein</small></summary>
+              <div class="demo__paramgrid">
+                <div class="q"><label class="q__label" for="demo-rate">Preis je km <span class="opt">€</span></label><input class="field" id="demo-rate" name="rate" type="number" min="0.1" step="0.1" value="2.2" required inputmode="decimal"><span class="q__err">Zahl größer 0.</span></div>
+                <div class="q"><label class="q__label" for="demo-daymin">Tagesminimum <span class="opt">€ je Tag</span></label><input class="field" id="demo-daymin" name="dayMin" type="number" min="0" step="10" value="650" required inputmode="numeric"><span class="q__err">Zahl ab 0.</span></div>
+                <div class="q"><label class="q__label" for="demo-extra">Zusätzlicher Fahrer <span class="opt">€ je Tag</span></label><input class="field" id="demo-extra" name="extraDriver" type="number" min="0" step="10" value="250" required inputmode="numeric"><span class="q__err">Zahl ab 0.</span></div>
+                <div class="q"><label class="q__label" for="demo-night">Übernachtung Fahrer <span class="opt">€ je Nacht</span></label><input class="field" id="demo-night" name="night" type="number" min="0" step="5" value="90" required inputmode="numeric"><span class="q__err">Zahl ab 0.</span></div>
+                <div class="q"><label class="q__label" for="demo-pct">Zuschlag / Rabatt Fahrtart <span class="opt">%</span></label><input class="field" id="demo-pct" name="pct" type="number" min="-100" max="300" step="1" value="0" required inputmode="numeric"><span class="q__err">−100 bis 300 %.</span></div>
+              </div>
+            </details>
+            <div class="demo__actions">
+              <button class="btn btn--cream btn--lg" type="submit" id="demo-submit">Fahrpreis berechnen</button>
+              <p class="demo__hint">Beim Berechnen werden Orte und Route an OpenStreetMap, komoot (Photon) und OSRM übertragen. <a href="datenschutz.html#h-demo">Datenschutz</a></p>
+            </div>
+            <p class="demo__msg" id="demo-msg" role="status" aria-live="polite" hidden></p>
+          </form>
+          <div class="demo__out">
+            <div class="demo__map" id="demo-map">
+              <div class="demo__empty"><span class="eyebrow">Beispiel</span><b>Berlin → Paris</b><span>Geben Sie links Ihre Fahrt ein – die Route erscheint hier auf der Karte.</span></div>
+            </div>
+            <div class="demo__result" id="demo-result" hidden>
+              <dl class="demo__facts">
+                <div><dt>Einfache Strecke</dt><dd data-out="km">—</dd></div>
+                <div><dt>Lenkzeit je Richtung</dt><dd data-out="dur">—</dd></div>
+                <div><dt>Fahrzeug</dt><dd data-out="bus">—</dd></div>
+                <div><dt>Tage</dt><dd data-out="days">—</dd></div>
+              </dl>
+              <div class="demo__block">
+                <h4>Besatzung und Lenkzeiten</h4>
+                <p data-out="crew"></p>
+                <p class="demo__note" data-out="feasible"></p>
+                <p class="demo__note">Im Einsatzplan sehen Sie, welche Fahrer an diesem Tag frei sind.</p>
+              </div>
+              <div class="demo__block">
+                <h4>Durchfahrene Länder <small>ungefähr, je Richtung hin und zurück</small></h4>
+                <div class="demo__countries" data-out="countries"></div>
+                <p class="demo__note">BusFlow teilt die Route an jeder Grenze auf und berechnet die Umsatzsteuer je Land.</p>
+              </div>
+              <div class="demo__price">
+                <div class="demo__price-head"><span class="demo__price-label">Gesamtpreis netto</span><strong data-out="total">—</strong><span class="demo__price-pp" data-out="perPerson"></span></div>
+                <ul class="demo__lines" data-out="lines"></ul>
+              </div>
+              <p class="demo__foot">Demo mit Ihren Beispielwerten, Umsatzsteuer nicht enthalten – kein Angebot. In BusFlow rechnet Ihre Preisliste je Busklasse, Maut und Diesel je Land und die Leerfahrt ab Betriebshof.</p>
+              <a class="btn btn--ghost-dark" href="upit.html">Erstgespräch vereinbaren</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="auto rev rev--up">
         <div class="auto__head"><span class="key__ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span>Das System arbeitet von selbst – auch wenn Sie unterwegs sind</div>
         <ul class="auto__grid">
@@ -765,5 +904,6 @@
 </footer>
 
 <script src="assets/js/landing.js" defer></script>
+<script src="assets/js/demo.js" defer></script>
 </body>
 </html>

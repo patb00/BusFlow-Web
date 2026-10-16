@@ -225,6 +225,7 @@
             <circle class="stop" cx="1110" cy="300" r="4" fill="var(--surface-2)" style="--d: .9s"></circle>
             <circle class="stop" cx="520" cy="70" r="12" fill="#0D1C42" stroke="var(--ink)" style="--d: .55s"></circle>
             <circle class="stop" cx="520" cy="70" r="4" fill="var(--surface-2)" style="--d: .55s"></circle>
+            <circle class="stop" cx="520" cy="128" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .62s"></circle>
             <circle class="stop" cx="520" cy="185" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .7s"></circle>
             <circle class="stop" cx="520" cy="420" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: .95s"></circle>
             <circle class="stop" cx="700" cy="500" r="10" fill="var(--surface-2)" stroke="#0D1C42" style="--d: 1.15s"></circle>
@@ -262,6 +263,7 @@
             <text class="lbl" x="900" y="340" text-anchor="middle" style="--d: .75s">Plaćanje</text>
             <text class="lbl" x="1128" y="340" text-anchor="end" style="--d: .9s">Moje rezervacije</text>
             <text class="lbl" x="542" y="66" style="--d: .55s">Ploča „Traži vašu pažnju“</text>
+            <text class="lbl" x="542" y="124" style="--d: .62s">Vozači i raspored</text>
             <text class="lbl" x="542" y="181" style="--d: .7s">Inbox i velike grupe</text>
             <text class="lbl" x="498" y="416" text-anchor="end" style="--d: .95s">Zauzeće i baze</text>
             <text class="lbl" x="700" y="538" text-anchor="middle" style="--d: 1.15s">Posada i EU pravila</text>
@@ -281,6 +283,7 @@
             <text class="lbl" x="900" y="358" text-anchor="middle" style="--d: .75s">myPOS · PayPal</text>
             <text class="lbl" x="1128" y="358" text-anchor="end" style="--d: .9s">otkazivanje i ostatak</text>
             <text class="lbl" x="542" y="84" style="--d: .55s">zadaci ureda na jednom mjestu</text>
+            <text class="lbl" x="542" y="142" style="--d: .62s">Dokumenti · Sati · Moje vožnje</text>
             <text class="lbl" x="542" y="199" style="--d: .7s">potvrda ponude jednim klikom</text>
             <text class="lbl" x="498" y="434" text-anchor="end" style="--d: .95s">blackouti · više baza</text>
             <text class="lbl" x="700" y="556" text-anchor="middle" style="--d: 1.15s">561/2006 · do 3 vozača</text>
@@ -325,7 +328,7 @@
         <div class="st-head">
           <span class="st-label rev rev--left"><span class="badge badge--inline">02</span>Stanica 02 · Mogućnosti</span>
           <h2 class="display rev rev--left" style="--i: 1">Vozni red mogućnosti.</h2>
-          <p class="rev rev--left" style="--i: 2">Sve što BusFlow radi, složeno po linijama s karte: trideset stanica, od prvog upita do porezne prijave.</p>
+          <p class="rev rev--left" style="--i: 2">Sve što BusFlow radi, složeno po linijama s karte: trideset dvije stanice, od prvog upita do porezne prijave.</p>
         </div>
         <ul class="key rev rev--up" style="--i: 3">
           <li><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span>Radi sam, bez ureda</li>
@@ -345,7 +348,7 @@
           <div class="board__row"><span class="board__code">P8</span><span class="board__t">Jednodnevna vožnja</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Paušal po klasi autobusa i plaćanje odmah; uključuje se po želji.</span></div>
         </article>
         <article class="board board--o rev rev--up" style="--i: 1">
-          <div class="board__head"><span class="board__letter">O</span><div><div class="board__title">Ured i operativa</div><div class="board__meta">Linija O · 8 stanica</div></div></div>
+          <div class="board__head"><span class="board__letter">O</span><div><div class="board__title">Ured i operativa</div><div class="board__meta">Linija O · 10 stanica</div></div></div>
           <div class="board__row"><span class="board__code">O1</span><span class="board__t">Ploča „Traži vašu pažnju“</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Brojači zadataka i polasci za sljedećih 7 dana.</span></div>
           <div class="board__row"><span class="board__code">O2</span><span class="board__t">Inbox rezervacija</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Filteri, značka izvedivosti i izvoz u CSV.</span></div>
           <div class="board__row"><span class="board__code">O3</span><span class="board__t">Velike grupe</span><span class="board__ico" aria-label="Odluka je vaša"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Ponudu provjerite, potvrdite i pošaljete kupcu jednim klikom.</span></div>
@@ -354,6 +357,8 @@
           <div class="board__row"><span class="board__code">O6</span><span class="board__t">Posada po EU 561/2006</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Pauze, smjene, do 3 vozača i noćenja, s obrazloženjem.</span></div>
           <div class="board__row"><span class="board__code">O7</span><span class="board__t">Navigacija za vozače</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Google Maps poveznica s cijelom rutom i putni list e-mailom.</span></div>
           <div class="board__row"><span class="board__code">O8</span><span class="board__t">Telefonski upiti</span><span class="board__ico" aria-label="Radi sam"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Brzi izračun i ručna rezervacija istim cjenovnim motorom.</span></div>
+          <div class="board__row"><span class="board__code">O9</span><span class="board__t">Dosje vozača i rokovi</span><span class="board__ico" aria-label="Radi automatski"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span><span class="board__d">Vozačka dozvola, kartica vozača i kvalifikacija s rokom isteka; svakih 28 dana kontrola dozvole i preuzimanje kartice, dospjelo se označava žuto.</span></div>
+          <div class="board__row"><span class="board__code">O10</span><span class="board__t">Raspored i sati</span><span class="board__ico" aria-label="Vi odlučujete"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span><span class="board__d">Vozači po vožnji, raspored po datumu, sati na dužnosti i za volanom s izvozom u CSV; vozač vidi svoje vožnje pod „Moje vožnje“ i dobiva putni nalog pri svakoj promjeni.</span></div>
         </article>
         <article class="board board--f rev rev--up" style="--i: 2">
           <div class="board__head"><span class="board__letter">F</span><div><div class="board__title">Financije</div><div class="board__meta">Linija F · 8 stanica</div></div></div>
@@ -394,7 +399,7 @@
       <div class="st-head">
         <span class="st-label rev rev--left"><span class="badge badge--inline">03</span>Stanica 03 · Što se poboljšava</span>
         <h2 class="display rev rev--left" style="--i: 1">Što se mijenja, posao po posao.</h2>
-        <p class="rev rev--left" style="--i: 2">Sedam svakodnevnih poslova autobusnog prijevoznika: kako izgledaju danas i kako ih radi BusFlow.</p>
+        <p class="rev rev--left" style="--i: 2">Osam svakodnevnih poslova autobusnog prijevoznika: kako izgledaju danas i kako ih radi BusFlow.</p>
       </div>
       <div class="cmp">
         <div class="cmp__th"><span>Posao</span><span>Prije</span><span></span><span>S BusFlowom</span></div>
@@ -440,7 +445,68 @@
           <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
           <div class="cmp__after"><p>Cestarine, smještaj vozača, dodatni vozači i izleti uvijek su naplaćeni, i uz minimalnu cijenu.</p><span class="cmp__tag">km razredi · dnevni minimum · paušali transfera</span></div>
         </div>
+        <div class="cmp__row" style="--i: 7">
+          <div class="cmp__job"><span class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><path d="M7.5 14.5h3M13.5 14.5h3M7.5 17.5h3"></path></svg></span>Raspored vozača</div>
+          <p class="cmp__before">Tko kada vozi piše na papiriću ili u WhatsAppu; vrijede li još vozačka dozvola i kartica vozača, nitko ne provjerava redovito.</p>
+          <div class="cmp__arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><circle class="arr-dot" cx="6" cy="20" r="4" fill="var(--accent-strong)"></circle><path class="arr" d="M12 20H48" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 5" pathLength="60"></path><path d="M44 13l8 7-8 7" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="cmp__after"><p>Raspored prikazuje svakog vozača po danu, upozorava na dvostruko zauzeće i dokumente koji nedostaju, a svaka promjena ide vozaču e-mailom kao putni nalog.</p><span class="cmp__tag">raspored · izvoz sati · kontrola dozvole svakih 28 dana</span></div>
+        </div>
       </div>
+      <figure class="roster rev rev--up" aria-labelledby="roster-cap">
+        <div class="roster__card">
+          <div class="roster__bar">
+            <div class="roster__title"><span class="key__ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20.5c1.3-3.9 4-5.8 7-5.8s5.7 1.9 7 5.8"></path></svg></span>Vozači · Raspored</div>
+            <div class="roster__tabs" aria-hidden="true"><span>Pregled</span><span class="is-active">Raspored</span><span>Sati</span></div>
+            <span class="roster__week">43. tjedan · 19.–25. 10. 2026.</span>
+          </div>
+          <div class="roster__scroll" aria-hidden="true">
+            <div class="roster__grid">
+              <div class="roster__row" style="--r: 0">
+                <div class="roster__head"><b>Vozač</b></div>
+                <div class="roster__head">pon <b>19.</b></div><div class="roster__head">uto <b>20.</b></div><div class="roster__head">sri <b>21.</b></div><div class="roster__head">čet <b>22.</b></div><div class="roster__head">pet <b>23.</b></div><div class="roster__head">sub <b>24.</b></div><div class="roster__head">ned <b>25.</b></div>
+              </div>
+              <div class="roster__row" style="--r: 1">
+                <div class="roster__drv"><b>J. Weber</b><small>Na dužnosti 9 h · Vožnja 7,5 h</small><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
+                <div class="roster__cell roster__cell--span"><div class="roster__trip">München → Zagreb<small>Vozač 1 · školski izlet · 2 dana</small></div></div>
+                <div class="roster__cell"><div class="roster__trip roster__trip--o">Zagreb → München<small>Vozač 1 · povratak</small></div></div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+                <div class="roster__cell"><div class="roster__trip">Shuttle zračna luka MUC<small>Vozač 1 · 06:00</small></div></div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+              </div>
+              <div class="roster__row" style="--r: 2">
+                <div class="roster__drv"><b>M. Kovač</b><small>Na dužnosti 8 h · Vožnja 6 h</small><span class="roster__badge roster__badge--due">Kartica vozača istječe za 12 dana</span></div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+                <div class="roster__cell roster__cell--span"><div class="roster__trip">Školski izlet Berlin<small>Vozač 2 · 2 dana</small></div></div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+                <div class="roster__cell"><div class="roster__trip">Umirovljenici Bodensko jezero<small>Vozač 1</small></div></div>
+                <div class="roster__cell"><div class="roster__trip">Shuttle sajam Frankfurt<small>Vozač 1</small></div><div class="roster__trip roster__trip--dbl">Vjenčanje Würzburg<small>Upozorenje: dvostruko zauzet</small></div></div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+              </div>
+              <div class="roster__row" style="--r: 3">
+                <div class="roster__drv"><b>S. Yilmaz</b><small>Na dužnosti 10 h · Vožnja 8 h</small><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
+                <div class="roster__cell"><div class="roster__trip roster__trip--o">Shuttle za tvornicu Ingolstadt<small>svaki dan 05:30</small></div></div>
+                <div class="roster__cell"><div class="roster__trip roster__trip--o">Shuttle za tvornicu Ingolstadt<small>svaki dan 05:30</small></div></div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+                <div class="roster__cell"><div class="roster__trip roster__trip--warn">Kontrola vozačke dospjela<small>svakih 28 dana · potvrditi</small></div></div>
+                <div class="roster__cell"><div class="roster__trip">Udruga Salzburg<small>Vozač 1</small></div></div>
+                <div class="roster__cell roster__cell--span"><div class="roster__trip">Skijanje Zillertal<small>Vozač 2 · 2 dana</small></div></div>
+              </div>
+              <div class="roster__row" style="--r: 4">
+                <div class="roster__drv"><b>A. Brandt</b><small>Na dužnosti 9 h · Vožnja 7 h</small><span class="roster__badge roster__badge--ok">Dokumenti ok</span></div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+                <div class="roster__cell"><div class="roster__trip">Shuttle sajam Frankfurt<small>Vozač 1</small></div></div>
+                <div class="roster__cell"><div class="roster__trip">Shuttle sajam Frankfurt<small>Vozač 1</small></div></div>
+                <div class="roster__cell roster__cell--span"><div class="roster__trip">Maturalac Prag<small>Vozač 1 · 2 dana</small></div></div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+                <div class="roster__cell roster__cell--off">slobodno</div>
+              </div>
+            </div>
+          </div>
+          <div class="roster__foot" aria-hidden="true"><span>Svaka promjena ide vozaču e-mailom kao putni nalog</span><span>Nedjelja 16 h: tjedni plan svima</span><span>Sati kao CSV</span></div>
+        </div>
+        <figcaption id="roster-cap">Raspored u BusFlowu: jedan tjedan, četiri vozača – vožnje, dokumenti i slobodni dani na jednom mjestu. Dvostruko zauzeće i dospjeli dokumenti se označavaju, ne blokiraju; vozač vidi svoje vožnje pod „Moje vožnje“.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -462,6 +528,79 @@
         <li class="pipe__step" style="--i: 4"><span class="pipe__num">05</span><div><div class="pipe__t">PDV po državama</div><div class="pipe__d">Ruta se dijeli po granicama koje prelazi.</div></div></li>
         <li class="pipe__step" style="--i: 5"><span class="pipe__num">06</span><div><div class="pipe__t">Cijena i plan vožnje</div><div class="pipe__d">Ukupno i po osobi, s planom posade i PDV-om.</div></div></li>
       </ol>
+      <div class="demo rev rev--up" id="demo">
+        <div class="demo__head">
+          <span class="eyebrow">Isprobajte</span>
+          <h3>Vaša ruta, vaš cjenik – kalkulator radi kao u BusFlowu.</h3>
+          <p>Unesite vožnju i upišite vlastite tarife. Rezultat je demo cijena iz vaših primjernih vrijednosti – nije ponuda.</p>
+        </div>
+        <div class="demo__grid">
+          <form class="demo__form" id="demo-form" novalidate aria-label="Demo kalkulator: ruta, posada i cijena">
+            <div class="demo__row2">
+              <div class="q"><label class="q__label" for="demo-from">Mjesto polaska</label><input class="field" id="demo-from" name="from" type="text" list="demo-from-list" placeholder="npr. Zagreb" required autocomplete="off"><datalist id="demo-from-list"></datalist><span class="q__err">Upišite mjesto polaska.</span></div>
+              <div class="q"><label class="q__label" for="demo-to">Odredište</label><input class="field" id="demo-to" name="to" type="text" list="demo-to-list" placeholder="npr. München" required autocomplete="off"><datalist id="demo-to-list"></datalist><span class="q__err">Upišite odredište.</span></div>
+            </div>
+            <fieldset class="q demo__kinds"><legend class="q__label">Vrsta vožnje</legend>
+              <div class="demo__options">
+                <label class="demo__radio"><input type="radio" name="kind" value="transfer"><span>Transfer – samo u jednom smjeru</span></label>
+                <label class="demo__radio"><input type="radio" name="kind" value="round" checked><span>Povratna vožnja</span></label>
+                <label class="demo__radio"><input type="radio" name="kind" value="day"><span>Jednodnevna / ostalo (eventi, shuttle)</span></label>
+              </div>
+            </fieldset>
+            <div class="demo__row3">
+              <div class="q"><label class="q__label" for="demo-date">Datum polaska</label><input class="field" id="demo-date" name="date" type="date" required><span class="q__err">Odaberite datum.</span></div>
+              <div class="q" data-kind="round"><label class="q__label" for="demo-return">Datum povratka</label><input class="field" id="demo-return" name="returnDate" type="date"><span class="q__err">Povratak mora biti na dan polaska ili poslije.</span></div>
+              <div class="q"><label class="q__label" for="demo-time">Vrijeme polaska <span class="opt">– po želji</span></label><input class="field" id="demo-time" name="time" type="time"></div>
+              <div class="q"><label class="q__label" for="demo-pax">Broj putnika</label><input class="field" id="demo-pax" name="pax" type="number" min="1" max="74" value="50" required inputmode="numeric"><span class="q__err">1 do 74 putnika.</span></div>
+            </div>
+            <details class="demo__params" open>
+              <summary><span>Vaš cjenik</span><small>primjerne vrijednosti – upišite svoje</small></summary>
+              <div class="demo__paramgrid">
+                <div class="q"><label class="q__label" for="demo-rate">Cijena po km <span class="opt">€</span></label><input class="field" id="demo-rate" name="rate" type="number" min="0.1" step="0.1" value="2.2" required inputmode="decimal"><span class="q__err">Broj veći od 0.</span></div>
+                <div class="q"><label class="q__label" for="demo-daymin">Dnevni minimum <span class="opt">€ po danu</span></label><input class="field" id="demo-daymin" name="dayMin" type="number" min="0" step="10" value="650" required inputmode="numeric"><span class="q__err">Broj od 0.</span></div>
+                <div class="q"><label class="q__label" for="demo-extra">Dodatni vozač <span class="opt">€ po danu</span></label><input class="field" id="demo-extra" name="extraDriver" type="number" min="0" step="10" value="250" required inputmode="numeric"><span class="q__err">Broj od 0.</span></div>
+                <div class="q"><label class="q__label" for="demo-night">Noćenje vozača <span class="opt">€ po noći</span></label><input class="field" id="demo-night" name="night" type="number" min="0" step="5" value="90" required inputmode="numeric"><span class="q__err">Broj od 0.</span></div>
+                <div class="q"><label class="q__label" for="demo-pct">Dodatak / popust za vrstu vožnje <span class="opt">%</span></label><input class="field" id="demo-pct" name="pct" type="number" min="-100" max="300" step="1" value="0" required inputmode="numeric"><span class="q__err">−100 do 300 %.</span></div>
+              </div>
+            </details>
+            <div class="demo__actions">
+              <button class="btn btn--cream btn--lg" type="submit" id="demo-submit">Izračunajte cijenu</button>
+              <p class="demo__hint">Pri izračunu se mjesta i ruta šalju servisima OpenStreetMap, komoot (Photon) i OSRM. <a href="privatnost.html#h-demo">Pravila privatnosti</a></p>
+            </div>
+            <p class="demo__msg" id="demo-msg" role="status" aria-live="polite" hidden></p>
+          </form>
+          <div class="demo__out">
+            <div class="demo__map" id="demo-map">
+              <div class="demo__empty"><span class="eyebrow">Primjer</span><b>Zagreb → München</b><span>Unesite vožnju lijevo – ruta se pojavljuje ovdje na karti.</span></div>
+            </div>
+            <div class="demo__result" id="demo-result" hidden>
+              <dl class="demo__facts">
+                <div><dt>Udaljenost u jednom smjeru</dt><dd data-out="km">—</dd></div>
+                <div><dt>Vožnja po smjeru</dt><dd data-out="dur">—</dd></div>
+                <div><dt>Vozilo</dt><dd data-out="bus">—</dd></div>
+                <div><dt>Dani</dt><dd data-out="days">—</dd></div>
+              </dl>
+              <div class="demo__block">
+                <h4>Posada i vremena vožnje</h4>
+                <p data-out="crew"></p>
+                <p class="demo__note" data-out="feasible"></p>
+                <p class="demo__note">U rasporedu vidite koji su vozači tog dana slobodni.</p>
+              </div>
+              <div class="demo__block">
+                <h4>Države na ruti <small>približno, u oba smjera</small></h4>
+                <div class="demo__countries" data-out="countries"></div>
+                <p class="demo__note">BusFlow dijeli rutu na svakoj granici i obračunava PDV po državi.</p>
+              </div>
+              <div class="demo__price">
+                <div class="demo__price-head"><span class="demo__price-label">Ukupna cijena neto</span><strong data-out="total">—</strong><span class="demo__price-pp" data-out="perPerson"></span></div>
+                <ul class="demo__lines" data-out="lines"></ul>
+              </div>
+              <p class="demo__foot">Demo s vašim primjernim vrijednostima, bez PDV-a – nije ponuda. U BusFlowu računa vaš cjenik po klasi autobusa, cestarina i gorivo po državi te prazna vožnja od baze.</p>
+              <a class="btn btn--ghost-dark" href="upit.html">Dogovorite prvi sastanak</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="auto rev rev--up">
         <div class="auto__head"><span class="key__ico"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.5L4.5 13.5h6.2l-1.2 8 9-11h-6.2l1.2-8z" fill="currentColor"></path></svg></span>Sustav radi sam, i kad ste na cesti</div>
         <ul class="auto__grid">
@@ -774,5 +913,6 @@
 </footer>
 
 <script src="../assets/js/landing.js" defer></script>
+<script src="../assets/js/demo.js" defer></script>
 </body>
 </html>
