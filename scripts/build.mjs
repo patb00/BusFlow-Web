@@ -12,15 +12,19 @@ import { Script } from "node:vm";
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const DIST = join(ROOT, "dist");
 const SITE = (process.env.VITE_SITE_URL || "https://busflow.email").trim().replace(/\/+$/, "");
+const PROD = "https://busflow.email"; // kanonska adresa upisana u HTML (canonical, hreflang, og:image, JSON-LD), neovisna o hostingu
 const BASE = (process.env.VITE_BASE || "/").replace(/\/*$/, "/");
 const COPY = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "404.html", "hr", "en", "kontakt", "assets"];
 const HTML = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "hr/index.html", "hr/upit.html",
   "hr/impresum.html", "hr/privatnost.html", "en/index.html", "en/upit.html", "en/legal-notice.html", "en/privacy.html",
   "kontakt/index.html", "404.html"];
 const LANGS = { de: "/", hr: "/hr/", en: "/en/" }; // ista stranica na tri jezika; x-default = de
+const SEO = { title: [20, 65], description: [70, 160] }; // dopuštene duljine u znakovima
 
 const read = (file) => readFileSync(join(ROOT, file), "utf8");
 const idsOf = (file) => new Set([...read(file).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+const text = (s) => s.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&shy;/g, "").replace(/&amp;/g, "&")
+  .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/\s+/g, " ").trim();
 
 function check() {
   const errors = [];
@@ -44,6 +48,7 @@ function check() {
       try { new Script(code, { filename: file }); } catch (e) { errors.push(`${file}: inline skripta: ${e.message}`); }
     }
   }
+  errors.push(...checkSeo());
   // vercel.json: odredište svakog preusmjeravanja postoji (i sidro u njemu), a izvor nije postojeća datoteka
   const { redirects = [] } = JSON.parse(read("vercel.json"));
   for (const { source, destination } of redirects) {
@@ -62,6 +67,62 @@ function check() {
   console.log(`check: ${HTML.length} HTML datoteka u redu`);
 }
 
+// SEO: tri indeksirane stranice imaju title/description prave duljine, jedan <h1>, canonical i hreflang na PROD,
+// og:image koja postoji, twitter:card i JSON-LD čiji FAQ odgovara pitanjima na stranici; sve ostale stranice su noindex.
+function checkSeo() {
+  const errors = [];
+  const indexed = Object.values(LANGS).map((path) => path.replace(/^\//, "") + "index.html");
+  for (const [lang, path] of Object.entries(LANGS)) {
+    const file = path.replace(/^\//, "") + "index.html";
+    const html = read(file);
+    const err = (msg) => errors.push(`${file}: ${msg}`);
+    const attr = (re) => { const m = html.match(re); return m ? text(m[1]) : ""; };
+    const title = attr(/<title>([^<]*)<\/title>/);
+    const description = attr(/<meta name="description" content="([^"]*)">/);
+    if (title.length < SEO.title[0] || title.length > SEO.title[1]) err(`title ima ${title.length} znakova (${SEO.title.join("–")})`);
+    if (description.length < SEO.description[0] || description.length > SEO.description[1]) err(`description ima ${description.length} znakova (${SEO.description.join("–")})`);
+    const h1 = (html.match(/<h1[\s>]/g) || []).length;
+    if (h1 !== 1) err(`${h1} <h1>, očekivan 1`);
+    if (/<meta name="robots" content="[^"]*noindex/.test(html)) err("indeksirana stranica ima noindex");
+    if (!html.includes(`<link rel="canonical" href="${PROD}${path}">`)) err(`canonical nije ${PROD}${path}`);
+    for (const [l, p] of [...Object.entries(LANGS), ["x-default", LANGS.de]]) {
+      if (!html.includes(`<link rel="alternate" hreflang="${l}" href="${PROD}${p}">`)) err(`nema hreflang="${l}" za ${PROD}${p}`);
+    }
+    const image = attr(/<meta property="og:image" content="([^"]*)">/);
+    if (!image.startsWith(PROD + "/")) err(`og:image nije na ${PROD}`);
+    else if (!existsSync(join(ROOT, image.slice(PROD.length + 1)))) err(`og:image ${image} ne postoji`);
+    for (const tag of ['<meta property="og:title"', '<meta property="og:description"', `<meta property="og:url" content="${PROD}${path}">`,
+      '<meta name="twitter:card" content="summary_large_image">', '<meta name="twitter:image"']) {
+      if (!html.includes(tag)) err(`nema ${tag}`);
+    }
+    const ld = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    if (!ld) { err("nema JSON-LD"); continue; }
+    let graph;
+    try { graph = JSON.parse(ld[1])["@graph"] || []; } catch (e) { err(`JSON-LD: ${e.message}`); continue; }
+    for (const type of ["Organization", "WebSite", "WebPage", "SoftwareApplication", "FAQPage"]) {
+      if (!graph.some((n) => n["@type"] === type)) err(`JSON-LD bez ${type}`);
+    }
+    const faq = graph.find((n) => n["@type"] === "FAQPage");
+    const onPage = [...html.matchAll(/<h3 class="faq__q">([\s\S]*?)<\/h3>\s*<p class="faq__a">([\s\S]*?)<\/p>/g)]
+      .map((m) => [text(m[1].replace(/<span class="faq__mark"[^>]*>\?<\/span>/, "")), text(m[2])]);
+    const inLd = (faq?.mainEntity || []).map((q) => [q.name, q.acceptedAnswer?.text]);
+    if (JSON.stringify(onPage) !== JSON.stringify(inLd)) err("FAQPage u JSON-LD-u ne odgovara pitanjima i odgovorima u sekciji 08");
+    if (faq && faq.inLanguage !== lang) err(`FAQPage inLanguage nije ${lang}`);
+  }
+  for (const file of HTML.filter((f) => !indexed.includes(f))) {
+    if (!/<meta name="robots" content="[^"]*noindex/.test(read(file))) errors.push(`${file}: stranica izvan sitemapa mora imati noindex`);
+  }
+  return errors;
+}
+
+function lastmod() {
+  try {
+    const date = execFileSync("git", ["log", "-1", "--format=%cI"], { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    if (/^\d{4}-\d{2}-\d{2}/.test(date)) return date.slice(0, 10);
+  } catch { /* bez gita (npr. ZIP): datum builda */ }
+  return new Date().toISOString().slice(0, 10);
+}
+
 function build() {
   rmSync(DIST, { recursive: true, force: true });
   mkdirSync(DIST);
@@ -70,14 +131,15 @@ function build() {
     const file = join(DIST, "404.html");
     writeFileSync(file, readFileSync(file, "utf8").replace(/(\s(?:href|src)=")\//g, `$1${BASE}`));
   }
+  const date = lastmod();
   const alt = [...Object.entries(LANGS), ["x-default", LANGS.de]]
     .map(([lang, path]) => `    <xhtml:link rel="alternate" hreflang="${lang}" href="${SITE}${path}"/>`);
-  const urls = Object.values(LANGS).map((path) => ["  <url>", `    <loc>${SITE}${path}</loc>`, ...alt, "  </url>"].join("\n"));
+  const urls = Object.values(LANGS).map((path) => ["  <url>", `    <loc>${SITE}${path}</loc>`, `    <lastmod>${date}</lastmod>`, ...alt, "  </url>"].join("\n"));
   writeFileSync(join(DIST, "sitemap.xml"), ['<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     ...urls, "</urlset>", ""].join("\n"));
   writeFileSync(join(DIST, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
-  console.log(`build: dist/ za ${SITE} (base ${BASE})`);
+  console.log(`build: dist/ za ${SITE} (base ${BASE}, lastmod ${date})`);
 }
 
 check();

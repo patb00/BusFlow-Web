@@ -32,8 +32,8 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 | `assets/js/demo.js` | demo-kalkulator u sekciji 04: pretraga mjesta (Photon), ruta (OSRM), karta (Leaflet + OpenStreetMap), države na ruti, posada, dani i ilustrativna cijena iz posjetiteljevih parametara; tekstovi de/hr/en u rječniku `I18N` |
 | `assets/vendor/leaflet/` | Leaflet 1.9.4 (BSD-2-Clause, `LICENSE` u mapi), poslužuje se s naše stranice i učitava tek pri prvom izračunu |
 | `assets/data/europe-countries.json` | pojednostavljeni poligoni europskih država (Natural Earth 110m, public domain) za pripisivanje kilometara državama |
-| `assets/img/favicon.svg` | ikona |
-| `scripts/build.mjs`, `package.json` | provjera (`npm run lint`) i build u `dist/` (`npm run build`), bez ovisnosti |
+| `assets/img/` | ikone `favicon.svg`, `favicon-96.png` i `apple-touch-icon.png`; slike za dijeljenje `og-de.png`, `og-hr.png`, `og-en.png` (1200×630); logo reference |
+| `scripts/build.mjs`, `package.json` | provjera (`npm run lint`, uključujući SEO provjere) i build u `dist/` (`npm run build`), bez ovisnosti |
 | `scripts/make-europe.mjs` | generira `assets/data/europe-countries.json` iz preuzetog Natural Earth GeoJSON-a (izvor se ne commita) |
 | `vercel.json` | postavke za Vercel: build, preusmjeravanja starih adresa i kratkih adresa pravnih stranica, keširanje fontova |
 
@@ -92,8 +92,8 @@ Nema instalacije. Stranicu poslužite bilo kojim statičnim poslužiteljem, npr.
 Sve radi bez interneta osim demo-kalkulatora u sekciji 04, koji pri izračunu zove Photon, OSRM i OpenStreetMap pločice.
 
 ```
-npm run lint    # sintaksa JS-a, sve lokalne poveznice i sidra, inline skripte, odredišta preusmjeravanja iz vercel.json
-npm run build   # isto, pa kopija u dist/ te robots.txt i sitemap.xml (VITE_SITE_URL, zadano https://busflow.email)
+npm run lint    # sintaksa JS-a, sve lokalne poveznice i sidra, inline skripte, odredišta preusmjeravanja iz vercel.json, SEO (vidi dolje)
+npm run build   # isto, pa kopija u dist/ te robots.txt i sitemap.xml s lastmod (VITE_SITE_URL, zadano https://busflow.email)
 ```
 
 ## Prije objave: `assets/js/config.js`
@@ -225,7 +225,7 @@ kontrola vozačke svakih 28 dana, Einsatzplan, sati, „Meine Fahrten“, Fahrau
 (ušteda, cijena, broja kupaca); demo-kalkulator računa isključivo iz brojki koje posjetitelj sam upiše, a zadane
 vrijednosti su označene kao primjeri. Imena vozača u mini Einsatzplanu su izmišljena. Novi jezik: kopirati `en/` u novu mapu, prevesti tekst, dodati jezik u `I18N` (`upit.js`), u vrijednosti
 `config.js`, u `LANGS`, `COPY` i `HTML` (`scripts/build.mjs`), u prekidače jezika i `hreflang` oznake svih stranica te u
-`kontakt/index.html` i `vercel.json`.
+`kontakt/index.html` i `vercel.json`; uz to sliku za dijeljenje `assets/img/og-<jezik>.png` i JSON-LD na tom jeziku (vidi SEO).
 
 Engleski tekst koristi pojmove iz engleskih tekstova aplikacije BusFlow_Mikanovic (`en.json`): coach operator, coach,
 inquiry, binding price, booking, invoice (nikad „e-invoice“), VAT, depot, partner operators, driver hire, „Book an online
@@ -244,3 +244,34 @@ samo fontovi, pa **promijenjeni font mora dobiti novo ime datoteke**.
 Repozitorij `patb00/BusFlow-Web` drži isto stablo kao ovaj (osim `.github/`, gdje je njegov workflow za GitHub Pages,
 koji koristi iste `npm ci`, `npm run lint` i `npm run build` uz `VITE_BASE=/BusFlow-Web/`). Bilo koji drugi statični
 hosting također radi: poslužite sadržaj `dist/` nakon `npm run build`.
+
+## SEO
+
+Indeksiraju se samo tri stranice: `/`, `/hr/` i `/en/`. Sve ostale (upit, `/kontakt`, pravne stranice, 404) imaju
+`noindex`, a `npm run lint` to provjerava. Kanonska adresa je `https://busflow.email` i upisana je u HTML neovisno o
+hostingu (`PROD` u `build.mjs`); `VITE_SITE_URL` mijenja samo `robots.txt` i `sitemap.xml`.
+
+Svaka od tri stranice ima, u `<head>`:
+
+- `<title>` (20–65 znakova, ključna riječ „Software für Busunternehmen“ / „softver za autobusne prijevoznike“ / „software for
+  coach operators“ naprijed) i `description` (70–160 znakova); lint mjeri duljine.
+- `robots` `index, follow, max-image-preview:large`, `canonical`, `hreflang` za de/hr/en i `x-default` (= de).
+- Open Graph i Twitter: `og:title`, `og:description`, `og:site_name`, `og:locale`, `og:url`, `og:image`
+  (`assets/img/og-<jezik>.png`, 1200×630, apsolutna adresa) s dimenzijama i `alt`, `twitter:card` `summary_large_image`.
+- Ikone: `favicon.svg`, `favicon-96.png` (Google traži PNG/ICO, višekratnik 48 px) i `apple-touch-icon.png` (180×180).
+- JSON-LD (`application/ld+json`, `@graph`): `Organization` (FlowSolutions d.o.o., podaci kao u Impressumu), `WebSite`,
+  `WebPage`, `SoftwareApplication` (BusFlow, `BusinessApplication`, bez cijene) i `FAQPage` s osam pitanja iz sekcije 08.
+  Pitanja i odgovori u JSON-LD-u moraju biti doslovno jednaki tekstu u `.faq__q` / `.faq__a` na stranici; lint to
+  uspoređuje, pa se pri promjeni FAQ-a mijenjaju oba mjesta.
+
+`sitemap.xml` sadrži tri adrese s `hreflang` alternativama i `lastmod` (datum zadnjeg commita, ili datum builda bez gita).
+
+Slike za dijeljenje i PNG ikone nacrtane su Canvas API-jem u pregledniku (navy podloga, logo, hero-tvrdnja na jeziku
+stranice, podnaslov, `busflow.email`); fontovi su Barlow Condensed 800 i Barlow iz `assets/fonts/`. Za novu sliku
+(npr. promjena tvrdnje ili novi jezik) dovoljno je nacrtati 1200×630 PNG istog imena; sadržaj teksta treba odgovarati
+`og:image:alt`.
+
+Nakon objave (radi vlasnik domene, jednokratno): u Google Search Console dodati domain property `busflow.email` i predati
+`https://busflow.email/sitemap.xml`; isto u Bing Webmaster Tools; provjeriti stranicu u Rich Results Testu
+(JSON-LD bez grešaka) i u LinkedIn Post Inspectoru (slika i naslov). Prije šire promocije vrijedi napomena iz odjeljka
+o demo-kalkulatoru: zamijeniti javni OSRM demo poslužitelj.
