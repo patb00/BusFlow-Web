@@ -179,7 +179,7 @@ procijeni kao zračna × 1,3 pri 75 km/h i označi „geschätzt“. **Prije ši
 poslužitelj vlastitim OSRM-om ili BusFlow API-jem (`POST api/v1/routes/legs` uz CORS za busflow.email): javni demo
 poslužitelj nije namijenjen komercijalnoj produkciji. Adresa za zamjenu je konstanta `OSRM` na vrhu `demo.js`
 (`PHOTON` i `TILES` isto); novi poslužitelj mora ući i u CSP u `vercel.json` (`connect-src` za `PHOTON` i `OSRM`,
-`img-src` za `TILES`), inače ga CSP blokira (dok je Report-Only, samo prijavljuje), a `npm run lint` javlja grešku. Kratka adresa `/demo` (i `/demo?lang=hr`, `/demo?lang=en`) vodi na `#demo`.
+`img-src` za `TILES`), inače ga CSP blokira, a `npm run lint` javlja grešku. Kratka adresa `/demo` (i `/demo?lang=hr`, `/demo?lang=en`) vodi na `#demo`.
 
 ## Upit za prvi sastanak
 
@@ -249,8 +249,8 @@ Fontovi se također keširaju godinu dana, ali bez hasha, pa **promijenjeni font
 provjerava. Sve adrese dobivaju sigurnosna zaglavlja `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`
 (bez kamere, mikrofona i lokacije) i `X-Frame-Options: DENY` (stranica se ne može ugraditi u iframe).
 
-**Content-Security-Policy (CSP)** je zasad zaglavlje `Content-Security-Policy-Report-Only`: preglednik ništa ne
-blokira, nego svako kršenje zapiše u konzolu. Sve što nije dopušteno je zabranjeno (`default-src 'none'`); dopušteno je:
+**Content-Security-Policy (CSP)** je zaglavlje `Content-Security-Policy`: preglednik blokira sve što nije dopušteno
+(`default-src 'none'`) i svako kršenje zapiše u konzolu („Refused to …“). Dopušteno je:
 
 - skripte (`script-src`) s vlastite domene (`assets/js/`, Leaflet iz `assets/vendor/`, Vercelov
   `/_vercel/insights/script.js`) i tri inline skripte po `sha256` hashu: preusmjeravanje `/hr` → `/hr/` i `/en` → `/en/`
@@ -269,24 +269,26 @@ Poveznice na Microsoft Bookings, `mailto:` i `tel:` su obična navigacija i CSP 
 sadrži točnu vrijednost za upis) ili ako u `script-src` ostane hash koji ne odgovara nijednoj skripti; uz to provjerava
 da su izvori `PHOTON`, `OSRM`, `TILES` (`demo.js`) i `formEndpoint` (`config.js`) u CSP-u i da HTML nema `on…=`
 atributa. Promjena inline skripte ili adrese vanjskog servisa zato ide u isti commit s `vercel.json`. Na pregledima
-(preview) Vercel ubacuje svoj toolbar s `vercel.live`, koji politika ne dopušta: prijave za `vercel.live` ondje su
-očekivane. GitHub Pages ne čita `vercel.json`, pa ondje nema ni CSP-a ni ostalih zaglavlja.
+(preview) Vercel ubacuje svoj toolbar s `vercel.live`, koji politika ne dopušta, pa toolbar (komentari na pregledu)
+ondje ne radi. GitHub Pages ne čita `vercel.json`, pa ondje nema ni CSP-a ni ostalih zaglavlja.
 
-**Prelazak na blokiranje.** Report-Only nema adresu za prijave (`report-uri`, `report-to`), pa se kršenja vide samo u
-konzoli preglednika:
+**Provjera i povratak.** Politika je najprije objavljena kao `Content-Security-Policy-Report-Only` (preglednik samo
+prijavljuje) i na produkciji provjerena bez ijednog kršenja (svih 14 stranica, demo-kalkulator, upit), a zatim
+prebačena na blokiranje. CSP nema adresu za prijave (`report-uri`, `report-to`), pa se kršenja vide samo u konzoli
+preglednika. Nakon promjene skripti, vanjskih servisa ili `vercel.json`:
 
-1. Nakon objave na `main`: `curl -sI https://busflow.email/` mora vratiti `content-security-policy-report-only`.
+1. Nakon objave na `main`: `curl -sI https://busflow.email/` mora vratiti `content-security-policy` (bez
+   `-report-only`).
 2. Na produkciji otvoriti svih 14 stranica (tri početne, tri upita, šest pravnih, `/kontakt/` i neku nepostojeću adresu
    za 404) s otvorenom konzolom (F12) u Chromeu, Firefoxu i po mogućnosti Safariju. U konzoli ne smije biti poruka o
-   Content Security Policy (u Chromeu „[Report Only] Refused to …“ ili „… violates the following Content Security Policy
-   directive …“). Na jednoj početnoj stranici izračunati rutu u demo-kalkulatoru (prijedlozi mjesta, karta s pločicama),
-   a upit ispuniti do koraka 2 bez slanja. Prijave za `chrome-extension://…` ili `moz-extension://…` dolaze od
-   proširenja preglednika i ne računaju se (najlakše: provjera u prozoru bez proširenja).
-3. Kad je konzola čista (preporuka: nakon tjedan dana bez promjena skripti i vanjskih servisa), u `vercel.json`
-   promijeniti samo ključ `Content-Security-Policy-Report-Only` u `Content-Security-Policy` (vrijednost ostaje ista),
-   pokrenuti `npm run lint`, objaviti i ponoviti korak 2. Kršenje se tada vidi kao blokirana skripta, slika ili zahtjev
-   („Refused to …“ bez „[Report Only]“).
-4. Povratak je ista izmjena unatrag i nova objava. Lint prihvaća oba ključa.
+   Content Security Policy („Refused to …“ ili „… violates the following Content Security Policy directive …“). Na
+   jednoj početnoj stranici izračunati rutu u demo-kalkulatoru (prijedlozi mjesta, karta s pločicama), a upit ispuniti
+   do koraka 2 bez slanja. Poruke za `chrome-extension://…` ili `moz-extension://…` dolaze od proširenja preglednika i
+   ne računaju se (najlakše: provjera u prozoru bez proširenja).
+3. Ako nešto ne radi zbog CSP-a, najbrži povratak je u `vercel.json` promijeniti ključ `Content-Security-Policy` natrag
+   u `Content-Security-Policy-Report-Only` (vrijednost ostaje ista) i objaviti: preglednik tada opet samo prijavljuje.
+   Kad je politika popravljena i provjerena po koraku 2, ključ se vraća na `Content-Security-Policy`. Lint prihvaća oba
+   ključa.
 
 Repozitorij `patb00/BusFlow-Web` drži isto stablo kao ovaj (osim `.github/`, gdje je njegov workflow za GitHub Pages,
 koji koristi iste `npm ci`, `npm run lint` i `npm run build` uz `VITE_BASE=/BusFlow-Web/`). Bilo koji drugi statični
