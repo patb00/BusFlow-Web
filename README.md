@@ -24,8 +24,8 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 | `assets/css/landing.css` | zaglavlje, prekidač jezika, tračnica sa stanicama i autobusom, hero-film (CSS 3D autobus), sve sekcije, animacije, prilagodbe širini |
 | `assets/css/upit.css` | stilovi stranice upita |
 | `assets/css/legal.css` | stilovi pravnih stranica |
-| `assets/css/fonts.css` + `assets/fonts/` | samostalno posluživani fontovi Barlow, Barlow Condensed i JetBrains Mono (latin + latin-ext) |
-| `assets/js/config.js` | postavke (kontakt, kalendar termina, trajanje sastanka, adresa za slanje upita) |
+| `assets/css/fonts.css` + `assets/fonts/` | samostalno posluživani fontovi Barlow 400–700, Barlow Condensed 800 i JetBrains Mono (varijabilni, jedna datoteka za 400–700), latin + latin-ext; svaki novi rez je nova datoteka za preuzimanje, pa prije dodavanja provjeriti može li postojeći |
+| `assets/js/config.js` | postavke (kontakt, kalendar termina, trajanje sastanka, adresa za slanje upita); u `<head>` je namjerno bez `defer`: mjereno na sporom mobitelu, s `defer` se hero iscrta ~0,5 s kasnije (preglednik prvo obradi cijeli HTML) |
 | `assets/js/landing.js` | izbornik, skaliranje filma, tračnica i paljenje stanica, ulazne animacije, tabovi mini Einsatzplana (sekcija 03), putna karta (korak 1 upita) |
 | `assets/js/analytics.js` | statistika posjeta (Vercel Web Analytics), učitava se samo na busflow.email |
 | `assets/js/upit.js` | logika upita: koraci, provjera, sažetak, slanje preko Formspreea (rezerva: e-mail iz preglednika); njemački, hrvatski i engleski tekstovi u rječniku `I18N` |
@@ -35,7 +35,8 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 | `assets/img/` | ikone `favicon.svg`, `favicon-96.png` i `apple-touch-icon.png`; slike za dijeljenje `og-de.png`, `og-hr.png`, `og-en.png` (1200×630); logo reference |
 | `scripts/build.mjs`, `package.json` | provjera (`npm run lint`, uključujući SEO provjere) i build u `dist/` (`npm run build`), bez ovisnosti |
 | `scripts/make-europe.mjs` | generira `assets/data/europe-countries.json` iz preuzetog Natural Earth GeoJSON-a (izvor se ne commita) |
-| `vercel.json` | postavke za Vercel: build, preusmjeravanja starih adresa i kratkih adresa pravnih stranica, keširanje fontova |
+| `vercel.json` | postavke za Vercel: build, preusmjeravanja starih adresa i kratkih adresa pravnih stranica, keširanje i sigurnosna zaglavlja |
+| `favicon.ico`, `llms.txt` | ikona na adresi koju neki alati traže izravno (16/32/48 px iz `favicon.svg`) i kratak opis stranice za AI alate (lint provjerava njegove poveznice i sidra) |
 
 ## Sekcije stranice (DE / HR; engleska stranica ima iste sekcije)
 
@@ -93,7 +94,7 @@ Sve radi bez interneta osim demo-kalkulatora u sekciji 04, koji pri izračunu zo
 
 ```
 npm run lint    # sintaksa JS-a, sve lokalne poveznice i sidra, inline skripte, odredišta preusmjeravanja iz vercel.json, SEO (vidi dolje)
-npm run build   # isto, pa kopija u dist/ te robots.txt i sitemap.xml s lastmod (VITE_SITE_URL, zadano https://busflow.email)
+npm run build   # isto, pa kopija u dist/ (CSS i JS s hashom u imenu) te robots.txt i sitemap.xml s lastmod (VITE_SITE_URL, zadano https://busflow.email)
 ```
 
 ## Prije objave: `assets/js/config.js`
@@ -238,8 +239,12 @@ Stranica je predviđena za `https://busflow.email`, koju danas poslužuje Vercel
 izlaz `dist/`), bez preusmjeravanja svih adresa na `index.html`, s preusmjeravanjima starih adresa dosadašnje stranice
 (`/hr` → `/hr/`, `/en` → `/en/`, `/?lang=hr` → `/hr/`, `/?lang=en` → `/en/`, `/demo` → demo-kalkulator `#demo`, `/klijenti` i
 `/klijenti/…` → referenca, uz `?lang=hr` / `?lang=en` na hrvatsku / englesku stranicu) i s kratkim adresama pravnih
-stranica. CSS, JS i HTML nemaju hash u imenu, pa ih Vercel poslužuje uz provjeru svježine; dugo se keširaju
-samo fontovi, pa **promijenjeni font mora dobiti novo ime datoteke**.
+stranica. Build u `dist/` daje CSS-u i JS-u hash sadržaja u imenu (`landing.<hash>.css`) i prepiše poveznice u svim
+HTML stranicama, pa se `/assets/css/` i `/assets/js/` keširaju godinu dana (`immutable`); u izvoru imena ostaju bez hasha.
+Fontovi se također keširaju godinu dana, ali bez hasha, pa **promijenjeni font mora dobiti novo ime datoteke**. Slike,
+`assets/vendor/` i `assets/data/` keširaju se dan (uz `stale-while-revalidate` od tjedan dana), a HTML se uvijek
+provjerava. Sve adrese dobivaju sigurnosna zaglavlja `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`
+(bez kamere, mikrofona i lokacije) i `X-Frame-Options: DENY` (stranica se ne može ugraditi u iframe).
 
 Repozitorij `patb00/BusFlow-Web` drži isto stablo kao ovaj (osim `.github/`, gdje je njegov workflow za GitHub Pages,
 koji koristi iste `npm ci`, `npm run lint` i `npm run build` uz `VITE_BASE=/BusFlow-Web/`). Bilo koji drugi statični
@@ -258,11 +263,17 @@ Svaka od tri stranice ima, u `<head>`:
 - `robots` `index, follow, max-image-preview:large`, `canonical`, `hreflang` za de/hr/en i `x-default` (= de).
 - Open Graph i Twitter: `og:title`, `og:description`, `og:site_name`, `og:locale`, `og:url`, `og:image`
   (`assets/img/og-<jezik>.png`, 1200×630, apsolutna adresa) s dimenzijama i `alt`, `twitter:card` `summary_large_image`.
-- Ikone: `favicon.svg`, `favicon-96.png` (Google traži PNG/ICO, višekratnik 48 px) i `apple-touch-icon.png` (180×180).
-- JSON-LD (`application/ld+json`, `@graph`): `Organization` (FlowSolutions d.o.o., podaci kao u Impressumu), `WebSite`,
+- Ikone: `favicon.svg`, `favicon-96.png` (Google traži PNG/ICO, višekratnik 48 px) i `apple-touch-icon.png` (180×180);
+  uz to `/favicon.ico` u korijenu, bez oznake u HTML-u.
+- JSON-LD (`application/ld+json`, `@graph`): `Organization` (FlowSolutions d.o.o., podaci kao u Impressumu; `sameAs`: LinkedIn
+  stranica tvrtke i Google profil tvrtke preko `kgmid`; službena stranica flow-solutions.hr je već `url`), `WebSite`,
   `WebPage`, `SoftwareApplication` (BusFlow, `BusinessApplication`, bez cijene) i `FAQPage` s osam pitanja iz sekcije 08.
   Pitanja i odgovori u JSON-LD-u moraju biti doslovno jednaki tekstu u `.faq__q` / `.faq__a` na stranici; lint to
   uspoređuje, pa se pri promjeni FAQ-a mijenjaju oba mjesta.
+
+Naslovi sekcija (`h2`) zadržavaju ton linije, ali nose i temu sekcije („Der Fahrplan: alle Funktionen der Software für
+Busunternehmen.“, „Vor der Abfahrt: häufige Fragen zur Buchungssoftware für Busunternehmen.“), jer po njima tražilice i AI
+alati razumiju strukturu stranice.
 
 `sitemap.xml` sadrži tri adrese s `hreflang` alternativama i `lastmod` (datum zadnjeg commita, ili datum builda bez gita).
 

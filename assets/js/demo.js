@@ -19,7 +19,7 @@
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var ASSETS = (function () {
     var s = document.currentScript;
-    return s && s.src ? s.src.replace(/js\/demo\.js(\?.*)?$/, "") : "assets/";
+    return s && s.src ? s.src.replace(/js\/demo(\.[0-9a-f]+)?\.js(\?.*)?$/, "") : "assets/"; // in dist/ heißt die Datei demo.<hash>.js
   })();
 
   var STORAGE_KEY = "busflow-demo";
