@@ -93,7 +93,7 @@ Nema instalacije. Stranicu poslužite bilo kojim statičnim poslužiteljem, npr.
 Sve radi bez interneta osim demo-kalkulatora u sekciji 04, koji pri izračunu zove Photon, OSRM i OpenStreetMap pločice.
 
 ```
-npm run lint    # sintaksa JS-a, sve lokalne poveznice i sidra, inline skripte, odredišta preusmjeravanja iz vercel.json, SEO (vidi dolje)
+npm run lint    # sintaksa JS-a, sve lokalne poveznice i sidra, inline skripte, odredišta preusmjeravanja iz vercel.json, SEO i CSP (vidi dolje)
 npm run build   # isto, pa kopija u dist/ (CSS i JS s hashom u imenu) te robots.txt i sitemap.xml s lastmod (VITE_SITE_URL, zadano https://busflow.email)
 ```
 
@@ -111,7 +111,8 @@ gdje dolazi logo i domena prijevoznika. Tekstovi koji ovise o jeziku upisuju se 
 - `formEndpoint` – `https://formspree.io/f/mnjwrbpa`, isti Formspree obrazac kao na flow-solutions.hr (stiže na
   info@flow-solutions.hr). Upit ide kao JSON (`POST`, `Content-Type: application/json`, očekuje se odgovor 2xx). Ako
   slanje ne uspije ili traje dulje od 15 s, otvara se e-mail program posjetitelja s porukom za `email` (rezerva).
-  Prazno: upit se uvijek šalje e-mailom iz preglednika.
+  Prazno: upit se uvijek šalje e-mailom iz preglednika. Nova adresa izvan `formspree.io` mora ući i u `connect-src`
+  CSP-a u `vercel.json` (lint to provjerava, vidi Objava).
 
 ## Pravne stranice
 
@@ -123,7 +124,8 @@ namjerno ne navodi. E-mail adresa je u njima upisana ručno, pa je pri promjeni 
 `sessionStorage` za odgovore, statistiku posjeta (Vercel Web Analytics), demo-kalkulator (Photon, OSRM demo
 poslužitelj, OpenStreetMap pločice, `sessionStorage` za primjerne cijene; odjeljak 5 `#h-demo`, na njega vodi napomena
 ispod gumba u demu), e-mail na Microsoft 365, termin preko Microsoft Bookings i Teamsa; stranica nema kolačića. Ako se
-doda nova usluga (npr. drugi servis za rutiranje ili drugi alat za statistiku), treba je dodati i u Datenschutz.
+doda nova usluga (npr. drugi servis za rutiranje ili drugi alat za statistiku), treba je dodati i u Datenschutz te u
+CSP u `vercel.json`.
 
 ## Statistika posjeta
 
@@ -176,7 +178,8 @@ Ako OSRM ili Photon ne odgovore u 12 s, demo javlja da servis nije dostupan; kad
 procijeni kao zračna × 1,3 pri 75 km/h i označi „geschätzt“. **Prije šire promocije stranice** zamijeniti OSRM demo
 poslužitelj vlastitim OSRM-om ili BusFlow API-jem (`POST api/v1/routes/legs` uz CORS za busflow.email): javni demo
 poslužitelj nije namijenjen komercijalnoj produkciji. Adresa za zamjenu je konstanta `OSRM` na vrhu `demo.js`
-(`PHOTON` i `TILES` isto). Kratka adresa `/demo` (i `/demo?lang=hr`, `/demo?lang=en`) vodi na `#demo`.
+(`PHOTON` i `TILES` isto); novi poslužitelj mora ući i u CSP u `vercel.json` (`connect-src` za `PHOTON` i `OSRM`,
+`img-src` za `TILES`), inače ga CSP blokira (dok je Report-Only, samo prijavljuje), a `npm run lint` javlja grešku. Kratka adresa `/demo` (i `/demo?lang=hr`, `/demo?lang=en`) vodi na `#demo`.
 
 ## Upit za prvi sastanak
 
@@ -245,6 +248,45 @@ Fontovi se također keširaju godinu dana, ali bez hasha, pa **promijenjeni font
 `assets/vendor/` i `assets/data/` keširaju se dan (uz `stale-while-revalidate` od tjedan dana), a HTML se uvijek
 provjerava. Sve adrese dobivaju sigurnosna zaglavlja `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`
 (bez kamere, mikrofona i lokacije) i `X-Frame-Options: DENY` (stranica se ne može ugraditi u iframe).
+
+**Content-Security-Policy (CSP)** je zasad zaglavlje `Content-Security-Policy-Report-Only`: preglednik ništa ne
+blokira, nego svako kršenje zapiše u konzolu. Sve što nije dopušteno je zabranjeno (`default-src 'none'`); dopušteno je:
+
+- skripte (`script-src`) s vlastite domene (`assets/js/`, Leaflet iz `assets/vendor/`, Vercelov
+  `/_vercel/insights/script.js`) i tri inline skripte po `sha256` hashu: preusmjeravanje `/hr` → `/hr/` i `/en` → `/en/`
+  (`hr/index.html`, `en/index.html`) i odabir jezika u `kontakt/index.html`. JSON-LD (`application/ld+json`) se ne
+  izvršava, pa mu hash ne treba.
+- stilovi (`style-src`) s vlastite domene i inline (`'unsafe-inline'`): početne stranice imaju oko 160 `style` atributa
+  (`--i`, `--d`, `animation-delay` za animacije), a `404.html` blok `<style>`.
+- slike (`img-src`) s vlastite domene, `data:` (SVG ikone u CSS-u) i `https://tile.openstreetmap.org` (karta u demu);
+  fontovi (`font-src`) samo s vlastite domene.
+- zahtjevi iz skripti (`connect-src`) prema vlastitoj domeni (`assets/data/`, Vercel statistika), Photonu, OSRM-u i
+  Formspreeu.
+- `form-action 'self'`, `base-uri 'none'` i `frame-ancestors 'none'` (isto što i `X-Frame-Options`).
+
+Poveznice na Microsoft Bookings, `mailto:` i `tel:` su obična navigacija i CSP ih ne ograničava. `npm run lint` računa
+`sha256` svake inline skripte (s LF krajevima redova, kao preglednik) i javlja grešku ako hash nije u `script-src` (poruka
+sadrži točnu vrijednost za upis) ili ako u `script-src` ostane hash koji ne odgovara nijednoj skripti; uz to provjerava
+da su izvori `PHOTON`, `OSRM`, `TILES` (`demo.js`) i `formEndpoint` (`config.js`) u CSP-u i da HTML nema `on…=`
+atributa. Promjena inline skripte ili adrese vanjskog servisa zato ide u isti commit s `vercel.json`. Na pregledima
+(preview) Vercel ubacuje svoj toolbar s `vercel.live`, koji politika ne dopušta: prijave za `vercel.live` ondje su
+očekivane. GitHub Pages ne čita `vercel.json`, pa ondje nema ni CSP-a ni ostalih zaglavlja.
+
+**Prelazak na blokiranje.** Report-Only nema adresu za prijave (`report-uri`, `report-to`), pa se kršenja vide samo u
+konzoli preglednika:
+
+1. Nakon objave na `main`: `curl -sI https://busflow.email/` mora vratiti `content-security-policy-report-only`.
+2. Na produkciji otvoriti svih 14 stranica (tri početne, tri upita, šest pravnih, `/kontakt/` i neku nepostojeću adresu
+   za 404) s otvorenom konzolom (F12) u Chromeu, Firefoxu i po mogućnosti Safariju. U konzoli ne smije biti poruka o
+   Content Security Policy (u Chromeu „[Report Only] Refused to …“ ili „… violates the following Content Security Policy
+   directive …“). Na jednoj početnoj stranici izračunati rutu u demo-kalkulatoru (prijedlozi mjesta, karta s pločicama),
+   a upit ispuniti do koraka 2 bez slanja. Prijave za `chrome-extension://…` ili `moz-extension://…` dolaze od
+   proširenja preglednika i ne računaju se (najlakše: provjera u prozoru bez proširenja).
+3. Kad je konzola čista (preporuka: nakon tjedan dana bez promjena skripti i vanjskih servisa), u `vercel.json`
+   promijeniti samo ključ `Content-Security-Policy-Report-Only` u `Content-Security-Policy` (vrijednost ostaje ista),
+   pokrenuti `npm run lint`, objaviti i ponoviti korak 2. Kršenje se tada vidi kao blokirana skripta, slika ili zahtjev
+   („Refused to …“ bez „[Report Only]“).
+4. Povratak je ista izmjena unatrag i nova objava. Lint prihvaća oba ključa.
 
 Repozitorij `patb00/BusFlow-Web` drži isto stablo kao ovaj (osim `.github/`, gdje je njegov workflow za GitHub Pages,
 koji koristi iste `npm ci`, `npm run lint` i `npm run build` uz `VITE_BASE=/BusFlow-Web/`). Bilo koji drugi statični

@@ -23,6 +23,9 @@ const HTML = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "
   "kontakt/index.html", "404.html"];
 const LANGS = { de: "/", hr: "/hr/", en: "/en/" }; // ista stranica na tri jezika; x-default = de
 const SEO = { title: [20, 65], description: [70, 160] }; // dopuštene duljine u znakovima
+// vanjske adrese koje skripte zovu: [datoteka, konstanta, CSP direktiva u kojoj mora biti njezin izvor]
+const EXTERNAL = [["assets/js/demo.js", "PHOTON", "connect-src"], ["assets/js/demo.js", "OSRM", "connect-src"],
+  ["assets/js/demo.js", "TILES", "img-src"], ["assets/js/config.js", "formEndpoint", "connect-src"]];
 
 const read = (file) => readFileSync(join(ROOT, file), "utf8");
 const idsOf = (file) => new Set([...read(file).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
@@ -51,7 +54,7 @@ function check() {
       try { new Script(code, { filename: file }); } catch (e) { errors.push(`${file}: inline skripta: ${e.message}`); }
     }
   }
-  errors.push(...checkSeo());
+  errors.push(...checkSeo(), ...checkCsp());
   // vercel.json: odredište svakog preusmjeravanja postoji (i sidro u njemu), a izvor nije postojeća datoteka;
   // iznimka je …/index.html → …/ (jedan URL po stranici umjesto duplikata)
   const { redirects = [] } = JSON.parse(read("vercel.json"));
@@ -124,6 +127,38 @@ function checkSeo() {
   }
   for (const file of HTML.filter((f) => !indexed.includes(f))) {
     if (!/<meta name="robots" content="[^"]*noindex/.test(read(file))) errors.push(`${file}: stranica izvan sitemapa mora imati noindex`);
+  }
+  return errors;
+}
+
+// CSP iz vercel.json (Content-Security-Policy ili …-Report-Only za "/(.*)"): script-src ima sha256 svake inline skripte
+// i nijedan višak, izvori adresa iz EXTERNAL su u svojoj direktivi, a HTML nema on…= atributa (CSP ih ne pušta).
+function checkCsp() {
+  const errors = [];
+  const { headers = [] } = JSON.parse(read("vercel.json"));
+  const header = (headers.find((h) => h.source === "/(.*)")?.headers || [])
+    .find((h) => /^Content-Security-Policy(-Report-Only)?$/i.test(h.key));
+  if (!header) return ['vercel.json: nema zaglavlja Content-Security-Policy(-Report-Only) za "/(.*)"'];
+  const csp = Object.fromEntries(header.value.split(";").map((d) => d.trim().split(/\s+/)).filter((d) => d[0])
+    .map(([name, ...values]) => [name.toLowerCase(), values]));
+  const scriptSrc = csp["script-src"] || csp["default-src"] || [];
+  const hashes = new Set();
+  for (const file of HTML) {
+    const html = read(file).replace(/\r\n?/g, "\n"); // preglednik hashira tekst skripte s LF krajevima redova
+    for (const [, attrs = "", code] of html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
+      if (/\ssrc=|\stype="application\/ld\+json"/.test(attrs)) continue; // JSON-LD se ne izvršava, CSP ga ne gleda
+      const hash = `'sha256-${createHash("sha256").update(code).digest("base64")}'`;
+      hashes.add(hash);
+      if (!scriptSrc.includes(hash)) errors.push(`${file}: inline skripta nije dopuštena u CSP-u, u script-src (vercel.json) dodati ${hash}`);
+    }
+    for (const [tag] of html.matchAll(/<[a-z][^>]*?\son[a-z]+=/gi)) errors.push(`${file}: on…= atribut (CSP ga blokira): ${tag.slice(0, 80)}`);
+  }
+  for (const value of scriptSrc) {
+    if (value.startsWith("'sha256-") && !hashes.has(value)) errors.push(`vercel.json: ${value} u script-src ne odgovara nijednoj inline skripti`);
+  }
+  for (const [file, name, directive] of EXTERNAL) {
+    const origin = read(file).match(new RegExp(`\\b${name}\\s*[:=]\\s*"(https?://[^/"]+)`))?.[1];
+    if (origin && !(csp[directive] || []).includes(origin)) errors.push(`vercel.json: ${origin} (${name} u ${file}) nije u CSP ${directive}`);
   }
   return errors;
 }
