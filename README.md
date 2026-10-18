@@ -265,7 +265,8 @@ Svaka od tri stranice ima, u `<head>`:
   (`assets/img/og-<jezik>.png`, 1200×630, apsolutna adresa) s dimenzijama i `alt`, `twitter:card` `summary_large_image`.
 - Ikone: `favicon.svg`, `favicon-96.png` (Google traži PNG/ICO, višekratnik 48 px) i `apple-touch-icon.png` (180×180);
   uz to `/favicon.ico` u korijenu, bez oznake u HTML-u.
-- JSON-LD (`application/ld+json`, `@graph`): `Organization` (FlowSolutions d.o.o., podaci kao u Impressumu), `WebSite`,
+- JSON-LD (`application/ld+json`, `@graph`): `Organization` (FlowSolutions d.o.o., podaci kao u Impressumu; `sameAs`: LinkedIn
+  stranica tvrtke i Google profil tvrtke preko `kgmid`; službena stranica flow-solutions.hr je već `url`), `WebSite`,
   `WebPage`, `SoftwareApplication` (BusFlow, `BusinessApplication`, bez cijene) i `FAQPage` s osam pitanja iz sekcije 08.
   Pitanja i odgovori u JSON-LD-u moraju biti doslovno jednaki tekstu u `.faq__q` / `.faq__a` na stranici; lint to
   uspoređuje, pa se pri promjeni FAQ-a mijenjaju oba mjesta.
