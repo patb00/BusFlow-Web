@@ -1,0 +1,26 @@
+# BusFlow
+
+> BusFlow is sales, booking and invoicing software for coach operators, made by FlowSolutions d.o.o. (Croatia). A customer enters departure, destination and number of passengers; BusFlow calculates the route across Europe, the crew under EU driving-time rules, VAT by country and a binding price in seconds, takes the payment online and sends the invoice.
+
+Each coach operator gets its own instance with its own brand, price list and fleet, with data in the EU. Onboarding takes 8–10 weeks. BusFlow has been running every day at the coach operator Omnibus Mikanović (Offenbach am Main) since August 2026.
+
+## Language versions
+
+- [Deutsch](https://busflow.email/): Software für Busunternehmen (main version)
+- [Hrvatski](https://busflow.email/hr/): softver za autobusne prijevoznike
+- [English](https://busflow.email/en/): software for coach operators
+
+## Key sections (English)
+
+- [System map](https://busflow.email/en/#system-map): how passengers, office, finance and partners connect
+- [Features](https://busflow.email/en/#features): thirty-two stops, from the first inquiry to the VAT return
+- [What changes](https://busflow.email/en/#improvements): eight everyday tasks of a coach operator, today and with BusFlow
+- [Price calculator demo](https://busflow.email/en/#demo): route, countries, crew, days and an illustrative price from your own figures
+- [Onboarding](https://busflow.email/en/#onboarding): phases from the first meeting to go-live
+- [Reference](https://busflow.email/en/#reference): Omnibus Mikanović
+- [FAQ](https://busflow.email/en/#faq): common questions about the software
+- [Book a first meeting](https://busflow.email/en/upit.html)
+
+## Contact
+
+- FlowSolutions d.o.o., Križevci, Croatia: info@flow-solutions.hr

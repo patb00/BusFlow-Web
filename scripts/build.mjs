@@ -1,12 +1,13 @@
 // BusFlow landing: provjerava statičnu stranicu i kopira je u dist/ (Vercel i GitHub Pages).
-//   node scripts/build.mjs          provjera, zatim kopija u dist/ te robots.txt i sitemap.xml
+//   node scripts/build.mjs          provjera, zatim kopija u dist/ (CSS i JS s hashom u imenu) te robots.txt i sitemap.xml
 //   node scripts/build.mjs --check  samo provjera (npm run lint)
 // VITE_SITE_URL  apsolutna adresa za robots.txt i sitemap.xml (zadano https://busflow.email)
 // VITE_BASE      prefiks za root-apsolutne poveznice u 404.html ("/BusFlow-Web/" na GitHub Pages)
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { Script } from "node:vm";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
@@ -14,7 +15,9 @@ const DIST = join(ROOT, "dist");
 const SITE = (process.env.VITE_SITE_URL || "https://busflow.email").trim().replace(/\/+$/, "");
 const PROD = "https://busflow.email"; // kanonska adresa upisana u HTML (canonical, hreflang, og:image, JSON-LD), neovisna o hostingu
 const BASE = (process.env.VITE_BASE || "/").replace(/\/*$/, "/");
-const COPY = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "404.html", "hr", "en", "kontakt", "assets"];
+const COPY = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "404.html", "hr", "en", "kontakt", "assets",
+  "favicon.ico", "llms.txt"];
+const HASHED = ["assets/css", "assets/js"]; // u dist/ dobivaju hash u imenu, pa ih vercel.json kešira godinu dana (immutable)
 const HTML = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "hr/index.html", "hr/upit.html",
   "hr/impresum.html", "hr/privatnost.html", "en/index.html", "en/upit.html", "en/legal-notice.html", "en/privacy.html",
   "kontakt/index.html", "404.html"];
@@ -62,6 +65,14 @@ function check() {
     const src = join(ROOT, source);
     const toOwnDir = source.endsWith("/index.html") && destination === source.slice(0, -"index.html".length);
     if (!toOwnDir && !source.includes(":") && existsSync(src) && statSync(src).isFile()) errors.push(`vercel.json: izvor ${source} je postojeća datoteka`);
+  }
+  // llms.txt: svaka poveznica na PROD vodi na postojeću stranicu (i sidro u njoj)
+  for (const [, url] of read("llms.txt").matchAll(/\]\((https:\/\/[^)\s]+)\)/g)) {
+    if (!url.startsWith(PROD + "/")) continue;
+    const [path, id] = url.slice(PROD.length + 1).split("#");
+    const rel = path + (path === "" || path.endsWith("/") ? "index.html" : "");
+    if (!existsSync(join(ROOT, rel))) errors.push(`llms.txt: ${url} ne postoji`);
+    else if (id && !idsOf(rel).has(id)) errors.push(`llms.txt: nema id-a "${id}" u ${rel}`);
   }
   if (errors.length) { console.error(errors.join("\n")); process.exit(1); }
   const iban = HTML.filter((file) => read(file).includes("[IBAN]"));
@@ -125,6 +136,29 @@ function lastmod() {
   return new Date().toISOString().slice(0, 10);
 }
 
+// landing.css → landing.<hash>.css u dist/ i u poveznicama svih HTML stranica; promijenjen sadržaj = novo ime,
+// pa preglednik nikad ne drži staru verziju. Izvorne datoteke i lint rade s imenima bez hasha.
+function fingerprint() {
+  const names = {};
+  for (const dir of HASHED) {
+    for (const file of readdirSync(join(DIST, dir))) {
+      const m = file.match(/^(.+)\.(css|js)$/);
+      if (!m) continue;
+      const hash = createHash("sha256").update(readFileSync(join(DIST, dir, file))).digest("hex").slice(0, 10);
+      renameSync(join(DIST, dir, file), join(DIST, dir, `${m[1]}.${hash}.${m[2]}`));
+      names[`${dir}/${file}`] = `${dir}/${m[1]}.${hash}.${m[2]}`;
+    }
+  }
+  for (const file of HTML) {
+    const path = join(DIST, file);
+    writeFileSync(path, readFileSync(path, "utf8").replace(/(\s(?:href|src)="[^"]*?)(assets\/(?:css|js)\/[^"?#]+)(?=["?#])/g, (_, pre, asset) => {
+      if (!names[asset]) throw new Error(`${file}: ${asset} nije u dist/`);
+      return pre + names[asset];
+    }));
+  }
+  return Object.keys(names).length;
+}
+
 function build() {
   rmSync(DIST, { recursive: true, force: true });
   mkdirSync(DIST);
@@ -133,6 +167,7 @@ function build() {
     const file = join(DIST, "404.html");
     writeFileSync(file, readFileSync(file, "utf8").replace(/(\s(?:href|src)=")\//g, `$1${BASE}`));
   }
+  const hashed = fingerprint();
   const date = lastmod();
   const alt = [...Object.entries(LANGS), ["x-default", LANGS.de]]
     .map(([lang, path]) => `    <xhtml:link rel="alternate" hreflang="${lang}" href="${SITE}${path}"/>`);
@@ -141,7 +176,7 @@ function build() {
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     ...urls, "</urlset>", ""].join("\n"));
   writeFileSync(join(DIST, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
-  console.log(`build: dist/ za ${SITE} (base ${BASE}, lastmod ${date})`);
+  console.log(`build: dist/ za ${SITE} (base ${BASE}, lastmod ${date}, ${hashed} CSS/JS s hashom)`);
 }
 
 check();
