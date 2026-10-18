@@ -5,6 +5,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/hr/index.html", "destination": "/hr/", "permanent": true },
+    { "source": "/en/index.html", "destination": "/en/", "permanent": true },
+    { "source": "/kontakt/index.html", "destination": "/kontakt/", "permanent": true },
     { "source": "/hr", "destination": "/hr/", "permanent": true },
     { "source": "/en", "destination": "/en/", "permanent": true },
     { "source": "/", "has": [{ "type": "query", "key": "lang", "value": "hr" }], "destination": "/hr/", "permanent": false },
