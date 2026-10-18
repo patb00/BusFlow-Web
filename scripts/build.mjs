@@ -49,7 +49,8 @@ function check() {
     }
   }
   errors.push(...checkSeo());
-  // vercel.json: odredište svakog preusmjeravanja postoji (i sidro u njemu), a izvor nije postojeća datoteka
+  // vercel.json: odredište svakog preusmjeravanja postoji (i sidro u njemu), a izvor nije postojeća datoteka;
+  // iznimka je …/index.html → …/ (jedan URL po stranici umjesto duplikata)
   const { redirects = [] } = JSON.parse(read("vercel.json"));
   for (const { source, destination } of redirects) {
     if (!destination.startsWith("/")) continue;
@@ -59,7 +60,8 @@ function check() {
     if (!existsSync(join(ROOT, rel)) || !statSync(join(ROOT, rel)).isFile()) errors.push(`vercel.json: odredište ${destination} ne postoji`);
     else if (id && !idsOf(rel).has(id)) errors.push(`vercel.json: nema id-a "${id}" u ${rel}`);
     const src = join(ROOT, source);
-    if (!source.includes(":") && existsSync(src) && statSync(src).isFile()) errors.push(`vercel.json: izvor ${source} je postojeća datoteka`);
+    const toOwnDir = source.endsWith("/index.html") && destination === source.slice(0, -"index.html".length);
+    if (!toOwnDir && !source.includes(":") && existsSync(src) && statSync(src).isFile()) errors.push(`vercel.json: izvor ${source} je postojeća datoteka`);
   }
   if (errors.length) { console.error(errors.join("\n")); process.exit(1); }
   const iban = HTML.filter((file) => read(file).includes("[IBAN]"));
