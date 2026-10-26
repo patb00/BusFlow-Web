@@ -27,7 +27,7 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 | `assets/css/fonts.css` + `assets/fonts/` | samostalno posluživani fontovi Barlow 400–700, Barlow Condensed 800 i JetBrains Mono (varijabilni, jedna datoteka za 400–700), latin + latin-ext; svaki novi rez je nova datoteka za preuzimanje, pa prije dodavanja provjeriti može li postojeći |
 | `assets/js/config.js` | postavke (kontakt, kalendar termina, trajanje sastanka, adresa za slanje upita); u `<head>` je namjerno bez `defer`: mjereno na sporom mobitelu, s `defer` se hero iscrta ~0,5 s kasnije (preglednik prvo obradi cijeli HTML) |
 | `assets/js/landing.js` | izbornik, skaliranje filma, tračnica i paljenje stanica, ulazne animacije, tabovi mini Einsatzplana (sekcija 03), putna karta (korak 1 upita) |
-| `assets/js/analytics.js` | statistika posjeta (Vercel Web Analytics), učitava se samo na busflow.email |
+| `assets/js/analytics.js` | statistika posjeta (Cloudflare Web Analytics), učitava se samo na busflow.email |
 | `assets/js/upit.js` | logika upita: koraci, provjera, sažetak, slanje preko Formspreea (rezerva: e-mail iz preglednika); njemački, hrvatski i engleski tekstovi u rječniku `I18N` |
 | `assets/js/demo.js` | demo-kalkulator u sekciji 04: pretraga mjesta (Photon), ruta (OSRM), karta (Leaflet + OpenStreetMap), države na ruti, posada, dani i ilustrativna cijena iz posjetiteljevih parametara; tekstovi de/hr/en u rječniku `I18N` |
 | `assets/vendor/leaflet/` | Leaflet 1.9.4 (BSD-2-Clause, `LICENSE` u mapi), poslužuje se s naše stranice i učitava tek pri prvom izračunu |
@@ -35,7 +35,8 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 | `assets/img/` | ikone `favicon.svg`, `favicon-96.png` i `apple-touch-icon.png`; slike za dijeljenje `og-de.png`, `og-hr.png`, `og-en.png` (1200×630); logo reference |
 | `scripts/build.mjs`, `package.json` | provjera (`npm run lint`, uključujući SEO provjere) i build u `dist/` (`npm run build`), bez ovisnosti |
 | `scripts/make-europe.mjs` | generira `assets/data/europe-countries.json` iz preuzetog Natural Earth GeoJSON-a (izvor se ne commita) |
-| `vercel.json` | postavke za Vercel: build, preusmjeravanja starih adresa i kratkih adresa pravnih stranica, keširanje i sigurnosna zaglavlja |
+| `_headers` | Cloudflare Pages: sigurnosna zaglavlja s CSP-om, keširanje i `noindex` na `pages.dev` adresama |
+| `functions/_middleware.js`, `functions/redirects.json`, `_routes.json` | Cloudflare Pages: preusmjeravanja starih adresa (`/?lang=`, `/demo`, `/klijenti/…`); `_routes.json` poziva funkciju samo za te adrese |
 | `favicon.ico`, `llms.txt` | ikona na adresi koju neki alati traže izravno (16/32/48 px iz `favicon.svg`) i kratak opis stranice za AI alate (lint provjerava njegove poveznice i sidra) |
 
 ## Sekcije stranice (DE / HR; engleska stranica ima iste sekcije)
@@ -93,7 +94,7 @@ Nema instalacije. Stranicu poslužite bilo kojim statičnim poslužiteljem, npr.
 Sve radi bez interneta osim demo-kalkulatora u sekciji 04, koji pri izračunu zove Photon, OSRM i OpenStreetMap pločice.
 
 ```
-npm run lint    # sintaksa JS-a, sve lokalne poveznice i sidra, inline skripte, odredišta preusmjeravanja iz vercel.json, SEO i CSP (vidi dolje)
+npm run lint    # sintaksa JS-a, sve lokalne poveznice i sidra, inline skripte, odredišta preusmjeravanja iz functions/redirects.json, SEO i CSP (vidi dolje)
 npm run build   # isto, pa kopija u dist/ (CSS i JS s hashom u imenu) te robots.txt i sitemap.xml s lastmod (VITE_SITE_URL, zadano https://busflow.email)
 ```
 
@@ -112,7 +113,7 @@ gdje dolazi logo i domena prijevoznika. Tekstovi koji ovise o jeziku upisuju se 
   info@flow-solutions.hr). Upit ide kao JSON (`POST`, `Content-Type: application/json`, očekuje se odgovor 2xx). Ako
   slanje ne uspije ili traje dulje od 15 s, otvara se e-mail program posjetitelja s porukom za `email` (rezerva).
   Prazno: upit se uvijek šalje e-mailom iz preglednika. Nova adresa izvan `formspree.io` mora ući i u `connect-src`
-  CSP-a u `vercel.json` (lint to provjerava, vidi Objava).
+  CSP-a u `_headers` (lint to provjerava, vidi Objava).
 
 ## Pravne stranice
 
@@ -120,24 +121,25 @@ gdje dolazi logo i domena prijevoznika. Tekstovi koji ovise o jeziku upisuju se 
 `en/legal-notice.html` i `en/privacy.html` (engleski) su statične
 stranice bez JavaScripta, s oznakom `noindex`. Podaci o tvrtki (puni naziv, sjedište u Križevcima, direktor, OIB,
 PDV ID, MBS i Trgovački sud u Bjelovaru, banka i IBAN) upisani su izravno u tih šest datoteka; temeljni kapital se
-namjerno ne navodi. E-mail adresa je u njima upisana ručno, pa je pri promjeni treba promijeniti i ondje. Datenschutz opisuje stvarne obrade: hosting na Vercelu, slanje upita preko Formspreea,
-`sessionStorage` za odgovore, statistiku posjeta (Vercel Web Analytics), demo-kalkulator (Photon, OSRM demo
+namjerno ne navodi. E-mail adresa je u njima upisana ručno, pa je pri promjeni treba promijeniti i ondje. Datenschutz opisuje stvarne obrade: hosting na Cloudflare Pages, slanje upita preko Formspreea,
+`sessionStorage` za odgovore, statistiku posjeta (Cloudflare Web Analytics), demo-kalkulator (Photon, OSRM demo
 poslužitelj, OpenStreetMap pločice, `sessionStorage` za primjerne cijene; odjeljak 5 `#h-demo`, na njega vodi napomena
 ispod gumba u demu), e-mail na Microsoft 365, termin preko Microsoft Bookings i Teamsa; stranica nema kolačića. Ako se
 doda nova usluga (npr. drugi servis za rutiranje ili drugi alat za statistiku), treba je dodati i u Datenschutz te u
-CSP u `vercel.json`.
+CSP u `_headers`.
 
 ## Statistika posjeta
 
-Broj posjeta mjeri **Vercel Web Analytics** (bez kolačića, samo zbirni podaci). Sve stranice učitavaju
-`assets/js/analytics.js`, koji na adresi busflow.email dodaje Vercelovu skriptu `/_vercel/insights/script.js`; lokalno,
-na GitHub Pages i u pregledu ne radi ništa. Da bi statistika radila, vlasnik Vercel projekta (Patrik) mora uključiti
-**Analytics → Enable** u projektu busflow.email i zatim ponovno objaviti stranicu (novi push na `main` ili
-**Redeploy**); prije toga skripta vraća 404. Podaci su u Vercel nadzornoj ploči pod **Analytics**. Na besplatnom
-(Hobby) planu uključeno je 50.000 događaja mjesečno za sve projekte na računu, a izvještaji pokrivaju zadnji mjesec.
+Broj posjeta mjeri **Cloudflare Web Analytics** (bez kolačića i bez spremanja u preglednik, samo zbirni podaci). Sve
+stranice učitavaju `assets/js/analytics.js`, koji na adresi busflow.email dodaje Cloudflareovu skriptu
+`https://static.cloudflareinsights.com/beacon.min.js` (šalje na `cloudflareinsights.com`, oboje je u CSP-u); lokalno,
+na `pages.dev` pregledima i na GitHub Pages ne radi ništa. Skripta treba `TOKEN` na vrhu `analytics.js`: u Cloudflareu
+(račun FlowSolutions) **Analytics & Logs → Web Analytics → busflow.email → Manage site**, ručna JS skripta, vrijednost
+`token` iz nje. Dok je `TOKEN` prazan, statistika se ne bilježi. Automatsko ubacivanje skripte za busflow.email mora biti
+isključeno, inače se posjeti broje dvaput. Podaci su u Cloudflare nadzornoj ploči pod **Web Analytics**.
 Datenschutz, Pravila privatnosti i Privacy policy opisuju tu obradu u odjeljku 4; ako se alat promijeni, treba promijeniti i
-njih. Kratke adrese `/impressum`, `/datenschutz`, `/hr/impresum`, `/hr/privatnost`, `/en/legal-notice` i `/en/privacy`
-preusmjeravaju na te stranice (`vercel.json`).
+njih. Pravne stranice imaju i kratke adrese `/impressum`, `/datenschutz`, `/hr/impresum`, `/hr/privatnost`,
+`/en/legal-notice` i `/en/privacy`: Cloudflare Pages ih poslužuje bez `.html`, a adresu s `.html` preusmjerava na kratku.
 
 Izjava vlasnika u sekciji 07 je doslovan tekst koji je Ilija Mikanović napisao na njemačkom; izvadak koristi „[…]“ za
 izostavljene dijelove; hrvatska i engleska stranica prikazuju prijevod i njemački izvornik. Logo je
@@ -178,7 +180,7 @@ Ako OSRM ili Photon ne odgovore u 12 s, demo javlja da servis nije dostupan; kad
 procijeni kao zračna × 1,3 pri 75 km/h i označi „geschätzt“. **Prije šire promocije stranice** zamijeniti OSRM demo
 poslužitelj vlastitim OSRM-om ili BusFlow API-jem (`POST api/v1/routes/legs` uz CORS za busflow.email): javni demo
 poslužitelj nije namijenjen komercijalnoj produkciji. Adresa za zamjenu je konstanta `OSRM` na vrhu `demo.js`
-(`PHOTON` i `TILES` isto); novi poslužitelj mora ući i u CSP u `vercel.json` (`connect-src` za `PHOTON` i `OSRM`,
+(`PHOTON` i `TILES` isto); novi poslužitelj mora ući i u CSP u `_headers` (`connect-src` za `PHOTON` i `OSRM`,
 `img-src` za `TILES`), inače ga CSP blokira, a `npm run lint` javlja grešku. Kratka adresa `/demo` (i `/demo?lang=hr`, `/demo?lang=en`) vodi na `#demo`.
 
 ## Upit za prvi sastanak
@@ -209,7 +211,7 @@ Bereits vorhanden: …
 Gespräch: Videotermin
 Anmerkung: …
 
-Gesendet von: https://busflow.email/upit.html
+Gesendet von: https://busflow.email/upit
 ```
 
 Potvrda zatim vodi na kalendar termina („Online-Termin vereinbaren“, `bookingUrl`, nova kartica). JSON koji ide na
@@ -229,7 +231,7 @@ kontrola vozačke svakih 28 dana, Einsatzplan, sati, „Meine Fahrten“, Fahrau
 (ušteda, cijena, broja kupaca); demo-kalkulator računa isključivo iz brojki koje posjetitelj sam upiše, a zadane
 vrijednosti su označene kao primjeri. Imena vozača u mini Einsatzplanu su izmišljena. Novi jezik: kopirati `en/` u novu mapu, prevesti tekst, dodati jezik u `I18N` (`upit.js`), u vrijednosti
 `config.js`, u `LANGS`, `COPY` i `HTML` (`scripts/build.mjs`), u prekidače jezika i `hreflang` oznake svih stranica te u
-`kontakt/index.html` i `vercel.json`; uz to sliku za dijeljenje `assets/img/og-<jezik>.png` i JSON-LD na tom jeziku (vidi SEO).
+`kontakt/index.html` i `functions/redirects.json`; uz to sliku za dijeljenje `assets/img/og-<jezik>.png` i JSON-LD na tom jeziku (vidi SEO).
 
 Engleski tekst koristi pojmove iz engleskih tekstova aplikacije BusFlow_Mikanovic (`en.json`): coach operator, coach,
 inquiry, binding price, booking, invoice (nikad „e-invoice“), VAT, depot, partner operators, driver hire, „Book an online
@@ -237,45 +239,55 @@ meeting“, „within one working day“.
 
 ## Objava
 
-Stranica je predviđena za `https://busflow.email`, koju danas poslužuje Vercel iz repozitorija `patb00/BusFlow-Web`
-(svaki push na `main` objavljuje stranicu). Vercel čita `vercel.json`: build bez okvira (`npm ci`, `npm run build`,
-izlaz `dist/`), bez preusmjeravanja svih adresa na `index.html`, s preusmjeravanjima starih adresa dosadašnje stranice
-(`/hr` → `/hr/`, `/en` → `/en/`, `/?lang=hr` → `/hr/`, `/?lang=en` → `/en/`, `/demo` → demo-kalkulator `#demo`, `/klijenti` i
-`/klijenti/…` → referenca, uz `?lang=hr` / `?lang=en` na hrvatsku / englesku stranicu) i s kratkim adresama pravnih
-stranica. Build u `dist/` daje CSS-u i JS-u hash sadržaja u imenu (`landing.<hash>.css`) i prepiše poveznice u svim
+Stranica je predviđena za `https://busflow.email`, koju poslužuje **Cloudflare Pages** (račun FlowSolutions, projekt
+`busflow-web`) iz repozitorija `patb00/BusFlow-Web`: svaki push na `main` objavljuje stranicu, a svaka druga grana dobiva
+pregled na `<grana>.busflow-web.pages.dev`. Postavke builda u projektu: build `npm run build`, izlaz `dist`. Build kopira
+u `dist/` i `_headers` (zaglavlja) i `_routes.json`; funkcija iz `functions/` objavljuje se uz stranicu.
+
+Cloudflare Pages sam preusmjerava `/hr` → `/hr/`, `/en` → `/en/`, `…/index.html` → `…/` i `stranica.html` → `stranica`,
+a nepostojeće adrese dobivaju `404.html` (bez preusmjeravanja svih adresa na `index.html`). Stare adrese dosadašnje
+stranice (`/?lang=hr` → `/hr/`, `/?lang=en` → `/en/`, `/demo` → demo-kalkulator `#demo`, `/klijenti` i `/klijenti/…` →
+referenca, uz `?lang=hr` / `?lang=en` na hrvatsku / englesku stranicu) rješava `functions/_middleware.js` prema tablici
+`functions/redirects.json` (307), jer Cloudflareov `_redirects` ne zna uvjet po parametru `?lang=`. `_routes.json`
+poziva funkciju samo za `/`, `/demo` i `/klijenti/…`; sve ostalo se poslužuje izravno, bez funkcije. Lint provjerava da
+svako odredište (i sidro u njemu) postoji i da je svaka adresa iz tablice u `_routes.json`.
+
+Build u `dist/` daje CSS-u i JS-u hash sadržaja u imenu (`landing.<hash>.css`) i prepiše poveznice u svim
 HTML stranicama, pa se `/assets/css/` i `/assets/js/` keširaju godinu dana (`immutable`); u izvoru imena ostaju bez hasha.
 Fontovi se također keširaju godinu dana, ali bez hasha, pa **promijenjeni font mora dobiti novo ime datoteke**. Slike,
 `assets/vendor/` i `assets/data/` keširaju se dan (uz `stale-while-revalidate` od tjedan dana), a HTML se uvijek
 provjerava. Sve adrese dobivaju sigurnosna zaglavlja `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`
-(bez kamere, mikrofona i lokacije) i `X-Frame-Options: DENY` (stranica se ne može ugraditi u iframe).
+(bez kamere, mikrofona i lokacije) i `X-Frame-Options: DENY` (stranica se ne može ugraditi u iframe). Adrese na
+`pages.dev` (projekt i pregledi) dobivaju i `X-Robots-Tag: noindex`, da u tražilici ostane samo busflow.email. Sve je u
+`_headers`.
 
 **Content-Security-Policy (CSP)** je zaglavlje `Content-Security-Policy`: preglednik blokira sve što nije dopušteno
 (`default-src 'none'`) i svako kršenje zapiše u konzolu („Refused to …“). Dopušteno je:
 
-- skripte (`script-src`) s vlastite domene (`assets/js/`, Leaflet iz `assets/vendor/`, Vercelov
-  `/_vercel/insights/script.js`) i tri inline skripte po `sha256` hashu: preusmjeravanje `/hr` → `/hr/` i `/en` → `/en/`
+- skripte (`script-src`) s vlastite domene (`assets/js/`, Leaflet iz `assets/vendor/`), Cloudflareova skripta za
+  statistiku s `https://static.cloudflareinsights.com` i tri inline skripte po `sha256` hashu: preusmjeravanje `/hr` → `/hr/` i `/en` → `/en/`
   (`hr/index.html`, `en/index.html`) i odabir jezika u `kontakt/index.html`. JSON-LD (`application/ld+json`) se ne
   izvršava, pa mu hash ne treba.
 - stilovi (`style-src`) s vlastite domene i inline (`'unsafe-inline'`): početne stranice imaju oko 160 `style` atributa
   (`--i`, `--d`, `animation-delay` za animacije), a `404.html` blok `<style>`.
 - slike (`img-src`) s vlastite domene, `data:` (SVG ikone u CSS-u) i `https://tile.openstreetmap.org` (karta u demu);
   fontovi (`font-src`) samo s vlastite domene.
-- zahtjevi iz skripti (`connect-src`) prema vlastitoj domeni (`assets/data/`, Vercel statistika), Photonu, OSRM-u i
-  Formspreeu.
+- zahtjevi iz skripti (`connect-src`) prema vlastitoj domeni (`assets/data/`), Cloudflareovoj statistici
+  (`https://cloudflareinsights.com`), Photonu, OSRM-u i Formspreeu.
 - `form-action 'self'`, `base-uri 'none'` i `frame-ancestors 'none'` (isto što i `X-Frame-Options`).
 
 Poveznice na Microsoft Bookings, `mailto:` i `tel:` su obična navigacija i CSP ih ne ograničava. `npm run lint` računa
 `sha256` svake inline skripte (s LF krajevima redova, kao preglednik) i javlja grešku ako hash nije u `script-src` (poruka
 sadrži točnu vrijednost za upis) ili ako u `script-src` ostane hash koji ne odgovara nijednoj skripti; uz to provjerava
-da su izvori `PHOTON`, `OSRM`, `TILES` (`demo.js`) i `formEndpoint` (`config.js`) u CSP-u i da HTML nema `on…=`
-atributa. Promjena inline skripte ili adrese vanjskog servisa zato ide u isti commit s `vercel.json`. Na pregledima
-(preview) Vercel ubacuje svoj toolbar s `vercel.live`, koji politika ne dopušta, pa toolbar (komentari na pregledu)
-ondje ne radi. GitHub Pages ne čita `vercel.json`, pa ondje nema ni CSP-a ni ostalih zaglavlja.
+da su izvori `PHOTON`, `OSRM`, `TILES` (`demo.js`), `formEndpoint` (`config.js`) i `BEACON` (`analytics.js`) u CSP-u i
+da HTML nema `on…=` atributa. Promjena inline skripte ili adrese vanjskog servisa zato ide u isti commit s `_headers`.
+GitHub Pages ne čita `_headers`, pa ondje nema ni CSP-a ni ostalih zaglavlja. Lokalno se zaglavlja, preusmjeravanja i
+funkcija mogu provjeriti Cloudflareovim simulatorom: `npm run build`, zatim `npx wrangler pages dev dist`.
 
 **Provjera i povratak.** Politika je najprije objavljena kao `Content-Security-Policy-Report-Only` (preglednik samo
 prijavljuje) i na produkciji provjerena bez ijednog kršenja (svih 14 stranica, demo-kalkulator, upit), a zatim
 prebačena na blokiranje. CSP nema adresu za prijave (`report-uri`, `report-to`), pa se kršenja vide samo u konzoli
-preglednika. Nakon promjene skripti, vanjskih servisa ili `vercel.json`:
+preglednika. Nakon promjene skripti, vanjskih servisa ili `_headers`:
 
 1. Nakon objave na `main`: `curl -sI https://busflow.email/` mora vratiti `content-security-policy` (bez
    `-report-only`).
@@ -285,7 +297,7 @@ preglednika. Nakon promjene skripti, vanjskih servisa ili `vercel.json`:
    jednoj početnoj stranici izračunati rutu u demo-kalkulatoru (prijedlozi mjesta, karta s pločicama), a upit ispuniti
    do koraka 2 bez slanja. Poruke za `chrome-extension://…` ili `moz-extension://…` dolaze od proširenja preglednika i
    ne računaju se (najlakše: provjera u prozoru bez proširenja).
-3. Ako nešto ne radi zbog CSP-a, najbrži povratak je u `vercel.json` promijeniti ključ `Content-Security-Policy` natrag
+3. Ako nešto ne radi zbog CSP-a, najbrži povratak je u `_headers` promijeniti ime `Content-Security-Policy` natrag
    u `Content-Security-Policy-Report-Only` (vrijednost ostaje ista) i objaviti: preglednik tada opet samo prijavljuje.
    Kad je politika popravljena i provjerena po koraku 2, ključ se vraća na `Content-Security-Policy`. Lint prihvaća oba
    ključa.

@@ -1,0 +1,5 @@
+{
+  "/": { "hr": "/hr/", "en": "/en/" },
+  "/demo": { "de": "/#demo", "hr": "/hr/#demo", "en": "/en/#demo" },
+  "/klijenti": { "de": "/#referenz", "hr": "/hr/#referenca", "en": "/en/#reference" }
+}
