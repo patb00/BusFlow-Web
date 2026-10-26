@@ -1,4 +1,4 @@
-// BusFlow landing: provjerava statičnu stranicu i kopira je u dist/ (Vercel i GitHub Pages).
+// BusFlow landing: provjerava statičnu stranicu i kopira je u dist/ (Cloudflare Pages i GitHub Pages).
 //   node scripts/build.mjs          provjera, zatim kopija u dist/ (CSS i JS s hashom u imenu) te robots.txt i sitemap.xml
 //   node scripts/build.mjs --check  samo provjera (npm run lint)
 // VITE_SITE_URL  apsolutna adresa za robots.txt i sitemap.xml (zadano https://busflow.email)
@@ -16,8 +16,8 @@ const SITE = (process.env.VITE_SITE_URL || "https://busflow.email").trim().repla
 const PROD = "https://busflow.email"; // kanonska adresa upisana u HTML (canonical, hreflang, og:image, JSON-LD), neovisna o hostingu
 const BASE = (process.env.VITE_BASE || "/").replace(/\/*$/, "/");
 const COPY = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "404.html", "hr", "en", "kontakt", "assets",
-  "favicon.ico", "llms.txt"];
-const HASHED = ["assets/css", "assets/js"]; // u dist/ dobivaju hash u imenu, pa ih vercel.json kešira godinu dana (immutable)
+  "favicon.ico", "llms.txt", "_headers", "_routes.json"];
+const HASHED = ["assets/css", "assets/js"]; // u dist/ dobivaju hash u imenu, pa ih _headers kešira godinu dana (immutable)
 const HTML = ["index.html", "upit.html", "impressum.html", "datenschutz.html", "hr/index.html", "hr/upit.html",
   "hr/impresum.html", "hr/privatnost.html", "en/index.html", "en/upit.html", "en/legal-notice.html", "en/privacy.html",
   "kontakt/index.html", "404.html"];
@@ -25,7 +25,8 @@ const LANGS = { de: "/", hr: "/hr/", en: "/en/" }; // ista stranica na tri jezik
 const SEO = { title: [20, 65], description: [70, 160] }; // dopuštene duljine u znakovima
 // vanjske adrese koje skripte zovu: [datoteka, konstanta, CSP direktiva u kojoj mora biti njezin izvor]
 const EXTERNAL = [["assets/js/demo.js", "PHOTON", "connect-src"], ["assets/js/demo.js", "OSRM", "connect-src"],
-  ["assets/js/demo.js", "TILES", "img-src"], ["assets/js/config.js", "formEndpoint", "connect-src"]];
+  ["assets/js/demo.js", "TILES", "img-src"], ["assets/js/config.js", "formEndpoint", "connect-src"],
+  ["assets/js/analytics.js", "BEACON", "script-src"]];
 
 const read = (file) => readFileSync(join(ROOT, file), "utf8");
 const idsOf = (file) => new Set([...read(file).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
@@ -55,19 +56,18 @@ function check() {
     }
   }
   errors.push(...checkSeo(), ...checkCsp());
-  // vercel.json: odredište svakog preusmjeravanja postoji (i sidro u njemu), a izvor nije postojeća datoteka;
-  // iznimka je …/index.html → …/ (jedan URL po stranici umjesto duplikata)
-  const { redirects = [] } = JSON.parse(read("vercel.json"));
-  for (const { source, destination } of redirects) {
-    if (!destination.startsWith("/")) continue;
-    const [pathQ, id] = destination.split("#");
-    const path = pathQ.split("?")[0];
-    const rel = path.replace(/^\//, "") + (path.endsWith("/") ? "index.html" : "");
-    if (!existsSync(join(ROOT, rel)) || !statSync(join(ROOT, rel)).isFile()) errors.push(`vercel.json: odredište ${destination} ne postoji`);
-    else if (id && !idsOf(rel).has(id)) errors.push(`vercel.json: nema id-a "${id}" u ${rel}`);
-    const src = join(ROOT, source);
-    const toOwnDir = source.endsWith("/index.html") && destination === source.slice(0, -"index.html".length);
-    if (!toOwnDir && !source.includes(":") && existsSync(src) && statSync(src).isFile()) errors.push(`vercel.json: izvor ${source} je postojeća datoteka`);
+  // functions/redirects.json: odredište svakog preusmjeravanja postoji (i sidro u njemu), izvor nije postojeća datoteka
+  // ni mapa (Cloudflare bi je poslužio prije funkcije) osim početne, a _routes.json pušta izvor do funkcije
+  const { include = [] } = JSON.parse(read("_routes.json"));
+  for (const [source, targets] of Object.entries(JSON.parse(read("functions/redirects.json")))) {
+    if (!include.includes(source)) errors.push(`_routes.json: nema ${source} u include`);
+    if (source !== "/" && existsSync(join(ROOT, source))) errors.push(`functions/redirects.json: izvor ${source} postoji u stablu`);
+    for (const destination of Object.values(targets)) {
+      const [path, id] = destination.split("#");
+      const rel = path.replace(/^\//, "") + (path.endsWith("/") ? "index.html" : "");
+      if (!existsSync(join(ROOT, rel)) || !statSync(join(ROOT, rel)).isFile()) errors.push(`functions/redirects.json: odredište ${destination} ne postoji`);
+      else if (id && !idsOf(rel).has(id)) errors.push(`functions/redirects.json: nema id-a "${id}" u ${rel}`);
+    }
   }
   // llms.txt: svaka poveznica na PROD vodi na postojeću stranicu (i sidro u njoj)
   for (const [, url] of read("llms.txt").matchAll(/\]\((https:\/\/[^)\s]+)\)/g)) {
@@ -131,14 +131,20 @@ function checkSeo() {
   return errors;
 }
 
-// CSP iz vercel.json (Content-Security-Policy ili …-Report-Only za "/(.*)"): script-src ima sha256 svake inline skripte
+// CSP iz _headers (Content-Security-Policy ili …-Report-Only za "/*"): script-src ima sha256 svake inline skripte
 // i nijedan višak, izvori adresa iz EXTERNAL su u svojoj direktivi, a HTML nema on…= atributa (CSP ih ne pušta).
 function checkCsp() {
   const errors = [];
-  const { headers = [] } = JSON.parse(read("vercel.json"));
-  const header = (headers.find((h) => h.source === "/(.*)")?.headers || [])
-    .find((h) => /^Content-Security-Policy(-Report-Only)?$/i.test(h.key));
-  if (!header) return ['vercel.json: nema zaglavlja Content-Security-Policy(-Report-Only) za "/(.*)"'];
+  const headers = {}; // _headers: redak bez uvlake je adresa, uvučeni "Ime: vrijednost" su njezina zaglavlja, # komentar
+  let source = null;
+  for (const line of read("_headers").split(/\r?\n/)) {
+    if (!line.trim() || line.trim().startsWith("#")) continue;
+    if (!/^\s/.test(line)) { source = line.trim(); headers[source] ??= []; continue; }
+    const m = line.match(/^\s+([^:]+):\s*(.*)$/);
+    if (m && source) headers[source].push({ key: m[1].trim(), value: m[2].trim() });
+  }
+  const header = (headers["/*"] || []).find((h) => /^Content-Security-Policy(-Report-Only)?$/i.test(h.key));
+  if (!header) return ['_headers: nema zaglavlja Content-Security-Policy(-Report-Only) za "/*"'];
   const csp = Object.fromEntries(header.value.split(";").map((d) => d.trim().split(/\s+/)).filter((d) => d[0])
     .map(([name, ...values]) => [name.toLowerCase(), values]));
   const scriptSrc = csp["script-src"] || csp["default-src"] || [];
@@ -149,16 +155,16 @@ function checkCsp() {
       if (/\ssrc=|\stype="application\/ld\+json"/.test(attrs)) continue; // JSON-LD se ne izvršava, CSP ga ne gleda
       const hash = `'sha256-${createHash("sha256").update(code).digest("base64")}'`;
       hashes.add(hash);
-      if (!scriptSrc.includes(hash)) errors.push(`${file}: inline skripta nije dopuštena u CSP-u, u script-src (vercel.json) dodati ${hash}`);
+      if (!scriptSrc.includes(hash)) errors.push(`${file}: inline skripta nije dopuštena u CSP-u, u script-src (_headers) dodati ${hash}`);
     }
     for (const [tag] of html.matchAll(/<[a-z][^>]*?\son[a-z]+=/gi)) errors.push(`${file}: on…= atribut (CSP ga blokira): ${tag.slice(0, 80)}`);
   }
   for (const value of scriptSrc) {
-    if (value.startsWith("'sha256-") && !hashes.has(value)) errors.push(`vercel.json: ${value} u script-src ne odgovara nijednoj inline skripti`);
+    if (value.startsWith("'sha256-") && !hashes.has(value)) errors.push(`_headers: ${value} u script-src ne odgovara nijednoj inline skripti`);
   }
   for (const [file, name, directive] of EXTERNAL) {
     const origin = read(file).match(new RegExp(`\\b${name}\\s*[:=]\\s*"(https?://[^/"]+)`))?.[1];
-    if (origin && !(csp[directive] || []).includes(origin)) errors.push(`vercel.json: ${origin} (${name} u ${file}) nije u CSP ${directive}`);
+    if (origin && !(csp[directive] || []).includes(origin)) errors.push(`_headers: ${origin} (${name} u ${file}) nije u CSP ${directive}`);
   }
   return errors;
 }

@@ -1,13 +1,15 @@
-/* BusFlow — statistika posjeta preko Vercel Web Analytics (bez kolačića).
-   Skripta /_vercel/insights/script.js postoji samo na busflow.email, i to tek kad je Web Analytics uključen u Vercel
-   projektu i stranica ponovno objavljena. Zato se učitava samo na toj adresi; lokalno, na GitHub Pages i u pregledu
-   se preskače. Opisano u Datenschutzu (DE) i Pravilima privatnosti (HR), odjeljak 4. */
+/* BusFlow — statistika posjeta preko Cloudflare Web Analytics (bez kolačića i bez spremanja u preglednik).
+   Učitava se samo na busflow.email i tek kad je TOKEN upisan (Cloudflare → Web Analytics → busflow.email → Manage site,
+   ručna JS skripta); lokalno, na pages.dev pregledima i na GitHub Pages se preskače. Opisano u Datenschutzu (DE),
+   Pravilima privatnosti (HR) i Privacy policyju (EN), odjeljak 4. */
 (function () {
   "use strict";
-  if (location.hostname !== "busflow.email") return;
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  var TOKEN = "";
+  var BEACON = "https://static.cloudflareinsights.com/beacon.min.js";
+  if (location.hostname !== "busflow.email" || !TOKEN) return;
   var s = document.createElement("script");
   s.defer = true;
-  s.src = "/_vercel/insights/script.js";
+  s.src = BEACON;
+  s.setAttribute("data-cf-beacon", JSON.stringify({ token: TOKEN }));
   document.head.appendChild(s);
 })();
