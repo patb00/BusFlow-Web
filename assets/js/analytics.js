@@ -4,7 +4,7 @@
    Pravilima privatnosti (HR) i Privacy policyju (EN), odjeljak 4. */
 (function () {
   "use strict";
-  var TOKEN = "";
+  var TOKEN = "17482e39f7b44af6956adac1df20948d";
   var BEACON = "https://static.cloudflareinsights.com/beacon.min.js";
   if (location.hostname !== "busflow.email" || !TOKEN) return;
   var s = document.createElement("script");
