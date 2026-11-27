@@ -20,15 +20,16 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 | `hr/impresum.html`, `hr/privatnost.html` | isto na hrvatskom: Impresum i Pravila privatnosti |
 | `en/legal-notice.html`, `en/privacy.html` | isto na engleskom: Legal notice i Privacy policy |
 | `404.html` | stranica „nije pronađeno“ (njemački, s hrvatskim i engleskim retkom); poveznice su root-apsolutne jer se poslužuje na bilo kojoj adresi |
-| `assets/css/style.css` | tokeni boja i fontova, osnova, zajedničke komponente (gumbi, kartice, čipovi, logo, polja obrasca) |
+| `assets/css/style.css` | tokeni boja i fontova, osnova, zajedničke komponente (gumbi, kartice, logo, polja obrasca, čipovi i potvrda kratkog upita) |
 | `assets/css/landing.css` | zaglavlje, prekidač jezika, tračnica sa stanicama i autobusom, hero-film (CSS 3D autobus), sve sekcije, animacije, prilagodbe širini |
-| `assets/css/upit.css` | stilovi stranice upita |
+| `assets/css/upit.css` | raspored stranice upita (`upit.html`) |
 | `assets/css/legal.css` | stilovi pravnih stranica |
 | `assets/css/fonts.css` + `assets/fonts/` | samostalno posluživani fontovi Barlow 400–700, Barlow Condensed 800 i JetBrains Mono (varijabilni, jedna datoteka za 400–700), latin + latin-ext; svaki novi rez je nova datoteka za preuzimanje, pa prije dodavanja provjeriti može li postojeći |
 | `assets/js/config.js` | postavke (kontakt, kalendar termina, trajanje sastanka, adresa za slanje upita); u `<head>` je namjerno bez `defer`: mjereno na sporom mobitelu, s `defer` se hero iscrta ~0,5 s kasnije (preglednik prvo obradi cijeli HTML) |
-| `assets/js/landing.js` | izbornik, skaliranje filma, tračnica i paljenje stanica, ulazne animacije, tabovi mini Einsatzplana (sekcija 03), putna karta (korak 1 upita) |
+| `assets/js/site.js` | postavke iz `config.js` na stranici na njezinom jeziku (`data-cfg`, `data-cfg-href`, `data-cfg-requires`), na početnim stranicama i upitu |
+| `assets/js/landing.js` | izbornik, skaliranje filma, tračnica i paljenje stanica, ulazne animacije, tabovi mini Einsatzplana (sekcija 03) |
 | `assets/js/analytics.js` | statistika posjeta (Cloudflare Web Analytics), učitava se samo na busflow.email |
-| `assets/js/upit.js` | logika upita: koraci, provjera, sažetak, slanje preko Formspreea (rezerva: e-mail iz preglednika); njemački, hrvatski i engleski tekstovi u rječniku `I18N` |
+| `assets/js/upit.js` | kratki upit (putna karta i `upit.html`): provjera, talon, slanje preko Formspreea, rezerva e-mailom iz preglednika i kopiranje; njemački, hrvatski i engleski tekstovi u rječniku `I18N` |
 | `assets/js/demo.js` | demo-kalkulator u sekciji 04: pretraga mjesta (Photon), ruta (OSRM), karta (Leaflet + OpenStreetMap), države na ruti, posada, dani i ilustrativna cijena iz posjetiteljevih parametara; tekstovi de/hr/en u rječniku `I18N` |
 | `assets/vendor/leaflet/` | Leaflet 1.9.4 (BSD-2-Clause, `LICENSE` u mapi), poslužuje se s naše stranice i učitava tek pri prvom izračunu |
 | `assets/data/europe-countries.json` | pojednostavljeni poligoni europskih država (Natural Earth 110m, public domain) za pripisivanje kilometara državama |
@@ -59,7 +60,7 @@ sastanak. Paleta je bijela podloga s tri navy tona; krem se koristi samo na navy
 9. **07 Referenz / Referenca** (tamno): činjenice, izjava vlasnika Ilije Mikanovića s logom tvrtke (izvadak, cijeli tekst
    na klik; na hrvatskoj stranici prijevod i njemački izvornik) i popis onoga što smo za Omnibus Mikanović napravili.
 10. **08 Fragen / Pitanja**: osam pitanja.
-11. **Ziel / Odredište**: putna karta (korak 1 upita na stranici), „Im Erstgespräch“, „Lieber gleich einen Termin?“ (gumb na Microsoft Bookings).
+11. **Ziel / Odredište**: putna karta s kratkim upitom (šalje se izravno sa stranice) i gumbom za kalendar termina ispod njega, „Im Erstgespräch“, „Lieber gleich einen Termin?“ (gumb na Zoho Calendar).
 
 Sidra sekcija na njemačkoj stranici: `#start, #systemkarte, #funktionen, #verbesserungen, #tempo, #vorteile, #einfuehrung,
 #referenz, #fragen, #termin`; na hrvatskoj: `#vrh, #karta, #mogucnosti, #poboljsanja, #ubrzanja, #prednosti, #uvodenje,
@@ -103,15 +104,18 @@ npm run build   # isto, pa kopija u dist/ (CSS i JS s hashom u imenu) te robots.
 Na autobusu u sekciji 05 `[IHR LOGO]` / `[ihre-domain.de]` (i hrvatske i engleske inačice) namjerno su oznake: pokazuju
 gdje dolazi logo i domena prijevoznika. Tekstovi koji ovise o jeziku upisuju se kao `{ de: "…", hr: "…", en: "…" }`.
 
-- `email` – `info@flow-solutions.hr`: podnožje, potvrda upita i adresa na koju upit stiže e-mailom.
+- `email` – `info@flow-solutions.hr` (sandučić je na Zoho Mailu): podnožje, potvrda upita i adresa na koju upit stiže.
 - `phone`, `phoneDisplay` – telefon u podnožju; dok je prazno, stavka se ne prikazuje.
 - `replyWithin` – rok odgovora (`de` „innerhalb eines Werktages“, `hr` „unutar 1 radnog dana“, `en` „within one working
   day“, kao u dijalogu na mikanovic.de).
-- `bookingUrl` – Microsoft Bookings za prvi sastanak (isti kalendar kao na mikanovic.de); `meetingMinutes` (30) i
-  `bookingHours` (`de` „Mo–Fr, 9–16 Uhr“, `hr` „pon–pet 9–16 h“, `en` „Mon–Fri, 9:00–16:00 CET“) opisuju taj tip termina.
+- `bookingUrl` – booking stranica „BusFlow“ u Zoho Calendaru (isti link kao na mikanovic.de): 30 min na Zoho Meeting
+  videu, termini svaki dan 9–18 h. `meetingMinutes` (30) i `bookingHours` (`de` „9–18 Uhr“, `hr` „9–18 h“, `en`
+  „9:00–18:00 CET“) samo opisuju te termine; dani i sati mijenjaju se u Zohu (Appointment Booking → BusFlow → Available
+  hours). Prazno skriva sve gumbe za kalendar (`data-cfg-requires="bookingUrl"`).
 - `formEndpoint` – `https://formspree.io/f/mnjwrbpa`, isti Formspree obrazac kao na flow-solutions.hr (stiže na
   info@flow-solutions.hr). Upit ide kao JSON (`POST`, `Content-Type: application/json`, očekuje se odgovor 2xx). Ako
-  slanje ne uspije ili traje dulje od 15 s, otvara se e-mail program posjetitelja s porukom za `email` (rezerva).
+  slanje ne uspije ili traje dulje od 15 s, potvrda nudi gumb koji otvara e-mail program posjetitelja s porukom za
+  `email`, uz „kopiraj“ (rezerva).
   Prazno: upit se uvijek šalje e-mailom iz preglednika. Nova adresa izvan `formspree.io` mora ući i u `connect-src`
   CSP-a u `_headers` (lint to provjerava, vidi Objava).
 
@@ -121,10 +125,11 @@ gdje dolazi logo i domena prijevoznika. Tekstovi koji ovise o jeziku upisuju se 
 `en/legal-notice.html` i `en/privacy.html` (engleski) su statične
 stranice bez JavaScripta, s oznakom `noindex`. Podaci o tvrtki (puni naziv, sjedište u Križevcima, direktor, OIB,
 PDV ID, MBS i Trgovački sud u Bjelovaru, banka i IBAN) upisani su izravno u tih šest datoteka; temeljni kapital se
-namjerno ne navodi. E-mail adresa je u njima upisana ručno, pa je pri promjeni treba promijeniti i ondje. Datenschutz opisuje stvarne obrade: hosting na Cloudflare Pages, slanje upita preko Formspreea,
-`sessionStorage` za odgovore, statistiku posjeta (Cloudflare Web Analytics), demo-kalkulator (Photon, OSRM demo
+namjerno ne navodi. E-mail adresa je u njima upisana ručno, pa je pri promjeni treba promijeniti i ondje. Datenschutz opisuje stvarne obrade: hosting na Cloudflare Pages, kratki upit (e-mail, broj vozila,
+poruka) preko Formspreea, statistiku posjeta (Cloudflare Web Analytics), demo-kalkulator (Photon, OSRM demo
 poslužitelj, OpenStreetMap pločice, `sessionStorage` za primjerne cijene; odjeljak 5 `#h-demo`, na njega vodi napomena
-ispod gumba u demu), e-mail na Microsoft 365, termin preko Microsoft Bookings i Teamsa; stranica nema kolačića. Ako se
+ispod gumba u demu), e-mail na Zoho Mailu (Zoho Corporation B.V., EU podatkovni centar) i termin preko Zoho Calendara
+i Zoho Meetinga; stranica nema kolačića. Ako se
 doda nova usluga (npr. drugi servis za rutiranje ili drugi alat za statistiku), treba je dodati i u Datenschutz te u
 CSP u `_headers`.
 
@@ -183,41 +188,33 @@ poslužitelj nije namijenjen komercijalnoj produkciji. Adresa za zamjenu je kons
 (`PHOTON` i `TILES` isto); novi poslužitelj mora ući i u CSP u `_headers` (`connect-src` za `PHOTON` i `OSRM`,
 `img-src` za `TILES`), inače ga CSP blokira, a `npm run lint` javlja grešku. Kratka adresa `/demo` (i `/demo?lang=hr`, `/demo?lang=en`) vodi na `#demo`.
 
-## Upit za prvi sastanak
+## Upit
 
-Dva koraka, ukupno 13 stavki: **01 Abfahrt / Polazište** (tvrtka*, ime*, e-mail*, telefon, država) i **02 Ziel /
-Odredište** (broj autobusa*, usluge*, kako danas nastaju ponude, kada želite krenuti*, što već imate, video ili
-telefon, napomena, privola*). Prvi korak može se ispuniti i na landing stranici: gumb „Weiter: Ihr Busbetrieb“ /
-„Dalje: vaš prijevoz“ / „Next: your business“ sprema odgovore u `sessionStorage` (ključ `busflow-upit`, samo kodovi
-odgovora, pa vrijede u svim jezicima) i otvara upit na istom jeziku na koraku 2.
+Jedan korak, tri polja, isti obrazac na putnoj karti sve tri početne stranice (sekcija Ziel / Odredište / Destination;
+na nju vode i „Termin vereinbaren“ / „Zakaži sastanak“ / „Book a meeting“ u zaglavlju, heroju i podnožju) i na
+`upit.html` (za `/kontakt`): **e-mail\***, **broj vozila\*** (1–3, 4–10, 11–25, 26–50, 50+) i **kratka poruka** po želji
+(do 1000 znakova), uz skriveno polje `_gotcha` za robote (ispunjeno: ništa se ne šalje, a robot vidi uspjeh). Bez
+kvačice privole: rečenica ispod gumba vodi na Datenschutz / Pravila privatnosti / Privacy policy (pravna osnova je
+čl. 6. st. 1. t. (b) GDPR-a). Odmah ispod gumba „Anfrage senden“ / „Pošaljite upit“ / „Send inquiry“ je gumb za
+kalendar termina (`bookingUrl`), za onoga tko radije odmah bira termin; isti je u bočnom panelu i na potvrdi.
 
-Gumb „Anfrage senden“ / „Pošaljite upit“ / „Send inquiry“ šalje upit preko Formspreea; sažetak na jeziku stranice ide u polje `poruka`,
-a isti je tekst na potvrdi, uz gumb za kopiranje. Kad slanje ne uspije, isti sažetak se otvara kao poruka u e-mail
-programu. Njemački primjer:
+JSON na `formEndpoint` (Formspree): `_subject` („Anfrage zu BusFlow – 4–10 Fahrzeuge“ / „Upit za BusFlow – 4–10 vozila“
+/ „Inquiry about BusFlow – 4–10 vehicles“), `_replyto` (e-mail posjetitelja, za odgovor), zatim `email, flota, poruka,
+lang, page, sent_at`. Uspjeh je HTTP 2xx: potvrda „Anfrage gesendet.“ s gumbom za termin. Inače (greška, mreža, 15 s)
+potvrda „Der Versand hat nicht geklappt.“ nudi gumb „Per E-Mail senden“ (mailto s ovim tekstom, poruka se skraćuje
+iznad ~1900 znakova), „Anfrage kopieren“ i „Anfrage bearbeiten“. Njemački primjer teksta:
 
 ```
-Anfrage zur Einführung von BusFlow
+Anfrage zu BusFlow
 
-Firma: …
-Name: …
 E-Mail: …
-Telefon: …
-Firmensitz: …
-Anzahl Busse: …
-Leistungen: …
-Angebotserstellung heute: …
-Gewünschter Start: …
-Bereits vorhanden: …
-Gespräch: Videotermin
-Anmerkung: …
+Anzahl Fahrzeuge: …
+
+Nachricht:
+…
 
 Gesendet von: https://busflow.email/upit
 ```
-
-Potvrda zatim vodi na kalendar termina („Online-Termin vereinbaren“, `bookingUrl`, nova kartica). JSON koji ide na
-`formEndpoint`: `_subject` (predmet poruke), `_replyto` (e-mail posjetitelja, za odgovor), `poruka` (sažetak), zatim
-`sent_at, page, lang, tvrtka, ime, email, telefon, drzava, flota, usluge[], ponude, kada, imate[], format, napomena,
-privola`.
 
 **Testiranje:** automatski testovi i ručne provjere moraju presresti `formspree.io` (npr. Playwright
 `context.route`), inače svaki klik na „Anfrage senden“ šalje pravi upit na info@flow-solutions.hr. Pravi probni upit
@@ -276,7 +273,7 @@ provjerava. Sve adrese dobivaju sigurnosna zaglavlja `X-Content-Type-Options`, `
   (`https://cloudflareinsights.com`), Photonu, OSRM-u i Formspreeu.
 - `form-action 'self'`, `base-uri 'none'` i `frame-ancestors 'none'` (isto što i `X-Frame-Options`).
 
-Poveznice na Microsoft Bookings, `mailto:` i `tel:` su obična navigacija i CSP ih ne ograničava. `npm run lint` računa
+Poveznice na Zoho Calendar, `mailto:` i `tel:` su obična navigacija i CSP ih ne ograničava. `npm run lint` računa
 `sha256` svake inline skripte (s LF krajevima redova, kao preglednik) i javlja grešku ako hash nije u `script-src` (poruka
 sadrži točnu vrijednost za upis) ili ako u `script-src` ostane hash koji ne odgovara nijednoj skripti; uz to provjerava
 da su izvori `PHOTON`, `OSRM`, `TILES` (`demo.js`), `formEndpoint` (`config.js`) i `BEACON` (`analytics.js`) u CSP-u i
@@ -295,7 +292,7 @@ preglednika. Nakon promjene skripti, vanjskih servisa ili `_headers`:
    za 404) s otvorenom konzolom (F12) u Chromeu, Firefoxu i po mogućnosti Safariju. U konzoli ne smije biti poruka o
    Content Security Policy („Refused to …“ ili „… violates the following Content Security Policy directive …“). Na
    jednoj početnoj stranici izračunati rutu u demo-kalkulatoru (prijedlozi mjesta, karta s pločicama), a upit ispuniti
-   do koraka 2 bez slanja. Poruke za `chrome-extension://…` ili `moz-extension://…` dolaze od proširenja preglednika i
+   bez slanja. Poruke za `chrome-extension://…` ili `moz-extension://…` dolaze od proširenja preglednika i
    ne računaju se (najlakše: provjera u prozoru bez proširenja).
 3. Ako nešto ne radi zbog CSP-a, najbrži povratak je u `_headers` promijeniti ime `Content-Security-Policy` natrag
    u `Content-Security-Policy-Report-Only` (vrijednost ostaje ista) i objaviti: preglednik tada opet samo prijavljuje.
