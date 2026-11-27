@@ -199,7 +199,9 @@
 
       fields.hidden = true;
       done.hidden = false;
-      done.focus({ preventScroll: true });
+      var title = $("[data-upit-done-title]", form);
+      title.setAttribute("tabindex", "-1");
+      title.focus({ preventScroll: true });
       /* Obrazac se upravo skratio (polja su skrivena), a preglednik je zadržao položaj; tek nakon novog rasporeda
          vrati vrh obrasca u vidno polje, inače potvrda ostane iznad ekrana (mobitel). */
       requestAnimationFrame(function () {
@@ -222,9 +224,10 @@
       if (!validate()) { status.textContent = t("checkFields"); return; }
       status.textContent = "";
 
-      /* Robot je ispunio skriveno polje: ne šaljemo ništa, a robot vidi uspjeh. */
-      var trap = $("input[name=_gotcha]", form);
-      if (trap && trap.value) { showDone("sent"); return; }
+      /* Robot je kvačnuo skriveno polje (kvačica, jer je preglednik nikad ne popuni sam kao tekstno polje):
+         ne šaljemo ništa, a robot vidi uspjeh. */
+      var trap = $("input[name=botcheck]", form);
+      if (trap && trap.checked) { showDone("sent"); return; }
 
       var endpoint = text("formEndpoint");
       if (!endpoint) { showDone("mail"); return; }

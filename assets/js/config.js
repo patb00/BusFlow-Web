@@ -16,7 +16,7 @@ window.BUSFLOW = {
      Booking → BusFlow → Available hours), a ovdje samo tekst uz gumbe. Prazno = gumbi za kalendar se skrivaju. */
   bookingUrl: "https://calendar.zoho.eu/zc/view/slot-booking/0801123eb2e67d0614e435f10b7cfc7b0000908716c149fb8693f4a7881c898cbfcd0c31ecb462b0af14579353eac5f1a484bdfff151f8cbc0b7539f527d29d66cc5",
   meetingMinutes: 30,
-  bookingHours: { de: "9–18 Uhr", hr: "9–18 h", en: "9:00–18:00 CET" },
+  bookingHours: { de: "9–18 Uhr", hr: "9–18 h", en: "9:00–18:00 (CET/CEST)" },
 
   /* Kratki upit (e-mail, broj vozila, poruka) šalje se automatski preko Formspreea: isti obrazac kao na flow-solutions.hr,
      poruka stiže na info@flow-solutions.hr. Šalje se JSON (POST, Content-Type: application/json; polja _subject, _replyto,

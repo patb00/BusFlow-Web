@@ -110,7 +110,7 @@ gdje dolazi logo i domena prijevoznika. Tekstovi koji ovise o jeziku upisuju se 
   day“, kao u dijalogu na mikanovic.de).
 - `bookingUrl` – booking stranica „BusFlow“ u Zoho Calendaru (isti link kao na mikanovic.de): 30 min na Zoho Meeting
   videu, termini svaki dan 9–18 h. `meetingMinutes` (30) i `bookingHours` (`de` „9–18 Uhr“, `hr` „9–18 h“, `en`
-  „9:00–18:00 CET“) samo opisuju te termine; dani i sati mijenjaju se u Zohu (Appointment Booking → BusFlow → Available
+  „9:00–18:00 (CET/CEST)“) samo opisuju te termine; dani i sati mijenjaju se u Zohu (Appointment Booking → BusFlow → Available
   hours). Prazno skriva sve gumbe za kalendar (`data-cfg-requires="bookingUrl"`).
 - `formEndpoint` – `https://formspree.io/f/mnjwrbpa`, isti Formspree obrazac kao na flow-solutions.hr (stiže na
   info@flow-solutions.hr). Upit ide kao JSON (`POST`, `Content-Type: application/json`, očekuje se odgovor 2xx). Ako
@@ -193,7 +193,8 @@ poslužitelj nije namijenjen komercijalnoj produkciji. Adresa za zamjenu je kons
 Jedan korak, tri polja, isti obrazac na putnoj karti sve tri početne stranice (sekcija Ziel / Odredište / Destination;
 na nju vode i „Termin vereinbaren“ / „Zakaži sastanak“ / „Book a meeting“ u zaglavlju, heroju i podnožju) i na
 `upit.html` (za `/kontakt`): **e-mail\***, **broj vozila\*** (1–3, 4–10, 11–25, 26–50, 50+) i **kratka poruka** po želji
-(do 1000 znakova), uz skriveno polje `_gotcha` za robote (ispunjeno: ništa se ne šalje, a robot vidi uspjeh). Bez
+(do 1000 znakova), uz skrivenu kvačicu `botcheck` za robote (kvačnuta: ništa se ne šalje, a robot vidi uspjeh; kvačica, a ne
+tekstno polje, jer je automatsko popunjavanje preglednika nikad ne kvačne). Bez
 kvačice privole: rečenica ispod gumba vodi na Datenschutz / Pravila privatnosti / Privacy policy (pravna osnova je
 čl. 6. st. 1. t. (b) GDPR-a). Odmah ispod gumba „Anfrage senden“ / „Pošaljite upit“ / „Send inquiry“ je gumb za
 kalendar termina (`bookingUrl`), za onoga tko radije odmah bira termin; isti je u bočnom panelu i na potvrdi.
