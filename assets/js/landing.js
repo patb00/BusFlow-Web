@@ -1,51 +1,16 @@
-/* BusFlow landing — ponašanje stranice: postavke iz config.js, mobilni izbornik, skaliranje hero-filma,
-   tračnica (autobus + ispuna + paljenje stanica), ulazne animacije sekcija, putna karta (korak 1 → upit.html)
-   i gumb za kalendar termina (Microsoft Bookings). Bez ovisnosti. */
+/* BusFlow landing — ponašanje stranice: mobilni izbornik, skaliranje hero-filma, tračnica (autobus + ispuna +
+   paljenje stanica), ulazne animacije sekcija i tabovi modula Fahrer. Postavke iz config.js primjenjuje site.js, a
+   kratki upit na putnoj karti upit.js. Bez ovisnosti. */
 (function () {
   "use strict";
 
   var html = document.documentElement;
   html.classList.add("js");
 
-  var cfg = window.BUSFLOW || {};
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
-  var LANG = (html.lang || "de").slice(0, 2).toLowerCase();
-  var MIN = { de: "Min.", hr: "min", en: "min" }[LANG] || "min";
-  /* vrijednost iz config.js; { de: …, hr: …, en: … } daje tekst za jezik stranice */
-  function localize(v) { return v && typeof v === "object" && ("de" in v || "hr" in v) ? (LANG in v ? v[LANG] : v.de) : v; }
-  function get(key) { return localize(key.split(".").reduce(function (o, p) { return o && o[p]; }, cfg)); }
-
-  /* ---------- Postavke iz config.js ---------- */
-  function applyConfig() {
-    var phone = (get("phone") || "").toString().trim();
-    var phoneDisplay = (get("phoneDisplay") || phone).toString().trim();
-
-    $$("[data-cfg]").forEach(function (el) {
-      var key = el.getAttribute("data-cfg");
-      var v;
-      if (key === "phoneDisplay") v = phoneDisplay;
-      else if (key === "meetingMinutes") v = get("meetingMinutes") ? get("meetingMinutes") + " " + MIN : "";
-      else v = get(key);
-      if (v === undefined || v === null || v === "") {
-        if (key === "phoneDisplay") el.hidden = true; /* bez telefona u configu nema oznake [Telefon] */
-        return;
-      }
-      el.textContent = String(v);
-    });
-
-    $$("[data-cfg-href]").forEach(function (el) {
-      var key = el.getAttribute("data-cfg-href");
-      var v = key === "phone" ? phone : get(key);
-      if (!v) { if (key === "phone") el.hidden = true; return; }
-      if (key === "phone") el.setAttribute("href", "tel:" + String(v).replace(/[^+\d]/g, ""));
-      else if (key === "email") el.setAttribute("href", "mailto:" + v);
-      else el.setAttribute("href", String(v));
-      el.removeAttribute("aria-disabled");
-    });
-  }
 
   /* ---------- Mobilni izbornik ---------- */
   function setupNav() {
@@ -209,77 +174,11 @@
     });
   }
 
-  /* ---------- Putna karta: korak 1 na stranici → upit.html korak 2 ---------- */
-  var STORAGE_KEY = "busflow-upit";
-
-  function setupTicket() {
-    var form = document.getElementById("karta-upit");
-    if (!form) return;
-
-    function values() {
-      var out = {};
-      $$("input, select", form).forEach(function (el) { if (el.name) out[el.name] = el.value.trim(); });
-      return out;
-    }
-    function updateStub() {
-      var v = values();
-      var t = $('[data-stub="tvrtka"]', form);
-      var k = $('[data-stub="kontakt"]', form);
-      if (t) { t.textContent = v.tvrtka || "—"; t.classList.toggle("is-empty", !v.tvrtka); }
-      var kontakt = [v.ime, v.telefon].filter(Boolean).join(" · ");
-      if (k) { k.textContent = kontakt || "—"; k.classList.toggle("is-empty", !kontakt); }
-    }
-    function validate() {
-      var ok = true, first = null;
-      $$(".q", form).forEach(function (q) {
-        var input = $("input, select", q);
-        var valid = !input || input.checkValidity();
-        q.classList.toggle("is-invalid", !valid);
-        if (!valid) { ok = false; if (!first) first = input; }
-      });
-      if (first) first.focus();
-      return ok;
-    }
-
-    form.addEventListener("input", function (e) {
-      var q = e.target.closest(".q");
-      if (q && q.classList.contains("is-invalid") && e.target.checkValidity()) q.classList.remove("is-invalid");
-      updateStub();
-    });
-    form.addEventListener("change", updateStub);
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!validate()) return;
-      var v = values();
-      var saved = null;
-      try { saved = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null"); } catch (err) { saved = null; }
-      /* novi zapis: zadržavaju se samo već upisani odgovori (npr. korak 2), ne i stariji ključevi */
-      var state = { step: 2, values: {} };
-      var prev = (saved && typeof saved === "object" && saved.values && typeof saved.values === "object") ? saved.values : {};
-      Object.keys(prev).forEach(function (key) { state.values[key] = prev[key]; });
-      ["tvrtka", "ime", "email", "telefon", "drzava"].forEach(function (key) { state.values[key] = v[key] || ""; });
-      try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (err) { /* privatni način: upit.html kreće od koraka 1 */ }
-      window.location.href = "upit.html";
-    });
-
-    /* ako se posjetitelj vratio sa stranice upita, prikaži već upisano */
-    try {
-      var prev = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null");
-      if (prev && prev.values) {
-        $$("input, select", form).forEach(function (el) { if (el.name && prev.values[el.name]) el.value = prev.values[el.name]; });
-      }
-    } catch (err) { /* ignoriraj */ }
-    updateStub();
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
-    applyConfig();
     setupNav();
     setupStageScale();
     setupRail();
     setupEntry();
     setupRoster();
-    setupTicket();
   });
 })();

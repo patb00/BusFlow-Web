@@ -234,7 +234,7 @@ input, select, textarea { font: inherit; color: inherit; }
 }
 .chip--muted { background: transparent; color: var(--text-2); padding: 0; }
 
-/* Polja obrasca (landing: putna karta; upit.html: svi koraci) */
+/* Polja obrasca (kratki upit: putna karta na početnim stranicama i upit.html) */
 .q { display: flex; flex-direction: column; gap: 10px; }
 .q__label, .q > legend { font-size: 16px; font-weight: 700; display: block; margin-bottom: 0; }
 .q__label .opt, .q > legend .opt { font-weight: 400; color: var(--text-2); }
@@ -261,3 +261,92 @@ select.field {
   background-position: right 14px center;
 }
 .q.is-invalid .field { border-color: var(--danger); }
+.form-status { font-size: 14px; font-weight: 600; color: var(--danger); }
+/* prazan ostaje u stablu pristupačnosti (role=alert), samo bez razmaka koji bi dodao flex gap */
+.form-status:empty { margin-top: -18px; }
+
+/* Čipovi (radio kao gumbi: broj vozila) */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips label { position: relative; }
+.chips input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.chips span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(var(--ink-rgb), 0.22);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.12s, border-color 0.12s, color 0.12s;
+}
+.chips span::before {
+  content: "";
+  width: 0; height: 14px;
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FCF1D0' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center / 14px no-repeat;
+  transition: width 0.12s;
+}
+.chips input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--on-ink); font-weight: 600; padding-left: 10px; }
+.chips input:checked + span::before { width: 14px; }
+.chips input:focus-visible + span { outline: 3px solid rgba(34, 57, 111, 0.45); outline-offset: 2px; }
+.chips span:hover { border-color: rgba(var(--ink-rgb), 0.5); }
+.q.is-invalid .chips span { border-color: var(--danger); }
+
+/* Kratki upit: polja, zamka za robote, gumb za termin ispod obrasca i potvrda nakon slanja */
+.upit-fields { display: flex; flex-direction: column; gap: 18px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.upit-alt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--ground-2);
+}
+.upit-alt__text { flex: 1 1 240px; font-size: 14px; line-height: 1.45; color: var(--text-2); }
+.upit-alt__text strong { color: var(--text); }
+.upit-done { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.upit-done__title:focus { outline: none; }
+.upit-done__title { font-family: var(--font-display); font-weight: 800; font-size: 30px; line-height: 1.05; }
+.upit-done__text { font-size: 15px; line-height: 1.55; color: var(--text-2); }
+.upit-done__buttons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
+.upit-done__status { font-size: 13px; color: var(--text-2); }
+.upit-done__pre {
+  align-self: stretch;
+  margin: 4px 0 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: var(--border);
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.upit-done__edit {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.upit-done__edit:hover { color: var(--text); }
+.tag--warn { background: var(--danger); color: #FFFFFF; }
+
+@media (max-width: 560px) {
+  .upit-done__buttons { align-self: stretch; flex-direction: column; align-items: stretch; }
+  .upit-done__buttons .btn, .upit-alt__btn { width: 100%; }
+}
